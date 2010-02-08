@@ -1,0 +1,18 @@
+#summary System information provider module.
+#labels Phase-Design
+
+= Introduction =
+
+This module should gather system information under Microsoft Windows.
+
+= Details =
+
+It devides on information areas:
+
+CPU 
+
+Memory 
+
+GPU 
+
+OS Information

@@ -25,7 +25,7 @@ void showModuleInformation()
 		else wprintf(L"Error Load function\n");
 		::FreeLibrary(hModule); 
 	}
-	else wprintf(L"Error load dll");
+	else wprintf(L"Error load dll\n");
 }
 
 void showSystemInformation()
@@ -56,7 +56,7 @@ void showSystemInformation()
 		else wprintf(L"Error Load function\n");
 		::FreeLibrary(hModule); 
 	}
-	else wprintf(L"Error load dll");
+	else wprintf(L"Error load dll\n");
 }
 
 int main()

@@ -51,6 +51,8 @@ void showSystemInformation()
 				if (s.isHostRunningOnBatteries) wprintf(L"Power status: %s\n",L"Battery");
 				else wprintf(L"Power status: %s\n",L"AC");
 				wprintf(L"Number of available processors: %d\n",s.processorCount);
+				wprintf(L"DirectX version string: %s\n",s.strDirectXVersion);
+				wprintf(L"DirectX version hex number: %x\n",s.dwDirectXVersion);
 			}
 		}
 		else wprintf(L"Error Load function\n");
@@ -63,6 +65,6 @@ int main()
 {
 	showModuleInformation();
 	showSystemInformation();
-	getchar();
+	char c = getchar();
 	return 0;
 }

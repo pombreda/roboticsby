@@ -5,6 +5,8 @@ typedef struct SystemInformation {
 	MEMORYSTATUS	memoryStatus;
 	BOOL isHostRunningOnBatteries;
 	DWORD processorCount;
+	DWORD dwDirectXVersion;
+    WCHAR strDirectXVersion[10];
 }SystemInformationStruct;
 
 typedef struct ModuleInformation {

@@ -76,6 +76,10 @@ void showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Number of available processors: %d\n",s.processorCount);
 				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"DirectX version string: %s\n",s.strDirectXVersion);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"DirectX version hex number: %x\n",s.dwDirectXVersion);
+				buffer_count++;
 			}
 		}
 		else 

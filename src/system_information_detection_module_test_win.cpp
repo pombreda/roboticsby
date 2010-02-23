@@ -80,6 +80,8 @@ void showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Processor String: %s\n",s.strProcessorString);
 				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Vendor String: %s\n",s.strProcessorVendorString);
+				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Number of available processors: %d\n",s.processorCount);
 				buffer_count++;
 			}

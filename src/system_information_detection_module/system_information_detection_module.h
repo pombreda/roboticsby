@@ -11,6 +11,7 @@ typedef struct SystemInformation {
     WCHAR strDirectXVersion[10];
 	DWORD processorCount;
 	WCHAR strProcessorString[49];
+	WCHAR strProcessorVendorString[13];
 }SystemInformationStruct;
 
 typedef struct ModuleInformation {

@@ -68,3 +68,22 @@ void GetProcessorString(WCHAR *processorString) {
 		wcscpy_s(processorString, 49, L"Processor string not supported.");
 	}
 }
+
+void GetCPUVendor(WCHAR *processorVendorString) {
+	int i=0;
+	char outStr[13];
+	BYTE vendor_id[]="------------";
+	CPUID_ARGS ca;
+
+	outStr[13-1] = '\0';
+	
+	ca.eax = 0;
+	cpuid32(&ca);
+	((DWORD*)vendor_id)[0] = ca.ebx;
+	((DWORD*)vendor_id)[1] = ca.edx;
+	((DWORD*)vendor_id)[2] = ca.ecx;
+	
+	strncpy_s(outStr, 13 ,(char *)vendor_id, 12);
+	size_t convertedChars = 0;
+	mbstowcs_s(&convertedChars, processorVendorString, 13, outStr, _TRUNCATE);
+}

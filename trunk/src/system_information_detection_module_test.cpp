@@ -50,9 +50,10 @@ void showSystemInformation()
 				wprintf(L"Memory: %ldK total, %ldK free\n",s.memoryStatus.dwTotalPhys/1024L,s.memoryStatus.dwAvailPhys/1024L);
 				if (s.isHostRunningOnBatteries) wprintf(L"Power status: %s\n",L"Battery");
 				else wprintf(L"Power status: %s\n",L"AC");
-				wprintf(L"Number of available processors: %d\n",s.processorCount);
 				wprintf(L"DirectX version string: %s\n",s.strDirectXVersion);
 				wprintf(L"DirectX version hex number: %x\n",s.dwDirectXVersion);
+				wprintf(L"Processor String: %s\n",s.strProcessorString);
+				wprintf(L"Number of available processors: %d\n",s.processorCount);
 			}
 		}
 		else wprintf(L"Error Load function\n");

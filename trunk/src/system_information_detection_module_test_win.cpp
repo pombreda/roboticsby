@@ -74,11 +74,13 @@ void showSystemInformation()
 				if (s.isHostRunningOnBatteries) wsprintf(text_buf[buffer_count], L"Power status: %s\n",L"Battery");
 				else wsprintf(text_buf[buffer_count], L"Power status: %s\n",L"AC");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Number of available processors: %d\n",s.processorCount);
-				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"DirectX version string: %s\n",s.strDirectXVersion);
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"DirectX version hex number: %x\n",s.dwDirectXVersion);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor String: %s\n",s.strProcessorString);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Number of available processors: %d\n",s.processorCount);
 				buffer_count++;
 			}
 		}

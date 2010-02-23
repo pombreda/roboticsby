@@ -1,3 +1,6 @@
+#ifndef SYSTEM_INFORMATION_DETECTION_MODULE_H
+#define SYSTEM_INFORMATION_DETECTION_MODULE_H
+
 #include <windows.h>
 
 typedef struct SystemInformation {
@@ -17,3 +20,5 @@ typedef enum SystemInformationModuleErrorEnum {
     MODULE_NO_ERRROR,
 	MODULE_BAD_INPUT_POINTER
 };
+
+#endif // SYSTEM_INFORMATION_DETECTION_MODULE_H

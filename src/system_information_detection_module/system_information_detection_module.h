@@ -7,9 +7,10 @@ typedef struct SystemInformation {
     OSVERSIONINFO	osVersion;
 	MEMORYSTATUS	memoryStatus;
 	BOOL isHostRunningOnBatteries;
-	DWORD processorCount;
 	DWORD dwDirectXVersion;
     WCHAR strDirectXVersion[10];
+	DWORD processorCount;
+	WCHAR strProcessorString[49];
 }SystemInformationStruct;
 
 typedef struct ModuleInformation {

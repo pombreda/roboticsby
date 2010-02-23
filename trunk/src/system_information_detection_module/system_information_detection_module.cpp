@@ -6,6 +6,8 @@ extern HRESULT GetDXVersion( DWORD* pdwDirectXVersion, WCHAR* strDirectXVersion,
 
 extern DWORD processorCount();
 
+extern void GetCPUVendor(WCHAR *processorVendorString);
+
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)  
 {
 	switch( fdwReason ){
@@ -59,6 +61,7 @@ extern "C" __declspec(dllexport)  SystemInformationModuleErrorEnum __cdecl Syste
 		p->isHostRunningOnBatteries = IsRunningOnBatteries();
 		p->processorCount = processorCount();
 		GetProcessorString(p->strProcessorString);
+		GetCPUVendor(p->strProcessorVendorString);
 		GetDXVersion(&p->dwDirectXVersion, p->strDirectXVersion, ARRAYSIZE(p->strDirectXVersion));
 		return MODULE_NO_ERRROR;
 	}

@@ -53,6 +53,7 @@ void showSystemInformation()
 				wprintf(L"DirectX version string: %s\n",s.strDirectXVersion);
 				wprintf(L"DirectX version hex number: %x\n",s.dwDirectXVersion);
 				wprintf(L"Processor String: %s\n",s.strProcessorString);
+				wprintf(L"Processor Vendor String: %s\n",s.strProcessorVendorString);
 				wprintf(L"Number of available processors: %d\n",s.processorCount);
 			}
 		}

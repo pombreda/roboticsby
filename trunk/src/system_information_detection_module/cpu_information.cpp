@@ -70,7 +70,6 @@ void GetProcessorString(WCHAR *processorString) {
 }
 
 void GetCPUVendor(WCHAR *processorVendorString) {
-	int i=0;
 	char outStr[13];
 	BYTE vendor_id[]="------------";
 	CPUID_ARGS ca;
@@ -83,7 +82,7 @@ void GetCPUVendor(WCHAR *processorVendorString) {
 	((DWORD*)vendor_id)[1] = ca.edx;
 	((DWORD*)vendor_id)[2] = ca.ecx;
 	
-	strncpy_s(outStr, 13 ,(char *)vendor_id, 12);
+	strncpy_s(outStr, ARRAYSIZE(outStr),(char *)vendor_id, ARRAYSIZE(vendor_id));
 	size_t convertedChars = 0;
-	mbstowcs_s(&convertedChars, processorVendorString, 13, outStr, _TRUNCATE);
+	mbstowcs_s(&convertedChars, processorVendorString, ARRAYSIZE(outStr), outStr, _TRUNCATE);
 }

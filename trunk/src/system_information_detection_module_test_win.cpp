@@ -4,7 +4,8 @@
 
 #define BUFFER_SIZE 1024
 #define BUFFER_COUNT 16
-wchar_t text_buf[BUFFER_COUNT][BUFFER_SIZE];
+
+WCHAR text_buf[BUFFER_COUNT][BUFFER_SIZE];
 INT buffer_count;
 BOOL need_paint;
 
@@ -27,16 +28,16 @@ void showModuleInformation()
 			result=(*me)(&s);
 			if (result == MODULE_NO_ERRROR)
 			{
-				wsprintf(text_buf[buffer_count], L"%s", L"ModuleInformation\n");
+				wsprintf(text_buf[buffer_count], L"%s", L"ModuleInformation");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Module Version: %d\n\n",s.moduleVersion);
+				wsprintf(text_buf[buffer_count], L"Module Version: %d",s.moduleVersion);
 				buffer_count++;
 				buffer_count++;
 			}
 		}
 		else 
 		{
-			wsprintf(text_buf[buffer_count], L"Error Load function\n");
+			wsprintf(text_buf[buffer_count], L"Error Load function");
 			buffer_count++;
 		}
 		::FreeLibrary(hModule); 
@@ -65,30 +66,30 @@ void showSystemInformation()
 			result=(*me)(&s);
 			if (result == MODULE_NO_ERRROR)
 			{
-				wsprintf(text_buf[buffer_count], L"SystemInformation\n");
+				wsprintf(text_buf[buffer_count], L"SystemInformation");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"OS: Windows %ld.%ld.%ld\n",s.osVersion.dwMajorVersion,s.osVersion.dwMinorVersion,s.osVersion.dwBuildNumber);
+				wsprintf(text_buf[buffer_count], L"OS: Windows %ld.%ld.%ld",s.osVersion.dwMajorVersion,s.osVersion.dwMinorVersion,s.osVersion.dwBuildNumber);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Memory: %ldK total, %ldK free\n",s.memoryStatus.dwTotalPhys/1024L,s.memoryStatus.dwAvailPhys/1024L);
+				wsprintf(text_buf[buffer_count], L"Memory: %ldK total, %ldK free",s.memoryStatus.dwTotalPhys/1024L,s.memoryStatus.dwAvailPhys/1024L);
 				buffer_count++;
-				if (s.isHostRunningOnBatteries) wsprintf(text_buf[buffer_count], L"Power status: %s\n",L"Battery");
-				else wsprintf(text_buf[buffer_count], L"Power status: %s\n",L"AC");
+				if (s.isHostRunningOnBatteries) wsprintf(text_buf[buffer_count], L"Power status: %s",L"Battery");
+				else wsprintf(text_buf[buffer_count], L"Power status: %s",L"AC");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"DirectX version string: %s\n",s.strDirectXVersion);
+				wsprintf(text_buf[buffer_count], L"DirectX version string: %s",s.strDirectXVersion);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"DirectX version hex number: %x\n",s.dwDirectXVersion);
+				wsprintf(text_buf[buffer_count], L"DirectX version hex number: %x",s.dwDirectXVersion);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Processor String: %s\n",s.strProcessorString);
+				wsprintf(text_buf[buffer_count], L"Processor String: %s",s.strProcessorString);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Processor Vendor String: %s\n",s.strProcessorVendorString);
+				wsprintf(text_buf[buffer_count], L"Processor Vendor String: %s",s.strProcessorVendorString);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Number of available processors: %d\n",s.processorCount);
+				wsprintf(text_buf[buffer_count], L"Number of available processors: %d",s.processorCount);
 				buffer_count++;
 			}
 		}
 		else 
 		{
-			wsprintf(text_buf[buffer_count], L"Error Load function\n");
+			wsprintf(text_buf[buffer_count], L"Error Load function");
 			buffer_count++;
 		}
 		::FreeLibrary(hModule); 
@@ -155,6 +156,13 @@ LRESULT CALLBACK WindProcedure(HWND hWnd, UINT Msg,
 		break;
 	case WM_CREATE:
 		buffer_count = 0;
+		for (INT i = 0; i < BUFFER_COUNT; i++)
+		{
+			for (INT j = 0; j < BUFFER_SIZE; j++)
+			{
+				text_buf[i][j] = L' ';
+			}
+		}
 		showModuleInformation();
 		showSystemInformation();
 		need_paint = true;

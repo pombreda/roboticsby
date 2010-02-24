@@ -147,7 +147,7 @@ LRESULT CALLBACK WindProcedure(HWND hWnd, UINT Msg,
 			   WPARAM wParam, LPARAM lParam)
 {
 	HDC hDC;
-         PAINTSTRUCT Ps;
+    PAINTSTRUCT Ps;
 
 	switch(Msg)
 	{
@@ -156,15 +156,20 @@ LRESULT CALLBACK WindProcedure(HWND hWnd, UINT Msg,
 		break;
 	case WM_CREATE:
 		buffer_count = 0;
+		showModuleInformation();
+		showSystemInformation();
+		
 		for (INT i = 0; i < BUFFER_COUNT; i++)
 		{
 			for (INT j = 0; j < BUFFER_SIZE; j++)
 			{
-				text_buf[i][j] = L' ';
+				if (text_buf[i][j] == '\0')
+				{
+					text_buf[i][j] = L' ';
+				} 
 			}
 		}
-		showModuleInformation();
-		showSystemInformation();
+
 		need_paint = true;
 		break;
 	case WM_DESTROY:

@@ -1,12 +1,12 @@
 #include "system_information_detection_module.h"
 
-extern void GetProcessorString(WCHAR *processorString);
+extern VOID GetProcessorString(WCHAR *processorString);
 
 extern HRESULT GetDXVersion( DWORD* pdwDirectXVersion, WCHAR* strDirectXVersion, SIZE_T cchDirectXVersion = 10 );
 
 extern DWORD processorCount();
 
-extern void GetCPUVendor(WCHAR *processorVendorString);
+extern VOID GetCPUVendor(WCHAR *processorVendorString);
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)  
 {

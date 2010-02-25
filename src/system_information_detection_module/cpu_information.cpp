@@ -7,7 +7,7 @@ typedef struct cpuid_args_s {
 	DWORD edx;
 } CPUID_ARGS;
 
-void cpuid32(CPUID_ARGS* p) {
+VOID cpuid32(CPUID_ARGS* p) {
 	__asm {
 		mov	edi, p
 		mov eax, [edi]
@@ -28,7 +28,7 @@ DWORD processorCount()
 	return systemInfo.dwNumberOfProcessors;
 }
 
-void GetProcessorString(WCHAR *processorString) {
+VOID GetProcessorString(WCHAR *processorString) {
 	char outStr[49];
 	DWORD maxb = 0;
 	DWORD cpuid_arg = 0x80000000;
@@ -69,7 +69,7 @@ void GetProcessorString(WCHAR *processorString) {
 	}
 }
 
-void GetCPUVendor(WCHAR *processorVendorString) {
+VOID GetCPUVendor(WCHAR *processorVendorString) {
 	char outStr[13];
 	BYTE vendor_id[]="------------";
 	CPUID_ARGS ca;

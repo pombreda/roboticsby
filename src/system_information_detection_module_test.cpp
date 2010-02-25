@@ -1,7 +1,7 @@
 #include <iostream>
 #include "system_information_detection_module\system_information_detection_module.h"
 
-void showModuleInformation()
+VOID showModuleInformation()
 {
 	HINSTANCE hModule=NULL;
 	typedef  SystemInformationModuleErrorEnum (__cdecl MESS)(ModuleInformationStruct *p);
@@ -28,7 +28,7 @@ void showModuleInformation()
 	else wprintf(L"Error load dll\n");
 }
 
-void showSystemInformation()
+VOID showSystemInformation()
 {
 	HINSTANCE hModule=NULL;
 	typedef  SystemInformationModuleErrorEnum (__cdecl MESS)(SystemInformationStruct *p);
@@ -63,7 +63,7 @@ void showSystemInformation()
 	else wprintf(L"Error load dll\n");
 }
 
-int main()
+INT main()
 {
 	showModuleInformation();
 	showSystemInformation();

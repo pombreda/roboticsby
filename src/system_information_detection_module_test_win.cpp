@@ -11,7 +11,7 @@ BOOL need_paint;
 
 LRESULT CALLBACK WindProcedure(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
-void showModuleInformation()
+VOID showModuleInformation()
 {
 	HINSTANCE hModule=NULL;
 	typedef  SystemInformationModuleErrorEnum (__cdecl MESS)(ModuleInformationStruct *p);
@@ -49,7 +49,7 @@ void showModuleInformation()
 	}
 }
 
-void showSystemInformation()
+VOID showSystemInformation()
 {
 	HINSTANCE hModule=NULL;
 	typedef  SystemInformationModuleErrorEnum (__cdecl MESS)(SystemInformationStruct *p);
@@ -102,7 +102,7 @@ void showSystemInformation()
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine, int nCmdShow)
+                   LPSTR lpCmdLine, INT nCmdShow)
 {
     WNDCLASSEX  WndCls;
     MSG         Msg;

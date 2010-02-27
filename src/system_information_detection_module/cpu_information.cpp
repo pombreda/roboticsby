@@ -61,9 +61,9 @@ VOID GetProcessorString(WCHAR *processorString) {
 		brString[9] = ca.ebx;
 		brString[10] = ca.ecx;
 		brString[11] = ca.edx;
-		strncpy_s(outStr, 49 ,(char *)brString, 12*4);
+		strncpy_s(outStr,  ARRAYSIZE(outStr) ,(char *)brString, 12*4);
 		size_t convertedChars = 0;
-		mbstowcs_s(&convertedChars, processorString, 49, outStr, _TRUNCATE);
+		mbstowcs_s(&convertedChars, processorString,  ARRAYSIZE(outStr), outStr,  ARRAYSIZE(outStr));
 	} else {
 		wcscpy_s(processorString, 49, L"Processor string not supported.");
 	}
@@ -84,5 +84,5 @@ VOID GetCPUVendor(WCHAR *processorVendorString) {
 	
 	strncpy_s(outStr, ARRAYSIZE(outStr),(char *)vendor_id, ARRAYSIZE(vendor_id));
 	size_t convertedChars = 0;
-	mbstowcs_s(&convertedChars, processorVendorString, ARRAYSIZE(outStr), outStr, _TRUNCATE);
+	mbstowcs_s(&convertedChars, processorVendorString, ARRAYSIZE(outStr), outStr,  ARRAYSIZE(outStr));
 }

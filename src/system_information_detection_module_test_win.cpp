@@ -3,7 +3,7 @@
 #include "system_information_detection_module\system_information_detection_module.h"
 
 #define BUFFER_SIZE 1024
-#define BUFFER_COUNT 16
+#define BUFFER_COUNT 32
 
 WCHAR text_buf[BUFFER_COUNT][BUFFER_SIZE];
 INT buffer_count;
@@ -84,6 +84,18 @@ VOID showSystemInformation()
 				wsprintf(text_buf[buffer_count], L"Processor Vendor String: %s",s.strProcessorVendorString);
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Number of available processors: %d",s.processorCount);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU vendor string: %s\n",s.gpuVendorDescriptionString);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU vendor hex number: %x\n",s.gpuVendorId);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU device string: %s\n",s.gpuDeviceDescriptionString);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU device hex number: %x\n",s.gpuDeviceId);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU max vertex shader hardware support: %d\n",s.gpuVsVersionMax);
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"GPU max pixel shader hardware support: %d\n",s.gpuPsVersionMax);
 				buffer_count++;
 			}
 		}

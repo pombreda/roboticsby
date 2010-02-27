@@ -12,6 +12,12 @@ typedef struct SystemInformation {
 	DWORD processorCount;
 	WCHAR strProcessorString[49];
 	WCHAR strProcessorVendorString[13];
+	DWORD gpuVendorId;
+	DWORD gpuDeviceId; 
+	DWORD gpuVsVersionMax; 
+	DWORD gpuPsVersionMax;  
+	WCHAR gpuVendorDescriptionString[512]; 
+	WCHAR gpuDeviceDescriptionString[512];
 }SystemInformationStruct;
 
 typedef struct ModuleInformation {

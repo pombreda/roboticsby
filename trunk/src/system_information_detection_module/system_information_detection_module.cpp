@@ -8,6 +8,8 @@ extern DWORD processorCount();
 
 extern VOID GetCPUVendor(WCHAR *processorVendorString);
 
+extern VOID GetGPUInformation(DWORD* vendorId, DWORD* deviceId, DWORD* vsVersionMax, DWORD* psVersionMax,  WCHAR* vendorDescriptionString, WCHAR* deviceDescriptionString); 
+
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)  
 {
 	switch( fdwReason ){
@@ -63,6 +65,7 @@ extern "C" __declspec(dllexport)  SystemInformationModuleErrorEnum __cdecl Syste
 		GetProcessorString(p->strProcessorString);
 		GetCPUVendor(p->strProcessorVendorString);
 		GetDXVersion(&p->dwDirectXVersion, p->strDirectXVersion, ARRAYSIZE(p->strDirectXVersion));
+		GetGPUInformation(&p->gpuVendorId, &p->gpuDeviceId, &p->gpuVsVersionMax, &p->gpuPsVersionMax,  p->gpuVendorDescriptionString, p->gpuDeviceDescriptionString);
 		return MODULE_NO_ERRROR;
 	}
 	return MODULE_BAD_INPUT_POINTER;

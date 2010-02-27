@@ -55,6 +55,12 @@ VOID showSystemInformation()
 				wprintf(L"Processor String: %s\n",s.strProcessorString);
 				wprintf(L"Processor Vendor String: %s\n",s.strProcessorVendorString);
 				wprintf(L"Number of available processors: %d\n",s.processorCount);
+				wprintf(L"GPU vendor string: %s\n",s.gpuVendorDescriptionString);
+				wprintf(L"GPU vendor hex number: %x\n",s.gpuVendorId);
+				wprintf(L"GPU device string: %s\n",s.gpuDeviceDescriptionString);
+				wprintf(L"GPU device hex number: %x\n",s.gpuDeviceId);
+				wprintf(L"GPU max vertex shader hardware support: %d\n",s.gpuVsVersionMax);
+				wprintf(L"GPU max pixel shader hardware support: %d\n",s.gpuPsVersionMax);
 			}
 		}
 		else wprintf(L"Error Load function\n");

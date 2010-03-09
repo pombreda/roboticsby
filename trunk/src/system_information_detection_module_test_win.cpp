@@ -85,17 +85,17 @@ VOID showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Number of available processors: %d",s.processorCount);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU vendor string: %s\n",s.gpuVendorDescriptionString);
+				wsprintf(text_buf[buffer_count], L"GPU vendor string: %s",s.gpuVendorDescriptionString);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU vendor hex number: %x\n",s.gpuVendorId);
+				wsprintf(text_buf[buffer_count], L"GPU vendor hex number: %x",s.gpuVendorId);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU device string: %s\n",s.gpuDeviceDescriptionString);
+				wsprintf(text_buf[buffer_count], L"GPU device string: %s",s.gpuDeviceDescriptionString);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU device hex number: %x\n",s.gpuDeviceId);
+				wsprintf(text_buf[buffer_count], L"GPU device hex number: %x",s.gpuDeviceId);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU max vertex shader hardware support: %d\n",s.gpuVsVersionMax);
+				wsprintf(text_buf[buffer_count], L"GPU max vertex shader hardware support: %d",s.gpuVsVersionMax);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU max pixel shader hardware support: %d\n",s.gpuPsVersionMax);
+				wsprintf(text_buf[buffer_count], L"GPU max pixel shader hardware support: %d",s.gpuPsVersionMax);
 				buffer_count++;
 			}
 		}

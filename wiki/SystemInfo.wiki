@@ -20,41 +20,42 @@ _Module Version: 1_
 _OS: Windows 6.1.7600_
 
 _Memory: 4193460K total, 2797200K free_
+
 _Power status: AC_
 
-DirectX version string: 10.0
+_DirectX version string: 10.0_
 
-DirectX version hex number: a0000
+_DirectX version hex number: a0000_
 
-Processor String: Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz
+_Processor String: Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz_
 
-Processor Vendor String: GenuineIntel
+_Processor Vendor String: GenuineIntel_
 
-Processor Support Intel SSE: Yes
+_Processor Support Intel SSE: Yes_
 
-Processor Support Intel SSE2: Yes
+_Processor Support Intel SSE2: Yes_
 
-Processor Support Intel SSE3: Yes
+_Processor Support Intel SSE3: Yes_
 
-Processor Support Intel SSSE3: Yes
+_Processor Support Intel SSSE3: Yes_
 
-Processor Support Intel SSE4_1: No
+_Processor Support Intel SSE4_1: No_
 
-Processor Support Intel SSE4_2: No
+_Processor Support Intel SSE4_2: No_
 
-Number of available processors: 2
+_Number of available processors: 2_
 
-GPU vendor string: ATI Technologies Inc. / Advanced Micro Devices, Inc.
+_GPU vendor string: ATI Technologies Inc. / Advanced Micro Devices, Inc._
 
-GPU vendor hex number: 1002
+_GPU vendor hex number: 1002_
 
-GPU device string: ATI Radeon HD 4800 Series
+_GPU device string: ATI Radeon HD 4800 Series_
 
-GPU device hex number: 9442
+_GPU device hex number: 9442_
 
-GPU max vertex shader hardware support: 3
+_GPU max vertex shader hardware support: 3_
 
-GPU max pixel shader hardware support: 3
+_GPU max pixel shader hardware support: 3_
 
 = Compiler Support =
 

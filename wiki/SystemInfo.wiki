@@ -11,13 +11,13 @@ It devides on several information areas:
 
 = Example: =
 
-_ModuleInformation
+*ModuleInformation*
+_Module Version: 1_
 
-Module Version: 1
+*SystemInformation*
 
-SystemInformation
-OS: Windows 6.1.7600
-Memory: 4193460K total, 2797200K free
+_OS: Windows 6.1.7600_
+_Memory: 4193460K total, 2797200K free_
 Power status: AC
 DirectX version string: 10.0
 DirectX version hex number: a0000

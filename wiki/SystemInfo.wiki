@@ -20,8 +20,7 @@ _Module Version: 1_
 _OS: Windows 6.1.7600_
 
 _Memory: 4193460K total, 2797200K free_
-
-Power status: AC
+_Power status: AC_
 
 DirectX version string: 10.0
 

@@ -58,3 +58,7 @@ GPU max vertex shader hardware support: 3
 GPU max pixel shader hardware support: 3
 
 = Compiler Support =
+
+_Microsoft Visual Studio 2005,2008_
+
+_Intell C++ Compiler 11_

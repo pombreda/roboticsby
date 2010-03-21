@@ -1,5 +1,5 @@
 #summary System information provider module.
-#labels Phase-Design
+#labels Phase-Design,Phase-Implementation
 
 = Introduction =
 

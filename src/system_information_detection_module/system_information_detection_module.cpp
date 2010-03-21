@@ -4,11 +4,18 @@ extern VOID GetProcessorString(WCHAR *processorString);
 
 extern HRESULT GetDXVersion( DWORD* pdwDirectXVersion, WCHAR* strDirectXVersion, SIZE_T cchDirectXVersion = 10 );
 
-extern DWORD processorCount();
+extern DWORD ProcessorCount();
 
 extern VOID GetCPUVendor(WCHAR *processorVendorString);
 
-extern VOID GetGPUInformation(DWORD* vendorId, DWORD* deviceId, DWORD* vsVersionMax, DWORD* psVersionMax,  WCHAR* vendorDescriptionString, WCHAR* deviceDescriptionString); 
+extern VOID GetGPUInformation(DWORD* vendorId, DWORD* deviceId, DWORD* vsVersionMax, DWORD* psVersionMax,  WCHAR* vendorDescriptionString, WCHAR* deviceDescriptionString);
+
+extern BOOL GetSSE();
+extern BOOL GetSSE2();
+extern BOOL GetSSE3();
+extern BOOL GetSSSE3();
+extern BOOL GetSSE4_1();
+extern BOOL GetSSE4_2();
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved)  
 {
@@ -61,9 +68,15 @@ extern "C" __declspec(dllexport)  SystemInformationModuleErrorEnum __cdecl Syste
 		GetVersionEx((OSVERSIONINFO*)&p->osVersion);
 		GlobalMemoryStatus(&p->memoryStatus);
 		p->isHostRunningOnBatteries = IsRunningOnBatteries();
-		p->processorCount = processorCount();
+		p->processorCount = ProcessorCount();
 		GetProcessorString(p->strProcessorString);
 		GetCPUVendor(p->strProcessorVendorString);
+		p->isProcessorIntelSSESupport = GetSSE();
+		p->isProcessorIntelSSE2Support = GetSSE2();
+		p->isProcessorIntelSSE3Support = GetSSE3();
+		p->isProcessorIntelSSSE3Support = GetSSSE3();
+		p->isProcessorIntelSSE4_1Support = GetSSE4_1();
+		p->isProcessorIntelSSE4_2Support = GetSSE4_2();
 		GetDXVersion(&p->dwDirectXVersion, p->strDirectXVersion, ARRAYSIZE(p->strDirectXVersion));
 		GetGPUInformation(&p->gpuVendorId, &p->gpuDeviceId, &p->gpuVsVersionMax, &p->gpuPsVersionMax,  p->gpuVendorDescriptionString, p->gpuDeviceDescriptionString);
 		return MODULE_NO_ERRROR;

@@ -83,6 +83,18 @@ VOID showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Processor Vendor String: %s",s.strProcessorVendorString);
 				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE: %s",s.isProcessorIntelSSESupport ? L"Yes" : L"No");
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE2: %s",s.isProcessorIntelSSE2Support ? L"Yes" : L"No");
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE3: %s",s.isProcessorIntelSSE3Support ? L"Yes" : L"No");
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSSE3: %s",s.isProcessorIntelSSSE3Support ? L"Yes" : L"No");
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE4_1: %s",s.isProcessorIntelSSE4_1Support ? L"Yes" : L"No");
+				buffer_count++;
+				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE4_2: %s",s.isProcessorIntelSSE4_2Support ? L"Yes" : L"No");
+				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Number of available processors: %d",s.processorCount);
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"GPU vendor string: %s",s.gpuVendorDescriptionString);

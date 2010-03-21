@@ -9,9 +9,10 @@ This module should gather system information under Microsoft Windows Operating S
 
 It devides on several information areas:
 
-Example:
+= Example: =
 
-ModuleInformation
+_ModuleInformation
+
 Module Version: 1
 
 SystemInformation
@@ -34,4 +35,6 @@ GPU vendor hex number: 1002
 GPU device string: ATI Radeon HD 4800 Series
 GPU device hex number: 9442
 GPU max vertex shader hardware support: 3
-GPU max pixel shader hardware support: 3
+GPU max pixel shader hardware support: 3_
+
+= Compiler Support =

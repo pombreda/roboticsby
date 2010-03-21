@@ -12,6 +12,12 @@ typedef struct SystemInformation {
 	DWORD processorCount;
 	WCHAR strProcessorString[49];
 	WCHAR strProcessorVendorString[13];
+	BOOL  isProcessorIntelSSESupport;
+	BOOL  isProcessorIntelSSE2Support;
+	BOOL  isProcessorIntelSSE3Support;
+	BOOL  isProcessorIntelSSSE3Support;
+	BOOL  isProcessorIntelSSE4_1Support;
+	BOOL  isProcessorIntelSSE4_2Support;
 	DWORD gpuVendorId;
 	DWORD gpuDeviceId; 
 	DWORD gpuVsVersionMax; 

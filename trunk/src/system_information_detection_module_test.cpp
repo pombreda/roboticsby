@@ -54,6 +54,12 @@ VOID showSystemInformation()
 				wprintf(L"DirectX version hex number: %x\n",s.dwDirectXVersion);
 				wprintf(L"Processor String: %s\n",s.strProcessorString);
 				wprintf(L"Processor Vendor String: %s\n",s.strProcessorVendorString);
+				wprintf(L"Processor Support Intel SSE: %s\n",s.isProcessorIntelSSESupport ? L"Yes" : L"No" );
+				wprintf(L"Processor Support Intel SSE2: %s\n",s.isProcessorIntelSSE2Support ? L"Yes" : L"No" );
+				wprintf(L"Processor Support Intel SSE3: %s\n",s.isProcessorIntelSSE3Support ? L"Yes" : L"No" );
+				wprintf(L"Processor Support Intel SSSE3: %s\n",s.isProcessorIntelSSSE3Support ? L"Yes" : L"No" );
+				wprintf(L"Processor Support Intel SSE4_1: %s\n",s.isProcessorIntelSSE4_1Support ? L"Yes" : L"No" );
+				wprintf(L"Processor Support Intel SSE4_2: %s\n",s.isProcessorIntelSSE4_2Support ? L"Yes" : L"No" );
 				wprintf(L"Number of available processors: %d\n",s.processorCount);
 				wprintf(L"GPU vendor string: %s\n",s.gpuVendorDescriptionString);
 				wprintf(L"GPU vendor hex number: %x\n",s.gpuVendorId);

@@ -3,16 +3,35 @@
 
 = Introduction =
 
-This module should gather system information under Microsoft Windows.
+This module should gather system information under Microsoft Windows Operating Systems.
 
 = Details =
 
-It devides on information areas:
+It devides on several information areas:
 
-CPU 
+Example:
 
-Memory 
+ModuleInformation
+Module Version: 1
 
-GPU 
-
-OS Information
+SystemInformation
+OS: Windows 6.1.7600
+Memory: 4193460K total, 2797200K free
+Power status: AC
+DirectX version string: 10.0
+DirectX version hex number: a0000
+Processor String: Intel(R) Core(TM)2 CPU          6300  @ 1.86GHz
+Processor Vendor String: GenuineIntel
+Processor Support Intel SSE: Yes
+Processor Support Intel SSE2: Yes
+Processor Support Intel SSE3: Yes
+Processor Support Intel SSSE3: Yes
+Processor Support Intel SSE4_1: No
+Processor Support Intel SSE4_2: No
+Number of available processors: 2
+GPU vendor string: ATI Technologies Inc. / Advanced Micro Devices, Inc.
+GPU vendor hex number: 1002
+GPU device string: ATI Radeon HD 4800 Series
+GPU device hex number: 9442
+GPU max vertex shader hardware support: 3
+GPU max pixel shader hardware support: 3

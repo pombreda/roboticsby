@@ -1,1 +1,2 @@
 #summary USB Joystick test application.
+This small test application works using .NET Platform Invoke technology with any USB joystick. It can be used for test all buttons and axis.

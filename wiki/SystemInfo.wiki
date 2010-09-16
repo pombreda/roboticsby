@@ -11,7 +11,7 @@ It devides on several information areas. Please see a picture for detail.
 
 = Example: =
 
-
+http://roboticsby.googlecode.com/svn/wiki/images/system_information_module_test_win.png
 
 = Compiler Support =
 

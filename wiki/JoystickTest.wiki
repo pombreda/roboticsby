@@ -3,7 +3,7 @@
 
 = Introduction =
 
- USB Joystick simple test application.
+USB Joystick simple test application.
 
 = Details =
 

@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+This module should help test Tigra robot using joystick.
 
 
 = Details =

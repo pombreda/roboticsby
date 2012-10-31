@@ -4,10 +4,8 @@
 
 This module should help test Tigra robot using joystick.
 
+= Compiler Support =
 
-= Details =
+_Microsoft Visual Studio 2005,2008,2010
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+_Intell C++ Compiler 11,12_

@@ -15,9 +15,9 @@ http://roboticsby.googlecode.com/svn/wiki/images/system_information_module_test_
 
 = Compiler Support =
 
-_Microsoft Visual Studio 2005,2008 Microsoft DirectX SDK_
+_Microsoft Visual Studio 2005,2008,2010 Microsoft DirectX SDK_
 
-_Intell C++ Compiler 11_
+_Intell C++ Compiler 11,12_
 
 = Additional SDK's =
 

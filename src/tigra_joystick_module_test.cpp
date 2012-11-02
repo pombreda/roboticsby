@@ -91,7 +91,7 @@ void usageInformation()
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Usage options:\n"));
 	wprintf(TEXT("\n"));
-	wprintf(TEXT("TigraTestUtility.exe [Joystick Number] [COM Port Name] [Baud Rate]\n"));
+	wprintf(TEXT("tigra_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate]\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Joystick Number - system number of joystick, usually from 0 to 15\n"));
 	wprintf(TEXT("COM Port Name \t- COM Port Name like \"COM1\"\n"));

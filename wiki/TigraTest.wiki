@@ -4,7 +4,19 @@
 
 This module should help test Tigra robot using joystick.
 
-= Compiler Support =
+= Details =
+
+Utility performs sending control data throw XBee Pro whireless network to Tigra robot.
+Using this utility you can easy test your 'Tigra' robot.
+
+= Example: =
+
+Tigra robot image:
+http://roboticsby.googlecode.com/svn/wiki/images/tigra_robot_test_utility_screen.png
+Application screen:
+http://roboticsby.googlecode.com/svn/wiki/images/tigra.png
+
+= Compiler Support = 
 
 _Microsoft Visual Studio 2005,2008,2010
 

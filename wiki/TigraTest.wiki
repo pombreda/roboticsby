@@ -13,6 +13,7 @@ Using this utility you can easy test your 'Tigra' robot.
 
 Tigra robot image:
 http://roboticsby.googlecode.com/svn/wiki/images/tigra_robot_test_utility_screen.png
+
 Application screen:
 http://roboticsby.googlecode.com/svn/wiki/images/tigra.png
 

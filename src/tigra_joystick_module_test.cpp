@@ -8,8 +8,10 @@ void enumeratingJoysticks()
 {
 	JOYCAPS joycaps;
 	wprintf(TEXT("\nEnumerating joysticks:\n"));
+	UINT joystick_counter=0;
 	for(UINT i=0; i<=joyGetNumDevs(); i++) {
 		if(joyGetDevCaps(i, &joycaps, sizeof(JOYCAPS))==JOYERR_NOERROR) {
+			joystick_counter++;
 			wprintf(TEXT("%d: %s with %d axes: ["),i,joycaps.szPname,joycaps.wNumAxes);
 			if(joycaps.wNumAxes>=2) {
 				wprintf(TEXT("x,y"));
@@ -25,6 +27,10 @@ void enumeratingJoysticks()
 			wprintf(TEXT("] and %d buttons\n"), joycaps.wNumButtons);
 		}
 	}
+	if (joystick_counter == 0)
+	{
+		wprintf(TEXT("We could not find any joystick devices.\n"));
+	}
 }
 
 void enumeratingCOMPorts()
@@ -33,7 +39,7 @@ void enumeratingCOMPorts()
 	for (UINT i=1; i<256; i++)
 	{
 		wchar_t buffer[32];
-		wsprintf(buffer,TEXT("COM%u"), i);
+		wsprintf(buffer,TEXT("\\\\.\\COM%u"), i);
 
 		BOOL bSuccess = FALSE;
 		g_FileHandle = CreateFile(buffer, GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
@@ -51,7 +57,7 @@ void enumeratingCOMPorts()
 		CloseHandle(g_FileHandle);
 		if (bSuccess)
 		{
-			wprintf(TEXT("%d: %s\n"), i, buffer);
+			wprintf(TEXT("%u: COM%u\n"), i, i);
 		}
 	}
 }
@@ -204,11 +210,11 @@ int main(int argc, char** argv)
 			byteBuffer[8] = 8;
 		}
 		byteBuffer[9] = '#';
-		DWORD w;
-		WriteFile(g_FileHandle, byteBuffer, 10, &w, NULL);
+		DWORD bytes_write;
+		WriteFile(g_FileHandle, byteBuffer, 10, &bytes_write, NULL);
 		FlushFileBuffers(g_FileHandle);
 
-		printf("%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", 
+		wprintf(TEXT("Sending to robot's: [%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X]\n"), 
 			byteBuffer[0], 
 			byteBuffer[1], 
 			byteBuffer[2], 

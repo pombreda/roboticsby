@@ -2,9 +2,9 @@
 @echo *********************************
 @echo * www.robotics.by Build creator * 
 @echo *********************************
-@echo Progress: Build Started using MVS 2005
 
-call 32bit\vs2005\cl2005.cmd
+@echo Progress: Build Started using MVS 2012
+@call 32bit\vs2012\cl2012.cmd
 cl /EHsc /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /arch:SSE2 /O1 /analyze ..\src\tigra_joystick_module_test.cpp /link Winmm.lib user32.lib
 cl /EHsc /D "_CONSOLE" /D "_UNICODE" /D "UNICODE" /arch:SSE2 /O1 /analyze ..\src\system_information_detection_module_test.cpp
 cl /EHsc /D "_UNICODE" /D "UNICODE" /arch:SSE2  /D "WIN32" /D "_WINDOWS" /O1 /analyze ..\src\system_information_detection_module_test_win.cpp /link user32.lib gdi32.lib kernel32.lib 

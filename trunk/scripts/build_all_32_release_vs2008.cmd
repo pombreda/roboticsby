@@ -1,6 +1,6 @@
 @echo off
 @echo *********************************
-@echo * Roboticsby Build creator      * 
+@echo * www.robotics.by Build creator * 
 @echo *********************************
 
 @echo Progress: Build Started using MVS 2008

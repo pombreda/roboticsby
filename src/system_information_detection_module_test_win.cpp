@@ -30,7 +30,7 @@ VOID showModuleInformation()
 			{
 				wsprintf(text_buf[buffer_count], L"%s", L"ModuleInformation");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Module Version: %d",s.moduleVersion);
+				wsprintf(text_buf[buffer_count], L"Module Version: %u",s.moduleVersion);
 				buffer_count++;
 				buffer_count++;
 			}
@@ -68,9 +68,9 @@ VOID showSystemInformation()
 			{
 				wsprintf(text_buf[buffer_count], L"SystemInformation");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"OS: Windows %ld.%ld.%ld",s.osVersion.dwMajorVersion,s.osVersion.dwMinorVersion,s.osVersion.dwBuildNumber);
+				wsprintf(text_buf[buffer_count], L"OS: Windows %lu.%lu.%lu",s.osVersion.dwMajorVersion,s.osVersion.dwMinorVersion,s.osVersion.dwBuildNumber);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Memory: %ldK total, %ldK free",s.memoryStatus.dwTotalPhys/1024L,s.memoryStatus.dwAvailPhys/1024L);
+				wsprintf(text_buf[buffer_count], L"Memory: %I64uK total, %I64uK free",s.memoryStatus.ullTotalPhys/1024,s.memoryStatus.ullAvailPhys/1024);
 				buffer_count++;
 				if (s.isHostRunningOnBatteries) wsprintf(text_buf[buffer_count], L"Power status: %s",L"Battery");
 				else wsprintf(text_buf[buffer_count], L"Power status: %s",L"AC");
@@ -95,7 +95,7 @@ VOID showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"Processor Support Intel SSE4_2: %s",s.isProcessorIntelSSE4_2Support ? L"Yes" : L"No");
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"Number of available processors: %d",s.processorCount);
+				wsprintf(text_buf[buffer_count], L"Number of available processors: %u",s.processorCount);
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"GPU vendor string: %s",s.gpuVendorDescriptionString);
 				buffer_count++;
@@ -105,9 +105,9 @@ VOID showSystemInformation()
 				buffer_count++;
 				wsprintf(text_buf[buffer_count], L"GPU device hex number: %x",s.gpuDeviceId);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU max vertex shader hardware support: %d",s.gpuVsVersionMax);
+				wsprintf(text_buf[buffer_count], L"GPU max vertex shader hardware support: %u",s.gpuVsVersionMax);
 				buffer_count++;
-				wsprintf(text_buf[buffer_count], L"GPU max pixel shader hardware support: %d",s.gpuPsVersionMax);
+				wsprintf(text_buf[buffer_count], L"GPU max pixel shader hardware support: %u",s.gpuPsVersionMax);
 				buffer_count++;
 			}
 		}

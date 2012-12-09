@@ -4,11 +4,11 @@
 #include <windows.h>
 
 typedef struct SystemInformation {
-    OSVERSIONINFO	osVersion;
-	MEMORYSTATUS	memoryStatus;
+    	OSVERSIONINFO	osVersion;
+	MEMORYSTATUSEX	memoryStatus;
 	BOOL isHostRunningOnBatteries;
 	DWORD dwDirectXVersion;
-    WCHAR strDirectXVersion[10];
+    	WCHAR strDirectXVersion[10];
 	DWORD processorCount;
 	WCHAR strProcessorString[49];
 	WCHAR strProcessorVendorString[13];

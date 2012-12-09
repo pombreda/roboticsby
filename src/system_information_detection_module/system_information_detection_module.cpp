@@ -66,7 +66,8 @@ extern "C" __declspec(dllexport)  SystemInformationModuleErrorEnum __cdecl Syste
 		ZeroMemory(&p->osVersion, sizeof(OSVERSIONINFO));
 		p->osVersion.dwOSVersionInfoSize = sizeof(p->osVersion);
 		GetVersionEx((OSVERSIONINFO*)&p->osVersion);
-		GlobalMemoryStatus(&p->memoryStatus);
+		p->memoryStatus.dwLength = sizeof(p->memoryStatus);
+		GlobalMemoryStatusEx(&p->memoryStatus);
 		p->isHostRunningOnBatteries = IsRunningOnBatteries();
 		p->processorCount = ProcessorCount();
 		GetProcessorString(p->strProcessorString);

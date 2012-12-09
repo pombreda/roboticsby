@@ -449,9 +449,9 @@ HRESULT GetDXVersion( DWORD* pdwDirectXVersion, WCHAR* strDirectXVersion, SIZE_T
         // like "8.1b" which would represent DX8.1b
         if( cDirectXVersionLetter == ' ' )
             
-			wsprintf( strDirectXVersion, L"%d.%d", dwDirectXVersionMajor, dwDirectXVersionMinor );
+			wsprintf( strDirectXVersion, L"%u.%u", dwDirectXVersionMajor, dwDirectXVersionMinor );
         else
-            wsprintf( strDirectXVersion, L"%d.%d%c", dwDirectXVersionMajor, dwDirectXVersionMinor, cDirectXVersionLetter );
+            wsprintf( strDirectXVersion, L"%u.%u%c", dwDirectXVersionMajor, dwDirectXVersionMinor, cDirectXVersionLetter );
         strDirectXVersion[cchDirectXVersion-1] = 0;
     }
     

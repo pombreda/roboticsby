@@ -9,34 +9,36 @@ OVERLAPPED globalOverlapWrite, globalOverlapRead;
 
 VOID WINAPI ThreadProcedureCOMPortRead(PVOID*)
 {
-	
+
 	DWORD bytesRead;
 	BYTE readBuffer[128];
 	WCHAR finalDataBuffer[128];
 	ZeroMemory(&readBuffer, ARRAYSIZE(readBuffer));
 	ZeroMemory(&finalDataBuffer, ARRAYSIZE(finalDataBuffer));
 
-	COMSTAT comstat;		
-	DWORD btr, temp, mask, signal;	
+	COMSTAT comstat;
+	DWORD mask=0;
+	DWORD bytesInQue, numberOfBytesTransferred, error, signal;	
 
 	ZeroMemory(&globalOverlapRead, sizeof(OVERLAPPED));
 	globalOverlapRead.hEvent = CreateEvent(NULL, true, true, NULL);	
 	SetCommMask(globalFileHandle, EV_RXCHAR);
+	BOOL cycleRun = true;
 
-	while(TRUE)						
+	while(cycleRun)						
 	{
 		WaitCommEvent(globalFileHandle, &mask, &globalOverlapRead);              
-		if (globalOverlapRead.hEvent != INVALID_HANDLE_VALUE)
+		if (globalOverlapRead.hEvent != INVALID_HANDLE_VALUE && globalOverlapRead.hEvent != NULL)
 		{
 			signal = WaitForSingleObject(globalOverlapRead.hEvent, INFINITE);	
 			if(signal == WAIT_OBJECT_0)				        
 			{
-				if(GetOverlappedResult(globalFileHandle, &globalOverlapRead, &temp, true)) 
+				if(GetOverlappedResult(globalFileHandle, &globalOverlapRead, &numberOfBytesTransferred, true)) 
 					if((mask & EV_RXCHAR)!=0)					
 					{
-						ClearCommError(globalFileHandle, &temp, &comstat);		
-						btr = comstat.cbInQue;                          	
-						if(btr)                         			
+						ClearCommError(globalFileHandle, &error, &comstat);		
+						bytesInQue = comstat.cbInQue;                          	
+						if(bytesInQue)                         			
 						{
 							BOOL readFileResult = ReadFile(globalFileHandle, readBuffer, 127, &bytesRead, &globalOverlapRead);
 							if (readFileResult && bytesRead > 0)
@@ -66,11 +68,11 @@ void enumeratingJoysticks()
 {
 	JOYCAPS joycaps;
 	wprintf(TEXT("\nEnumerating joysticks:\n"));
-	UINT joystick_counter=0;
+	UINT joystickCounter=0;
 	for(UINT i=0; i<=joyGetNumDevs(); i++) {
 		if(joyGetDevCaps(i, &joycaps, sizeof(JOYCAPS))==JOYERR_NOERROR) {
-			joystick_counter++;
-			wprintf(TEXT("%d: %s with %d axes: ["),i,joycaps.szPname,joycaps.wNumAxes);
+			joystickCounter++;
+			wprintf(TEXT("%u: %s with %u axes: ["),i,joycaps.szPname,joycaps.wNumAxes);
 			if(joycaps.wNumAxes>=2) {
 				wprintf(TEXT("x,y"));
 				if(joycaps.wCaps & JOYCAPS_HASV)
@@ -82,10 +84,10 @@ void enumeratingJoysticks()
 				if(joycaps.wCaps & JOYCAPS_HASU)
 					wprintf(TEXT(",u"));
 			}
-			wprintf(TEXT("] and %d buttons\n"), joycaps.wNumButtons);
+			wprintf(TEXT("] and %u buttons\n"), joycaps.wNumButtons);
 		}
 	}
-	if (joystick_counter == 0)
+	if (joystickCounter == 0)
 	{
 		wprintf(TEXT("We could not find any joystick devices.\n"));
 	}
@@ -94,48 +96,50 @@ void enumeratingJoysticks()
 void enumeratingCOMPorts()
 {
 	wprintf(TEXT("\nEnumerating COM ports:\n"));
+	UINT comPortCounter = 1;
 	for (UINT i=1; i<256; i++)
 	{
 		WCHAR buffer[32];
 		wsprintf(buffer,TEXT("\\\\.\\COM%u"), i);
 
-		BOOL bSuccess = FALSE;
+		BOOL success = FALSE;
 		globalFileHandle = CreateFile(buffer, GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
 		if (globalFileHandle == INVALID_HANDLE_VALUE)
 		{
-			DWORD dwError = GetLastError();
-			if (dwError == ERROR_ACCESS_DENIED || dwError == ERROR_GEN_FAILURE || dwError == ERROR_SHARING_VIOLATION || dwError == ERROR_SEM_TIMEOUT)
-				bSuccess = TRUE;
+			DWORD lastError = GetLastError();
+			if (lastError == ERROR_ACCESS_DENIED || lastError == ERROR_GEN_FAILURE || lastError == ERROR_SHARING_VIOLATION || lastError == ERROR_SEM_TIMEOUT)
+				success = TRUE;
 		}
 		else
 		{
-			bSuccess = TRUE;
+			success = TRUE;
 		}
 
 		CloseHandle(globalFileHandle);
-		if (bSuccess)
+		if (success)
 		{
-			wprintf(TEXT("%u: COM%u\n"), i, i);
+			wprintf(TEXT("%u: COM%u\n"), comPortCounter, i);
+			comPortCounter++;
 		}
 	}
 }
 
-void errorDetailedInformation(LPTSTR lpszFunctionName) 
+void errorDetailedInformation(LPTSTR functionName) 
 { 
-	LPVOID lpMessageBuffer;
-	DWORD dwLastError = GetLastError(); 
+	LPVOID messageBuffer;
+	DWORD lastError = GetLastError(); 
 
 	FormatMessage(
 		FORMAT_MESSAGE_ALLOCATE_BUFFER | 
 		FORMAT_MESSAGE_FROM_SYSTEM |
 		FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL,
-		dwLastError,
+		lastError,
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(LPTSTR) &lpMessageBuffer,
+		(LPTSTR) &messageBuffer,
 		0, NULL );
 
-	wprintf(TEXT("[%s] failed with error %d: %s"), lpszFunctionName, dwLastError, (LPTSTR)lpMessageBuffer);
+	wprintf(TEXT("[%s] failed with error %u: %s"), functionName, lastError, (LPTSTR)messageBuffer);
 }
 
 LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){ 
@@ -149,9 +153,9 @@ LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){
 
 void usageInformation()
 {
-	wprintf(TEXT("*********************************\n"));
-	wprintf(TEXT("* Roboticsby Tigra test utility *\n"));
-	wprintf(TEXT("*********************************\n"));
+	wprintf(TEXT("**************************************\n"));
+	wprintf(TEXT("* www.robotics.by Tigra test utility *\n"));
+	wprintf(TEXT("**************************************\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Usage options:\n"));
 	wprintf(TEXT("\n"));
@@ -164,11 +168,11 @@ void usageInformation()
 	enumeratingJoysticks();
 }
 
-void exitInformation()
+int exitInformation()
 {
 	wprintf(TEXT("\nApplication will closed.\n"));
 	wprintf(TEXT("\nPress 'Enter' key...\n"));
-	int i = getchar();
+	return getchar();
 }
 
 int main(int argc, char** argv)
@@ -182,8 +186,8 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	UINT jnum = atoi(argv[1]);
-	UINT br = atoi(argv[3]);
+	UINT joystickNumber = atoi(argv[1]);
+	UINT baudRate = atoi(argv[3]);
 	WCHAR wBuffer[512];
 
 	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(argv[2], wBuffer));
@@ -197,7 +201,7 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	wprintf(TEXT("Setting baud rate [%d]\n"),br);
+	wprintf(TEXT("Setting baud rate [%u]\n"),baudRate);
 
 	DCB dcb;
 	ZeroMemory(&dcb, sizeof(DCB));
@@ -211,7 +215,7 @@ int main(int argc, char** argv)
 		return -1; 
 	}
 
-	dcb.BaudRate = br;
+	dcb.BaudRate = baudRate;
 	dcb.ByteSize = 8; 
 	dcb.StopBits = ONESTOPBIT; 
 	dcb.Parity = NOPARITY; 
@@ -270,18 +274,18 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	wprintf(TEXT("\nStart joystick aquire [%d]\n\n"),jnum);
+	wprintf(TEXT("\nStart joystick aquire [%u]\n\n"),joystickNumber);
 	JOYINFOEX ji;
 
 	ZeroMemory(&globalOverlapWrite, sizeof(OVERLAPPED));
+	BOOL cycleRun = true;
 
-	while (TRUE)
+	while (cycleRun)
 	{
-
 		ZeroMemory(&ji, sizeof(JOYINFOEX));
 		ji.dwSize = sizeof(JOYINFOEX);
 		ji.dwFlags = JOY_RETURNALL;
-		MMRESULT joystickFeadback = joyGetPosEx(jnum, &ji);  
+		MMRESULT joystickFeadback = joyGetPosEx(joystickNumber, &ji);  
 
 		if(joystickFeadback!=JOYERR_NOERROR)
 		{
@@ -312,7 +316,7 @@ int main(int argc, char** argv)
 		byteBuffer[5] = (ji.dwZpos>>8)&0xff;
 		byteBuffer[6] = (ji.dwUpos>>8)&0xff;
 		byteBuffer[7] = (ji.dwRpos>>8)&0xff;
-		byteBuffer[8] = (BYTE)ji.dwPOV/4500;
+		byteBuffer[8] = ((ji.dwPOV/4500)>>8)&0xff;
 		if (byteBuffer[8]>7)
 		{
 			byteBuffer[8] = 8;

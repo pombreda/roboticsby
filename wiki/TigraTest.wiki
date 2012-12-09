@@ -23,6 +23,6 @@ http://roboticsby.googlecode.com/svn/wiki/images/tigra_robot_test_utility_screen
 
 = Compiler Support = 
 
-_Microsoft Visual Studio 2005,2008,2010
+_Microsoft Visual Studio 2005, 2008, 2010, 2012
 
 _Intell C++ Compiler 11,12_

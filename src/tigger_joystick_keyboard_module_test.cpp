@@ -3,13 +3,136 @@
 #include <locale.h>
 #include <wchar.h>
 
-HANDLE globalFileHandle, globalThreadHandle;
-DWORD globalThreadParam, globalThreadId;
+HANDLE globalFileHandle;
+HANDLE globalThreadCOMPortReadHandle;
+DWORD globalThreadCOMPortReadParam, globalThreadCOMPortReadId;
+HANDLE globalThreadConsoleReadHandle;
+DWORD globalThreadConsoleReadParam, globalThreadConsoleReadId;
 OVERLAPPED globalOverlapWrite, globalOverlapRead;
+BOOL globalIsJoystickUsed = TRUE;
+BOOL globalQAEDPressed[4] = {FALSE,FALSE,FALSE,FALSE};
+USHORT globalRobotDrivePowerLevel = 0;
+
+VOID errorDetailedInformation(LPTSTR functionName) 
+{ 
+	LPVOID messageBuffer;
+	DWORD lastError = GetLastError(); 
+
+	FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		lastError,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPTSTR) &messageBuffer,
+		0, NULL );
+
+	wprintf(TEXT("[%s] failed with error %u: %s"), functionName, lastError, (LPTSTR)messageBuffer);
+}
+
+VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
+{
+	if (!globalIsJoystickUsed)
+	{
+		HANDLE handleStdInput;
+		DWORD numberOfReaded, i;
+		INPUT_RECORD inputRecordBuffer[128];
+		BOOL cycleRun = true;
+		
+		handleStdInput = GetStdHandle(STD_INPUT_HANDLE);
+
+		while(cycleRun)
+		{
+			if(ReadConsoleInput(handleStdInput, inputRecordBuffer, 128, &numberOfReaded))
+			{
+				for (i = 0; i < numberOfReaded; i++)
+				{
+					if (inputRecordBuffer[i].EventType==KEY_EVENT)
+					{
+						if (inputRecordBuffer[i].Event.KeyEvent.bKeyDown)
+						{
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x51)
+							{
+								globalQAEDPressed[0]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x41)
+							{
+								globalQAEDPressed[1]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x45)
+							{
+								globalQAEDPressed[2]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x44)
+							{
+								globalQAEDPressed[3]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x31)
+							{
+								globalRobotDrivePowerLevel = 0;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x32)
+							{
+								globalRobotDrivePowerLevel = 1;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x33)
+							{
+								globalRobotDrivePowerLevel = 2;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x34)
+							{
+								globalRobotDrivePowerLevel = 3;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x35)
+							{
+								globalRobotDrivePowerLevel = 4;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x36)
+							{
+								globalRobotDrivePowerLevel = 5;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x37)
+							{
+								globalRobotDrivePowerLevel = 6;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x38)
+							{
+								globalRobotDrivePowerLevel = 7;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x39)
+							{
+								globalRobotDrivePowerLevel = 8;
+							}
+						}
+						else
+						{
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x51)
+							{
+								globalQAEDPressed[0]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x41)
+							{
+								globalQAEDPressed[1]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x45)
+							{
+								globalQAEDPressed[2]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x44)
+							{
+								globalQAEDPressed[3]=FALSE;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 VOID WINAPI ThreadProcedureCOMPortRead(PVOID*)
 {
-
 	DWORD bytesRead;
 	BYTE readBuffer[128];
 	WCHAR finalDataBuffer[128];
@@ -124,24 +247,6 @@ void enumeratingCOMPorts()
 	}
 }
 
-void errorDetailedInformation(LPTSTR functionName) 
-{ 
-	LPVOID messageBuffer;
-	DWORD lastError = GetLastError(); 
-
-	FormatMessage(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | 
-		FORMAT_MESSAGE_FROM_SYSTEM |
-		FORMAT_MESSAGE_IGNORE_INSERTS,
-		NULL,
-		lastError,
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(LPTSTR) &messageBuffer,
-		0, NULL );
-
-	wprintf(TEXT("[%s] failed with error %u: %s"), functionName, lastError, (LPTSTR)messageBuffer);
-}
-
 LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){ 
 	size_t len = strlen(charBuffer) + 1; 
 	size_t reqsize = 0;
@@ -153,17 +258,22 @@ LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){
 
 void usageInformation()
 {
-	wprintf(TEXT("**************************************\n"));
-	wprintf(TEXT("* www.robotics.by Tigra test utility *\n"));
-	wprintf(TEXT("**************************************\n"));
+	wprintf(TEXT("***************************************\n"));
+	wprintf(TEXT("* www.robotics.by Tigger test utility *\n"));
+	wprintf(TEXT("***************************************\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Usage options:\n"));
 	wprintf(TEXT("\n"));
-	wprintf(TEXT("tigra_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate]\n"));
+	wprintf(TEXT("tigger_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate] [Use Keyboard]\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Joystick Number - system number of joystick, usually from 0 to 15\n"));
-	wprintf(TEXT("COM Port Name \t- COM Port Name like \"COM1\"\n"));
-	wprintf(TEXT("Baud Rate \t- COM Port baud rate like 9600\n"));
+	wprintf(TEXT("COM Port Name \t- COM Port Name like 'COM1'\n"));
+	wprintf(TEXT("Baud Rate \t- COM Port baud rate like '9600'\n"));
+	wprintf(TEXT("Use Keyboard \t- 'TRUE' or 'FALSE' to enable/disable keyboard support\n"));
+	wprintf(TEXT("Keyboard active keys: \t\n"));
+	wprintf(TEXT("'Q' and 'A' \t- left track control\n"));
+	wprintf(TEXT("'E' and 'D' \t- right track control\n"));
+	wprintf(TEXT("'1' - '9' \t- robot speed control\n"));
 	enumeratingCOMPorts();
 	enumeratingJoysticks();
 }
@@ -179,7 +289,7 @@ int main(int argc, char** argv)
 {
 	setlocale(LC_CTYPE,"Russian");
 
-	if (argc<3)
+	if (argc!=5)
 	{
 		usageInformation();
 		exitInformation();
@@ -188,6 +298,11 @@ int main(int argc, char** argv)
 
 	UINT joystickNumber = atoi(argv[1]);
 	UINT baudRate = atoi(argv[3]);
+
+	if (strcmp(argv[4],"TRUE") == 0)
+	{
+		globalIsJoystickUsed = FALSE;
+	}
 	WCHAR wBuffer[512];
 
 	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(argv[2], wBuffer));
@@ -264,64 +379,118 @@ int main(int argc, char** argv)
 		return -1;
 	} 	
 
-	globalThreadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProcedureCOMPortRead, &globalThreadParam, 0, &globalThreadId);
-	if (INVALID_HANDLE_VALUE == globalThreadHandle)
+	globalThreadCOMPortReadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProcedureCOMPortRead, &globalThreadCOMPortReadParam, 0, &globalThreadCOMPortReadId);
+	if (INVALID_HANDLE_VALUE == globalThreadCOMPortReadHandle)
 	{
-		CloseHandle(globalThreadHandle);
+		CloseHandle(globalThreadCOMPortReadHandle);
 		wprintf(TEXT("\nCreate Thread for COM Port Read issue.\n"));
 		errorDetailedInformation(TEXT("CreateThread"));
 		exitInformation();
 		return -1;
 	}
 
-	wprintf(TEXT("\nStart joystick aquire [%u]\n\n"),joystickNumber);
+	globalThreadConsoleReadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProcedureConsoleRead, &globalThreadConsoleReadParam, 0, &globalThreadConsoleReadId);
+	if (INVALID_HANDLE_VALUE == globalThreadConsoleReadHandle)
+	{
+		CloseHandle(globalThreadConsoleReadHandle);
+		wprintf(TEXT("\nCreate Thread for Console Read issue.\n"));
+		errorDetailedInformation(TEXT("CreateThread"));
+		exitInformation();
+		return -1;
+	}
+
+	if (globalIsJoystickUsed)
+	{
+		wprintf(TEXT("\nStart joystick aquire [%u]\n\n"),joystickNumber);
+	}
+
 	JOYINFOEX ji;
 
 	ZeroMemory(&globalOverlapWrite, sizeof(OVERLAPPED));
 	BOOL cycleRun = true;
+	BYTE directRobotPowerValues[9]={142,156,170,184,198,212,226,240,255};
+	BYTE inDirectRobotPowerValues[9]={112,98,84,70,56,42,28,14,0};
 
 	while (cycleRun)
 	{
-		ZeroMemory(&ji, sizeof(JOYINFOEX));
-		ji.dwSize = sizeof(JOYINFOEX);
-		ji.dwFlags = JOY_RETURNALL;
-		MMRESULT joystickFeadback = joyGetPosEx(joystickNumber, &ji);  
+		BYTE byteBuffer[10] = {'$',0,0,128,128,128,0,128,0,'#'};
+		if (globalIsJoystickUsed)
+		{		
+			ZeroMemory(&ji, sizeof(JOYINFOEX));
+			ji.dwSize = sizeof(JOYINFOEX);
+			ji.dwFlags = JOY_RETURNALL;
+			MMRESULT joystickFeadback = joyGetPosEx(joystickNumber, &ji);  
 
-		if(joystickFeadback!=JOYERR_NOERROR)
-		{
-			if (joystickFeadback == JOYERR_PARMS)
+			if(joystickFeadback!=JOYERR_NOERROR)
 			{
-				wprintf(TEXT("\nJoystick - bad parameters.\n"));
+				if (joystickFeadback == JOYERR_PARMS)
+				{
+					wprintf(TEXT("\nJoystick - bad parameters.\n"));
+				}
+				if (joystickFeadback == JOYERR_NOCANDO)
+				{
+					wprintf(TEXT("\nJoystick - request not completed.\n"));
+				}
+				if (joystickFeadback == JOYERR_UNPLUGGED)
+				{
+					wprintf(TEXT("\nJoystick - joystick is unplugged.\n"));
+				}
+				CloseHandle(globalFileHandle);
+				errorDetailedInformation(TEXT("joyGetPosEx"));
+				exitInformation();
+				return -1;
 			}
-			if (joystickFeadback == JOYERR_NOCANDO)
-			{
-				wprintf(TEXT("\nJoystick - request not completed.\n"));
-			}
-			if (joystickFeadback == JOYERR_UNPLUGGED)
-			{
-				wprintf(TEXT("\nJoystick - joystick is unplugged.\n"));
-			}
-			CloseHandle(globalFileHandle);
-			errorDetailedInformation(TEXT("joyGetPosEx"));
-			exitInformation();
-			return -1;
-		}
 
-		BYTE byteBuffer[10];
-		byteBuffer[0] = '$';
-		byteBuffer[1] = ji.dwButtons&0xff;
-		byteBuffer[2] = (ji.dwButtons>>8)&0xff;
-		byteBuffer[3] = (ji.dwXpos>>8)&0xff;
-		byteBuffer[4] = (ji.dwYpos>>8)&0xff;
-		byteBuffer[5] = (ji.dwZpos>>8)&0xff;
-		byteBuffer[6] = (ji.dwUpos>>8)&0xff;
-		byteBuffer[7] = (ji.dwRpos>>8)&0xff;
-		byteBuffer[8] = ((ji.dwPOV/4500)>>8)&0xff;
-		if (byteBuffer[8]>7)
-		{
-			byteBuffer[8] = 8;
+			byteBuffer[1] = ji.dwButtons&0xff;
+			byteBuffer[2] = (ji.dwButtons>>8)&0xff;
+			byteBuffer[3] = (ji.dwXpos>>8)&0xff;
+			byteBuffer[4] = (ji.dwYpos>>8)&0xff;
+			byteBuffer[5] = (ji.dwZpos>>8)&0xff;
+			byteBuffer[6] = (ji.dwUpos>>8)&0xff;
+			byteBuffer[7] = (ji.dwRpos>>8)&0xff;
+			byteBuffer[8] = ((ji.dwPOV/4500)>>8)&0xff;
+			if (byteBuffer[8]>7)
+			{
+				byteBuffer[8] = 8;
+			}
+		} else {
+			if (globalQAEDPressed[0]==TRUE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==TRUE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==TRUE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==TRUE)
+			{
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==TRUE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==TRUE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==TRUE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==TRUE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==TRUE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==TRUE)
+			{
+				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==TRUE && globalQAEDPressed[2]==TRUE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
 		}
-		byteBuffer[9] = '#';
 
 		DWORD bytesWrite;
 

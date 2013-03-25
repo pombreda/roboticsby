@@ -11,6 +11,7 @@ DWORD globalThreadConsoleReadParam, globalThreadConsoleReadId;
 OVERLAPPED globalOverlapWrite, globalOverlapRead;
 BOOL globalIsJoystickUsed = TRUE;
 BOOL globalQAEDPressed[4] = {FALSE,FALSE,FALSE,FALSE};
+BOOL globalCursorPressed[4] = {FALSE,FALSE,FALSE,FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 
 VOID errorDetailedInformation(LPTSTR functionName) 
@@ -52,6 +53,22 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 					{
 						if (inputRecordBuffer[i].Event.KeyEvent.bKeyDown)
 						{
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x25)
+							{
+								globalCursorPressed[0]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x26)
+							{
+								globalCursorPressed[1]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x27)
+							{
+								globalCursorPressed[2]=TRUE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x28)
+							{
+								globalCursorPressed[3]=TRUE;
+							}
 							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x51)
 							{
 								globalQAEDPressed[0]=TRUE;
@@ -107,6 +124,22 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 						}
 						else
 						{
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x25)
+							{
+								globalCursorPressed[0]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x26)
+							{
+								globalCursorPressed[1]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x27)
+							{
+								globalCursorPressed[2]=FALSE;
+							}
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x28)
+							{
+								globalCursorPressed[3]=FALSE;
+							}
 							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x51)
 							{
 								globalQAEDPressed[0]=FALSE;
@@ -273,6 +306,10 @@ void usageInformation()
 	wprintf(TEXT("Keyboard active keys: \t\n"));
 	wprintf(TEXT("'Q' and 'A' \t- left track control\n"));
 	wprintf(TEXT("'E' and 'D' \t- right track control\n"));
+	wprintf(TEXT("'ARROW UP' \t- move forward\n"));
+	wprintf(TEXT("'ARROW DOWN' \t- move back\n"));
+	wprintf(TEXT("'ARROW LEFT' \t- turn left\n"));
+	wprintf(TEXT("'ARROW RIGHT' \t- turn right\n"));
 	wprintf(TEXT("'1' - '9' \t- robot speed control\n"));
 	enumeratingCOMPorts();
 	enumeratingJoysticks();
@@ -486,6 +523,26 @@ int main(int argc, char** argv)
 				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
 			}
 			if (globalQAEDPressed[0]==FALSE && globalQAEDPressed[1]==TRUE && globalQAEDPressed[2]==TRUE && globalQAEDPressed[3]==FALSE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalCursorPressed[1]==TRUE)
+			{
+				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalCursorPressed[3]==TRUE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalCursorPressed[2]==TRUE)
+			{
+				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
+			}
+			if (globalCursorPressed[0]==TRUE)
 			{
 				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
 				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];

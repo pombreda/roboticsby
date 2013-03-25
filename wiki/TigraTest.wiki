@@ -25,4 +25,4 @@ http://roboticsby.googlecode.com/svn/wiki/images/tigra_robot_test_utility_screen
 
 _Microsoft Visual Studio 2005, 2008, 2010, 2012
 
-_Intell C++ Compiler 11,12_
+_Intell C++ Compiler 11,12,13_

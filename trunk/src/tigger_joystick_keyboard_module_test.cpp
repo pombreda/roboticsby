@@ -341,9 +341,11 @@ int main(int argc, char** argv)
 		globalIsJoystickUsed = FALSE;
 	}
 	WCHAR wBuffer[512];
+	char buffer[32];
+	sprintf(buffer,"\\\\.\\%s", argv[2]);
 
-	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(argv[2], wBuffer));
-	globalFileHandle = CreateFile(multiCharToUniChar(argv[2],wBuffer), GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
+	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(buffer, wBuffer));
+	globalFileHandle = CreateFile(multiCharToUniChar(buffer,wBuffer), GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
 	if (INVALID_HANDLE_VALUE == globalFileHandle)
 	{
 		CloseHandle(globalFileHandle);

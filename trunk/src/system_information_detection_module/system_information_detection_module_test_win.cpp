@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <iostream>
-#include "system_information_detection_module\system_information_detection_module.h"
+#include "system_information_detection_module.h"
 
 #define BUFFER_SIZE 1024
 #define BUFFER_COUNT 32

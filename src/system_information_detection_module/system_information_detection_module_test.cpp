@@ -1,5 +1,5 @@
 #include <iostream>
-#include "system_information_detection_module\system_information_detection_module.h"
+#include "system_information_detection_module.h"
 
 VOID showModuleInformation()
 {

@@ -1,7 +1,22 @@
 #include <QApplication>
+#include <QMessageBox>
 
-int main(int argc, char *argv[])
+#include "RCSGAboutDialog.h"
+#include "RCSGMainWindow.h"
+
+int main(int argc, char **argv)
 {
-	QApplication application(argc, argv);
-	return application.exec();
+	QT_REQUIRE_VERSION(argc, argv, "5.1.1");
+
+	QApplication a(argc, argv);
+
+	RCSGMainWindow mw(NULL);
+	QWidget central(&mw);
+	
+	RCSGAboutDialog aboutDialog(&central);
+
+	mw.setCentralWidget(&aboutDialog);
+	mw.show();
+
+	return a.exec();
 }

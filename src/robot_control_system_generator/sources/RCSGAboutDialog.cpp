@@ -33,9 +33,7 @@ RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
 	qtwTab->addTab(about, tr("&About RCSG"));
 	qtwTab->addTab(qteLicense, tr("&License"));
 
-	QPushButton *okButton = new QPushButton(tr("OK"), this);
-	connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
-
 	vblMain->addWidget(qtwTab);
-	vblMain->addWidget(okButton);
+
+	resize(320, 240);
 }

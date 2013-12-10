@@ -1,22 +1,24 @@
 #include <QApplication>
 #include <QMessageBox>
 
-#include "RCSGAboutDialog.h"
 #include "RCSGMainWindow.h"
+#include "RCSGWindowsEventFilter.h"
 
 int main(int argc, char **argv)
 {
+	int result = 0;
 	QT_REQUIRE_VERSION(argc, argv, "5.1.1");
 
-	QApplication a(argc, argv);
-
+	QApplication a(argc, argv);	
 	RCSGMainWindow mw(NULL);
-	QWidget central(&mw);
+
+	RCSGWindowsEventFilter filter(&mw); 
+	a.installNativeEventFilter(&filter);
 	
-	RCSGAboutDialog aboutDialog(&central);
-
-	mw.setCentralWidget(&aboutDialog);
 	mw.show();
+	
+	result = a.exec();
+	a.removeNativeEventFilter(&filter);
 
-	return a.exec();
+	return result;
 }

@@ -4,11 +4,13 @@ TEMPLATE   = app
 
 HEADERS    = sources\Version.h\
              sources\RCSGMainWindow.h\
-             sources\RCSGAboutDialog.h
+             sources\RCSGAboutDialog.h\
+             sources\RCSGWindowsEventFilter.h     
 
 SOURCES    = sources\main.cpp\
              sources\RCSGMainWindow.cpp\
-             sources\RCSGAboutDialog.cpp
+             sources\RCSGAboutDialog.cpp\
+             sources\RCSGWindowsEventFilter.cpp
 	     
 FORMS	   =   
 

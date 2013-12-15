@@ -31,42 +31,30 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QTabWidget>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QLabel>
-#include <QPushButton>
+#ifndef RCSGCONSOLE_H
+#define RCSGCONSOLE_H
 
-#include "Version.h"
-#include "RCSGAboutDialog.h"
+#include <QPlainTextEdit>
 
-RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
-	setWindowTitle(tr("About Robot Control System Generator"));
+class RCSGConsole : public QPlainTextEdit
+{
+    Q_OBJECT
 
-	QTabWidget *qtwTab = new QTabWidget(this);
-	QVBoxLayout *vblMain = new QVBoxLayout(this);
+signals:
+    void getData(const QByteArray &data);
 
-	QTextEdit *qteLicense=new QTextEdit(qtwTab);
-	qteLicense->setReadOnly(true);
-	qteLicense->setPlainText(QLatin1String(licenseRCSG));
+public:
+    explicit RCSGConsole(QWidget *parent = 0);
+	void setLocalEchoEnabled(bool set);
 
-	QWidget *about=new QWidget(qtwTab);
+public slots:
+	void putData(const QByteArray &data);
 
-	QLabel *text=new QLabel(about);
-	text->setOpenExternalLinks(true);
-	text->setText(tr(
-	                  "<h3>%1 (%2)</h3>"
-	                  "<p>Copyright %4 Sergey Gerasuto <a href='mailto:contacts@robotics.by'>contacts@robotics.by</a></p>"
-	                  "<p><b>A robot control system generator application</b></p>"
-	                  "<p><tt><a href=\"%3\">%3</a></tt></p>"
-	              ).arg(QLatin1String(VER_PRODUCTNAME_STR)).arg(QLatin1String(RCSG_RELEASE)).arg(QLatin1String("http://www.robotics.by/")).arg(QLatin1String("2013-2014")));
-	QHBoxLayout *qhbl=new QHBoxLayout(about);
-	qhbl->addWidget(text);
+protected:
+    virtual void keyPressEvent(QKeyEvent *e);
+    virtual void mousePressEvent(QMouseEvent *e);
+    virtual void mouseDoubleClickEvent(QMouseEvent *e);
+    virtual void contextMenuEvent(QContextMenuEvent *e);
+};
 
-	qtwTab->addTab(about, tr("&About RCSG"));
-	qtwTab->addTab(qteLicense, tr("&License"));
-
-	vblMain->addWidget(qtwTab);
-
-	resize(320, 240);
-}
+#endif // RCSGCONSOLE_H

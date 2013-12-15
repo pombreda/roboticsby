@@ -26,6 +26,8 @@
 static const char *licenseRCSG = 
 	"Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>\n"
 	"\n"
+	"http://www.robotics.by/\n"
+	"\n"
 	"All rights reserved.\n"
 	"\n"
 	"Redistribution and use in source and binary forms, with or without\n"
@@ -37,7 +39,7 @@ static const char *licenseRCSG =
 	"- Redistributions in binary form must reproduce the above copyright notice,\n"
 	"  this list of conditions and the following disclaimer in the documentation\n"
 	"  and/or other materials provided with the distribution.\n"
-	"- Neither the name of the Mumble Developers nor the names of its\n"
+	"- Neither the name of the RCSG Developers nor the names of its\n"
 	"  contributors may be used to endorse or promote products derived from this\n"
 	"  software without specific prior written permission.\n"
 	"\n"

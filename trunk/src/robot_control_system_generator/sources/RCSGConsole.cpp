@@ -31,42 +31,55 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QTabWidget>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QLabel>
-#include <QPushButton>
+#include <QScrollBar>
+#include <QtCore/QDebug>
 
-#include "Version.h"
-#include "RCSGAboutDialog.h"
+#include "RCSGConsole.h"
 
-RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
-	setWindowTitle(tr("About Robot Control System Generator"));
+RCSGConsole::RCSGConsole(QWidget *parent)
+    : QPlainTextEdit(parent)
+{
+    document()->setMaximumBlockCount(100);
+    QPalette p = palette();
+    p.setColor(QPalette::Base, Qt::black);
+    p.setColor(QPalette::Text, Qt::green);
+    setPalette(p);
+	setEnabled(false);
+}
 
-	QTabWidget *qtwTab = new QTabWidget(this);
-	QVBoxLayout *vblMain = new QVBoxLayout(this);
+void RCSGConsole::putData(const QByteArray &data)
+{
+    insertPlainText(QString(data));
+    QScrollBar *bar = verticalScrollBar();
+    bar->setValue(bar->maximum());
+}
 
-	QTextEdit *qteLicense=new QTextEdit(qtwTab);
-	qteLicense->setReadOnly(true);
-	qteLicense->setPlainText(QLatin1String(licenseRCSG));
+void RCSGConsole::keyPressEvent(QKeyEvent *e)
+{
+    switch (e->key()) {
+    case Qt::Key_Backspace:
+    case Qt::Key_Left:
+    case Qt::Key_Right:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
+        break;
+    default:
+        emit getData(e->text().toLocal8Bit());
+    }
+}
 
-	QWidget *about=new QWidget(qtwTab);
+void RCSGConsole::mousePressEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+    setFocus();
+}
 
-	QLabel *text=new QLabel(about);
-	text->setOpenExternalLinks(true);
-	text->setText(tr(
-	                  "<h3>%1 (%2)</h3>"
-	                  "<p>Copyright %4 Sergey Gerasuto <a href='mailto:contacts@robotics.by'>contacts@robotics.by</a></p>"
-	                  "<p><b>A robot control system generator application</b></p>"
-	                  "<p><tt><a href=\"%3\">%3</a></tt></p>"
-	              ).arg(QLatin1String(VER_PRODUCTNAME_STR)).arg(QLatin1String(RCSG_RELEASE)).arg(QLatin1String("http://www.robotics.by/")).arg(QLatin1String("2013-2014")));
-	QHBoxLayout *qhbl=new QHBoxLayout(about);
-	qhbl->addWidget(text);
+void RCSGConsole::mouseDoubleClickEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+}
 
-	qtwTab->addTab(about, tr("&About RCSG"));
-	qtwTab->addTab(qteLicense, tr("&License"));
-
-	vblMain->addWidget(qtwTab);
-
-	resize(320, 240);
+void RCSGConsole::contextMenuEvent(QContextMenuEvent *e)
+{
+    Q_UNUSED(e)
 }

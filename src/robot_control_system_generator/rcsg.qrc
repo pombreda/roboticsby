@@ -1,5 +1,10 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/">
-   <file></file>
+   <file>icons/gamepad.svg</file>
+   <file>icons/generate.svg</file>
+   <file>icons/terminal.svg</file>
+   <file>icons/stop.svg</file>
+   <file>icons/start.svg</file>
+   <file>icons/connection.svg</file>
 </qresource>
 </RCC>

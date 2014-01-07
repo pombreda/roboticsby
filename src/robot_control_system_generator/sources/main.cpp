@@ -47,9 +47,9 @@ int main(int argc, char **argv)
 
 	RCSGWindowsEventFilter filter(&mw); 
 	a.installNativeEventFilter(&filter);
-	
+
 	mw.show();
-	
+
 	result = a.exec();
 	a.removeNativeEventFilter(&filter);
 

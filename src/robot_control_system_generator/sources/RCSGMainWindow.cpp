@@ -47,41 +47,43 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGMainWindow.h"
 #include "RCSGAboutDialog.h"
 #include "RCSGConsole.h"
+#include "RCSGCommunicationDevicesManager.h"
 
 
-RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL){
+RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL), consoleMessage(""){
 
-    createNotificationFilter();
+	createNotificationFilter();
 	createActions();
 	createMenus();
 	createStatusBar();
 	createToolBars();
 	createDockWindows();
-
 	resize(640, 480);
-	//setCentralWidget(console);
+
+	communicationDevicesManager = new RCSGCommunicationDevicesManager(this);
+	communicationDevicesManager->populateDevices();
 }
 
 RCSGMainWindow::~RCSGMainWindow() {
 	UnregisterDeviceNotification(hDevNotify);
+	if (communicationDevicesManager!=NULL)
+	{		
+		emit communicationDevicesManager->cancelPopulatingDevices();
+		delete communicationDevicesManager;
+		communicationDevicesManager = NULL;
+	}
 }
 
 void RCSGMainWindow::deviceConnected()
 {
-	statusBar()->showMessage(tr("USB device connected"), 5000);
-	if (console != NULL)
-	{
-		console->putData((tr("USB device connected\n")).toLocal8Bit());
-	}
+	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device connected\n")));
+	communicationDevicesManager->populateDevices();
 }
 
 void RCSGMainWindow::deviceDisconnected()
 {
-	statusBar()->showMessage(tr("USB device disconnected"), 5000);
-	if (console != NULL)
-	{
-		console->putData((tr("USB device disconnected\n")).toLocal8Bit());
-	}
+	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device disconnected\n")));
+	communicationDevicesManager->populateDevices();
 }
 
 void RCSGMainWindow::showAboutDialog()
@@ -108,14 +110,16 @@ void RCSGMainWindow::createMenus()
 
 void RCSGMainWindow::createStatusBar()
 {
-	statusBar()->showMessage("Ready",0);
+	statusBar()->showMessage(tr("Ready to work"),0);
 }
 
 void RCSGMainWindow::createToolBars()
 {
 	consoleAction = new QAction(this);
+	consoleAction->setEnabled(false);
 	consoleAction->setObjectName(QStringLiteral("Console"));
 	consoleAction->setIcon(createIconFromSVG(QString(":/icons/terminal.svg")));
+	connect(consoleAction,SIGNAL(triggered()),this,SLOT(onConsoleAction()));
 
 	startProcessAction = new QAction(this);
 	startProcessAction->setEnabled(false);
@@ -126,19 +130,26 @@ void RCSGMainWindow::createToolBars()
 	stopProcessAction->setEnabled(false);
 	stopProcessAction->setObjectName(QStringLiteral("Stop simulation process"));
 	stopProcessAction->setIcon(createIconFromSVG(QString(":/icons/stop.svg")));
-	
+
 	generateProcessAction = new QAction(this);
 	generateProcessAction->setEnabled(false);
 	generateProcessAction->setObjectName(QStringLiteral("Generate custom system"));
 	generateProcessAction->setIcon(createIconFromSVG(QString(":/icons/generate.svg")));
-	
+
 	joystickAction = new QAction(this);
+	joystickAction->setEnabled(false);
 	joystickAction->setObjectName(QStringLiteral("Joystick setup"));
 	joystickAction->setIcon(createIconFromSVG(QString(":/icons/gamepad.svg")));
 
 	connectionsAction = new QAction(this);
+	connectionsAction->setEnabled(false);
 	connectionsAction->setObjectName(QStringLiteral("Connections setup"));
 	connectionsAction->setIcon(createIconFromSVG(QString(":/icons/connection.svg")));
+
+	robotsAction = new QAction(this);
+	robotsAction->setEnabled(false);
+	robotsAction->setObjectName(QStringLiteral("Robots setup"));
+	robotsAction->setIcon(createIconFromSVG(QString(":/icons/robot.svg")));
 
 	toolsToolBar = new QToolBar(this);
 	toolsToolBar->setObjectName(QStringLiteral("Tools"));
@@ -148,6 +159,7 @@ void RCSGMainWindow::createToolBars()
 	toolsToolBar->addAction(consoleAction);
 	toolsToolBar->addAction(joystickAction);
 	toolsToolBar->addAction(connectionsAction);
+	toolsToolBar->addAction(robotsAction);
 	addToolBar(Qt::TopToolBarArea, toolsToolBar);
 
 	simulationToolBar = new QToolBar(this);
@@ -178,7 +190,7 @@ void RCSGMainWindow::createNotificationFilter()
 
 	if(hDevNotify == NULL)
 	{
-		qDebug() << "Error: Failed to register device notification!";
+		qDebug() << tr("Error: Failed to register device notification!");
 		qApp->quit();
 	}
 }
@@ -195,9 +207,53 @@ QIcon RCSGMainWindow::createIconFromSVG( const QString &filename )
 
 void RCSGMainWindow::createDockWindows()
 {
-	QDockWidget *dock = new QDockWidget(tr("RCSG application console"), this);
-	dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-	console = new RCSGConsole(dock);
-	dock->setWidget(console);
-	addDockWidget(Qt::RightDockWidgetArea, dock);
+	createConsoleDockWindow();
+}
+
+void RCSGMainWindow::showStatusBarMessage( const QString &message )
+{
+	statusBar()->showMessage(message, 5000);
+}
+
+void RCSGMainWindow::showApplicationConsoleMessage( const QString &message )
+{
+	if (console != NULL)
+	{
+		if (consoleMessage.compare(message)!=0)
+		{
+			console->putStringData(message);
+		}
+		consoleMessage.clear();
+		consoleMessage.append(message);
+	}
+}
+
+void RCSGMainWindow::showApplicationConsoleAndStatusBarMessage( const QString &message )
+{
+	showStatusBarMessage(message);
+	showApplicationConsoleMessage(message);
+}
+
+void RCSGMainWindow::createConsoleDockWindow()
+{
+	if (!consoleAction->isEnabled())
+	{
+		QDockWidget *dock = new QDockWidget(tr("RCSG application console"), this);
+		dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+		console = new RCSGConsole(dock);
+		dock->setWidget(console);
+		addDockWidget(Qt::RightDockWidgetArea, dock);
+		connect(dock, SIGNAL(visibilityChanged(bool)), this, SLOT(onConsoleAction(bool)));
+	}
+}
+
+void RCSGMainWindow::onConsoleAction()
+{
+	consoleAction->setEnabled(!consoleAction->isEnabled());
+	createConsoleDockWindow();
+}
+
+void RCSGMainWindow::onConsoleAction(bool visible)
+{
+	consoleAction->setEnabled(!visible);
 }

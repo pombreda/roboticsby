@@ -31,77 +31,38 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RCSGMAINWINDOW_H
-#define RCSGMAINWINDOW_H
+#ifndef RCSGCOMMUNICATIONDEVICESMANAGER_H_
+#define RCSGCOMMUNICATIONDEVICESMANAGER_H_
 
-#include <QMainWindow>
-#include <QListWidget>
-#include <windows.h>
-#include <dbt.h>
+#include <QObject>
+#include <QMap>
+#include <QString>
+#include <QFutureWatcher>
 
-#include "RCSGConsole.h"
-#include "RCSGCommunicationDevicesManager.h"
+#include "RCSGMainWindow.h"
 
-class RCSGCommunicationDevicesManager;
+class RCSGMainWindow;
 
-class RCSGMainWindow : public QMainWindow 
+class RCSGCommunicationDevicesManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGMainWindow(QWidget *parent);
-	~RCSGMainWindow();
+	RCSGCommunicationDevicesManager (RCSGMainWindow *mainWindow);
+	~RCSGCommunicationDevicesManager();
 
 	public slots:
-		void deviceConnected();
-		void deviceDisconnected();
-		void showStatusBarMessage(const QString &message);
-		void showApplicationConsoleMessage(const QString &message);
-		void showApplicationConsoleAndStatusBarMessage(const QString &message);
-		void showAboutDialog();
+		void populateDevices();
+		void cancelPopulatingDevices();
+		void finishedPopulatingDevices();
+
+signals:
+		void onCommunicationDevicesManagerError(const QString &message);
 
 private:
-	Q_DISABLE_COPY( RCSGMainWindow )
-
-		HDEVNOTIFY hDevNotify;
-
-	void createActions();
-	void createMenus();
-	void createStatusBar();
-	void createToolBars();
-	void createNotificationFilter();
-	void createDockWindows();
-	void createConsoleDockWindow();
-
-	QIcon createIconFromSVG(const QString &filename);
-
-	QMenu *helpMenu;
-
-	QStatusBar *statusbar;
-
-	QAction *aboutAction;
-	QAction *aboutQtAction;
-
-	QAction *consoleAction;
-	QAction *startProcessAction;
-	QAction *stopProcessAction;
-
-	QAction *generateProcessAction;
-	QAction *joystickAction;
-	QAction *connectionsAction;
-	QAction *robotsAction;
-
-	RCSGConsole *console;
-	QString consoleMessage;
-
-	QToolBar *toolsToolBar;
-	QToolBar *simulationToolBar;
-
-	RCSGCommunicationDevicesManager *communicationDevicesManager;
-
-	private slots:
-		void onConsoleAction();
-		void onConsoleAction(bool visible);
+	RCSGMainWindow *mainWindow;
+	QMap<QString,QObject*> *communicationDevices;
+	QFutureWatcher<void> populatingDeviceWatcher;
 };
 
-#endif //RCSGMAINWINDOW_H
+#endif //RCSGCOMMUNICATIONDEVICESMANAGER_H_

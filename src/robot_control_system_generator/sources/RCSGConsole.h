@@ -38,23 +38,24 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 class RCSGConsole : public QPlainTextEdit
 {
-    Q_OBJECT
-
-signals:
-    void getData(const QByteArray &data);
+	Q_OBJECT
 
 public:
-    explicit RCSGConsole(QWidget *parent = 0);
+	explicit RCSGConsole(QWidget *parent = 0);
 	void setLocalEchoEnabled(bool set);
 
-public slots:
-	void putData(const QByteArray &data);
+	public slots:
+		void putData(const QByteArray &data);
+		void putStringData(const QString &data);
+
+signals:
+		void getData(const QByteArray &data);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *e);
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void mouseDoubleClickEvent(QMouseEvent *e);
-    virtual void contextMenuEvent(QContextMenuEvent *e);
+	virtual void keyPressEvent(QKeyEvent *e);
+	virtual void mousePressEvent(QMouseEvent *e);
+	virtual void mouseDoubleClickEvent(QMouseEvent *e);
+	virtual void contextMenuEvent(QContextMenuEvent *e);
 };
 
 #endif // RCSGCONSOLE_H

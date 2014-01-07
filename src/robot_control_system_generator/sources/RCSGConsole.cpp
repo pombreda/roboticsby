@@ -50,7 +50,7 @@ RCSGConsole::RCSGConsole(QWidget *parent)
 void RCSGConsole::putData(const QByteArray &data)
 {
     insertPlainText(QString(data));
-    QScrollBar *bar = verticalScrollBar();
+	QScrollBar *bar = verticalScrollBar();
     bar->setValue(bar->maximum());
 }
 
@@ -82,4 +82,11 @@ void RCSGConsole::mouseDoubleClickEvent(QMouseEvent *e)
 void RCSGConsole::contextMenuEvent(QContextMenuEvent *e)
 {
     Q_UNUSED(e)
+}
+
+void RCSGConsole::putStringData( const QString &data )
+{
+	insertPlainText(data);
+	QScrollBar *bar = verticalScrollBar();
+	bar->setValue(bar->maximum());
 }

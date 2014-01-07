@@ -31,42 +31,32 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QTabWidget>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QLabel>
-#include <QPushButton>
+#ifndef RCSGCOMPORTDEVICE_H_
+#define RCSGCOMPORTDEVICE_H_
 
-#include "Version.h"
-#include "RCSGAboutDialog.h"
+#include <QObject>
 
-RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
-	setWindowTitle(tr("About Robot Control System Generator"));
+#include <windows.h>
 
-	QTabWidget *qtwTab = new QTabWidget(this);
-	QVBoxLayout *vblMain = new QVBoxLayout(this);
+class RCSGComPortDevice : public QObject
+{
+	Q_OBJECT
 
-	QTextEdit *qteLicense=new QTextEdit(qtwTab);
-	qteLicense->setReadOnly(true);
-	qteLicense->setPlainText(QLatin1String(licenseRCSG));
+public:
+	RCSGComPortDevice(const LPTSTR &portName);
+	const QString commPortName();
+	const QString commPortDescription();
+	const QString commPortManufacturer();
 
-	QWidget *about=new QWidget(qtwTab);
+signals:
+	void onDeviceError(const QString &message);
 
-	QLabel *text=new QLabel(about);
-	text->setOpenExternalLinks(true);
-	text->setText(tr(
-		"<h3>%1 (%2)</h3>"
-		"<p>Copyright %4 Sergey Gerasuto <a href='mailto:contacts@robotics.by'>contacts@robotics.by</a></p>"
-		"<p><b>A robot control system generator application</b></p>"
-		"<p><tt><a href=\"%3\">%3</a></tt></p>"
-		).arg(QLatin1String(VER_PRODUCTNAME_STR)).arg(QLatin1String(RCSG_RELEASE)).arg(QLatin1String("http://www.robotics.by/")).arg(QLatin1String("2013-2014")));
-	QHBoxLayout *qhbl=new QHBoxLayout(about);
-	qhbl->addWidget(text);
+private:	
+	COMMCONFIG commConfig;
+	QString commName;
+	QString commDescription;
+	QString commManufacturer;
+	void errorDetailedInformation(LPTSTR functionName);
+};
 
-	qtwTab->addTab(about, tr("&About RCSG"));
-	qtwTab->addTab(qteLicense, tr("&License"));
-
-	vblMain->addWidget(qtwTab);
-
-	resize(320, 240);
-}
+#endif //RCSGCOMPORTDEVICE_H_

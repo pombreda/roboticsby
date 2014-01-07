@@ -31,77 +31,22 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RCSGMAINWINDOW_H
-#define RCSGMAINWINDOW_H
+#ifndef RCSGHOCKEYROBOT_H_
+#define RCSGHOCKEYROBOT_H_
 
-#include <QMainWindow>
-#include <QListWidget>
-#include <windows.h>
-#include <dbt.h>
+#include <QObject>
 
-#include "RCSGConsole.h"
-#include "RCSGCommunicationDevicesManager.h"
+#include "RCSGMainWindow.h"
 
-class RCSGCommunicationDevicesManager;
-
-class RCSGMainWindow : public QMainWindow 
+class RCSGInputDevicesManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGMainWindow(QWidget *parent);
-	~RCSGMainWindow();
-
-	public slots:
-		void deviceConnected();
-		void deviceDisconnected();
-		void showStatusBarMessage(const QString &message);
-		void showApplicationConsoleMessage(const QString &message);
-		void showApplicationConsoleAndStatusBarMessage(const QString &message);
-		void showAboutDialog();
+	RCSGInputDevicesManager (RCSGMainWindow *mainWindow) : mainWindow(mainWindow) {}
 
 private:
-	Q_DISABLE_COPY( RCSGMainWindow )
-
-		HDEVNOTIFY hDevNotify;
-
-	void createActions();
-	void createMenus();
-	void createStatusBar();
-	void createToolBars();
-	void createNotificationFilter();
-	void createDockWindows();
-	void createConsoleDockWindow();
-
-	QIcon createIconFromSVG(const QString &filename);
-
-	QMenu *helpMenu;
-
-	QStatusBar *statusbar;
-
-	QAction *aboutAction;
-	QAction *aboutQtAction;
-
-	QAction *consoleAction;
-	QAction *startProcessAction;
-	QAction *stopProcessAction;
-
-	QAction *generateProcessAction;
-	QAction *joystickAction;
-	QAction *connectionsAction;
-	QAction *robotsAction;
-
-	RCSGConsole *console;
-	QString consoleMessage;
-
-	QToolBar *toolsToolBar;
-	QToolBar *simulationToolBar;
-
-	RCSGCommunicationDevicesManager *communicationDevicesManager;
-
-	private slots:
-		void onConsoleAction();
-		void onConsoleAction(bool visible);
+	RCSGMainWindow *mainWindow;
 };
 
-#endif //RCSGMAINWINDOW_H
+#endif //RCSGHOCKEYROBOT_H_

@@ -37,13 +37,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QObject>
 #include <QDialog>
 
-class RCSGAboutDialog : public QDialog {
-private:
+class RCSGAboutDialog : public QDialog 
+{
 	Q_OBJECT
-	Q_DISABLE_COPY( RCSGAboutDialog )
 
 public:
 	RCSGAboutDialog(QWidget *parent);
+
+private:
+	Q_DISABLE_COPY( RCSGAboutDialog )
 };
 
 #endif //RCSGABOUTDIALOG_H_

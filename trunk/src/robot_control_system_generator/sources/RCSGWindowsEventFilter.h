@@ -42,6 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 class RCSGWindowsEventFilter : public QAbstractNativeEventFilter
 {
+
 public:
 	RCSGWindowsEventFilter(RCSGMainWindow *mainWindow) : mainWindow(mainWindow) {}
 
@@ -49,7 +50,7 @@ protected:
 	virtual bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
 
 private:
-    RCSGMainWindow *mainWindow;
+	RCSGMainWindow *mainWindow;
 };
 
 #endif //RCSGWINDOWSEVENTFILTER_H_

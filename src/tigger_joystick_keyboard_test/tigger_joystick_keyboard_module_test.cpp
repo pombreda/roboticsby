@@ -3,16 +3,21 @@
 #include <locale.h>
 #include <wchar.h>
 
-HANDLE globalFileHandle;
+HANDLE globalIncomingDataFileHandle = NULL;
+HANDLE globalOutcomingDataFileHandle = NULL;
+HANDLE globalFileHandle = NULL;
 HANDLE globalThreadCOMPortReadHandle;
-DWORD globalThreadCOMPortReadParam, globalThreadCOMPortReadId;
 HANDLE globalThreadConsoleReadHandle;
+DWORD globalThreadCOMPortReadParam, globalThreadCOMPortReadId;
 DWORD globalThreadConsoleReadParam, globalThreadConsoleReadId;
 OVERLAPPED globalOverlapWrite, globalOverlapRead;
 BOOL globalIsJoystickUsed = TRUE;
+BOOL globalIsIncomingDataSaved = FALSE;
+BOOL globalIsOutcomingDataSaved = FALSE;
 BOOL globalQAEDPressed[4] = {FALSE,FALSE,FALSE,FALSE};
 BOOL globalCursorPressed[4] = {FALSE,FALSE,FALSE,FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
+WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 
 VOID errorDetailedInformation(LPTSTR functionName) 
 { 
@@ -40,7 +45,7 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 		DWORD numberOfReaded, i;
 		INPUT_RECORD inputRecordBuffer[128];
 		BOOL cycleRun = true;
-		
+
 		handleStdInput = GetStdHandle(STD_INPUT_HANDLE);
 
 		while(cycleRun)
@@ -210,6 +215,15 @@ VOID WINAPI ThreadProcedureCOMPortRead(PVOID*)
 									}								
 								}
 								wprintf(TEXT("Recieving from robot's: [%s]\n"),finalDataBuffer);
+								if (globalIsIncomingDataSaved!=FALSE)
+								{
+									if (globalIncomingDataFileHandle != INVALID_HANDLE_VALUE)
+									{
+										DWORD bytesIncomingDataWrite;
+										WriteFile(globalIncomingDataFileHandle, readBuffer, bytesRead, &bytesIncomingDataWrite, NULL);
+										FlushFileBuffers(globalIncomingDataFileHandle);
+									}
+								}
 								ZeroMemory(&readBuffer, ARRAYSIZE(readBuffer));
 								ZeroMemory(&finalDataBuffer, ARRAYSIZE(finalDataBuffer));
 							}                      		
@@ -220,7 +234,7 @@ VOID WINAPI ThreadProcedureCOMPortRead(PVOID*)
 	}
 }
 
-void enumeratingJoysticks()
+VOID enumeratingJoysticks()
 {
 	JOYCAPS joycaps;
 	wprintf(TEXT("\nEnumerating joysticks:\n"));
@@ -249,7 +263,7 @@ void enumeratingJoysticks()
 	}
 }
 
-void enumeratingCOMPorts()
+VOID enumeratingCOMPorts()
 {
 	wprintf(TEXT("\nEnumerating COM ports:\n"));
 	UINT comPortCounter = 1;
@@ -278,7 +292,7 @@ void enumeratingCOMPorts()
 			comPortCounter++;
 		}
 	}
-}
+} 
 
 LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){ 
 	size_t len = strlen(charBuffer) + 1; 
@@ -297,7 +311,7 @@ void usageInformation()
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Usage options:\n"));
 	wprintf(TEXT("\n"));
-	wprintf(TEXT("tigger_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate] [Use Keyboard]\n"));
+	wprintf(TEXT("tigger_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate] [Use Keyboard] [Logging Incoming Data] [Logging Outcoming Data]\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Joystick Number - system number of joystick, usually from 0 to 15\n"));
 	wprintf(TEXT("COM Port Name \t- COM Port Name like 'COM1'\n"));
@@ -311,6 +325,8 @@ void usageInformation()
 	wprintf(TEXT("'ARROW LEFT' \t- turn left\n"));
 	wprintf(TEXT("'ARROW RIGHT' \t- turn right\n"));
 	wprintf(TEXT("'1' - '9' \t- robot speed control\n"));
+	wprintf(TEXT("Incoming data \t- 'TRUE' or 'FALSE' to enable/disable logging. A 'robotin.txt' file will created in the same folder as executable.\n"));
+	wprintf(TEXT("Outcoming data \t- 'TRUE' or 'FALSE' to enable/disable logging. A 'robotout.txt' file will created in the same folder as executable.\n"));
 	enumeratingCOMPorts();
 	enumeratingJoysticks();
 }
@@ -326,7 +342,19 @@ int main(int argc, char** argv)
 {
 	setlocale(LC_CTYPE,"Russian");
 
-	if (argc!=5)
+	{
+		DWORD currentDirectoryPathLen = 0;
+		currentDirectoryPathLen = GetCurrentDirectory(MAX_PATH, globalCurrentExecutableDirectory);
+		if (currentDirectoryPathLen < 1)
+		{
+			wprintf(TEXT("\nGetting current directory issue.\n"));
+			errorDetailedInformation(TEXT("GetCurrentDirectory"));
+			exitInformation();
+			return -1;
+		}
+	}
+
+	if (argc!=7)
 	{
 		usageInformation();
 		exitInformation();
@@ -340,9 +368,44 @@ int main(int argc, char** argv)
 	{
 		globalIsJoystickUsed = FALSE;
 	}
+
+	if (strcmp(argv[5],"TRUE") == 0)
+	{
+		globalIsIncomingDataSaved = TRUE;
+		WCHAR filePath[MAX_PATH];
+		ZeroMemory(&filePath, ARRAYSIZE(filePath));
+		wsprintf(filePath,TEXT("%s\\%s"), globalCurrentExecutableDirectory, TEXT("robotin.txt"));
+		globalIncomingDataFileHandle = CreateFile(filePath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (INVALID_HANDLE_VALUE == globalIncomingDataFileHandle)
+		{
+			CloseHandle(globalIncomingDataFileHandle);
+			wprintf(TEXT("\nUnable to create 'robotin.txt' file.\n"));
+			errorDetailedInformation(TEXT("CreateFile"));
+			exitInformation();
+			return -1;
+		}
+	}
+
+	if (strcmp(argv[6],"TRUE") == 0)
+	{
+		globalIsOutcomingDataSaved = TRUE;
+		WCHAR filePath[MAX_PATH];
+		ZeroMemory(&filePath, ARRAYSIZE(filePath));
+		wsprintf(filePath,TEXT("%s\\%s"), globalCurrentExecutableDirectory, TEXT("robotout.txt"));
+		globalOutcomingDataFileHandle = CreateFile(filePath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (INVALID_HANDLE_VALUE == globalOutcomingDataFileHandle)
+		{
+			CloseHandle(globalOutcomingDataFileHandle);
+			wprintf(TEXT("\nUnable to create 'robotout.txt' file.\n"));
+			errorDetailedInformation(TEXT("CreateFile"));
+			exitInformation();
+			return -1;
+		}
+	}
+
 	WCHAR wBuffer[512];
 	char buffer[32];
-	sprintf(buffer,"\\\\.\\%s", argv[2]);
+	sprintf_s(buffer,"\\\\.\\%s", argv[2]);
 
 	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(buffer, wBuffer));
 	globalFileHandle = CreateFile(multiCharToUniChar(buffer,wBuffer), GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
@@ -475,6 +538,8 @@ int main(int argc, char** argv)
 					wprintf(TEXT("\nJoystick - joystick is unplugged.\n"));
 				}
 				CloseHandle(globalFileHandle);
+				CloseHandle(globalIncomingDataFileHandle);
+				CloseHandle(globalOutcomingDataFileHandle);
 				errorDetailedInformation(TEXT("joyGetPosEx"));
 				exitInformation();
 				return -1;
@@ -555,6 +620,16 @@ int main(int argc, char** argv)
 
 		WriteFile(globalFileHandle, byteBuffer, 10, &bytesWrite, &globalOverlapWrite);
 		FlushFileBuffers(globalFileHandle);
+
+		if (globalIsOutcomingDataSaved!=FALSE)
+		{
+			if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+			{
+				DWORD bytesOutcomingDataWrite;
+				WriteFile(globalOutcomingDataFileHandle, byteBuffer, 10, &bytesOutcomingDataWrite, NULL);
+				FlushFileBuffers(globalOutcomingDataFileHandle);
+			}
+		}
 
 		wprintf(TEXT("Sending to robot's: [%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X]\n"), 
 			byteBuffer[0], byteBuffer[1], byteBuffer[2], 

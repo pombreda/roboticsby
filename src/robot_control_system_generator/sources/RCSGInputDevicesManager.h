@@ -31,22 +31,41 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RCSGHOCKEYROBOT_H_
-#define RCSGHOCKEYROBOT_H_
+#ifndef RCSGINPUTDEVICESMANAGER_H_
+#define RCSGINPUTDEVICESMANAGER_H_
 
 #include <QObject>
+#include <QMap>
+#include <QString>
+#include <QFutureWatcher>
 
 #include "RCSGMainWindow.h"
+#include "RCSGUsbIds.h"
+
+class RCSGMainWindow;
 
 class RCSGInputDevicesManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGInputDevicesManager (RCSGMainWindow *mainWindow) : mainWindow(mainWindow) {}
+	RCSGInputDevicesManager (RCSGMainWindow *mainWindow);
+	~RCSGInputDevicesManager();
+
+	public slots:
+		void populateDevices();
+		void cancelPopulatingDevices();
+		void finishedPopulatingDevices();
+		QHash<QString,QObject*>* getInputDevices();
+
+signals:
+		void onInputDevicesManagerError(const QString &message);
+		void onInputDevicesManagerNewDevices();
 
 private:
 	RCSGMainWindow *mainWindow;
+	QHash<QString,QObject*>* inputDevices;
+	QFutureWatcher<void> populatingDeviceWatcher;
 };
 
-#endif //RCSGHOCKEYROBOT_H_
+#endif //RCSGINPUTDEVICESMANAGER_H_

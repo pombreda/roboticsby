@@ -1,4 +1,5 @@
 /*
+
 Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
 
 http://www.robotics.by/
@@ -29,33 +30,46 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 */
 
-#ifndef RCSGCONSOLE_H
-#define RCSGCONSOLE_H
+#ifndef USBIDS_H_
+#define USBIDS_H_
 
-#include <QPlainTextEdit>
+#include <windows.h>
+#include <QHash>
+#include <QString>
 
-class RCSGConsole : public QPlainTextEdit
+
+static const char *licenseUsbIds = 
+"\n"
+"	List of USB ID's\n"
+"\n"
+"	Maintained by Stephen J. Gowdy <linux.usb.ids@gmail.com>\n"
+"	If you have any new entries, please submit them via\n"
+"		http://www.linux-usb.org/usb-ids.html\n"
+"	or send entries as patches (diff -u old new) in the\n"
+"	body of your email (a bot will attempt to deal with it).\n"
+"	The latest version can be obtained from\n"
+"		http://www.linux-usb.org/usb.ids\n"
+"\n"
+" Version: 2014.02.03\n"
+" Date:    2014-02-03 20:34:03\n";
+
+class RCSGUsbIds
 {
-	Q_OBJECT
-
 public:
-	explicit RCSGConsole(QWidget *parent = 0);
-	void setLocalEchoEnabled(bool set);
+	RCSGUsbIds();
+	QString Manufacture(WORD manufactureId);
+	QString Product(WORD manufactureId, WORD productId);
 
-	public slots:
-		void putData(const QByteArray &data);
-		void putStringData(const QString &data);
-
-signals:
-		void getData(const QByteArray &data);
-
-protected:
-	virtual void keyPressEvent(QKeyEvent *e);
-	virtual void mousePressEvent(QMouseEvent *e);
-	virtual void mouseDoubleClickEvent(QMouseEvent *e);
-	virtual void contextMenuEvent(QContextMenuEvent *e);
+private:
+	QHash<WORD, QString> mh;
+	QHash<WORD, QHash<WORD, QString>> mph;
+	void InitManufacturesUsbIdsHash();
+	void InitManufacturesProductsUsbIdsHash();
+	void InsertVendors(DWORD *mid, char **mids, unsigned int size);
+	void InsertProducts(DWORD vendorId ,DWORD *mid, char **mids, unsigned int size);
 };
 
-#endif // RCSGCONSOLE_H
+#endif //USBIDS_H_

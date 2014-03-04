@@ -39,10 +39,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <windows.h>
 #include <dbt.h>
 
-#include "RCSGConsole.h"
+#include "RCSGConsoleDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
+#include "RCSGInputDevicesManager.h"
+#include "RCSGComPortsInfoDockWindow.h"
+#include "RCSGJoysticksInfoDockWindow.h"
 
 class RCSGCommunicationDevicesManager;
+class RCSGInputDevicesManager;
 
 class RCSGMainWindow : public QMainWindow 
 {
@@ -55,6 +59,8 @@ public:
 	public slots:
 		void deviceConnected();
 		void deviceDisconnected();
+		void joystickDevicesAvailable();
+		void comPortDevicesAvailable();
 		void showStatusBarMessage(const QString &message);
 		void showApplicationConsoleMessage(const QString &message);
 		void showApplicationConsoleAndStatusBarMessage(const QString &message);
@@ -71,7 +77,10 @@ private:
 	void createToolBars();
 	void createNotificationFilter();
 	void createDockWindows();
-	void createConsoleDockWindow();
+	
+	void displayConsoleDockWindow();
+	void displayComPortsInfoDockWindow();
+	void displayJoysticksInfoDockWindow();
 
 	QIcon createIconFromSVG(const QString &filename);
 
@@ -91,17 +100,30 @@ private:
 	QAction *connectionsAction;
 	QAction *robotsAction;
 
-	RCSGConsole *console;
+	RCSGConsoleDockWindow *console;
+	RCSGComPortsInfoDockWindow *comPortsInfo;
+	RCSGJoysticksInfoDockWindow *joysticksInfo;
+
+	QDockWidget *consoleDockWidget;
+	QDockWidget *comPortsInfoDockWidget;
+	QDockWidget *joysticksInfoDockWidget;
+
 	QString consoleMessage;
 
 	QToolBar *toolsToolBar;
 	QToolBar *simulationToolBar;
 
 	RCSGCommunicationDevicesManager *communicationDevicesManager;
+	RCSGInputDevicesManager *inputDevicesManager;
 
 	private slots:
 		void onConsoleAction();
 		void onConsoleAction(bool visible);
+		void onConnectionsAction();
+		void onConnectionsAction(bool visible);
+		void onJoystickAction();
+		void onJoystickAction(bool visible);
+
 };
 
 #endif //RCSGMAINWINDOW_H

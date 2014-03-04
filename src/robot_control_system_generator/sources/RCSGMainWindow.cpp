@@ -46,12 +46,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "RCSGMainWindow.h"
 #include "RCSGAboutDialog.h"
-#include "RCSGConsole.h"
+#include "RCSGConsoleDockWindow.h"
+#include "RCSGJoysticksInfoDockWindow.h"
+#include "RCSGComPortsInfoDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
+#include "RCSGInputDevicesManager.h"
 
-
-RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL), consoleMessage(""){
-
+RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),consoleMessage(""),
+	communicationDevicesManager(NULL),inputDevicesManager(NULL)
+{
 	createNotificationFilter();
 	createActions();
 	createMenus();
@@ -61,10 +64,16 @@ RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL), c
 	resize(640, 480);
 
 	communicationDevicesManager = new RCSGCommunicationDevicesManager(this);
+	connect(communicationDevicesManager,SIGNAL(onCommunicationDevicesManagerNewDevices()), this, SLOT(comPortDevicesAvailable()));
 	communicationDevicesManager->populateDevices();
+
+	inputDevicesManager = new RCSGInputDevicesManager(this);
+	connect(inputDevicesManager,SIGNAL(onInputDevicesManagerNewDevices()), this, SLOT(joystickDevicesAvailable()));
+	inputDevicesManager->populateDevices();
 }
 
-RCSGMainWindow::~RCSGMainWindow() {
+RCSGMainWindow::~RCSGMainWindow() 
+{
 	UnregisterDeviceNotification(hDevNotify);
 	if (communicationDevicesManager!=NULL)
 	{		
@@ -72,18 +81,26 @@ RCSGMainWindow::~RCSGMainWindow() {
 		delete communicationDevicesManager;
 		communicationDevicesManager = NULL;
 	}
+	if (inputDevicesManager!=NULL)
+	{		
+		emit inputDevicesManager->cancelPopulatingDevices();
+		delete inputDevicesManager;
+		inputDevicesManager = NULL;
+	}
 }
 
 void RCSGMainWindow::deviceConnected()
 {
 	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device connected\n")));
 	communicationDevicesManager->populateDevices();
+	inputDevicesManager->populateDevices();
 }
 
 void RCSGMainWindow::deviceDisconnected()
 {
 	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device disconnected\n")));
 	communicationDevicesManager->populateDevices();
+	inputDevicesManager->populateDevices();
 }
 
 void RCSGMainWindow::showAboutDialog()
@@ -140,11 +157,13 @@ void RCSGMainWindow::createToolBars()
 	joystickAction->setEnabled(false);
 	joystickAction->setObjectName(QStringLiteral("Joystick setup"));
 	joystickAction->setIcon(createIconFromSVG(QString(":/icons/gamepad.svg")));
+	connect(joystickAction,SIGNAL(triggered()),this,SLOT(onJoystickAction()));
 
 	connectionsAction = new QAction(this);
 	connectionsAction->setEnabled(false);
 	connectionsAction->setObjectName(QStringLiteral("Connections setup"));
 	connectionsAction->setIcon(createIconFromSVG(QString(":/icons/connection.svg")));
+	connect(connectionsAction,SIGNAL(triggered()),this,SLOT(onConnectionsAction()));
 
 	robotsAction = new QAction(this);
 	robotsAction->setEnabled(false);
@@ -207,7 +226,36 @@ QIcon RCSGMainWindow::createIconFromSVG( const QString &filename )
 
 void RCSGMainWindow::createDockWindows()
 {
-	createConsoleDockWindow();
+	if (!consoleAction->isEnabled())
+	{
+		consoleDockWidget = new QDockWidget(tr("RCSG application console"), this);
+		consoleDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		console = new RCSGConsoleDockWindow(consoleDockWidget);
+		consoleDockWidget->setWidget(console);
+		addDockWidget(Qt::LeftDockWidgetArea, consoleDockWidget);
+		connect(consoleDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onConsoleAction(bool)));
+		consoleDockWidget->show();
+	}
+	if (!connectionsAction->isEnabled())
+	{
+		comPortsInfoDockWidget = new QDockWidget(tr("RCSG communication ports info"), this);
+		comPortsInfoDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		comPortsInfo = new RCSGComPortsInfoDockWindow(comPortsInfoDockWidget);
+		comPortsInfoDockWidget->setWidget(comPortsInfo);
+		addDockWidget(Qt::RightDockWidgetArea, comPortsInfoDockWidget);
+		connect(comPortsInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onConnectionsAction(bool)));
+		comPortsInfoDockWidget->hide();
+	}
+	if (!joystickAction->isEnabled())
+	{
+		joysticksInfoDockWidget = new QDockWidget(tr("RCSG joysticks info"), this);
+		joysticksInfoDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		joysticksInfo = new RCSGJoysticksInfoDockWindow(joysticksInfoDockWidget);
+		joysticksInfoDockWidget->setWidget(joysticksInfo);
+		addDockWidget(Qt::RightDockWidgetArea, joysticksInfoDockWidget);
+		connect(joysticksInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onJoystickAction(bool)));
+		joysticksInfoDockWidget->hide();
+	}
 }
 
 void RCSGMainWindow::showStatusBarMessage( const QString &message )
@@ -234,26 +282,82 @@ void RCSGMainWindow::showApplicationConsoleAndStatusBarMessage( const QString &m
 	showApplicationConsoleMessage(message);
 }
 
-void RCSGMainWindow::createConsoleDockWindow()
-{
-	if (!consoleAction->isEnabled())
-	{
-		QDockWidget *dock = new QDockWidget(tr("RCSG application console"), this);
-		dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-		console = new RCSGConsole(dock);
-		dock->setWidget(console);
-		addDockWidget(Qt::RightDockWidgetArea, dock);
-		connect(dock, SIGNAL(visibilityChanged(bool)), this, SLOT(onConsoleAction(bool)));
-	}
-}
-
 void RCSGMainWindow::onConsoleAction()
 {
 	consoleAction->setEnabled(!consoleAction->isEnabled());
-	createConsoleDockWindow();
+	displayConsoleDockWindow();
 }
 
 void RCSGMainWindow::onConsoleAction(bool visible)
 {
 	consoleAction->setEnabled(!visible);
+}
+
+void RCSGMainWindow::onConnectionsAction()
+{
+	connectionsAction->setEnabled(!connectionsAction->isEnabled());
+	displayComPortsInfoDockWindow();
+}
+
+void RCSGMainWindow::onConnectionsAction(bool visible)
+{
+	connectionsAction->setEnabled(!visible);
+}
+
+void RCSGMainWindow::onJoystickAction()
+{
+	joystickAction->setEnabled(!joystickAction->isEnabled());
+	displayJoysticksInfoDockWindow();
+}
+
+void RCSGMainWindow::onJoystickAction(bool visible)
+{
+	joystickAction->setEnabled(!visible);
+}
+
+void RCSGMainWindow::displayConsoleDockWindow()
+{
+	if (!consoleAction->isEnabled())
+	{
+		consoleDockWidget->show();
+		consoleDockWidget->raise();
+	}
+}
+
+void RCSGMainWindow::displayComPortsInfoDockWindow()
+{
+	if (!connectionsAction->isEnabled())
+	{
+		comPortsInfoDockWidget->show();
+		comPortsInfoDockWidget->raise();
+	}
+}
+
+void RCSGMainWindow::displayJoysticksInfoDockWindow()
+{
+	if (!joystickAction->isEnabled())
+	{
+		joysticksInfoDockWidget->show();
+		joysticksInfoDockWidget->raise();
+	}
+}
+
+void RCSGMainWindow::joystickDevicesAvailable()
+{
+	QHash<QString,QObject*> *inputDevices = inputDevicesManager->getInputDevices();
+	if (inputDevices!=NULL)
+	{
+		emit onJoystickAction();
+		emit joysticksInfo->updateDevicesInformation(inputDevices);
+	}
+}
+
+void RCSGMainWindow::comPortDevicesAvailable()
+{
+	QHash<QString,QObject*> *communicationDevices = communicationDevicesManager->getCommunicationDevices();
+	if (communicationDevices!=NULL)
+	{
+		emit onConnectionsAction();
+		emit comPortsInfo->updateDevicesInformation(communicationDevices);
+	}
 }

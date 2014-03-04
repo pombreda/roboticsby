@@ -31,27 +31,31 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QApplication>
-#include <QMessageBox>
+#ifndef RCSGCONSOLEDOCKWINDOW_H
+#define RCSGCONSOLEDOCKWINDOW_H
 
-#include "RCSGMainWindow.h"
-#include "RCSGWindowsEventFilter.h"
+#include <QPlainTextEdit>
 
-int main(int argc, char **argv)
+class RCSGConsoleDockWindow : public QPlainTextEdit
 {
-	int result = 0;
-	QT_REQUIRE_VERSION(argc, argv, "5.2.1");
+	Q_OBJECT
 
-	QApplication a(argc, argv);	
-	RCSGMainWindow mw(NULL);
+public:
+	explicit RCSGConsoleDockWindow(QWidget *parent = 0);
+	void setLocalEchoEnabled(bool set);
 
-	RCSGWindowsEventFilter filter(&mw); 
-	a.installNativeEventFilter(&filter);
+	public slots:
+		void putData(const QByteArray &data);
+		void putStringData(const QString &data);
 
-	mw.show();
+signals:
+		void getData(const QByteArray &data);
 
-	result = a.exec();
-	a.removeNativeEventFilter(&filter);
+protected:
+	virtual void keyPressEvent(QKeyEvent *e);
+	virtual void mousePressEvent(QMouseEvent *e);
+	virtual void mouseDoubleClickEvent(QMouseEvent *e);
+	virtual void contextMenuEvent(QContextMenuEvent *e);
+};
 
-	return result;
-}
+#endif // RCSGCONSOLEDOCKWINDOW_H

@@ -6,6 +6,6 @@
    <file>icons/stop.svg</file>
    <file>icons/start.svg</file>
    <file>icons/robot.svg</file>
-   <file>icons/connection.svg</file>
+   <file>icons/connection.svg</file>	
 </qresource>
 </RCC>

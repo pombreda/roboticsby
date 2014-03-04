@@ -38,6 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPushButton>
 
 #include "Version.h"
+#include "RCSGUsbIds.h"
 #include "RCSGAboutDialog.h"
 
 RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
@@ -46,9 +47,13 @@ RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
 	QTabWidget *qtwTab = new QTabWidget(this);
 	QVBoxLayout *vblMain = new QVBoxLayout(this);
 
-	QTextEdit *qteLicense=new QTextEdit(qtwTab);
-	qteLicense->setReadOnly(true);
-	qteLicense->setPlainText(QLatin1String(licenseRCSG));
+	QTextEdit *qtLicense=new QTextEdit(qtwTab);
+	qtLicense->setReadOnly(true);
+	qtLicense->setPlainText(QLatin1String(licenseRCSG));
+
+	QTextEdit *usbIdsLicense=new QTextEdit(qtwTab);
+	usbIdsLicense->setReadOnly(true);
+	usbIdsLicense->setPlainText(QLatin1String(licenseUsbIds));
 
 	QWidget *about=new QWidget(qtwTab);
 
@@ -64,8 +69,9 @@ RCSGAboutDialog::RCSGAboutDialog(QWidget *p) : QDialog(p) {
 	qhbl->addWidget(text);
 
 	qtwTab->addTab(about, tr("&About RCSG"));
-	qtwTab->addTab(qteLicense, tr("&License"));
-
+	qtwTab->addTab(qtLicense, tr("&License"));
+	qtwTab->addTab(usbIdsLicense, tr("&USB ID's database License"));
+	
 	vblMain->addWidget(qtwTab);
 
 	resize(320, 240);

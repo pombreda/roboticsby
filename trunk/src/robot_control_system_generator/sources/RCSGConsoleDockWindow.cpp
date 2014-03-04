@@ -34,9 +34,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QScrollBar>
 #include <QtCore/QDebug>
 
-#include "RCSGConsole.h"
+#include "RCSGConsoleDockWindow.h"
 
-RCSGConsole::RCSGConsole(QWidget *parent)
+RCSGConsoleDockWindow::RCSGConsoleDockWindow(QWidget *parent)
     : QPlainTextEdit(parent)
 {
     document()->setMaximumBlockCount(100);
@@ -47,14 +47,14 @@ RCSGConsole::RCSGConsole(QWidget *parent)
 	setEnabled(false);
 }
 
-void RCSGConsole::putData(const QByteArray &data)
+void RCSGConsoleDockWindow::putData(const QByteArray &data)
 {
     insertPlainText(QString(data));
 	QScrollBar *bar = verticalScrollBar();
     bar->setValue(bar->maximum());
 }
 
-void RCSGConsole::keyPressEvent(QKeyEvent *e)
+void RCSGConsoleDockWindow::keyPressEvent(QKeyEvent *e)
 {
     switch (e->key()) {
     case Qt::Key_Backspace:
@@ -68,23 +68,23 @@ void RCSGConsole::keyPressEvent(QKeyEvent *e)
     }
 }
 
-void RCSGConsole::mousePressEvent(QMouseEvent *e)
+void RCSGConsoleDockWindow::mousePressEvent(QMouseEvent *e)
 {
     Q_UNUSED(e)
     setFocus();
 }
 
-void RCSGConsole::mouseDoubleClickEvent(QMouseEvent *e)
+void RCSGConsoleDockWindow::mouseDoubleClickEvent(QMouseEvent *e)
 {
     Q_UNUSED(e)
 }
 
-void RCSGConsole::contextMenuEvent(QContextMenuEvent *e)
+void RCSGConsoleDockWindow::contextMenuEvent(QContextMenuEvent *e)
 {
     Q_UNUSED(e)
 }
 
-void RCSGConsole::putStringData( const QString &data )
+void RCSGConsoleDockWindow::putStringData( const QString &data )
 {
 	insertPlainText(data);
 	QScrollBar *bar = verticalScrollBar();

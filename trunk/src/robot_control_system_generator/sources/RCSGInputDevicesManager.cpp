@@ -31,5 +31,91 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "RCSGInputDevicesManager.h"
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrent>
 
+#include "RCSGInputDevicesManager.h"
+#include "RCSGJoystickDevice.h"
+
+QVector<UINT> globalInputDevicesHolder;
+
+RCSGInputDevicesManager::RCSGInputDevicesManager( RCSGMainWindow *mainWindow ): 
+	mainWindow(mainWindow),inputDevices(NULL)
+{
+	inputDevices = new QHash<QString,QObject*>;
+
+}
+
+RCSGInputDevicesManager::~RCSGInputDevicesManager()
+{
+	if (inputDevices != NULL)
+	{
+		qDeleteAll(inputDevices->begin(),inputDevices->end());
+		inputDevices->clear();
+		delete inputDevices;
+		inputDevices = NULL;
+	}
+}
+
+void enumeratingInputDevices()
+{
+	globalInputDevicesHolder.clear();
+	for(UINT i=0; i<joyGetNumDevs(); i++) 
+	{
+		JOYINFO ji;
+		ZeroMemory(&ji, sizeof(JOYINFO));
+		MMRESULT joystickFeadback = joyGetPos(i, &ji);  
+		if(joystickFeadback==JOYERR_NOERROR)
+		{
+			globalInputDevicesHolder.append(i);
+		}
+	}
+}
+
+void RCSGInputDevicesManager::populateDevices()
+{
+	cancelPopulatingDevices();
+	QObject::connect(&populatingDeviceWatcher, SIGNAL(finished()), this, SLOT(finishedPopulatingDevices()));
+	populatingDeviceWatcher.setFuture(QtConcurrent::run(enumeratingInputDevices));
+}
+
+void RCSGInputDevicesManager::cancelPopulatingDevices()
+{
+	populatingDeviceWatcher.cancel();
+	populatingDeviceWatcher.waitForFinished();
+}
+
+void RCSGInputDevicesManager::finishedPopulatingDevices()
+{
+	if (inputDevices != NULL)
+	{
+		qDeleteAll(inputDevices->begin(),inputDevices->end());
+		inputDevices->clear();
+	}
+
+	{
+		QVector<UINT>::iterator iterator;
+		for (iterator = globalInputDevicesHolder.begin(); iterator != globalInputDevicesHolder.end(); ++iterator)
+		{
+			RCSGJoystickDevice *device = new RCSGJoystickDevice(*iterator);
+			inputDevices->insert(QString("SLOT%1").arg(*iterator),device);
+		}
+	}
+
+	QHash<QString,QObject*>::iterator iterator;
+	QString message(QString("Joystick devices: %1\n").arg(inputDevices->size()));
+	UINT joystickCounter = 1;
+	for (iterator = inputDevices->begin(); iterator != inputDevices->end(); ++iterator)
+	{
+		RCSGJoystickDevice *device = qobject_cast<RCSGJoystickDevice*>(iterator.value());
+		message.append(QString("%1: Slot %2 [%3] - [%4]\n").arg(QString::number(joystickCounter),QString::number(device->joystickDeviceSlot()),device->joystickDeviceVendor(),device->joystickDeviceDescription()));
+		joystickCounter++;
+	}
+	mainWindow->showApplicationConsoleMessage(message);
+	emit onInputDevicesManagerNewDevices();
+}
+
+QHash<QString,QObject*>* RCSGInputDevicesManager::getInputDevices()
+{
+	return inputDevices;
+}

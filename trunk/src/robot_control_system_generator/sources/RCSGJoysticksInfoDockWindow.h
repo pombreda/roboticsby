@@ -31,27 +31,32 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QApplication>
-#include <QMessageBox>
+#ifndef RCSGJOYSTICKSINFODOCKWINDOW_H
+#define RCSGJOYSTICKSINFODOCKWINDOW_H
 
-#include "RCSGMainWindow.h"
-#include "RCSGWindowsEventFilter.h"
+#include <QTreeWidget>
+#include <windows.h>
 
-int main(int argc, char **argv)
+class RCSGJoysticksInfoDockWindow : public QTreeWidget
 {
-	int result = 0;
-	QT_REQUIRE_VERSION(argc, argv, "5.2.1");
+	Q_OBJECT
 
-	QApplication a(argc, argv);	
-	RCSGMainWindow mw(NULL);
+public:
+	RCSGJoysticksInfoDockWindow(QWidget *parent = 0);
 
-	RCSGWindowsEventFilter filter(&mw); 
-	a.installNativeEventFilter(&filter);
+	public slots:
+		void updateDevicesInformation(QHash<QString,QObject*>* inputDevices);
+		void extractXaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractYaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractZaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractRaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractUaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractVaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPollingFrequency(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractButtonsNumber(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOV(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOV4DIR(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOVCTS(QTreeWidgetItem *item, JOYCAPS caps);		
+};
 
-	mw.show();
-
-	result = a.exec();
-	a.removeNativeEventFilter(&filter);
-
-	return result;
-}
+#endif // RCSGJOYSTICKSINFODOCKWINDOW_H

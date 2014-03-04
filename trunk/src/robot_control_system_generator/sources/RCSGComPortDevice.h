@@ -46,7 +46,8 @@ public:
 	RCSGComPortDevice(const LPTSTR &portName);
 	const QString commPortName();
 	const QString commPortDescription();
-	const QString commPortManufacturer();
+	const QString commPortVendor();
+	const COMMCONFIG commPortConfig();
 
 signals:
 	void onDeviceError(const QString &message);

@@ -190,7 +190,12 @@ const QString RCSGComPortDevice::commPortDescription()
 	return commDescription;
 }
 
-const QString RCSGComPortDevice::commPortManufacturer()
+const QString RCSGComPortDevice::commPortVendor()
 {
 	return commManufacturer;
+}
+
+const COMMCONFIG RCSGComPortDevice::commPortConfig()
+{
+	return commConfig;
 }

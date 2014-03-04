@@ -31,18 +31,31 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RCSGHOCKEYROBOT_H_
-#define RCSGHOCKEYROBOT_H_
+#ifndef RCSGJOYSTICKDEVICE_H_
+#define RCSGJOYSTICKDEVICE_H_
 
 #include <QObject>
+
+#include <windows.h>
+
+#include "RCSGUsbIds.h"
 
 class RCSGJoystickDevice : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGJoystickDevice(){}
+	RCSGJoystickDevice(const UINT &joystickSlot);
+	const UINT joystickDeviceSlot();
+	const QString joystickDeviceDescription();
+	const QString joystickDeviceVendor();
+	const JOYCAPS joystickDeviceCapacites();
 
+private:
+	UINT joystickSlot;
+	QString joystickDescription;
+	QString joystickVendor;
+	JOYCAPS joystickCapacites;
 };
 
-#endif //RCSGHOCKEYROBOT_H_
+#endif //RCSGJOYSTICKDEVICE_H_

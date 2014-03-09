@@ -154,6 +154,7 @@ RCSGJoystickDevice::RCSGJoystickDevice(const UINT &joystickSlot)
 			}
 		}
 	}
+	joyReleaseCapture(joystickSlot);
 }
 
 const JOYCAPS RCSGJoystickDevice::joystickDeviceCapacites()

@@ -81,6 +81,7 @@ private:
 	void displayConsoleDockWindow();
 	void displayComPortsInfoDockWindow();
 	void displayJoysticksInfoDockWindow();
+	void updateDevicesInformation();
 
 	QIcon createIconFromSVG(const QString &filename);
 
@@ -107,6 +108,7 @@ private:
 	QDockWidget *consoleDockWidget;
 	QDockWidget *comPortsInfoDockWidget;
 	QDockWidget *joysticksInfoDockWidget;
+	QMutex canUpdateDevice;
 
 	QString consoleMessage;
 

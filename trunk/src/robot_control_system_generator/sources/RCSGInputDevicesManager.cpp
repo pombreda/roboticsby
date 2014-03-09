@@ -69,6 +69,7 @@ void enumeratingInputDevices()
 		{
 			globalInputDevicesHolder.append(i);
 		}
+		joyReleaseCapture(i);
 	}
 }
 

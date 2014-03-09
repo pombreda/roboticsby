@@ -92,15 +92,13 @@ RCSGMainWindow::~RCSGMainWindow()
 void RCSGMainWindow::deviceConnected()
 {
 	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device connected\n")));
-	communicationDevicesManager->populateDevices();
-	inputDevicesManager->populateDevices();
+	updateDevicesInformation();
 }
 
 void RCSGMainWindow::deviceDisconnected()
 {
 	showApplicationConsoleAndStatusBarMessage(QString(tr("USB device disconnected\n")));
-	communicationDevicesManager->populateDevices();
-	inputDevicesManager->populateDevices();
+	updateDevicesInformation();
 }
 
 void RCSGMainWindow::showAboutDialog()
@@ -135,39 +133,46 @@ void RCSGMainWindow::createToolBars()
 	consoleAction = new QAction(this);
 	consoleAction->setEnabled(false);
 	consoleAction->setObjectName(QStringLiteral("Console"));
+	consoleAction->setIconText(consoleAction->objectName());
 	consoleAction->setIcon(createIconFromSVG(QString(":/icons/terminal.svg")));
 	connect(consoleAction,SIGNAL(triggered()),this,SLOT(onConsoleAction()));
 
 	startProcessAction = new QAction(this);
 	startProcessAction->setEnabled(false);
 	startProcessAction->setObjectName(QStringLiteral("Start simulation process"));
+	startProcessAction->setIconText(startProcessAction->objectName());
 	startProcessAction->setIcon(createIconFromSVG(QString(":/icons/start.svg")));
 
 	stopProcessAction = new QAction(this);
 	stopProcessAction->setEnabled(false);
 	stopProcessAction->setObjectName(QStringLiteral("Stop simulation process"));
+	stopProcessAction->setIconText(stopProcessAction->objectName());
 	stopProcessAction->setIcon(createIconFromSVG(QString(":/icons/stop.svg")));
 
 	generateProcessAction = new QAction(this);
 	generateProcessAction->setEnabled(false);
 	generateProcessAction->setObjectName(QStringLiteral("Generate custom system"));
+	generateProcessAction->setIconText(generateProcessAction->objectName());
 	generateProcessAction->setIcon(createIconFromSVG(QString(":/icons/generate.svg")));
 
 	joystickAction = new QAction(this);
 	joystickAction->setEnabled(false);
 	joystickAction->setObjectName(QStringLiteral("Joystick setup"));
+	joystickAction->setIconText(joystickAction->objectName());
 	joystickAction->setIcon(createIconFromSVG(QString(":/icons/gamepad.svg")));
 	connect(joystickAction,SIGNAL(triggered()),this,SLOT(onJoystickAction()));
 
 	connectionsAction = new QAction(this);
 	connectionsAction->setEnabled(false);
 	connectionsAction->setObjectName(QStringLiteral("Connections setup"));
+	connectionsAction->setIconText(connectionsAction->objectName());
 	connectionsAction->setIcon(createIconFromSVG(QString(":/icons/connection.svg")));
 	connect(connectionsAction,SIGNAL(triggered()),this,SLOT(onConnectionsAction()));
 
 	robotsAction = new QAction(this);
 	robotsAction->setEnabled(false);
 	robotsAction->setObjectName(QStringLiteral("Robots setup"));
+	robotsAction->setIconText(robotsAction->objectName());
 	robotsAction->setIcon(createIconFromSVG(QString(":/icons/robot.svg")));
 
 	toolsToolBar = new QToolBar(this);
@@ -360,4 +365,12 @@ void RCSGMainWindow::comPortDevicesAvailable()
 		emit onConnectionsAction();
 		emit comPortsInfo->updateDevicesInformation(communicationDevices);
 	}
+}
+
+void RCSGMainWindow::updateDevicesInformation()
+{	
+	canUpdateDevice.lock();
+	communicationDevicesManager->populateDevices();
+	inputDevicesManager->populateDevices();
+	canUpdateDevice.unlock();
 }

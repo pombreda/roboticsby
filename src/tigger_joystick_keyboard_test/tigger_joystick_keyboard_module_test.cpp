@@ -1,21 +1,64 @@
+/*
+Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
+
+http://www.robotics.by/
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+- Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+- Neither the name of the RCSG Developers nor the names of its
+contributors may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+`AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
 #include <stdio.h>
 #include <windows.h>
 #include <locale.h>
 #include <wchar.h>
+#include <math.h>
 
 HANDLE globalIncomingDataFileHandle = NULL;
 HANDLE globalOutcomingDataFileHandle = NULL;
 HANDLE globalFileHandle = NULL;
-HANDLE globalThreadCOMPortReadHandle;
-HANDLE globalThreadConsoleReadHandle;
+HANDLE globalThreadCOMPortReadHandle = NULL;
+HANDLE globalThreadConsoleReadHandle = NULL;
+HANDLE globalScryptFileHandle = NULL;
 DWORD globalThreadCOMPortReadParam, globalThreadCOMPortReadId;
 DWORD globalThreadConsoleReadParam, globalThreadConsoleReadId;
 OVERLAPPED globalOverlapWrite, globalOverlapRead;
 BOOL globalIsJoystickUsed = TRUE;
 BOOL globalIsIncomingDataSaved = FALSE;
 BOOL globalIsOutcomingDataSaved = FALSE;
-BOOL globalQAEDPressed[4] = {FALSE,FALSE,FALSE,FALSE};
-BOOL globalCursorPressed[4] = {FALSE,FALSE,FALSE,FALSE};
+BOOL globalQAEDPressed[] = {FALSE,FALSE,FALSE,FALSE};
+BOOL globalCursorPressed[] = {FALSE,FALSE,FALSE,FALSE};
+BOOL globalF1_12Pressed[] = {FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE};
+char* globalRobotGUIDs[] = {
+	"00000000-0000-0000-0000-000000000001","00000000-0000-0000-0000-000000000002","00000000-0000-0000-0000-000000000003","00000000-0000-0000-0000-000000000004",
+	"00000000-0000-0000-0000-000000000005","00000000-0000-0000-0000-000000000006","00000000-0000-0000-0000-000000000007","00000000-0000-0000-0000-000000000008",
+	"00000000-0000-0000-0000-000000000009","00000000-0000-0000-0000-000000000010","00000000-0000-0000-0000-000000000011","00000000-0000-0000-0000-000000000012"
+};
+
+BOOL globalGIBRPressed[]={FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 
@@ -37,40 +80,48 @@ VOID errorDetailedInformation(LPTSTR functionName)
 	wprintf(TEXT("[%s] failed with error %u: %s"), functionName, lastError, (LPTSTR)messageBuffer);
 }
 
+VOID clearRobotSelectedStatus()
+{
+	for (unsigned int i = 0; i<ARRAYSIZE(globalF1_12Pressed); i++)
+	{
+		globalF1_12Pressed[i] = FALSE;
+	}
+}
+
 VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 {
-	if (!globalIsJoystickUsed)
+	HANDLE handleStdInput;
+	DWORD numberOfReaded, i;
+	INPUT_RECORD inputRecordBuffer[128];
+	BOOL cycleRun = true;
+
+	handleStdInput = GetStdHandle(STD_INPUT_HANDLE);
+
+	while(cycleRun)
 	{
-		HANDLE handleStdInput;
-		DWORD numberOfReaded, i;
-		INPUT_RECORD inputRecordBuffer[128];
-		BOOL cycleRun = true;
-
-		handleStdInput = GetStdHandle(STD_INPUT_HANDLE);
-
-		while(cycleRun)
+		if(ReadConsoleInput(handleStdInput, inputRecordBuffer, 128, &numberOfReaded))
 		{
-			if(ReadConsoleInput(handleStdInput, inputRecordBuffer, 128, &numberOfReaded))
+			for (i = 0; i < numberOfReaded; i++)
 			{
-				for (i = 0; i < numberOfReaded; i++)
+				if (inputRecordBuffer[i].EventType==KEY_EVENT)
 				{
-					if (inputRecordBuffer[i].EventType==KEY_EVENT)
+					if (inputRecordBuffer[i].Event.KeyEvent.bKeyDown)
 					{
-						if (inputRecordBuffer[i].Event.KeyEvent.bKeyDown)
+						if (!globalIsJoystickUsed)
 						{
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x25)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
 							{
 								globalCursorPressed[0]=TRUE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x26)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_UP)
 							{
 								globalCursorPressed[1]=TRUE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x27)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_RIGHT)
 							{
 								globalCursorPressed[2]=TRUE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x28)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_DOWN)
 							{
 								globalCursorPressed[3]=TRUE;
 							}
@@ -90,58 +141,141 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 							{
 								globalQAEDPressed[3]=TRUE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x31)
-							{
-								globalRobotDrivePowerLevel = 0;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x32)
-							{
-								globalRobotDrivePowerLevel = 1;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x33)
-							{
-								globalRobotDrivePowerLevel = 2;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x34)
-							{
-								globalRobotDrivePowerLevel = 3;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x35)
-							{
-								globalRobotDrivePowerLevel = 4;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x36)
-							{
-								globalRobotDrivePowerLevel = 5;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x37)
-							{
-								globalRobotDrivePowerLevel = 6;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x38)
-							{
-								globalRobotDrivePowerLevel = 7;
-							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x39)
-							{
-								globalRobotDrivePowerLevel = 8;
-							}
 						}
-						else
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x31)
 						{
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x25)
+							globalRobotDrivePowerLevel = 0;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x32)
+						{
+							globalRobotDrivePowerLevel = 1;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x33)
+						{
+							globalRobotDrivePowerLevel = 2;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x34)
+						{
+							globalRobotDrivePowerLevel = 3;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x35)
+						{
+							globalRobotDrivePowerLevel = 4;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x36)
+						{
+							globalRobotDrivePowerLevel = 5;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x37)
+						{
+							globalRobotDrivePowerLevel = 6;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x38)
+						{
+							globalRobotDrivePowerLevel = 7;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x39)
+						{
+							globalRobotDrivePowerLevel = 8;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x47)
+						{
+							globalGIBRPressed[0]=TRUE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x49)
+						{
+							globalGIBRPressed[1]=TRUE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x42)
+						{
+							globalGIBRPressed[2]=TRUE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x52)
+						{
+							globalGIBRPressed[3]=TRUE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_ESCAPE)
+						{
+							clearRobotSelectedStatus();
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F1)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[0]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F2)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[1]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F3)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[2]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F4)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[3]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F5)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[4]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F6)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[5]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F7)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[6]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F8)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[7]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F9)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[8]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F10)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[9]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F11)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[10]=TRUE;	
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_F12)
+						{
+							clearRobotSelectedStatus();
+							globalF1_12Pressed[11]=TRUE;	
+						}
+					}
+					else
+					{
+						if (!globalIsJoystickUsed)
+						{
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_LEFT)
 							{
 								globalCursorPressed[0]=FALSE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x26)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_UP)
 							{
 								globalCursorPressed[1]=FALSE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x27)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_RIGHT)
 							{
 								globalCursorPressed[2]=FALSE;
 							}
-							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x28)
+							if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_DOWN)
 							{
 								globalCursorPressed[3]=FALSE;
 							}
@@ -161,6 +295,22 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 							{
 								globalQAEDPressed[3]=FALSE;
 							}
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x47)
+						{
+							globalGIBRPressed[0]=FALSE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x49)
+						{
+							globalGIBRPressed[1]=FALSE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x42)
+						{
+							globalGIBRPressed[2]=FALSE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x52)
+						{
+							globalGIBRPressed[3]=FALSE;
 						}
 					}
 				}
@@ -294,13 +444,107 @@ VOID enumeratingCOMPorts()
 	}
 } 
 
-LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer){ 
+LPCWSTR multiCharToUniChar(char* charBuffer, WCHAR* wCharBuffer)
+{ 
 	size_t len = strlen(charBuffer) + 1; 
 	size_t reqsize = 0;
 	mbstowcs_s(&reqsize, NULL, 0, charBuffer, len);
 	if(!reqsize) return NULL;
 	mbstowcs_s(NULL, &wCharBuffer[0], len, charBuffer, len);
 	return (LPCWSTR)wCharBuffer; 
+}
+
+void displaySendedToRobotInformation(const BYTE *information, unsigned int arraySize)
+{
+	wprintf(TEXT("Sending to robot's: ["));
+	for (unsigned int i=0; i<arraySize; i++)
+	{
+		if (i == arraySize-1)
+		{
+			wprintf(TEXT("%02X"), information[i]);
+		} else 
+		{
+			wprintf(TEXT("%02X "), information[i]);
+		}
+	}
+	wprintf(TEXT("]\n"));
+}
+
+BYTE correctPowerValues(BYTE value)
+{
+	BYTE powerValues[]={0,14,28,42,56,70,84,98,128,156,170,184,198,212,226,240,255};
+	BYTE maxValue = powerValues[0];
+	for (int i=0; i<ARRAYSIZE(powerValues); i++)
+	{
+		if (value==powerValues[i]) return value;
+		if (sqrt((double)(value*value+powerValues[i]*powerValues[i]))>sqrt((double)(maxValue*maxValue+powerValues[i]*powerValues[i]))) maxValue=powerValues[i];
+	}
+	return maxValue;
+}
+
+BOOL updateToSelectedRobotGUID(BYTE* extendedByteBuffer)
+{
+	char* guid = NULL;
+
+	if (globalF1_12Pressed[0]!=FALSE)
+	{
+		guid = globalRobotGUIDs[0]; 
+	}
+	if (globalF1_12Pressed[1]!=FALSE)
+	{
+		guid = globalRobotGUIDs[1]; 
+	}
+	if (globalF1_12Pressed[2]!=FALSE)
+	{
+		guid = globalRobotGUIDs[2]; 
+	}
+	if (globalF1_12Pressed[3]!=FALSE)
+	{
+		guid = globalRobotGUIDs[3]; 
+	}
+	if (globalF1_12Pressed[4]!=FALSE)
+	{
+		guid = globalRobotGUIDs[4]; 
+	}
+	if (globalF1_12Pressed[5]!=FALSE)
+	{
+		guid = globalRobotGUIDs[5]; 
+	}
+	if (globalF1_12Pressed[6]!=FALSE)
+	{
+		guid = globalRobotGUIDs[6]; 
+	}
+	if (globalF1_12Pressed[7]!=FALSE)
+	{
+		guid = globalRobotGUIDs[7]; 
+	}
+	if (globalF1_12Pressed[8]!=FALSE)
+	{
+		guid = globalRobotGUIDs[8]; 
+	}
+	if (globalF1_12Pressed[9]!=FALSE)
+	{
+		guid = globalRobotGUIDs[9]; 
+	}
+	if (globalF1_12Pressed[10]!=FALSE)
+	{
+		guid = globalRobotGUIDs[10]; 
+	}
+	if (globalF1_12Pressed[11]!=FALSE)
+	{
+		guid = globalRobotGUIDs[11]; 
+	}
+
+	if (guid!=NULL)
+	{
+		for (unsigned int i = 0; i<36; i++)
+		{
+			extendedByteBuffer[1+i] = guid[i];
+		}
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 void usageInformation()
@@ -338,6 +582,145 @@ int exitInformation()
 	return getchar();
 }
 
+int scryptPlayer(int argc, char** argv)
+{
+	if (argc!=4)
+		return -1;
+	{
+		OPENFILENAME openFileName;      
+		WCHAR fileBuffer[MAX_PATH];      
+		HWND windowHandle = NULL;             
+
+		ZeroMemory(&openFileName, sizeof(openFileName));
+		openFileName.lStructSize = sizeof(OPENFILENAME);
+		openFileName.hwndOwner = windowHandle;
+		openFileName.lpstrFile = fileBuffer;
+		openFileName.lpstrFile[0] = '\0';
+		openFileName.nMaxFile = sizeof(fileBuffer);
+		openFileName.lpstrFilter = L"All\0*.*\0Text\0*.robotscript\0";
+		openFileName.nFilterIndex = 1;
+		openFileName.lpstrFileTitle = NULL;
+		openFileName.nMaxFileTitle = 0;
+		openFileName.lpstrInitialDir = NULL;
+		openFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if (GetOpenFileName(&openFileName)==TRUE) 
+			globalScryptFileHandle = CreateFile(openFileName.lpstrFile, 
+			GENERIC_READ,
+			0,
+			(LPSECURITY_ATTRIBUTES) NULL,
+			OPEN_EXISTING,
+			FILE_ATTRIBUTE_NORMAL,
+			(HANDLE) NULL);
+	}
+
+	if (NULL == globalScryptFileHandle)
+	{
+		wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
+		errorDetailedInformation(TEXT("CreateFile"));
+		exitInformation();
+		return -1;
+	}
+
+	UINT baudRate = atoi(argv[3]);
+
+	WCHAR wBuffer[512];
+	char buffer[32];
+	sprintf_s(buffer,"\\\\.\\%s", argv[2]);
+
+	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(buffer, wBuffer));
+	globalFileHandle = CreateFile(multiCharToUniChar(buffer,wBuffer), GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
+	if (INVALID_HANDLE_VALUE == globalFileHandle)
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nCOM port opening issue.\n"));
+		errorDetailedInformation(TEXT("CreateFile"));
+		exitInformation();
+		return -1;
+	}
+
+	wprintf(TEXT("Setting baud rate [%u]\n"),baudRate);
+
+	DCB dcb;
+	ZeroMemory(&dcb, sizeof(DCB));
+
+	if (!GetCommState(globalFileHandle,&dcb))
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nSetting baud rate issue.\n"));
+		errorDetailedInformation(TEXT("GetCommState"));
+		exitInformation();
+		return -1; 
+	}
+
+	dcb.BaudRate = baudRate;
+	dcb.ByteSize = 8; 
+	dcb.StopBits = ONESTOPBIT; 
+	dcb.Parity = NOPARITY; 
+
+	if (!SetCommState(globalFileHandle, &dcb))
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nSetting baud rate issue.\n"));
+		errorDetailedInformation(TEXT("SetCommState"));
+		exitInformation();
+		return -1;
+	}
+
+	COMMTIMEOUTS ComTimeouts;
+	ZeroMemory(&ComTimeouts, sizeof(COMMTIMEOUTS));
+	ComTimeouts.ReadIntervalTimeout = MAXDWORD;
+	ComTimeouts.ReadTotalTimeoutConstant = 0;
+	ComTimeouts.ReadTotalTimeoutMultiplier = 100;
+	ComTimeouts.WriteTotalTimeoutConstant = 1;
+	ComTimeouts.WriteTotalTimeoutMultiplier = 100;
+
+	if(!SetCommTimeouts(globalFileHandle, &ComTimeouts))
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nSetting COM Port Timeouts issue.\n"));
+		errorDetailedInformation(TEXT("SetCommTimeouts"));
+		exitInformation();
+		return -1;
+	}
+
+	if(!PurgeComm(globalFileHandle, PURGE_RXCLEAR))
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nPurge COMM for RX issue.\n"));
+		errorDetailedInformation(TEXT("PurgeComm"));
+		exitInformation();
+		return -1;
+	}
+
+	if(!PurgeComm(globalFileHandle, PURGE_TXCLEAR))
+	{
+		CloseHandle(globalFileHandle);
+		wprintf(TEXT("\nPurge COMM for TX issue.\n"));
+		errorDetailedInformation(TEXT("PurgeComm"));
+		exitInformation();
+		return -1;
+	} 	
+
+	globalThreadCOMPortReadHandle = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProcedureCOMPortRead, &globalThreadCOMPortReadParam, 0, &globalThreadCOMPortReadId);
+	if (INVALID_HANDLE_VALUE == globalThreadCOMPortReadHandle)
+	{
+		CloseHandle(globalThreadCOMPortReadHandle);
+		wprintf(TEXT("\nCreate Thread for COM Port Read issue.\n"));
+		errorDetailedInformation(TEXT("CreateThread"));
+		exitInformation();
+		return -1;
+	}
+
+	BOOL cycleRun = true;
+	while (cycleRun)
+	{
+
+		Sleep(100);
+	}
+	return -1;
+}
+
 int main(int argc, char** argv)
 {
 	setlocale(LC_CTYPE,"Russian");
@@ -356,10 +739,17 @@ int main(int argc, char** argv)
 
 	if (argc!=7)
 	{
+		if (argc==4) 
+		{
+			if (strcmp(argv[1],"script") == 0)
+			{
+				return scryptPlayer(argc, argv);
+			}
+		}
 		usageInformation();
 		exitInformation();
 		return -1;
-	}
+	} 
 
 	UINT joystickNumber = atoi(argv[1]);
 	UINT baudRate = atoi(argv[3]);
@@ -510,12 +900,13 @@ int main(int argc, char** argv)
 
 	ZeroMemory(&globalOverlapWrite, sizeof(OVERLAPPED));
 	BOOL cycleRun = true;
-	BYTE directRobotPowerValues[9]={142,156,170,184,198,212,226,240,255};
-	BYTE inDirectRobotPowerValues[9]={112,98,84,70,56,42,28,14,0};
+	BYTE directRobotPowerValues[]={142,156,170,184,198,212,226,240,255};
+	BYTE inDirectRobotPowerValues[]={112,98,84,70,56,42,28,14,0};
 
 	while (cycleRun)
 	{
-		BYTE byteBuffer[10] = {'$',0,0,128,128,128,0,128,0,'#'};
+		BYTE byteBuffer[] = {'$',0,0,128,128,128,0,128,0,'#'};
+		BYTE extendedByteBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','c','t','r','l','$',0,0,128,128,128,0,128,0,'#'};
 		if (globalIsJoystickUsed)
 		{		
 			ZeroMemory(&ji, sizeof(JOYINFOEX));
@@ -545,18 +936,14 @@ int main(int argc, char** argv)
 				return -1;
 			}
 
-			byteBuffer[1] = ji.dwButtons&0xff;
-			byteBuffer[2] = (ji.dwButtons>>8)&0xff;
-			byteBuffer[3] = (ji.dwXpos>>8)&0xff;
-			byteBuffer[4] = (ji.dwYpos>>8)&0xff;
-			byteBuffer[5] = (ji.dwZpos>>8)&0xff;
-			byteBuffer[6] = (ji.dwUpos>>8)&0xff;
-			byteBuffer[7] = (ji.dwRpos>>8)&0xff;
-			byteBuffer[8] = ((ji.dwPOV/4500)>>8)&0xff;
-			if (byteBuffer[8]>7)
-			{
-				byteBuffer[8] = 8;
-			}
+			byteBuffer[1] = 0;
+			byteBuffer[2] = 0;
+			byteBuffer[3] = correctPowerValues((ji.dwXpos>>8)&0xff);
+			byteBuffer[4] = correctPowerValues((ji.dwYpos>>8)&0xff);
+			byteBuffer[5] = correctPowerValues((ji.dwZpos>>8)&0xff);
+			byteBuffer[6] = correctPowerValues((ji.dwUpos>>8)&0xff);
+			byteBuffer[7] = correctPowerValues((ji.dwRpos>>8)&0xff);
+			byteBuffer[8] = 0;
 		} else {
 			if (globalQAEDPressed[0]==TRUE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==FALSE)
 			{
@@ -618,23 +1005,148 @@ int main(int argc, char** argv)
 
 		DWORD bytesWrite;
 
-		WriteFile(globalFileHandle, byteBuffer, 10, &bytesWrite, &globalOverlapWrite);
-		FlushFileBuffers(globalFileHandle);
+		BOOL robotGUIDControl = updateToSelectedRobotGUID(extendedByteBuffer); 
 
-		if (globalIsOutcomingDataSaved!=FALSE)
+		if (robotGUIDControl!=FALSE)
 		{
-			if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+			unsigned int byteBufferCounter=0;
+			for (unsigned int i = (ARRAYSIZE(extendedByteBuffer)-ARRAYSIZE(byteBuffer));i<ARRAYSIZE(extendedByteBuffer);i++)
 			{
-				DWORD bytesOutcomingDataWrite;
-				WriteFile(globalOutcomingDataFileHandle, byteBuffer, 10, &bytesOutcomingDataWrite, NULL);
-				FlushFileBuffers(globalOutcomingDataFileHandle);
+				extendedByteBuffer[i]=byteBuffer[byteBufferCounter];
+				byteBufferCounter++;
 			}
+
+			WriteFile(globalFileHandle, extendedByteBuffer, ARRAYSIZE(extendedByteBuffer), &bytesWrite, &globalOverlapWrite);
+			FlushFileBuffers(globalFileHandle);
+
+			if (globalIsOutcomingDataSaved!=FALSE)
+			{
+				if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+				{
+					DWORD bytesOutcomingDataWrite;
+					WriteFile(globalOutcomingDataFileHandle, extendedByteBuffer, ARRAYSIZE(extendedByteBuffer), &bytesOutcomingDataWrite, NULL);
+					FlushFileBuffers(globalOutcomingDataFileHandle);
+				}
+			}
+
+			if (globalGIBRPressed[0]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','g','e','t','G','U','I','D','#'};
+				WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+				FlushFileBuffers(globalFileHandle);
+
+				if (globalIsOutcomingDataSaved!=FALSE)
+				{
+					if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+					{
+						DWORD bytesOutcomingDataWrite;
+						WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+						FlushFileBuffers(globalOutcomingDataFileHandle);
+					}
+				}
+				displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+			}
+
+			if (globalGIBRPressed[1]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','I','n','f','o','r','m','a','t','i','o','n','#'};
+				if (updateToSelectedRobotGUID(commandBuffer))
+				{
+					WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+					FlushFileBuffers(globalFileHandle);
+
+					if (globalIsOutcomingDataSaved!=FALSE)
+					{
+						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+						{
+							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+							FlushFileBuffers(globalOutcomingDataFileHandle);
+						}
+					}
+					displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+				}
+			}
+
+			if (globalGIBRPressed[2]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','B','a','t','t','e','r','y','V','o','l','t','a','g','e','#'};
+				if (updateToSelectedRobotGUID(commandBuffer))
+				{
+					WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+					FlushFileBuffers(globalFileHandle);
+
+					if (globalIsOutcomingDataSaved!=FALSE)
+					{
+						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+						{
+							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+							FlushFileBuffers(globalOutcomingDataFileHandle);
+						}
+					}
+					displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+				}
+			}
+
+			if (globalGIBRPressed[3]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','R','S','S','I','#'};
+				if (updateToSelectedRobotGUID(commandBuffer))
+				{
+					WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+					FlushFileBuffers(globalFileHandle);
+
+					if (globalIsOutcomingDataSaved!=FALSE)
+					{
+						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+						{
+							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+							FlushFileBuffers(globalOutcomingDataFileHandle);
+						}
+					}
+					displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+				}
+			}
+			displaySendedToRobotInformation(extendedByteBuffer, ARRAYSIZE(extendedByteBuffer));
+		} 
+		else 
+		{
+			WriteFile(globalFileHandle, byteBuffer, ARRAYSIZE(byteBuffer), &bytesWrite, &globalOverlapWrite);
+			FlushFileBuffers(globalFileHandle);
+
+			if (globalIsOutcomingDataSaved!=FALSE)
+			{
+				if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+				{
+					DWORD bytesOutcomingDataWrite;
+					WriteFile(globalOutcomingDataFileHandle, byteBuffer, ARRAYSIZE(byteBuffer), &bytesOutcomingDataWrite, NULL);
+					FlushFileBuffers(globalOutcomingDataFileHandle);
+				}
+			}
+
+			if (globalGIBRPressed[0]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','g','e','t','G','U','I','D','#'};
+				WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+				FlushFileBuffers(globalFileHandle);
+
+				if (globalIsOutcomingDataSaved!=FALSE)
+				{
+					if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+					{
+						DWORD bytesOutcomingDataWrite;
+						WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+						FlushFileBuffers(globalOutcomingDataFileHandle);
+					}
+				}
+				displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+			}
+
+			displaySendedToRobotInformation(byteBuffer, ARRAYSIZE(byteBuffer));
 		}
 
-		wprintf(TEXT("Sending to robot's: [%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X]\n"), 
-			byteBuffer[0], byteBuffer[1], byteBuffer[2], 
-			byteBuffer[3], byteBuffer[4], byteBuffer[5], 
-			byteBuffer[6], byteBuffer[7], byteBuffer[8], byteBuffer[9]);
 		Sleep(100);
 	}
 }

@@ -1,41 +1,9 @@
-/*
-Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
-
-http://www.robotics.by/
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-- Redistributions of source code must retain the above copyright notice,
-this list of conditions and the following disclaimer.
-- Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation
-and/or other materials provided with the distribution.
-- Neither the name of the RCSG Developers nor the names of its
-contributors may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-`AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
 #include <stdio.h>
 #include <windows.h>
 #include <locale.h>
 #include <wchar.h>
 #include <math.h>
+#include <vector>
 
 HANDLE globalIncomingDataFileHandle = NULL;
 HANDLE globalOutcomingDataFileHandle = NULL;
@@ -61,6 +29,7 @@ char* globalRobotGUIDs[] = {
 BOOL globalGIBRPressed[]={FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
+BYTE globalRobotScriptIdentifier[] = {'<','r','o','b','o','t','s','c','r','i','p','t','>'};
 
 VOID errorDetailedInformation(LPTSTR functionName) 
 { 
@@ -557,6 +526,10 @@ void usageInformation()
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("tigger_joystick_module_test.exe [Joystick Number] [COM Port Name] [Baud Rate] [Use Keyboard] [Logging Incoming Data] [Logging Outcoming Data]\n"));
 	wprintf(TEXT("\n"));
+	wprintf(TEXT("Sript mode:\n"));
+	wprintf(TEXT("\n"));
+	wprintf(TEXT("tigger_joystick_module_test.exe script [COM Port Name] [Baud Rate]\n"));
+	wprintf(TEXT("\n"));
 	wprintf(TEXT("Joystick Number - system number of joystick, usually from 0 to 15\n"));
 	wprintf(TEXT("COM Port Name \t- COM Port Name like 'COM1'\n"));
 	wprintf(TEXT("Baud Rate \t- COM Port baud rate like '9600'\n"));
@@ -582,10 +555,22 @@ int exitInformation()
 	return getchar();
 }
 
+DWORD getFileSize(LPCWSTR fileName)
+{
+	WIN32_FILE_ATTRIBUTE_DATA   fileInfo;
+	if (NULL == fileName)
+		return 0;
+	if (!GetFileAttributesEx(fileName, GetFileExInfoStandard, &fileInfo))
+		return 0;
+	return fileInfo.nFileSizeLow;
+}
+
 int scryptPlayer(int argc, char** argv)
 {
 	if (argc!=4)
 		return -1;
+
+	DWORD fileSizeRobotScrypt = 0;
 	{
 		OPENFILENAME openFileName;      
 		WCHAR fileBuffer[MAX_PATH];      
@@ -612,9 +597,14 @@ int scryptPlayer(int argc, char** argv)
 			OPEN_EXISTING,
 			FILE_ATTRIBUTE_NORMAL,
 			(HANDLE) NULL);
+
+		if (NULL != globalScryptFileHandle)
+		{
+			fileSizeRobotScrypt = getFileSize(openFileName.lpstrFile);
+		}
 	}
 
-	if (NULL == globalScryptFileHandle)
+	if (NULL == globalScryptFileHandle && fileSizeRobotScrypt>ARRAYSIZE(globalRobotScriptIdentifier) && fileSizeRobotScrypt<100*1024*1024)
 	{
 		wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
 		errorDetailedInformation(TEXT("CreateFile"));
@@ -713,11 +703,95 @@ int scryptPlayer(int argc, char** argv)
 	}
 
 	BOOL cycleRun = true;
+
+	BYTE *scryptFileMemoryBuffer = NULL;
+	scryptFileMemoryBuffer = (BYTE*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,fileSizeRobotScrypt);
+	DWORD nRead;
+	if (globalScryptFileHandle!=NULL)
+	{
+		if (ReadFile(globalScryptFileHandle,scryptFileMemoryBuffer,fileSizeRobotScrypt,&nRead,NULL))
+		{
+			CloseHandle(globalScryptFileHandle);
+		} else
+		{
+			CloseHandle(globalScryptFileHandle);
+			wprintf(TEXT("\nUnable to read '*.robotscript' file.\n"));
+			errorDetailedInformation(TEXT("ReadFile"));
+			exitInformation();
+			return -1;
+		}	
+	} else {
+		wprintf(TEXT("\nUnable to use file handle of '*.robotscript' file.\n"));
+		exitInformation();
+		return -1;
+	}
+	
+	if ((nRead<ARRAYSIZE(globalRobotScriptIdentifier)) || (memcmp(scryptFileMemoryBuffer,globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))!=0))
+	{
+		wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
+		exitInformation();
+		return -1;
+	}
+
+	std::vector<std::pair<DWORD,DWORD>> script;
+	
+	DWORD scriptCounter = ARRAYSIZE(globalRobotScriptIdentifier);
+	DWORD first = scriptCounter;
+	while (scriptCounter<fileSizeRobotScrypt)
+	{
+		BYTE comparationBuffer[ARRAYSIZE(globalRobotScriptIdentifier)];
+		ZeroMemory(&comparationBuffer,ARRAYSIZE(globalRobotScriptIdentifier));
+		for(DWORD i=0;i<ARRAYSIZE(globalRobotScriptIdentifier);i++)
+		{
+			if (i+scriptCounter<fileSizeRobotScrypt)
+			{
+				comparationBuffer[i]=scryptFileMemoryBuffer[i+scriptCounter];
+			}
+		}
+		if (memcmp(comparationBuffer,globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))==0)
+		{
+			std::pair<DWORD,DWORD> scriptPair;
+			scriptPair.first = first;
+			scriptPair.second = scriptCounter;
+			script.push_back(scriptPair);
+			scriptCounter+=ARRAYSIZE(globalRobotScriptIdentifier);
+			first=scriptCounter;
+			continue;
+		}
+		scriptCounter++;
+		if (scriptCounter==fileSizeRobotScrypt-1)
+		{
+			std::pair<DWORD,DWORD> scriptPair;
+			scriptPair.first = first;
+			scriptPair.second = fileSizeRobotScrypt;
+			script.push_back(scriptPair);
+		}
+	}
+	
+	wprintf(TEXT("\nStarting robot script playing...\n"));
+
 	while (cycleRun)
 	{
-
+		std::pair<DWORD,DWORD> scriptPair = script.back();
+		script.pop_back();
+		BYTE *commandBuffer = new BYTE[scriptPair.second-scriptPair.first];
+		for(DWORD i=0;i<scriptPair.second-scriptPair.first;i++)
+		{
+			commandBuffer[i]=scryptFileMemoryBuffer[i+scriptPair.first];
+		}
+		DWORD bytesWrite;
+		WriteFile(globalFileHandle, commandBuffer, scriptPair.second-scriptPair.first, &bytesWrite, &globalOverlapWrite);
+		FlushFileBuffers(globalFileHandle);
+		displaySendedToRobotInformation(commandBuffer, scriptPair.second-scriptPair.first);
+		delete[] commandBuffer;
 		Sleep(100);
+		if (script.size()==0)
+		{
+			cycleRun = FALSE;
+		}
 	}
+	HeapFree(GetProcessHeap(),0,scryptFileMemoryBuffer);
+	CloseHandle(globalFileHandle);
 	return -1;
 }
 
@@ -1024,6 +1098,7 @@ int main(int argc, char** argv)
 				if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 				{
 					DWORD bytesOutcomingDataWrite;
+					WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 					WriteFile(globalOutcomingDataFileHandle, extendedByteBuffer, ARRAYSIZE(extendedByteBuffer), &bytesOutcomingDataWrite, NULL);
 					FlushFileBuffers(globalOutcomingDataFileHandle);
 				}
@@ -1040,6 +1115,7 @@ int main(int argc, char** argv)
 					if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 					{
 						DWORD bytesOutcomingDataWrite;
+						WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 						WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
 						FlushFileBuffers(globalOutcomingDataFileHandle);
 					}
@@ -1060,6 +1136,7 @@ int main(int argc, char** argv)
 						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 						{
 							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
 							FlushFileBuffers(globalOutcomingDataFileHandle);
 						}
@@ -1081,6 +1158,7 @@ int main(int argc, char** argv)
 						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 						{
 							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
 							FlushFileBuffers(globalOutcomingDataFileHandle);
 						}
@@ -1102,6 +1180,7 @@ int main(int argc, char** argv)
 						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 						{
 							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
 							FlushFileBuffers(globalOutcomingDataFileHandle);
 						}
@@ -1121,6 +1200,7 @@ int main(int argc, char** argv)
 				if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 				{
 					DWORD bytesOutcomingDataWrite;
+					WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 					WriteFile(globalOutcomingDataFileHandle, byteBuffer, ARRAYSIZE(byteBuffer), &bytesOutcomingDataWrite, NULL);
 					FlushFileBuffers(globalOutcomingDataFileHandle);
 				}
@@ -1137,6 +1217,7 @@ int main(int argc, char** argv)
 					if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
 					{
 						DWORD bytesOutcomingDataWrite;
+						WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
 						WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
 						FlushFileBuffers(globalOutcomingDataFileHandle);
 					}

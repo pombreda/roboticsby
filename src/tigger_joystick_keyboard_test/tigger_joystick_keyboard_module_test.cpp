@@ -772,8 +772,8 @@ int scryptPlayer(int argc, char** argv)
 
 	while (cycleRun)
 	{
-		std::pair<DWORD,DWORD> scriptPair = script.back();
-		script.pop_back();
+		std::pair<DWORD,DWORD> scriptPair = script.front();
+		script.erase(script.begin());
 		BYTE *commandBuffer = new BYTE[scriptPair.second-scriptPair.first];
 		for(DWORD i=0;i<scriptPair.second-scriptPair.first;i++)
 		{
@@ -790,6 +790,7 @@ int scryptPlayer(int argc, char** argv)
 			cycleRun = FALSE;
 		}
 	}
+
 	HeapFree(GetProcessHeap(),0,scryptFileMemoryBuffer);
 	CloseHandle(globalFileHandle);
 	return -1;

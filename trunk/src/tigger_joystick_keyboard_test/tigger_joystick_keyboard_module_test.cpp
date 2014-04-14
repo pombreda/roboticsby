@@ -30,6 +30,7 @@ BOOL globalGIBRPressed[]={FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 BYTE globalRobotScriptIdentifier[] = {'<','r','o','b','o','t','s','c','r','i','p','t','>'};
+DWORD globalTime = 0;
 
 VOID errorDetailedInformation(LPTSTR functionName) 
 { 
@@ -772,6 +773,7 @@ int scryptPlayer(int argc, char** argv)
 
 	while (cycleRun)
 	{
+		globalTime = timeGetTime();
 		std::pair<DWORD,DWORD> scriptPair = script.front();
 		script.erase(script.begin());
 		BYTE *commandBuffer = new BYTE[scriptPair.second-scriptPair.first];
@@ -784,7 +786,12 @@ int scryptPlayer(int argc, char** argv)
 		FlushFileBuffers(globalFileHandle);
 		displaySendedToRobotInformation(commandBuffer, scriptPair.second-scriptPair.first);
 		delete[] commandBuffer;
-		Sleep(100);
+
+		while ((globalTime+100)>timeGetTime())
+		{
+			Sleep(1);
+		}
+		globalTime = timeGetTime();
 		if (script.size()==0)
 		{
 			cycleRun = FALSE;
@@ -980,6 +987,7 @@ int main(int argc, char** argv)
 
 	while (cycleRun)
 	{
+		globalTime = timeGetTime();
 		BYTE byteBuffer[] = {'$',0,0,128,128,128,0,128,0,'#'};
 		BYTE extendedByteBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','c','t','r','l','$',0,0,128,128,128,0,128,0,'#'};
 		if (globalIsJoystickUsed)
@@ -1228,7 +1236,10 @@ int main(int argc, char** argv)
 
 			displaySendedToRobotInformation(byteBuffer, ARRAYSIZE(byteBuffer));
 		}
-
-		Sleep(100);
+		while ((globalTime+100)>timeGetTime())
+		{
+			Sleep(1);
+		}
+		globalTime = timeGetTime();
 	}
 }

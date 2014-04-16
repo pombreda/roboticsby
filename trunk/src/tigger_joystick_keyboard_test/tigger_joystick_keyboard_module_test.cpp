@@ -10,7 +10,7 @@ HANDLE globalOutcomingDataFileHandle = NULL;
 HANDLE globalFileHandle = NULL;
 HANDLE globalThreadCOMPortReadHandle = NULL;
 HANDLE globalThreadConsoleReadHandle = NULL;
-HANDLE globalScryptFileHandle = NULL;
+HANDLE globalScryptFileHandle[] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 DWORD globalThreadCOMPortReadParam, globalThreadCOMPortReadId;
 DWORD globalThreadConsoleReadParam, globalThreadConsoleReadId;
 OVERLAPPED globalOverlapWrite, globalOverlapRead;
@@ -529,7 +529,7 @@ void usageInformation()
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Sript mode:\n"));
 	wprintf(TEXT("\n"));
-	wprintf(TEXT("tigger_joystick_module_test.exe script [COM Port Name] [Baud Rate]\n"));
+	wprintf(TEXT("tigger_joystick_module_test.exe script [1-12] [COM Port Name] [Baud Rate]\n"));
 	wprintf(TEXT("\n"));
 	wprintf(TEXT("Joystick Number - system number of joystick, usually from 0 to 15\n"));
 	wprintf(TEXT("COM Port Name \t- COM Port Name like 'COM1'\n"));
@@ -568,56 +568,69 @@ DWORD getFileSize(LPCWSTR fileName)
 
 int scryptPlayer(int argc, char** argv)
 {
-	if (argc!=4)
+	if (argc!=5)
 		return -1;
 
-	DWORD fileSizeRobotScrypt = 0;
+	UINT scriptFilesCount = atoi(argv[2]);
+
+	if (scriptFilesCount<1 || scriptFilesCount>12)
 	{
-		OPENFILENAME openFileName;      
-		WCHAR fileBuffer[MAX_PATH];      
-		HWND windowHandle = NULL;             
-
-		ZeroMemory(&openFileName, sizeof(openFileName));
-		openFileName.lStructSize = sizeof(OPENFILENAME);
-		openFileName.hwndOwner = windowHandle;
-		openFileName.lpstrFile = fileBuffer;
-		openFileName.lpstrFile[0] = '\0';
-		openFileName.nMaxFile = sizeof(fileBuffer);
-		openFileName.lpstrFilter = L"All\0*.*\0Text\0*.robotscript\0";
-		openFileName.nFilterIndex = 1;
-		openFileName.lpstrFileTitle = NULL;
-		openFileName.nMaxFileTitle = 0;
-		openFileName.lpstrInitialDir = NULL;
-		openFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-		if (GetOpenFileName(&openFileName)==TRUE) 
-			globalScryptFileHandle = CreateFile(openFileName.lpstrFile, 
-			GENERIC_READ,
-			0,
-			(LPSECURITY_ATTRIBUTES) NULL,
-			OPEN_EXISTING,
-			FILE_ATTRIBUTE_NORMAL,
-			(HANDLE) NULL);
-
-		if (NULL != globalScryptFileHandle)
-		{
-			fileSizeRobotScrypt = getFileSize(openFileName.lpstrFile);
-		}
-	}
-
-	if (NULL == globalScryptFileHandle && fileSizeRobotScrypt>ARRAYSIZE(globalRobotScriptIdentifier) && fileSizeRobotScrypt<100*1024*1024)
-	{
-		wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
-		errorDetailedInformation(TEXT("CreateFile"));
+		wprintf(TEXT("\nNumber of script files out of range [1-12].\n"));
 		exitInformation();
 		return -1;
 	}
 
-	UINT baudRate = atoi(argv[3]);
+	DWORD fileSizeRobotScrypt[] = {0,0,0,0,0,0,0,0,0,0,0,0};
+
+	for(UINT i=0;i<scriptFilesCount;i++)
+	{
+		{
+			OPENFILENAME openFileName;      
+			WCHAR fileBuffer[MAX_PATH];      
+			HWND windowHandle = NULL;             
+
+			ZeroMemory(&openFileName, sizeof(openFileName));
+			openFileName.lStructSize = sizeof(OPENFILENAME);
+			openFileName.hwndOwner = windowHandle;
+			openFileName.lpstrFile = fileBuffer;
+			openFileName.lpstrFile[0] = '\0';
+			openFileName.nMaxFile = sizeof(fileBuffer);
+			openFileName.lpstrFilter = L"All\0*.*\0Text\0*.robotscript\0";
+			openFileName.nFilterIndex = 1;
+			openFileName.lpstrFileTitle = NULL;
+			openFileName.nMaxFileTitle = 0;
+			openFileName.lpstrInitialDir = NULL;
+			openFileName.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+			if (GetOpenFileName(&openFileName)==TRUE) 
+				globalScryptFileHandle[i] = CreateFile(openFileName.lpstrFile, 
+				GENERIC_READ,
+				0,
+				(LPSECURITY_ATTRIBUTES) NULL,
+				OPEN_EXISTING,
+				FILE_ATTRIBUTE_NORMAL,
+				(HANDLE) NULL);
+
+			if (NULL != globalScryptFileHandle)
+			{
+				fileSizeRobotScrypt[i] = getFileSize(openFileName.lpstrFile);
+			}
+		}
+
+		if (NULL == globalScryptFileHandle[i] && fileSizeRobotScrypt[i]>ARRAYSIZE(globalRobotScriptIdentifier) && fileSizeRobotScrypt[i]<100*1024*1024)
+		{
+			wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
+			errorDetailedInformation(TEXT("CreateFile"));
+			exitInformation();
+			return -1;
+		}
+	}
+
+	UINT baudRate = atoi(argv[4]);
 
 	WCHAR wBuffer[512];
 	char buffer[32];
-	sprintf_s(buffer,"\\\\.\\%s", argv[2]);
+	sprintf_s(buffer,"\\\\.\\%s", argv[3]);
 
 	wprintf(TEXT("Opening port [%s]\n"),multiCharToUniChar(buffer, wBuffer));
 	globalFileHandle = CreateFile(multiCharToUniChar(buffer,wBuffer), GENERIC_READ | GENERIC_WRITE, NULL, NULL, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, NULL);
@@ -704,101 +717,119 @@ int scryptPlayer(int argc, char** argv)
 	}
 
 	BOOL cycleRun = true;
-
-	BYTE *scryptFileMemoryBuffer = NULL;
-	scryptFileMemoryBuffer = (BYTE*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,fileSizeRobotScrypt);
-	DWORD nRead;
-	if (globalScryptFileHandle!=NULL)
+	BYTE *scryptFileMemoryBuffer []= {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+	for(UINT i=0;i<scriptFilesCount;i++)
 	{
-		if (ReadFile(globalScryptFileHandle,scryptFileMemoryBuffer,fileSizeRobotScrypt,&nRead,NULL))
+		scryptFileMemoryBuffer[i] = (BYTE*)HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,fileSizeRobotScrypt[i]);
+		DWORD nRead;
+		if (globalScryptFileHandle[i]!=NULL)
 		{
-			CloseHandle(globalScryptFileHandle);
-		} else
-		{
-			CloseHandle(globalScryptFileHandle);
-			wprintf(TEXT("\nUnable to read '*.robotscript' file.\n"));
-			errorDetailedInformation(TEXT("ReadFile"));
+			if (ReadFile(globalScryptFileHandle[i],scryptFileMemoryBuffer[i],fileSizeRobotScrypt[i],&nRead,NULL))
+			{
+				CloseHandle(globalScryptFileHandle[i]);
+			} else
+			{
+				CloseHandle(globalScryptFileHandle[i]);
+				wprintf(TEXT("\nUnable to read '*.robotscript' file.\n"));
+				errorDetailedInformation(TEXT("ReadFile"));
+				exitInformation();
+				return -1;
+			}	
+		} else {
+			wprintf(TEXT("\nUnable to use file handle of '*.robotscript' file.\n"));
 			exitInformation();
 			return -1;
-		}	
-	} else {
-		wprintf(TEXT("\nUnable to use file handle of '*.robotscript' file.\n"));
-		exitInformation();
-		return -1;
-	}
-	
-	if ((nRead<ARRAYSIZE(globalRobotScriptIdentifier)) || (memcmp(scryptFileMemoryBuffer,globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))!=0))
-	{
-		wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
-		exitInformation();
-		return -1;
+		}
+
+		if ((nRead<ARRAYSIZE(globalRobotScriptIdentifier)) || (memcmp(scryptFileMemoryBuffer[i],globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))!=0))
+		{
+			wprintf(TEXT("\nUnable to use '*.robotscript' file.\n"));
+			exitInformation();
+			return -1;
+		}
 	}
 
-	std::vector<std::pair<DWORD,DWORD>> script;
-	
-	DWORD scriptCounter = ARRAYSIZE(globalRobotScriptIdentifier);
-	DWORD first = scriptCounter;
-	while (scriptCounter<fileSizeRobotScrypt)
+	std::vector<std::pair<DWORD,DWORD>> script[ARRAYSIZE(fileSizeRobotScrypt)];
+
+	for(UINT j=0;j<scriptFilesCount;j++)
 	{
-		BYTE comparationBuffer[ARRAYSIZE(globalRobotScriptIdentifier)];
-		ZeroMemory(&comparationBuffer,ARRAYSIZE(globalRobotScriptIdentifier));
-		for(DWORD i=0;i<ARRAYSIZE(globalRobotScriptIdentifier);i++)
+		DWORD scriptCounter = ARRAYSIZE(globalRobotScriptIdentifier);
+		DWORD first = scriptCounter;
+		while (scriptCounter<fileSizeRobotScrypt[j])
 		{
-			if (i+scriptCounter<fileSizeRobotScrypt)
+			BYTE comparationBuffer[ARRAYSIZE(globalRobotScriptIdentifier)];
+			ZeroMemory(&comparationBuffer,ARRAYSIZE(globalRobotScriptIdentifier));
+			for(DWORD i=0;i<ARRAYSIZE(globalRobotScriptIdentifier);i++)
 			{
-				comparationBuffer[i]=scryptFileMemoryBuffer[i+scriptCounter];
+				if (i+scriptCounter<fileSizeRobotScrypt[j])
+				{
+					comparationBuffer[i]=scryptFileMemoryBuffer[j][i+scriptCounter];
+				}
+			}
+			if (memcmp(comparationBuffer,globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))==0)
+			{
+				std::pair<DWORD,DWORD> scriptPair;
+				scriptPair.first = first;
+				scriptPair.second = scriptCounter;
+				script[j].push_back(scriptPair);
+				scriptCounter+=ARRAYSIZE(globalRobotScriptIdentifier);
+				first=scriptCounter;
+				continue;
+			}
+			scriptCounter++;
+			if (scriptCounter==fileSizeRobotScrypt[j]-1)
+			{
+				std::pair<DWORD,DWORD> scriptPair;
+				scriptPair.first = first;
+				scriptPair.second = fileSizeRobotScrypt[j];
+				script[j].push_back(scriptPair);
 			}
 		}
-		if (memcmp(comparationBuffer,globalRobotScriptIdentifier,ARRAYSIZE(globalRobotScriptIdentifier))==0)
-		{
-			std::pair<DWORD,DWORD> scriptPair;
-			scriptPair.first = first;
-			scriptPair.second = scriptCounter;
-			script.push_back(scriptPair);
-			scriptCounter+=ARRAYSIZE(globalRobotScriptIdentifier);
-			first=scriptCounter;
-			continue;
-		}
-		scriptCounter++;
-		if (scriptCounter==fileSizeRobotScrypt-1)
-		{
-			std::pair<DWORD,DWORD> scriptPair;
-			scriptPair.first = first;
-			scriptPair.second = fileSizeRobotScrypt;
-			script.push_back(scriptPair);
-		}
 	}
-	
+
 	wprintf(TEXT("\nStarting robot script playing...\n"));
 
 	while (cycleRun)
 	{
 		globalTime = timeGetTime();
-		std::pair<DWORD,DWORD> scriptPair = script.front();
-		script.erase(script.begin());
-		BYTE *commandBuffer = new BYTE[scriptPair.second-scriptPair.first];
-		for(DWORD i=0;i<scriptPair.second-scriptPair.first;i++)
+		for(UINT j=0;j<scriptFilesCount;j++)
 		{
-			commandBuffer[i]=scryptFileMemoryBuffer[i+scriptPair.first];
+			if (script[j].size()>0)
+			{
+				std::pair<DWORD,DWORD> scriptPair = script[j].front();
+				script[j].erase(script[j].begin());
+				BYTE *commandBuffer = new BYTE[scriptPair.second-scriptPair.first];
+				for(DWORD i=0;i<scriptPair.second-scriptPair.first;i++)
+				{
+					commandBuffer[i]=scryptFileMemoryBuffer[j][i+scriptPair.first];
+				}
+				DWORD bytesWrite;
+				WriteFile(globalFileHandle, commandBuffer, scriptPair.second-scriptPair.first, &bytesWrite, &globalOverlapWrite);
+				FlushFileBuffers(globalFileHandle);
+				displaySendedToRobotInformation(commandBuffer, scriptPair.second-scriptPair.first);
+				delete[] commandBuffer;
+			}
 		}
-		DWORD bytesWrite;
-		WriteFile(globalFileHandle, commandBuffer, scriptPair.second-scriptPair.first, &bytesWrite, &globalOverlapWrite);
-		FlushFileBuffers(globalFileHandle);
-		displaySendedToRobotInformation(commandBuffer, scriptPair.second-scriptPair.first);
-		delete[] commandBuffer;
-
 		while ((globalTime+100)>timeGetTime())
 		{
 			Sleep(1);
 		}
 		globalTime = timeGetTime();
-		if (script.size()==0)
+
+		cycleRun = FALSE;
+		for(UINT j=0;j<scriptFilesCount;j++)
 		{
-			cycleRun = FALSE;
+			if (script[j].size()>0)
+			{
+				cycleRun = TRUE;
+			}
 		}
 	}
 
-	HeapFree(GetProcessHeap(),0,scryptFileMemoryBuffer);
+	for(UINT j = 0;j<scriptFilesCount;j++)
+	{
+		HeapFree(GetProcessHeap(),0,scryptFileMemoryBuffer[j]);
+	}	
 	CloseHandle(globalFileHandle);
 	return -1;
 }
@@ -821,7 +852,7 @@ int main(int argc, char** argv)
 
 	if (argc!=7)
 	{
-		if (argc==4) 
+		if (argc==5) 
 		{
 			if (strcmp(argv[1],"script") == 0)
 			{

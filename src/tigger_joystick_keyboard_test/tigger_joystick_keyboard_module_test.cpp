@@ -1,3 +1,36 @@
+/*
+Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
+
+http://www.robotics.by/
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+- Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+- Neither the name of the RCSG Developers nor the names of its
+contributors may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+`AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
 #include <stdio.h>
 #include <windows.h>
 #include <locale.h>
@@ -31,6 +64,8 @@ USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 BYTE globalRobotScriptIdentifier[] = {'<','r','o','b','o','t','s','c','r','i','p','t','>'};
 DWORD globalTime = 0;
+WORD  globalJoystickManufactureId = 0;
+WORD  globalJoystickPlatformId = 0;
 
 VOID errorDetailedInformation(LPTSTR functionName) 
 { 
@@ -1007,6 +1042,11 @@ int main(int argc, char** argv)
 	if (globalIsJoystickUsed)
 	{
 		wprintf(TEXT("\nStart joystick aquire [%u]\n\n"),joystickNumber);
+		JOYCAPS joystickCapacites;
+		ZeroMemory(&joystickCapacites,sizeof(JOYCAPS));
+		joyGetDevCaps(joystickNumber, &joystickCapacites, sizeof(JOYCAPS));
+		globalJoystickManufactureId = joystickCapacites.wMid;
+		globalJoystickPlatformId = joystickCapacites.wPid;
 	}
 
 	JOYINFOEX ji;
@@ -1050,13 +1090,36 @@ int main(int argc, char** argv)
 				return -1;
 			}
 
+			UINT joysticksConfigNumber = 2;
+			double joysticksConfig[3][8][6]= {
+				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 0, 0, 0}},// F510 Gamepad [XInput Mode]
+				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},// USB Wireless 2.4GHz Gamepad
+				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {-1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}// default;
+			};
+
+			if (globalJoystickManufactureId==1133 && globalJoystickPlatformId==49694)
+			{
+				joysticksConfigNumber = 0;
+			} else if (globalJoystickManufactureId==3727 && globalJoystickPlatformId==18)
+			{
+				joysticksConfigNumber = 1;
+			}
+			
+			double joysticksConfigVector[6] = {(double)((ji.dwXpos>>8)&0xff)-128, (double)((ji.dwYpos>>8)&0xff)-128, (double)((ji.dwZpos>>8)&0xff)-128, (double)((ji.dwUpos>>8)&0xff)-128, (double)((ji.dwRpos>>8)&0xff)-128, (double)((ji.dwVpos>>8)&0xff)-128};
+			for (UINT joysticksConfigI=0; joysticksConfigI<8; joysticksConfigI++)
+			{
+				double joysticksConfigResult = 0;
+				for (UINT joysticksConfigJ=0; joysticksConfigJ<6; joysticksConfigJ++)
+					joysticksConfigResult+=joysticksConfig[joysticksConfigNumber][joysticksConfigI][joysticksConfigJ]*joysticksConfigVector[joysticksConfigJ];
+				joysticksConfigResult+=128;
+				if (joysticksConfigResult<0)
+					joysticksConfigResult=0;
+				if (joysticksConfigResult>255)
+					joysticksConfigResult=255;
+				byteBuffer[joysticksConfigI+1]=correctPowerValues((BYTE)(joysticksConfigResult+0.5));
+			}
 			byteBuffer[1] = 0;
 			byteBuffer[2] = 0;
-			byteBuffer[3] = correctPowerValues((ji.dwXpos>>8)&0xff);
-			byteBuffer[4] = correctPowerValues((ji.dwYpos>>8)&0xff);
-			byteBuffer[5] = correctPowerValues((ji.dwZpos>>8)&0xff);
-			byteBuffer[6] = correctPowerValues((ji.dwUpos>>8)&0xff);
-			byteBuffer[7] = correctPowerValues((ji.dwRpos>>8)&0xff);
 			byteBuffer[8] = 0;
 		} else {
 			if (globalQAEDPressed[0]==TRUE && globalQAEDPressed[1]==FALSE && globalQAEDPressed[2]==FALSE && globalQAEDPressed[3]==FALSE)

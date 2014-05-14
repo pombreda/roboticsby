@@ -59,6 +59,12 @@ char* globalRobotGUIDs[] = {
 	"00000000-0000-0000-0000-000000000009","00000000-0000-0000-0000-000000000010","00000000-0000-0000-0000-000000000011","00000000-0000-0000-0000-000000000012"
 };
 
+double globalJoysticksConfig[3][8][6]= {
+	{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 0, 0, 0}},// F510 Gamepad [XInput Mode]
+	{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},// USB Wireless 2.4GHz Gamepad
+	{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {-1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}// default;
+};
+
 BOOL globalGIBRPressed[]={FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
@@ -1090,13 +1096,8 @@ int main(int argc, char** argv)
 				return -1;
 			}
 
-			UINT joysticksConfigNumber = 2;
-			double joysticksConfig[3][8][6]= {
-				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 0, 0, 0}},// F510 Gamepad [XInput Mode]
-				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},// USB Wireless 2.4GHz Gamepad
-				{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {-1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}// default;
-			};
-
+			UINT joysticksConfigNumber = ARRAYSIZE(globalJoysticksConfig)-1;
+			
 			if (globalJoystickManufactureId==1133 && globalJoystickPlatformId==49694)
 			{
 				joysticksConfigNumber = 0;
@@ -1110,7 +1111,7 @@ int main(int argc, char** argv)
 			{
 				double joysticksConfigResult = 0;
 				for (UINT joysticksConfigJ=0; joysticksConfigJ<6; joysticksConfigJ++)
-					joysticksConfigResult+=joysticksConfig[joysticksConfigNumber][joysticksConfigI][joysticksConfigJ]*joysticksConfigVector[joysticksConfigJ];
+					joysticksConfigResult+=globalJoysticksConfig[joysticksConfigNumber][joysticksConfigI][joysticksConfigJ]*joysticksConfigVector[joysticksConfigJ];
 				joysticksConfigResult+=128;
 				if (joysticksConfigResult<0)
 					joysticksConfigResult=0;

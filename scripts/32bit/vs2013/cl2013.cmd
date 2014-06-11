@@ -1,9 +1,9 @@
-if not exist "%VS110COMNTOOLS%\vsvars32.bat" goto missingvisualstudio
+if not exist "%VS120COMNTOOLS%\vsvars32.bat" goto missingvisualstudio
 if not exist "%DXSDK_DIR%Include\d3d9.h" goto missingdxsdk
-@"%VS110COMNTOOLS%\vsvars32.bat"
+@"%VS120COMNTOOLS%\vsvars32.bat"
 
 :missingvisualstudio
-@echo Microsoft Visual Studio 2012 not detected
+@echo Microsoft Visual Studio 2013 not detected
 @pause
 @echo on
 @exit

@@ -56,7 +56,7 @@ public:
 		void populateDevices();
 		void cancelPopulatingDevices();
 		void finishedPopulatingDevices();
-		QHash<QString,QObject*>* getInputDevices();
+		QHash<QString,QObject*>* getInputDevices() const;
 
 signals:
 		void onInputDevicesManagerError(const QString &message);
@@ -65,7 +65,7 @@ signals:
 private:
 	RCSGMainWindow *mainWindow;
 	QHash<QString,QObject*>* inputDevices;
-	QFutureWatcher<void> populatingDeviceWatcher;
+	QFutureWatcher<void> populatingDevicesWatcher;
 };
 
 #endif //RCSGINPUTDEVICESMANAGER_H_

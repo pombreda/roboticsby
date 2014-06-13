@@ -30,40 +30,44 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
+#include <windows.h>
 #include <QUuid>
 
-#include "RCSGHockeyRobot.h"
 #include "RCSGCommunicationProtocol.h"
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+RCSGCommunicationProtocol::RCSGCommunicationProtocol(QUuid robotId):id(NULL)
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+	startSymbolOutcoming = '$';
+	endSymbolOutcoming = '#';
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+RCSGCommunicationProtocol::~RCSGCommunicationProtocol()
 {
-	if (protocol != NULL)
+	if (id != NULL)
 	{
-		delete protocol;
-		protocol = NULL;
+		delete id;
+		id = NULL;
 	}
 }
-QUuid RCSGHockeyRobot::id() const
+
+BYTE* RCSGCommunicationProtocol::getGUIDOutcomingCommand() const
 {
-	return robotId;
+	return (BYTE*)(startSymbolOutcoming,
+		'g','e','t','G','U','I','D',
+		endSymbolOutcoming);
 }
 
-QString RCSGHockeyRobot::name() const
+BYTE* RCSGCommunicationProtocol::getBatteryVoltgeOutcomingCommand() const
 {
-	return robotName;
+	return (BYTE*)(startSymbolOutcoming,
+		'0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','B','a','t','t','e','r','y','V','o','l','t','a','g','e',
+		endSymbolOutcoming);
 }
 
-QString RCSGHockeyRobot::description() const
+BYTE* RCSGCommunicationProtocol::getRSSIOutcomingCommand() const
 {
-	return robotDescription;
+	return (BYTE*)(startSymbolOutcoming,
+		'0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','R','S','S','I',
+		endSymbolOutcoming);
 }
-

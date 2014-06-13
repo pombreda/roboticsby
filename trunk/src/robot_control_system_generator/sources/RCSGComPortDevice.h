@@ -44,10 +44,10 @@ class RCSGComPortDevice : public QObject
 
 public:
 	RCSGComPortDevice(const LPTSTR &portName);
-	const QString commPortName();
-	const QString commPortDescription();
-	const QString commPortVendor();
-	const COMMCONFIG commPortConfig();
+	QString commPortName() const;
+	QString commPortDescription() const;
+	QString commPortVendor() const;
+	COMMCONFIG commPortConfig() const;
 
 signals:
 	void onDeviceError(const QString &message);

@@ -1,4 +1,5 @@
 /*
+
 Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
 
 http://www.robotics.by/
@@ -29,41 +30,30 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#ifndef RCSGPROGRAMGRAPHICSITEM_H
+#define RCSGPROGRAMGRAPHICSITEM_H
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include <QGraphicsItem>
+
+class RCSGProgramGraphicsItem : public QGraphicsItem
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
-}
+public:
+    RCSGProgramGraphicsItem();
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
-{
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
-}
+private:
+	
+	QRectF rectOfProgram;
+	QImage imageOfProgram;
 
-QString RCSGHockeyRobot::name() const
-{
-	return robotName;
-}
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+};
 
-QString RCSGHockeyRobot::description() const
-{
-	return robotDescription;
-}
-
+#endif //RCSGPROGRAMGRAPHICSITEM_H

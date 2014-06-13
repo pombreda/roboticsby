@@ -35,18 +35,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RCSGROBOTSMANAGER_H_
 
 #include <QObject>
+#include <QUUID>
 
 #include "RCSGMainWindow.h"
+
 
 class RCSGRobotsManager : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGRobotsManager (RCSGMainWindow *mainWindow) : mainWindow(mainWindow) {}
+	RCSGRobotsManager (RCSGMainWindow *mainWindow);
+	~RCSGRobotsManager();
+
+	public slots:
+		void populateRobots();
+		void cancelPopulatingRobots();
+		void finishedPopulatingRobots();
+		QHash<QUuid,QObject*>* getRobots() const;
+
+signals:
+		void onRobotsManagerError(const QString &message);
+		void onRobotsManagerNewRobots();
 
 private:
 	RCSGMainWindow *mainWindow;
+	QHash<QUuid,QObject*>* robots;
+	QFutureWatcher<void> populatingRobotsWatcher;
 };
 
 #endif //RCSGROBOTSMANAGER_H_

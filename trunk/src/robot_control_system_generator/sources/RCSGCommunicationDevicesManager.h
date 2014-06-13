@@ -55,14 +55,14 @@ public:
 		void populateDevices();
 		void cancelPopulatingDevices();
 		void finishedPopulatingDevices();
-		QHash<QString,QObject*>* getCommunicationDevices();
+		QHash<QString,QObject*>* getCommunocationDevices() const;
 signals:
 		void onCommunicationDevicesManagerError(const QString &message);
 		void onCommunicationDevicesManagerNewDevices();		
 
 private:
 	RCSGMainWindow *mainWindow;
-	QHash<QString,QObject*>* communicationDevices;
+	QHash<QString,QObject*>* devices;
 	QFutureWatcher<void> populatingDeviceWatcher;
 };
 

@@ -30,40 +30,55 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGCameraGraphicsItem.h"
+
+RCSGCameraGraphicsItem::RCSGCameraGraphicsItem()
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+    setToolTip(QString("Click and drag Camera Object"));
+    setCursor(Qt::OpenHandCursor);
+    setAcceptedMouseButtons(Qt::LeftButton);
+	rectOfCamera = QRectF(0, 0, 25, 25);
+	QSvgRenderer renderer(QString(":/icons/flatcamera.svg"));
+	imageOfCamera = QImage(rectOfCamera.width(), rectOfCamera.height(), QImage::Format_ARGB32);
+	imageOfCamera.fill(0x00000000);
+	QPainter painter(&imageOfCamera);
+	renderer.render(&painter);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGCameraGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return rectOfCamera;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGCameraGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+	painter->drawImage(rectOfCamera, imageOfCamera, rectOfCamera);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGCameraGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-	return robotDescription;
+    setCursor(Qt::ClosedHandCursor);
 }
 
+void RCSGCameraGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+	mime->setImageData(imageOfCamera);
+	drag->setPixmap(QPixmap::fromImage(imageOfCamera));
+    drag->setHotSpot(QPoint(0, 0));
+    drag->exec();
+    setCursor(Qt::OpenHandCursor);
+}
+
+void RCSGCameraGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
+{
+    setCursor(Qt::OpenHandCursor);
+}

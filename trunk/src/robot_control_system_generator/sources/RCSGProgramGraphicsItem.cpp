@@ -30,40 +30,55 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGProgramGraphicsItem.h"
+
+RCSGProgramGraphicsItem::RCSGProgramGraphicsItem()
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+    setToolTip(QString("Click and drag Program Object"));
+    setCursor(Qt::OpenHandCursor);
+    setAcceptedMouseButtons(Qt::LeftButton);
+	rectOfProgram = QRectF(0, 0, 25, 25);
+	QSvgRenderer renderer(QString(":/icons/flatprogram.svg"));
+	imageOfProgram = QImage(rectOfProgram.width(), rectOfProgram.height(), QImage::Format_ARGB32);
+	imageOfProgram.fill(0x00000000);
+	QPainter painter(&imageOfProgram);
+	renderer.render(&painter);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGProgramGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return rectOfProgram;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGProgramGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+	painter->drawImage(rectOfProgram, imageOfProgram, rectOfProgram);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGProgramGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-	return robotDescription;
+    setCursor(Qt::ClosedHandCursor);
 }
 
+void RCSGProgramGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+	mime->setImageData(imageOfProgram);
+	drag->setPixmap(QPixmap::fromImage(imageOfProgram));
+    drag->setHotSpot(QPoint(0, 0));
+    drag->exec();
+    setCursor(Qt::OpenHandCursor);
+}
+
+void RCSGProgramGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
+{
+    setCursor(Qt::OpenHandCursor);
+}

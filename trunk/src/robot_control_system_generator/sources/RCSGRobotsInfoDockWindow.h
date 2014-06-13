@@ -30,40 +30,23 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
+#ifndef RCSGROBOTSINFODOCKWINDOW_H
+#define RCSGROBOTSINFODOCKWINDOW_H
+
+#include <QTreeWidget>
 #include <QUuid>
+#include <windows.h>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
-
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+class RCSGRobotsInfoDockWindow : public QTreeWidget
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
-}
+	Q_OBJECT
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
-{
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
-}
+public:
+	RCSGRobotsInfoDockWindow(QWidget *parent = 0);
 
-QString RCSGHockeyRobot::name() const
-{
-	return robotName;
-}
+	public slots:
+		void updateRobotsInformation(QHash<QUuid,QObject*>* robots);
+};
 
-QString RCSGHockeyRobot::description() const
-{
-	return robotDescription;
-}
-
+#endif // RCSGROBOTSINFODOCKWINDOW_H

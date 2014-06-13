@@ -108,8 +108,9 @@ QString devicePortName(HDEVINFO deviceInfoSet, PSP_DEVINFO_DATA deviceInfoData)
 
 RCSGComPortDevice::RCSGComPortDevice(const LPTSTR &portName)
 {	
-	ZeroMemory(&commConfig,sizeof(COMMCONFIG));
 	COMMCONFIG localCommConfig;
+	ZeroMemory(&localCommConfig,sizeof(COMMCONFIG));
+	ZeroMemory(&commConfig,sizeof(COMMCONFIG));
 	DWORD dwSize = sizeof(COMMCONFIG);
 	if( GetDefaultCommConfig(portName, &localCommConfig, &dwSize))
 	{
@@ -180,22 +181,22 @@ void RCSGComPortDevice::errorDetailedInformation(LPTSTR functionName)
 	emit onDeviceError(result);
 }
 
-const QString RCSGComPortDevice::commPortName()
+QString RCSGComPortDevice::commPortName() const
 {
 	return commName;
 }
 
-const QString RCSGComPortDevice::commPortDescription()
+QString RCSGComPortDevice::commPortDescription() const
 {
 	return commDescription;
 }
 
-const QString RCSGComPortDevice::commPortVendor()
+QString RCSGComPortDevice::commPortVendor() const
 {
 	return commManufacturer;
 }
 
-const COMMCONFIG RCSGComPortDevice::commPortConfig()
+COMMCONFIG RCSGComPortDevice::commPortConfig() const
 {
 	return commConfig;
 }

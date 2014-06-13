@@ -51,6 +51,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGComPortsInfoDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
 #include "RCSGInputDevicesManager.h"
+#include "RCSGRobotsManager.h"
 
 RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),consoleMessage(""),
 	communicationDevicesManager(NULL),inputDevicesManager(NULL)
@@ -70,11 +71,20 @@ RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),co
 	inputDevicesManager = new RCSGInputDevicesManager(this);
 	connect(inputDevicesManager,SIGNAL(onInputDevicesManagerNewDevices()), this, SLOT(joystickDevicesAvailable()));
 	inputDevicesManager->populateDevices();
+
+	robotsManager = new RCSGRobotsManager(this);
+	connect(robotsManager,SIGNAL(onRobotsManagerNewRobots()), this, SLOT(robotsAvailable()));
+	robotsManager->populateRobots();
 }
 
 RCSGMainWindow::~RCSGMainWindow() 
 {
-	UnregisterDeviceNotification(hDevNotify);
+	if (hDevNotify!=NULL)
+	{
+		UnregisterDeviceNotification(hDevNotify);
+		hDevNotify=NULL;
+	}
+	
 	if (communicationDevicesManager!=NULL)
 	{		
 		emit communicationDevicesManager->cancelPopulatingDevices();
@@ -86,6 +96,12 @@ RCSGMainWindow::~RCSGMainWindow()
 		emit inputDevicesManager->cancelPopulatingDevices();
 		delete inputDevicesManager;
 		inputDevicesManager = NULL;
+	}
+	if (robotsManager!=NULL)
+	{
+		emit robotsManager->cancelPopulatingRobots();
+		delete robotsManager;
+		robotsManager = NULL;
 	}
 }
 
@@ -139,41 +155,43 @@ void RCSGMainWindow::createToolBars()
 
 	startProcessAction = new QAction(this);
 	startProcessAction->setEnabled(false);
-	startProcessAction->setObjectName(QStringLiteral("Start simulation process"));
+	startProcessAction->setObjectName(QStringLiteral("Start control process"));
 	startProcessAction->setIconText(startProcessAction->objectName());
 	startProcessAction->setIcon(createIconFromSVG(QString(":/icons/start.svg")));
 
 	stopProcessAction = new QAction(this);
 	stopProcessAction->setEnabled(false);
-	stopProcessAction->setObjectName(QStringLiteral("Stop simulation process"));
+	stopProcessAction->setObjectName(QStringLiteral("Stop control process"));
 	stopProcessAction->setIconText(stopProcessAction->objectName());
 	stopProcessAction->setIcon(createIconFromSVG(QString(":/icons/stop.svg")));
 
-	generateProcessAction = new QAction(this);
-	generateProcessAction->setEnabled(false);
-	generateProcessAction->setObjectName(QStringLiteral("Generate custom system"));
-	generateProcessAction->setIconText(generateProcessAction->objectName());
-	generateProcessAction->setIcon(createIconFromSVG(QString(":/icons/generate.svg")));
+	controlSystemGeneratorAction = new QAction(this);
+	controlSystemGeneratorAction->setEnabled(false);
+	controlSystemGeneratorAction->setObjectName(QStringLiteral("Generate custom system"));
+	controlSystemGeneratorAction->setIconText(controlSystemGeneratorAction->objectName());
+	controlSystemGeneratorAction->setIcon(createIconFromSVG(QString(":/icons/generate.svg")));
+	connect(controlSystemGeneratorAction,SIGNAL(triggered()),this,SLOT(onControlSystemGeneratorAction()));
 
 	joystickAction = new QAction(this);
 	joystickAction->setEnabled(false);
-	joystickAction->setObjectName(QStringLiteral("Joystick setup"));
+	joystickAction->setObjectName(QStringLiteral("Joysticks info"));
 	joystickAction->setIconText(joystickAction->objectName());
 	joystickAction->setIcon(createIconFromSVG(QString(":/icons/gamepad.svg")));
 	connect(joystickAction,SIGNAL(triggered()),this,SLOT(onJoystickAction()));
 
 	connectionsAction = new QAction(this);
 	connectionsAction->setEnabled(false);
-	connectionsAction->setObjectName(QStringLiteral("Connections setup"));
+	connectionsAction->setObjectName(QStringLiteral("Connections info"));
 	connectionsAction->setIconText(connectionsAction->objectName());
 	connectionsAction->setIcon(createIconFromSVG(QString(":/icons/connection.svg")));
 	connect(connectionsAction,SIGNAL(triggered()),this,SLOT(onConnectionsAction()));
 
 	robotsAction = new QAction(this);
 	robotsAction->setEnabled(false);
-	robotsAction->setObjectName(QStringLiteral("Robots setup"));
+	robotsAction->setObjectName(QStringLiteral("Robots info"));
 	robotsAction->setIconText(robotsAction->objectName());
 	robotsAction->setIcon(createIconFromSVG(QString(":/icons/robot.svg")));
+	connect(robotsAction,SIGNAL(triggered()),this,SLOT(onRobotsAction()));
 
 	toolsToolBar = new QToolBar(this);
 	toolsToolBar->setObjectName(QStringLiteral("Tools"));
@@ -187,13 +205,13 @@ void RCSGMainWindow::createToolBars()
 	addToolBar(Qt::TopToolBarArea, toolsToolBar);
 
 	simulationToolBar = new QToolBar(this);
-	simulationToolBar->setObjectName(QStringLiteral("Simulation and Generation"));
+	simulationToolBar->setObjectName(QStringLiteral("Control and Generation"));
 	simulationToolBar->setStyleSheet(QString("QToolBar{border:0px;}"));
-	simulationToolBar->setToolTip(QStringLiteral("Simulation and Generation"));
-	simulationToolBar->setAccessibleName("Simulation and Generation");
+	simulationToolBar->setToolTip(QStringLiteral("Control and Generation"));
+	simulationToolBar->setAccessibleName("Control and Generation");
+	simulationToolBar->addAction(controlSystemGeneratorAction);
 	simulationToolBar->addAction(startProcessAction);
 	simulationToolBar->addAction(stopProcessAction);
-	simulationToolBar->addAction(generateProcessAction);
 	addToolBar(Qt::TopToolBarArea, simulationToolBar);
 }
 
@@ -261,6 +279,26 @@ void RCSGMainWindow::createDockWindows()
 		connect(joysticksInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onJoystickAction(bool)));
 		joysticksInfoDockWidget->hide();
 	}
+	if (!robotsAction->isEnabled())
+	{
+		robotsInfoDockWidget = new QDockWidget(tr("RCSG robots info"), this);
+		robotsInfoDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		robotsInfo = new RCSGRobotsInfoDockWindow(robotsInfoDockWidget);
+		robotsInfoDockWidget->setWidget(robotsInfo);
+		addDockWidget(Qt::RightDockWidgetArea, robotsInfoDockWidget);
+		connect(robotsInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onRobotsAction(bool)));
+		robotsInfoDockWidget->hide();
+	}
+	if (!controlSystemGeneratorAction->isEnabled())
+	{
+		controlSystemGeneratorDockWidget = new QDockWidget(tr("RCSG control system generator"), this);
+		controlSystemGeneratorDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		controlSystemGeneratorDockWindow = new RCSGControlSystemGeneratorDockWindow(controlSystemGeneratorDockWidget);
+		controlSystemGeneratorDockWidget->setWidget(controlSystemGeneratorDockWindow);
+		addDockWidget(Qt::RightDockWidgetArea, controlSystemGeneratorDockWidget);
+		connect(controlSystemGeneratorDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onControlSystemGeneratorAction(bool)));
+		controlSystemGeneratorDockWidget->show();
+	}
 }
 
 void RCSGMainWindow::showStatusBarMessage( const QString &message )
@@ -320,6 +358,28 @@ void RCSGMainWindow::onJoystickAction(bool visible)
 	joystickAction->setEnabled(!visible);
 }
 
+void RCSGMainWindow::onRobotsAction()
+{
+	robotsAction->setEnabled(!robotsAction->isEnabled());
+	displayRobotsInfoDockWindow();
+}
+
+void RCSGMainWindow::onRobotsAction( bool visible )
+{
+	robotsAction->setEnabled(!visible);
+}
+
+void RCSGMainWindow::onControlSystemGeneratorAction()
+{
+	controlSystemGeneratorAction->setEnabled(!controlSystemGeneratorAction->isEnabled());
+	displayControlSystemGeneratorDockWindow();
+}
+
+void RCSGMainWindow::onControlSystemGeneratorAction( bool visible )
+{
+	controlSystemGeneratorAction->setEnabled(!visible);
+}
+
 void RCSGMainWindow::displayConsoleDockWindow()
 {
 	if (!consoleAction->isEnabled())
@@ -347,9 +407,27 @@ void RCSGMainWindow::displayJoysticksInfoDockWindow()
 	}
 }
 
+void RCSGMainWindow::displayRobotsInfoDockWindow()
+{
+	if (!robotsAction->isEnabled())
+	{
+		robotsInfoDockWidget->show();
+		robotsInfoDockWidget->raise();
+	}
+}
+
+void RCSGMainWindow::displayControlSystemGeneratorDockWindow()
+{
+	if (!controlSystemGeneratorAction->isEnabled())
+	{
+		controlSystemGeneratorDockWidget->show();
+		controlSystemGeneratorDockWidget->raise();
+	}
+}
+
 void RCSGMainWindow::joystickDevicesAvailable()
 {
-	QHash<QString,QObject*> *inputDevices = inputDevicesManager->getInputDevices();
+	QHash<QString,QObject*>* inputDevices = inputDevicesManager->getInputDevices();
 	if (inputDevices!=NULL)
 	{
 		emit onJoystickAction();
@@ -359,11 +437,21 @@ void RCSGMainWindow::joystickDevicesAvailable()
 
 void RCSGMainWindow::comPortDevicesAvailable()
 {
-	QHash<QString,QObject*> *communicationDevices = communicationDevicesManager->getCommunicationDevices();
+	QHash<QString,QObject*>* communicationDevices = communicationDevicesManager->getCommunocationDevices();
 	if (communicationDevices!=NULL)
 	{
 		emit onConnectionsAction();
 		emit comPortsInfo->updateDevicesInformation(communicationDevices);
+	}
+}
+
+void RCSGMainWindow::robotsAvailable()
+{
+	QHash<QUuid,QObject*>* robots = robotsManager->getRobots();
+	if (robots!=NULL)
+	{
+		emit onRobotsAction();
+		emit robotsInfo->updateRobotsInformation(robots);
 	}
 }
 

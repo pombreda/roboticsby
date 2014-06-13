@@ -45,19 +45,19 @@ HANDLE globalEnumeratingCOMPortsFileHandle;
 QVector<QString> globalCommunicationDevicesHolder;
 
 RCSGCommunicationDevicesManager::RCSGCommunicationDevicesManager( RCSGMainWindow *mainWindow ) : 
-	mainWindow(mainWindow),communicationDevices(NULL)
+	mainWindow(mainWindow),devices(NULL)
 {
-	communicationDevices = new QHash<QString,QObject*>;
+	devices = new QHash<QString,QObject*>;
 }
 
 RCSGCommunicationDevicesManager::~RCSGCommunicationDevicesManager()
 {
-	if (communicationDevices != NULL)
+	if (devices != NULL)
 	{
-		qDeleteAll(communicationDevices->begin(),communicationDevices->end());
-		communicationDevices->clear();
-		delete communicationDevices;
-		communicationDevices = NULL;
+		qDeleteAll(devices->begin(),devices->end());
+		devices->clear();
+		delete devices;
+		devices = NULL;
 	}
 }
 
@@ -105,10 +105,10 @@ void RCSGCommunicationDevicesManager::cancelPopulatingDevices()
 
 void RCSGCommunicationDevicesManager::finishedPopulatingDevices()
 {
-	if (communicationDevices != NULL)
+	if (devices != NULL)
 	{
-		qDeleteAll(communicationDevices->begin(),communicationDevices->end());
-		communicationDevices->clear();
+		qDeleteAll(devices->begin(),devices->end());
+		devices->clear();
 	}
 	{
 		QVector<QString>::iterator iterator;
@@ -119,14 +119,14 @@ void RCSGCommunicationDevicesManager::finishedPopulatingDevices()
 			QString comPortName(*iterator);
 			iterator->toWCharArray(buffer);
 			RCSGComPortDevice *device = new RCSGComPortDevice(buffer);
-			communicationDevices->insert(comPortName,device);
+			devices->insert(comPortName,device);
 		}
 	}
 
 	QHash<QString,QObject*>::iterator iterator;
-	QString message(QString("COM port devices: %1\n").arg(communicationDevices->size()));
+	QString message(QString("COM port devices: %1\n").arg(devices->size()));
 	UINT comPortCounter = 1;
-	for (iterator = communicationDevices->begin(); iterator != communicationDevices->end(); ++iterator)
+	for (iterator = devices->begin(); iterator != devices->end(); ++iterator)
 	{
 		RCSGComPortDevice *device = qobject_cast<RCSGComPortDevice*>(iterator.value());
 		message.append(QString("%1: %2 [%3] - [%4]\n").arg(QString::number(comPortCounter),device->commPortName(),device->commPortVendor(),device->commPortDescription()));
@@ -136,7 +136,7 @@ void RCSGCommunicationDevicesManager::finishedPopulatingDevices()
 	emit onCommunicationDevicesManagerNewDevices();
 }
 
-QHash<QString,QObject*>* RCSGCommunicationDevicesManager::getCommunicationDevices()
+QHash<QString,QObject*>* RCSGCommunicationDevicesManager::getCommunocationDevices() const
 {
-	return communicationDevices;
+	return devices;
 }

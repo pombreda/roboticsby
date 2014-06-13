@@ -34,15 +34,30 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef RCSGHOCKEYROBOT_H_
 #define RCSGHOCKEYROBOT_H_
 
+#include <windows.h>
+#include <QUuid>
+#include <QString>
 #include <QObject>
+
+#include "RCSGCommunicationProtocol.h"
 
 class RCSGHockeyRobot : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGHockeyRobot(){}
+	RCSGHockeyRobot(const QUuid &id);
+	~RCSGHockeyRobot();
 
+	QUuid id() const;
+	QString name() const;
+	QString description() const;
+
+private:
+	QUuid robotId;
+	QString robotName;
+	QString robotDescription;
+	RCSGCommunicationProtocol *protocol;
 };
 
 #endif //RCSGHOCKEYROBOT_H_

@@ -157,22 +157,22 @@ RCSGJoystickDevice::RCSGJoystickDevice(const UINT &joystickSlot)
 	joyReleaseCapture(joystickSlot);
 }
 
-const JOYCAPS RCSGJoystickDevice::joystickDeviceCapacites()
+JOYCAPS RCSGJoystickDevice::joystickDeviceCapacites() const
 {
 	return joystickCapacites;
 }
 
-const UINT RCSGJoystickDevice::joystickDeviceSlot()
+UINT RCSGJoystickDevice::joystickDeviceSlot() const
 {
 	return joystickSlot;
 }
 
-const QString RCSGJoystickDevice::joystickDeviceDescription()
+QString RCSGJoystickDevice::joystickDeviceDescription() const
 {
 	return joystickDescription;
 }
 
-const QString RCSGJoystickDevice::joystickDeviceVendor()
+QString RCSGJoystickDevice::joystickDeviceVendor() const
 {
 	return joystickVendor;
 }

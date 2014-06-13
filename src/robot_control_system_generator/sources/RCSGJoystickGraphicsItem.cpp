@@ -30,40 +30,55 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGJoystickGraphicsItem.h"
+
+RCSGJoystickGraphicsItem::RCSGJoystickGraphicsItem()
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+    setToolTip(QString("Click and drag Joystick Object"));
+    setCursor(Qt::OpenHandCursor);
+    setAcceptedMouseButtons(Qt::LeftButton);
+	rectOfJoystick = QRectF(0, 0, 25, 25);
+	QSvgRenderer renderer(QString(":/icons/flatjoystick.svg"));
+	imageOfJoystick = QImage(rectOfJoystick.width(), rectOfJoystick.height(), QImage::Format_ARGB32);
+	imageOfJoystick.fill(0x00000000);
+	QPainter painter(&imageOfJoystick);
+	renderer.render(&painter);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGJoystickGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return rectOfJoystick;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGJoystickGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+	painter->drawImage(rectOfJoystick, imageOfJoystick, rectOfJoystick);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGJoystickGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-	return robotDescription;
+    setCursor(Qt::ClosedHandCursor);
 }
 
+void RCSGJoystickGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+	mime->setImageData(imageOfJoystick);
+	drag->setPixmap(QPixmap::fromImage(imageOfJoystick));
+    drag->setHotSpot(QPoint(0, 0));
+    drag->exec();
+    setCursor(Qt::OpenHandCursor);
+}
+
+void RCSGJoystickGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
+{
+    setCursor(Qt::OpenHandCursor);
+}

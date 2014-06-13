@@ -42,11 +42,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGConsoleDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
 #include "RCSGInputDevicesManager.h"
+#include "RCSGRobotsManager.h"
 #include "RCSGComPortsInfoDockWindow.h"
 #include "RCSGJoysticksInfoDockWindow.h"
+#include "RCSGRobotsInfoDockWindow.h"
+#include "RCSGControlSystemGeneratorDockWindow.h"
 
 class RCSGCommunicationDevicesManager;
 class RCSGInputDevicesManager;
+class RCSGRobotsManager;
 
 class RCSGMainWindow : public QMainWindow 
 {
@@ -61,6 +65,7 @@ public:
 		void deviceDisconnected();
 		void joystickDevicesAvailable();
 		void comPortDevicesAvailable();
+		void robotsAvailable();
 		void showStatusBarMessage(const QString &message);
 		void showApplicationConsoleMessage(const QString &message);
 		void showApplicationConsoleAndStatusBarMessage(const QString &message);
@@ -69,7 +74,7 @@ public:
 private:
 	Q_DISABLE_COPY( RCSGMainWindow )
 
-		HDEVNOTIFY hDevNotify;
+	HDEVNOTIFY hDevNotify;
 
 	void createActions();
 	void createMenus();
@@ -81,6 +86,9 @@ private:
 	void displayConsoleDockWindow();
 	void displayComPortsInfoDockWindow();
 	void displayJoysticksInfoDockWindow();
+	void displayRobotsInfoDockWindow();
+	void displayControlSystemGeneratorDockWindow();
+
 	void updateDevicesInformation();
 
 	QIcon createIconFromSVG(const QString &filename);
@@ -96,7 +104,7 @@ private:
 	QAction *startProcessAction;
 	QAction *stopProcessAction;
 
-	QAction *generateProcessAction;
+	QAction *controlSystemGeneratorAction;
 	QAction *joystickAction;
 	QAction *connectionsAction;
 	QAction *robotsAction;
@@ -104,10 +112,15 @@ private:
 	RCSGConsoleDockWindow *console;
 	RCSGComPortsInfoDockWindow *comPortsInfo;
 	RCSGJoysticksInfoDockWindow *joysticksInfo;
+	RCSGRobotsInfoDockWindow *robotsInfo;
+	RCSGControlSystemGeneratorDockWindow *controlSystemGeneratorDockWindow;
 
 	QDockWidget *consoleDockWidget;
 	QDockWidget *comPortsInfoDockWidget;
 	QDockWidget *joysticksInfoDockWidget;
+	QDockWidget *robotsInfoDockWidget;
+	QDockWidget *controlSystemGeneratorDockWidget;
+
 	QMutex canUpdateDevice;
 
 	QString consoleMessage;
@@ -117,6 +130,7 @@ private:
 
 	RCSGCommunicationDevicesManager *communicationDevicesManager;
 	RCSGInputDevicesManager *inputDevicesManager;
+	RCSGRobotsManager *robotsManager;
 
 	private slots:
 		void onConsoleAction();
@@ -125,7 +139,10 @@ private:
 		void onConnectionsAction(bool visible);
 		void onJoystickAction();
 		void onJoystickAction(bool visible);
-
+		void onRobotsAction();
+		void onRobotsAction(bool visible);
+		void onControlSystemGeneratorAction();
+		void onControlSystemGeneratorAction(bool visible);
 };
 
 #endif //RCSGMAINWINDOW_H

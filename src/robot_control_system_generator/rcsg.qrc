@@ -6,6 +6,14 @@
    <file>icons/stop.svg</file>
    <file>icons/start.svg</file>
    <file>icons/robot.svg</file>
+   <file>icons/flatwifi.svg</file>
+   <file>icons/flatuser.svg</file>
+   <file>icons/flatrobot.svg</file>
+   <file>icons/flatprogram.svg</file>
+   <file>icons/flatnetwork.svg</file>
+   <file>icons/flatlink.svg</file>
+   <file>icons/flatjoystick.svg</file>
+   <file>icons/flatcamera.svg</file>
    <file>icons/connection.svg</file>	
 </qresource>
 </RCC>

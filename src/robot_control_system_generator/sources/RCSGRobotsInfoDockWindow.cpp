@@ -30,40 +30,58 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
+#include <QScrollBar>
+#include <QtCore/QDebug>
+#include <QHeaderView>
+#include <windows.h>
+
+#include "RCSGRobotsInfoDockWindow.h"
 #include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+RCSGRobotsInfoDockWindow::RCSGRobotsInfoDockWindow(QWidget *parent)
+	:QTreeWidget(parent)
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+	QPalette p = palette();
+	p.setColor(QPalette::Base, Qt::black);
+	p.setColor(QPalette::Text, Qt::green);
+	setPalette(p);
+	setColumnCount(0);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+void RCSGRobotsInfoDockWindow::updateRobotsInformation(QHash<QUuid,QObject*>* robots)
 {
-	if (protocol != NULL)
+	if (robots!=NULL)
 	{
-		delete protocol;
-		protocol = NULL;
+		clear();
+		if (robots->size()==0)
+		{
+			return;
+		}
+		setColumnCount(2);
+		QStringList ColumnNames;
+		ColumnNames << QString(tr("Settings"))<<QString(tr("Values"));
+		setHeaderLabels(ColumnNames);  
+		
+		QHash<QUuid,QObject*>::iterator iterator;
+		
+		for (iterator = robots->begin(); iterator != robots->end(); ++iterator)
+		{
+			RCSGHockeyRobot *robot = qobject_cast<RCSGHockeyRobot*>(iterator.value());
+			if (robot!=NULL)
+			{
+				QTreeWidgetItem *topLevelItem = new QTreeWidgetItem(this);
+				addTopLevelItem(topLevelItem);
+				topLevelItem->setText(0,robot->name());
+				topLevelItem->setText(1,robot->description());
+				QTreeWidgetItem *robotIdItem=new QTreeWidgetItem(topLevelItem);
+				robotIdItem->setText(0,QString("id"));
+				robotIdItem->setText(1,robot->id().toString());				
+			}
+		}	
+		header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+	}	else {
+		clear();
+		setColumnCount(0);
 	}
 }
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
-}
-
-QString RCSGHockeyRobot::name() const
-{
-	return robotName;
-}
-
-QString RCSGHockeyRobot::description() const
-{
-	return robotDescription;
-}
-

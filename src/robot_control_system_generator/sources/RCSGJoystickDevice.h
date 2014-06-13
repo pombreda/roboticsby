@@ -46,10 +46,10 @@ class RCSGJoystickDevice : public QObject
 
 public:
 	RCSGJoystickDevice(const UINT &joystickSlot);
-	const UINT joystickDeviceSlot();
-	const QString joystickDeviceDescription();
-	const QString joystickDeviceVendor();
-	const JOYCAPS joystickDeviceCapacites();
+	UINT joystickDeviceSlot() const;
+	QString joystickDeviceDescription() const;
+	QString joystickDeviceVendor() const;
+	JOYCAPS joystickDeviceCapacites() const;
 
 private:
 	UINT joystickSlot;

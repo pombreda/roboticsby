@@ -30,40 +30,55 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGNetworkGraphicsItem.h"
+
+RCSGNetworkGraphicsItem::RCSGNetworkGraphicsItem()
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+    setToolTip(QString("Click and drag Network Object"));
+    setCursor(Qt::OpenHandCursor);
+    setAcceptedMouseButtons(Qt::LeftButton);
+	rectOfNetwork = QRectF(0, 0, 25, 25);
+	QSvgRenderer renderer(QString(":/icons/flatnetwork.svg"));
+	imageOfNetwork = QImage(rectOfNetwork.width(), rectOfNetwork.height(), QImage::Format_ARGB32);
+	imageOfNetwork.fill(0x00000000);
+	QPainter painter(&imageOfNetwork);
+	renderer.render(&painter);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGNetworkGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return rectOfNetwork;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGNetworkGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+	painter->drawImage(rectOfNetwork, imageOfNetwork, rectOfNetwork);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGNetworkGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-	return robotDescription;
+    setCursor(Qt::ClosedHandCursor);
 }
 
+void RCSGNetworkGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+	mime->setImageData(imageOfNetwork);
+	drag->setPixmap(QPixmap::fromImage(imageOfNetwork));
+    drag->setHotSpot(QPoint(0, 0));
+    drag->exec();
+    setCursor(Qt::OpenHandCursor);
+}
+
+void RCSGNetworkGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
+{
+    setCursor(Qt::OpenHandCursor);
+}

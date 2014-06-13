@@ -30,40 +30,55 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGRobotGraphicsItem.h"
+
+RCSGRobotGraphicsItem::RCSGRobotGraphicsItem()
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+    setToolTip(QString("Click and drag Robot Object"));
+    setCursor(Qt::OpenHandCursor);
+    setAcceptedMouseButtons(Qt::LeftButton);
+	rectOfRobot = QRectF(0, 0, 25, 25);
+	QSvgRenderer renderer(QString(":/icons/flatrobot.svg"));
+	imageOfRobot = QImage(rectOfRobot.width(), rectOfRobot.height(), QImage::Format_ARGB32);
+	imageOfRobot.fill(0x00000000);
+	QPainter painter(&imageOfRobot);
+	renderer.render(&painter);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGRobotGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return rectOfRobot;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGRobotGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+	painter->drawImage(rectOfRobot, imageOfRobot, rectOfRobot);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGRobotGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-	return robotDescription;
+    setCursor(Qt::ClosedHandCursor);
 }
 
+void RCSGRobotGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+	mime->setImageData(imageOfRobot);
+	drag->setPixmap(QPixmap::fromImage(imageOfRobot));
+    drag->setHotSpot(QPoint(0, 0));
+    drag->exec();
+    setCursor(Qt::OpenHandCursor);
+}
+
+void RCSGRobotGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *)
+{
+    setCursor(Qt::OpenHandCursor);
+}

@@ -30,40 +30,29 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#ifndef RCSGCONTROLSYSTEMGENERATORDOCKWINDOW_H
+#define RCSGCONTROLSYSTEMGENERATORDOCKWINDOW_H
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
-{
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
-}
+#include <QGraphicsView>
+#include <QGraphicsScene>
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
-{
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
-}
+class RCSGUserGraphicsItem;
 
-QString RCSGHockeyRobot::name() const
+class RCSGControlSystemGeneratorDockWindow : public QGraphicsView
 {
-	return robotName;
-}
+	Q_OBJECT
 
-QString RCSGHockeyRobot::description() const
-{
-	return robotDescription;
-}
+public:
+	RCSGControlSystemGeneratorDockWindow(QWidget *parent = 0);
+	~RCSGControlSystemGeneratorDockWindow();
+
+private:
+	QGraphicsScene *scene;
+
+protected:
+	void RCSGControlSystemGeneratorDockWindow::resizeEvent(QResizeEvent *event);
+};
+
+#endif // #define RCSGCONTROLSYSTEMGENERATORDOCKWINDOW_H
 

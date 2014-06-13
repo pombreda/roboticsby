@@ -43,7 +43,6 @@ RCSGInputDevicesManager::RCSGInputDevicesManager( RCSGMainWindow *mainWindow ):
 	mainWindow(mainWindow),inputDevices(NULL)
 {
 	inputDevices = new QHash<QString,QObject*>;
-
 }
 
 RCSGInputDevicesManager::~RCSGInputDevicesManager()
@@ -62,9 +61,11 @@ void enumeratingInputDevices()
 	globalInputDevicesHolder.clear();
 	for(UINT i=0; i<joyGetNumDevs(); i++) 
 	{
-		JOYINFO ji;
-		ZeroMemory(&ji, sizeof(JOYINFO));
-		MMRESULT joystickFeadback = joyGetPos(i, &ji);  
+		JOYINFOEX joyinfoex;
+		joyinfoex.dwSize = sizeof(JOYINFOEX);
+		joyinfoex.dwFlags = JOY_RETURNALL;
+		MMRESULT joystickFeadback = joyGetPosEx(i, &joyinfoex);
+
 		if(joystickFeadback==JOYERR_NOERROR)
 		{
 			globalInputDevicesHolder.append(i);
@@ -76,14 +77,14 @@ void enumeratingInputDevices()
 void RCSGInputDevicesManager::populateDevices()
 {
 	cancelPopulatingDevices();
-	QObject::connect(&populatingDeviceWatcher, SIGNAL(finished()), this, SLOT(finishedPopulatingDevices()));
-	populatingDeviceWatcher.setFuture(QtConcurrent::run(enumeratingInputDevices));
+	QObject::connect(&populatingDevicesWatcher, SIGNAL(finished()), this, SLOT(finishedPopulatingDevices()));
+	populatingDevicesWatcher.setFuture(QtConcurrent::run(enumeratingInputDevices));
 }
 
 void RCSGInputDevicesManager::cancelPopulatingDevices()
 {
-	populatingDeviceWatcher.cancel();
-	populatingDeviceWatcher.waitForFinished();
+	populatingDevicesWatcher.cancel();
+	populatingDevicesWatcher.waitForFinished();
 }
 
 void RCSGInputDevicesManager::finishedPopulatingDevices()
@@ -116,7 +117,7 @@ void RCSGInputDevicesManager::finishedPopulatingDevices()
 	emit onInputDevicesManagerNewDevices();
 }
 
-QHash<QString,QObject*>* RCSGInputDevicesManager::getInputDevices()
+QHash<QString,QObject*>* RCSGInputDevicesManager::getInputDevices() const
 {
 	return inputDevices;
 }

@@ -30,40 +30,30 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#ifndef RCSGCOMMUNICATIONPROTOCOL_H_
+#define RCSGCOMMUNICATIONPROTOCOL_H_
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include <windows.h>
+#include <QObject>
+
+class RCSGCommunicationProtocol : public QObject
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
-}
+	Q_OBJECT
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
-{
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
-}
+public:
+	RCSGCommunicationProtocol(QUuid robotId);
+	~RCSGCommunicationProtocol();
 
-QString RCSGHockeyRobot::name() const
-{
-	return robotName;
-}
+	BYTE* getGUIDOutcomingCommand() const;
+	BYTE* getBatteryVoltgeOutcomingCommand() const;
+	BYTE* getRSSIOutcomingCommand() const;
 
-QString RCSGHockeyRobot::description() const
-{
-	return robotDescription;
-}
+private:
 
+	BYTE startSymbolOutcoming;
+	BYTE endSymbolOutcoming;
+	BYTE* id;  
+};
+
+#endif //RCSGCOMMUNICATIONPROTOCOL_H_

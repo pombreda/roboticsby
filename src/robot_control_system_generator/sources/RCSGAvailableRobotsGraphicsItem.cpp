@@ -30,40 +30,49 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#include <QUuid>
 
-#include "RCSGHockeyRobot.h"
-#include "RCSGCommunicationProtocol.h"
+#include <QtWidgets>
+#include <QSvgRenderer>
 
-RCSGHockeyRobot::RCSGHockeyRobot( const QUuid &id):
-	protocol(NULL)
+#include "RCSGAvailableRobotsGraphicsItem.h"
+
+RCSGAvailableRobotsGraphicsItem::RCSGAvailableRobotsGraphicsItem(QGraphicsItem *parent)
+	: QGraphicsObject(parent)
 {
-	robotId = id;
-	robotName = QString("Tiger");
-	robotDescription = QString("Ice hockey robot");
-	protocol = new RCSGCommunicationProtocol(id);
+	setAcceptDrops(true);
+	itemFont = QFont("Helvetica",10);
+	QFontMetrics fontMetric(itemFont);
+	itemLabel = "Available Robots";
+	itemBoundsRect = QRectF(0, 0, itemFont.pointSize()*2+fontMetric.width(itemLabel), itemFont.pointSize()*4.5+25);
 }
 
-RCSGHockeyRobot::~RCSGHockeyRobot()
+QRectF RCSGAvailableRobotsGraphicsItem::boundingRect() const
 {
-	if (protocol != NULL)
-	{
-		delete protocol;
-		protocol = NULL;
-	}
-}
-QUuid RCSGHockeyRobot::id() const
-{
-	return robotId;
+	return itemBoundsRect;
 }
 
-QString RCSGHockeyRobot::name() const
+void RCSGAvailableRobotsGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	return robotName;
+	Q_UNUSED(option);
+	Q_UNUSED(widget);
+
+	painter->setBrush(Qt::lightGray);
+	painter->setFont(itemFont);
+	painter->drawRoundedRect(0, 0, itemBoundsRect.width(), itemBoundsRect.height(), 10, 10, Qt::AbsoluteSize);
+	painter->drawText(QPoint(itemFont.pointSize(), 1.5*itemFont.pointSize()), itemLabel);
 }
 
-QString RCSGHockeyRobot::description() const
+void RCSGAvailableRobotsGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
 {
-	return robotDescription;
+
 }
 
+void RCSGAvailableRobotsGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
+{
+
+}
+
+void RCSGAvailableRobotsGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
+{
+
+}

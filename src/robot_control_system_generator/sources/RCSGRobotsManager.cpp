@@ -31,6 +31,82 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrent>
+#include <QUUID>
+
 #include "RCSGRobotsManager.h"
+#include "RCSGHockeyRobot.h"
 
+QVector<QUuid> globalRobotsHolder;
 
+RCSGRobotsManager::RCSGRobotsManager( RCSGMainWindow *mainWindow ):
+	mainWindow(mainWindow),robots(NULL)
+{
+	robots = new QHash<QUuid,QObject*>;
+}
+
+RCSGRobotsManager::~RCSGRobotsManager()
+{
+	if (robots != NULL)
+	{
+		qDeleteAll(robots->begin(),robots->end());
+		robots->clear();
+		delete robots;
+		robots = NULL;
+	}
+}
+
+void enumeratingRobots()
+{
+	globalRobotsHolder.clear();
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000001"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000002"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000003"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000004"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000005"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000006"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000007"));
+	globalRobotsHolder.append(QUuid("00000000-0000-0000-0000-000000000008"));
+}
+
+void RCSGRobotsManager::populateRobots()
+{
+	cancelPopulatingRobots();
+	QObject::connect(&populatingRobotsWatcher, SIGNAL(finished()), this, SLOT(finishedPopulatingRobots()));
+	populatingRobotsWatcher.setFuture(QtConcurrent::run(enumeratingRobots));
+}
+
+void RCSGRobotsManager::cancelPopulatingRobots()
+{
+	populatingRobotsWatcher.cancel();
+	populatingRobotsWatcher.waitForFinished();
+}
+
+void RCSGRobotsManager::finishedPopulatingRobots()
+{
+	if (robots != NULL)
+	{
+		qDeleteAll(robots->begin(),robots->end());
+		robots->clear();
+	}
+
+	{
+		QVector<QUuid>::iterator iterator;
+		for (iterator = globalRobotsHolder.begin(); iterator != globalRobotsHolder.end(); ++iterator)
+		{
+			RCSGHockeyRobot *robot = new RCSGHockeyRobot(*iterator);
+			robots->insert((*iterator),robot);
+		}
+	}
+
+	QHash<QString,QObject*>::iterator iterator;
+	QString message(QString("Robots in database: %1\n").arg(robots->size()));
+	mainWindow->showApplicationConsoleMessage(message);
+	emit onRobotsManagerNewRobots();
+}
+
+QHash<QUuid,QObject*>* RCSGRobotsManager::getRobots() const
+{
+	return robots;
+}

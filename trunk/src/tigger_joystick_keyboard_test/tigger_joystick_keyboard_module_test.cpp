@@ -832,6 +832,7 @@ int scryptPlayer(int argc, char** argv)
 
 	while (cycleRun)
 	{
+		timeBeginPeriod(1);
 		globalTime = timeGetTime();
 		for(UINT j=0;j<scriptFilesCount;j++)
 		{
@@ -851,10 +852,12 @@ int scryptPlayer(int argc, char** argv)
 				delete[] commandBuffer;
 			}
 		}
+		timeBeginPeriod(1);
 		while ((globalTime+100)>timeGetTime())
 		{
 			Sleep(1);
 		}
+		timeBeginPeriod(1);
 		globalTime = timeGetTime();
 
 		cycleRun = FALSE;
@@ -1064,6 +1067,7 @@ int main(int argc, char** argv)
 
 	while (cycleRun)
 	{
+		timeBeginPeriod(1);
 		globalTime = timeGetTime();
 		BYTE byteBuffer[] = {'$',0,0,128,128,128,0,128,0,'#'};
 		BYTE extendedByteBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','c','t','r','l','$',0,0,128,128,128,0,128,0,'#'};
@@ -1331,10 +1335,12 @@ int main(int argc, char** argv)
 
 			displaySendedToRobotInformation(byteBuffer, ARRAYSIZE(byteBuffer));
 		}
+		timeBeginPeriod(1);
 		while ((globalTime+100)>timeGetTime())
 		{
 			Sleep(1);
 		}
+		timeBeginPeriod(1);
 		globalTime = timeGetTime();
 	}
 }

@@ -14,6 +14,7 @@
    <file>icons/flatlink.svg</file>
    <file>icons/flatjoystick.svg</file>
    <file>icons/flatcamera.svg</file>
-   <file>icons/connection.svg</file>	
+   <file>icons/connection.svg</file>
+   <file>icons/camera.svg</file>	
 </qresource>
 </RCC>

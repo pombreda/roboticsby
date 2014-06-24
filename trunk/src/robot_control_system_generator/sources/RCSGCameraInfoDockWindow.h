@@ -1,5 +1,4 @@
 /*
-
 Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
 
 http://www.robotics.by/
@@ -30,46 +29,35 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 */
 
-#ifndef USBIDS_H_
-#define USBIDS_H_
+#ifndef RCSGCAMERAINFODOCKWINDOW_H
+#define RCSGCAMERAINFODOCKWINDOW_H
 
+#include <QTreeWidget>
 #include <windows.h>
-#include <QHash>
-#include <QString>
 
-
-static const char *licenseUsbIds = 
-"\n"
-"	List of USB ID's\n"
-"\n"
-"	Maintained by Stephen J. Gowdy <linux.usb.ids@gmail.com>\n"
-"	If you have any new entries, please submit them via\n"
-"		http://www.linux-usb.org/usb-ids.html\n"
-"	or send entries as patches (diff -u old new) in the\n"
-"	body of your email (a bot will attempt to deal with it).\n"
-"	The latest version can be obtained from\n"
-"		http://www.linux-usb.org/usb.ids\n"
-"\n"
-" Version: 2014.05.05\n"
-" Date:    2014-05-05 20:34:03\n";
-
-class RCSGUsbIds
+class RCSGCameraInfoDockWindow : public QTreeWidget
 {
-public:
-	RCSGUsbIds();
-	QString Manufacture(WORD manufactureId);
-	QString Product(WORD manufactureId, WORD productId);
+	Q_OBJECT
 
-private:
-	QHash<WORD, QString> mh;
-	QHash<WORD, QHash<WORD, QString>> mph;
-	void InitManufacturesUsbIdsHash();
-	void InitManufacturesProductsUsbIdsHash();
-	void InsertVendors(DWORD *mid, char **mids, unsigned int size);
-	void InsertProducts(DWORD vendorId ,DWORD *mid, char **mids, unsigned int size);
+public:
+	RCSGCameraInfoDockWindow(QWidget *parent = 0);
+
+	public slots:
+		void updateDevicesInformation(QHash<QString,QObject*>* cameraDevices);
+	/*	void extractXaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractYaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractZaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractRaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractUaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractVaxis(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPollingFrequency(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractButtonsNumber(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOV(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOV4DIR(QTreeWidgetItem *item, JOYCAPS caps);
+		void extractPOVCTS(QTreeWidgetItem *item, JOYCAPS caps);	
+	*/
 };
 
-#endif //USBIDS_H_
+#endif // RCSGCAMERAINFODOCKWINDOW_H

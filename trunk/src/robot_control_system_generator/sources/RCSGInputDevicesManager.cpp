@@ -64,9 +64,8 @@ void enumeratingInputDevices()
 		JOYINFOEX joyinfoex;
 		joyinfoex.dwSize = sizeof(JOYINFOEX);
 		joyinfoex.dwFlags = JOY_RETURNALL;
-		MMRESULT joystickFeadback = joyGetPosEx(i, &joyinfoex);
 
-		if(joystickFeadback==JOYERR_NOERROR)
+		if(joyGetPosEx(i, &joyinfoex)==JOYERR_NOERROR)
 		{
 			globalInputDevicesHolder.append(i);
 		}

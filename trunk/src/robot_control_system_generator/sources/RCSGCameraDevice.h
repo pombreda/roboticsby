@@ -1,5 +1,4 @@
 /*
-
 Copyright (C) 2013-2014, Sergey Gerasuto <contacts@robotics.by>
 
 http://www.robotics.by/
@@ -30,46 +29,32 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 */
 
-#ifndef USBIDS_H_
-#define USBIDS_H_
+#ifndef RCSGCAMERADEVICE_H_
+#define RCSGCAMERADEVICE_H_
+
+#include <QObject>
 
 #include <windows.h>
-#include <QHash>
-#include <QString>
 
-
-static const char *licenseUsbIds = 
-"\n"
-"	List of USB ID's\n"
-"\n"
-"	Maintained by Stephen J. Gowdy <linux.usb.ids@gmail.com>\n"
-"	If you have any new entries, please submit them via\n"
-"		http://www.linux-usb.org/usb-ids.html\n"
-"	or send entries as patches (diff -u old new) in the\n"
-"	body of your email (a bot will attempt to deal with it).\n"
-"	The latest version can be obtained from\n"
-"		http://www.linux-usb.org/usb.ids\n"
-"\n"
-" Version: 2014.05.05\n"
-" Date:    2014-05-05 20:34:03\n";
-
-class RCSGUsbIds
+class RCSGCameraDevice : public QObject
 {
+	Q_OBJECT
+
 public:
-	RCSGUsbIds();
-	QString Manufacture(WORD manufactureId);
-	QString Product(WORD manufactureId, WORD productId);
+	RCSGCameraDevice(const UINT &cameraSlot);
+	UINT cameraDeviceSlot() const;
+	QString cameraDeviceDescription() const;
+	QString cameraDeviceVendor() const;
 
 private:
-	QHash<WORD, QString> mh;
-	QHash<WORD, QHash<WORD, QString>> mph;
-	void InitManufacturesUsbIdsHash();
-	void InitManufacturesProductsUsbIdsHash();
-	void InsertVendors(DWORD *mid, char **mids, unsigned int size);
-	void InsertProducts(DWORD vendorId ,DWORD *mid, char **mids, unsigned int size);
+	template <class T> void safeRelease(T **ppT);
+	WORD extractVid(LPCWSTR symbolicLink);
+	WORD extractPid(LPCWSTR symbolicLink);
+	UINT cameraSlot;
+	QString cameraDescription;
+	QString cameraVendor;
 };
 
-#endif //USBIDS_H_
+#endif //RCSGCAMERADEVICE_H_

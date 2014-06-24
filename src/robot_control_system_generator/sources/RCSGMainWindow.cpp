@@ -52,6 +52,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGCommunicationDevicesManager.h"
 #include "RCSGInputDevicesManager.h"
 #include "RCSGRobotsManager.h"
+#include "RCSGCameraDevicesManager.h"
 
 RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),consoleMessage(""),
 	communicationDevicesManager(NULL),inputDevicesManager(NULL)
@@ -72,9 +73,14 @@ RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),co
 	connect(inputDevicesManager,SIGNAL(onInputDevicesManagerNewDevices()), this, SLOT(joystickDevicesAvailable()));
 	inputDevicesManager->populateDevices();
 
+	cameraDevicesManager = new RCSGCameraDevicesManager(this);
+	connect(cameraDevicesManager,SIGNAL(onCameraDevicesManagerNewDevices()), this, SLOT(cameraDevicesAvailable()));
+	cameraDevicesManager->populateDevices();
+
 	robotsManager = new RCSGRobotsManager(this);
 	connect(robotsManager,SIGNAL(onRobotsManagerNewRobots()), this, SLOT(robotsAvailable()));
 	robotsManager->populateRobots();
+	
 }
 
 RCSGMainWindow::~RCSGMainWindow() 
@@ -96,6 +102,12 @@ RCSGMainWindow::~RCSGMainWindow()
 		emit inputDevicesManager->cancelPopulatingDevices();
 		delete inputDevicesManager;
 		inputDevicesManager = NULL;
+	}
+	if (cameraDevicesManager!=NULL)
+	{		
+		emit cameraDevicesManager->cancelPopulatingDevices();
+		delete cameraDevicesManager;
+		cameraDevicesManager = NULL;
 	}
 	if (robotsManager!=NULL)
 	{
@@ -179,6 +191,13 @@ void RCSGMainWindow::createToolBars()
 	joystickAction->setIcon(createIconFromSVG(QString(":/icons/gamepad.svg")));
 	connect(joystickAction,SIGNAL(triggered()),this,SLOT(onJoystickAction()));
 
+	ñameraAction = new QAction(this);
+	ñameraAction->setEnabled(false);
+	ñameraAction->setObjectName(QStringLiteral("Web Cameras info"));
+	ñameraAction->setIconText(ñameraAction->objectName());
+	ñameraAction->setIcon(createIconFromSVG(QString(":/icons/camera.svg")));
+	connect(ñameraAction,SIGNAL(triggered()),this,SLOT(onCameraAction()));
+
 	connectionsAction = new QAction(this);
 	connectionsAction->setEnabled(false);
 	connectionsAction->setObjectName(QStringLiteral("Connections info"));
@@ -200,6 +219,7 @@ void RCSGMainWindow::createToolBars()
 	toolsToolBar->setAccessibleName("Tools");
 	toolsToolBar->addAction(consoleAction);
 	toolsToolBar->addAction(joystickAction);
+	toolsToolBar->addAction(ñameraAction);
 	toolsToolBar->addAction(connectionsAction);
 	toolsToolBar->addAction(robotsAction);
 	addToolBar(Qt::TopToolBarArea, toolsToolBar);
@@ -221,14 +241,12 @@ void RCSGMainWindow::createNotificationFilter()
 	{0x90, 0x1F, 0x0, 0xC0, 0x4F, 0xB9, 0x51, 0xED}};
 
 	DEV_BROADCAST_DEVICEINTERFACE notificationFilter;
-	ZeroMemory( &notificationFilter, sizeof(notificationFilter) );
+	ZeroMemory( &notificationFilter, sizeof(notificationFilter));
 	notificationFilter.dbcc_size        = sizeof(DEV_BROADCAST_DEVICEINTERFACE);
 	notificationFilter.dbcc_devicetype  = DBT_DEVTYP_DEVICEINTERFACE;
-	notificationFilter.dbcc_reserved    = 0;
 	notificationFilter.dbcc_classguid   = GUID_CLASS_USB_DEVICE;
 
-	HDEVNOTIFY hDevNotify =
-		RegisterDeviceNotification((HANDLE)winId(), &notificationFilter, DEVICE_NOTIFY_WINDOW_HANDLE );
+	hDevNotify = RegisterDeviceNotification((HANDLE)winId(), &notificationFilter, DEVICE_NOTIFY_WINDOW_HANDLE );
 
 	if(hDevNotify == NULL)
 	{
@@ -278,6 +296,16 @@ void RCSGMainWindow::createDockWindows()
 		addDockWidget(Qt::RightDockWidgetArea, joysticksInfoDockWidget);
 		connect(joysticksInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onJoystickAction(bool)));
 		joysticksInfoDockWidget->hide();
+	}
+	if (!ñameraAction->isEnabled())
+	{
+		cameraInfoDockWidget = new QDockWidget(tr("RCSG cameras info"), this);
+		cameraInfoDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		cameraInfo = new RCSGCameraInfoDockWindow(cameraInfoDockWidget);
+		cameraInfoDockWidget->setWidget(cameraInfo);
+		addDockWidget(Qt::RightDockWidgetArea, cameraInfoDockWidget);
+		connect(cameraInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onCameraAction(bool)));
+		cameraInfoDockWidget->hide();
 	}
 	if (!robotsAction->isEnabled())
 	{
@@ -358,13 +386,24 @@ void RCSGMainWindow::onJoystickAction(bool visible)
 	joystickAction->setEnabled(!visible);
 }
 
+void RCSGMainWindow::onCameraAction()
+{
+	ñameraAction->setEnabled(!ñameraAction->isEnabled());
+	displayCameraInfoDockWindow();
+}
+
+void RCSGMainWindow::onCameraAction(bool visible)
+{
+	ñameraAction->setEnabled(!visible);
+}
+
 void RCSGMainWindow::onRobotsAction()
 {
 	robotsAction->setEnabled(!robotsAction->isEnabled());
 	displayRobotsInfoDockWindow();
 }
 
-void RCSGMainWindow::onRobotsAction( bool visible )
+void RCSGMainWindow::onRobotsAction(bool visible)
 {
 	robotsAction->setEnabled(!visible);
 }
@@ -375,7 +414,7 @@ void RCSGMainWindow::onControlSystemGeneratorAction()
 	displayControlSystemGeneratorDockWindow();
 }
 
-void RCSGMainWindow::onControlSystemGeneratorAction( bool visible )
+void RCSGMainWindow::onControlSystemGeneratorAction(bool visible)
 {
 	controlSystemGeneratorAction->setEnabled(!visible);
 }
@@ -407,6 +446,15 @@ void RCSGMainWindow::displayJoysticksInfoDockWindow()
 	}
 }
 
+void RCSGMainWindow::displayCameraInfoDockWindow()
+{
+	if (!ñameraAction->isEnabled())
+	{
+		cameraInfoDockWidget->show();
+		cameraInfoDockWidget->raise();
+	}
+}
+
 void RCSGMainWindow::displayRobotsInfoDockWindow()
 {
 	if (!robotsAction->isEnabled())
@@ -432,6 +480,15 @@ void RCSGMainWindow::joystickDevicesAvailable()
 	{
 		emit onJoystickAction();
 		emit joysticksInfo->updateDevicesInformation(inputDevices);
+	}
+}
+void RCSGMainWindow::cameraDevicesAvailable()
+{
+	QHash<QString,QObject*>* cameraDevices = cameraDevicesManager->getCameraDevices();
+	if (cameraDevices!=NULL)
+	{
+		emit onCameraAction();
+		emit cameraInfo->updateDevicesInformation(cameraDevices);
 	}
 }
 
@@ -460,5 +517,6 @@ void RCSGMainWindow::updateDevicesInformation()
 	canUpdateDevice.lock();
 	communicationDevicesManager->populateDevices();
 	inputDevicesManager->populateDevices();
+	cameraDevicesManager->populateDevices();
 	canUpdateDevice.unlock();
 }

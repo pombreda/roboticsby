@@ -27,6 +27,9 @@ HEADERS    = sources\Version.h\
              sources\RCSGLinkGraphicsItem.h\
              sources\RCSGJoystickGraphicsItem.h\
              sources\RCSGCameraGraphicsItem.h\
+             sources\RCSGCameraDevice.h\
+             sources\RCSGCameraInfoDockWindow.h\
+             sources\RCSGCameraDevicesManager.h\
              sources\RCSGAvailableUsersGraphicsItem.h\
              sources\RCSGAvailableRobotsGraphicsItem.h\
              sources\RCSGAvailableJoysticksGraphicsItem.h\
@@ -58,6 +61,9 @@ SOURCES    = sources\main.cpp\
              sources\RCSGLinkGraphicsItem.cpp\
              sources\RCSGJoystickGraphicsItem.cpp\
              sources\RCSGCameraGraphicsItem.cpp\
+             sources\RCSGCameraDevice.cpp\
+             sources\RCSGCameraInfoDockWindow.cpp\
+             sources\RCSGCameraDevicesManager.cpp\
              sources\RCSGAvailableUsersGraphicsItem.cpp\
              sources\RCSGAvailableRobotsGraphicsItem.cpp\
              sources\RCSGAvailableJoysticksGraphicsItem.cpp\
@@ -72,5 +78,5 @@ RESOURCES  = rcsg.qrc
 
 win32 {
    RC_FILE = rcsg.rc
-   LIBS += -lsetupapi -ladvapi32 -lhid
+   LIBS += -lsetupapi -ladvapi32 -lhid -lOle32 -lMfplat -lMf
 }

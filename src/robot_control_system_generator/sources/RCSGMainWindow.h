@@ -44,11 +44,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGInputDevicesManager.h"
 #include "RCSGRobotsManager.h"
 #include "RCSGComPortsInfoDockWindow.h"
+#include "RCSGCameraInfoDockWindow.h"
 #include "RCSGJoysticksInfoDockWindow.h"
 #include "RCSGRobotsInfoDockWindow.h"
 #include "RCSGControlSystemGeneratorDockWindow.h"
 
 class RCSGCommunicationDevicesManager;
+class RCSGCameraDevicesManager;
 class RCSGInputDevicesManager;
 class RCSGRobotsManager;
 
@@ -64,6 +66,7 @@ public:
 		void deviceConnected();
 		void deviceDisconnected();
 		void joystickDevicesAvailable();
+		void cameraDevicesAvailable();
 		void comPortDevicesAvailable();
 		void robotsAvailable();
 		void showStatusBarMessage(const QString &message);
@@ -86,6 +89,7 @@ private:
 	void displayConsoleDockWindow();
 	void displayComPortsInfoDockWindow();
 	void displayJoysticksInfoDockWindow();
+	void displayCameraInfoDockWindow();
 	void displayRobotsInfoDockWindow();
 	void displayControlSystemGeneratorDockWindow();
 
@@ -106,12 +110,14 @@ private:
 
 	QAction *controlSystemGeneratorAction;
 	QAction *joystickAction;
+	QAction *ñameraAction;
 	QAction *connectionsAction;
 	QAction *robotsAction;
 
 	RCSGConsoleDockWindow *console;
 	RCSGComPortsInfoDockWindow *comPortsInfo;
 	RCSGJoysticksInfoDockWindow *joysticksInfo;
+	RCSGCameraInfoDockWindow *cameraInfo;
 	RCSGRobotsInfoDockWindow *robotsInfo;
 	RCSGControlSystemGeneratorDockWindow *controlSystemGeneratorDockWindow;
 
@@ -120,6 +126,7 @@ private:
 	QDockWidget *joysticksInfoDockWidget;
 	QDockWidget *robotsInfoDockWidget;
 	QDockWidget *controlSystemGeneratorDockWidget;
+	QDockWidget *cameraInfoDockWidget;
 
 	QMutex canUpdateDevice;
 
@@ -130,6 +137,7 @@ private:
 
 	RCSGCommunicationDevicesManager *communicationDevicesManager;
 	RCSGInputDevicesManager *inputDevicesManager;
+	RCSGCameraDevicesManager *cameraDevicesManager;
 	RCSGRobotsManager *robotsManager;
 
 	private slots:
@@ -139,6 +147,8 @@ private:
 		void onConnectionsAction(bool visible);
 		void onJoystickAction();
 		void onJoystickAction(bool visible);
+		void onCameraAction();
+		void onCameraAction(bool visible);
 		void onRobotsAction();
 		void onRobotsAction(bool visible);
 		void onControlSystemGeneratorAction();

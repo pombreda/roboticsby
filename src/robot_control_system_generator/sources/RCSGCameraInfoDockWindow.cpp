@@ -67,8 +67,7 @@ void RCSGCameraInfoDockWindow::updateDevicesInformation( QHash<QString,QObject*>
 		{
 			RCSGCameraDevice *device = qobject_cast<RCSGCameraDevice*>(iterator.value());
 			if (device!=NULL)
-			{
-				
+			{			
 				QTreeWidgetItem *topLevelItem = new QTreeWidgetItem(this);
 				addTopLevelItem(topLevelItem);
 				topLevelItem->setText(0,QString("Slot %1").arg(QString::number(device->cameraDeviceSlot())));
@@ -78,42 +77,23 @@ void RCSGCameraInfoDockWindow::updateDevicesInformation( QHash<QString,QObject*>
 				vendorItem->setText(1,device->cameraDeviceVendor());
 				QTreeWidgetItem *productDescriptionItem=new QTreeWidgetItem(topLevelItem);
 				productDescriptionItem->setText(0,QString("Description"));
-				productDescriptionItem->setText(1,device->cameraDeviceDescription());
-/*				QTreeWidgetItem *xAxis = new QTreeWidgetItem(topLevelItem);
-				extractXaxis(xAxis,device->joystickDeviceCapacites());
-				QTreeWidgetItem *yAxis = new QTreeWidgetItem(topLevelItem);
-				extractYaxis(yAxis,device->joystickDeviceCapacites());
-				if(device->joystickDeviceCapacites().wCaps & JOYCAPS_HASZ)
+				productDescriptionItem->setText(1,device->cameraDeviceDescription());		
+				QVector<QHash<QString,QString>> capacites = device->cameraDeviceCapacites();		
+				QVector<QHash<QString,QString>>::Iterator iterator; 
+				for (iterator = capacites.begin(); iterator != capacites.end(); ++iterator)
 				{
-					QTreeWidgetItem *zAxis = new QTreeWidgetItem(topLevelItem);
-					extractZaxis(zAxis,device->joystickDeviceCapacites());
+					QHash<QString,QString> hashTable = (*iterator);
+					QHash<QString,QString>::iterator iteratorHash;
+					QTreeWidgetItem *cameraPropertyList = new QTreeWidgetItem(topLevelItem);
+					cameraPropertyList->setText(0,QString("Media Type"));
+					cameraPropertyList->setText(1,QString("[%1 %2]").arg(hashTable[QString("MF_MT_FRAME_SIZE")],hashTable[QString("MF_MT_FRAME_RATE")]));
+					for (iteratorHash = hashTable.begin(); iteratorHash != hashTable.end(); ++iteratorHash)
+					{
+						QTreeWidgetItem *cameraProperty = new QTreeWidgetItem(cameraPropertyList);
+						cameraProperty->setText(0,iteratorHash.key());
+						cameraProperty->setText(1,iteratorHash.value());
+					}
 				}
-				if(device->joystickDeviceCapacites().wCaps & JOYCAPS_HASR)
-				{
-					QTreeWidgetItem *rAxis = new QTreeWidgetItem(topLevelItem);
-					extractRaxis(rAxis,device->joystickDeviceCapacites());
-				}
-				if(device->joystickDeviceCapacites().wCaps & JOYCAPS_HASU)
-				{
-					QTreeWidgetItem *uAxis = new QTreeWidgetItem(topLevelItem);
-					extractUaxis(uAxis,device->joystickDeviceCapacites());
-				}
-				if(device->joystickDeviceCapacites().wCaps & JOYCAPS_HASV)
-				{
-					QTreeWidgetItem *vAxis = new QTreeWidgetItem(topLevelItem);
-					extractVaxis(vAxis,device->joystickDeviceCapacites());
-				}
-				QTreeWidgetItem *pollingFrequency = new QTreeWidgetItem(topLevelItem);
-				extractPollingFrequency(pollingFrequency,device->joystickDeviceCapacites());
-				QTreeWidgetItem *buttonsNumber = new QTreeWidgetItem(topLevelItem);
-				extractButtonsNumber(buttonsNumber,device->joystickDeviceCapacites());
-				QTreeWidgetItem *pov = new QTreeWidgetItem(topLevelItem);
-				extractPOV(pov,device->joystickDeviceCapacites());
-				QTreeWidgetItem *pov4dir = new QTreeWidgetItem(topLevelItem);
-				extractPOV4DIR(pov4dir,device->joystickDeviceCapacites());
-				QTreeWidgetItem *povcts = new QTreeWidgetItem(topLevelItem);
-				extractPOVCTS(povcts,device->joystickDeviceCapacites());
-*/
 			}
 		}
 		header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
@@ -122,100 +102,3 @@ void RCSGCameraInfoDockWindow::updateDevicesInformation( QHash<QString,QObject*>
 		setColumnCount(0);
 	}
 }
-
-/*
-void RCSGJoysticksInfoDockWindow::extractXaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("X axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wXmin),QString::number(caps.wXmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractYaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("Y axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wYmin),QString::number(caps.wYmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractZaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("Z axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wZmin),QString::number(caps.wZmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractRaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("R axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wRmin),QString::number(caps.wRmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractUaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("U axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wUmin),QString::number(caps.wUmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractVaxis( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("V axis"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wVmin),QString::number(caps.wVmax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractPollingFrequency( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("Polling Frequency"));
-	QString hex;
-	item->setText(1,QString("[%1,%2]").arg(QString::number(caps.wPeriodMin),QString::number(caps.wPeriodMax)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractButtonsNumber( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("Buttons Number"));
-	QString hex;
-	item->setText(1,QString("%1").arg(QString::number(caps.wNumButtons)));
-}
-
-void RCSGJoysticksInfoDockWindow::extractPOV( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("POV"));
-	QString result("");
-	if (caps.wCaps & JOYCAPS_HASPOV)
-	{
-		result.append("True");
-	} else {
-		result.append("False");
-	}
-	item->setText(1,result);
-}
-
-void RCSGJoysticksInfoDockWindow::extractPOV4DIR( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("POV4DIR"));
-	QString result("");
-	if (caps.wCaps & JOYCAPS_POV4DIR)
-	{
-		result.append("True");
-	} else {
-		result.append("False");
-	}
-	item->setText(1,result);
-}
-
-void RCSGJoysticksInfoDockWindow::extractPOVCTS( QTreeWidgetItem *item, JOYCAPS caps )
-{
-	item->setText(0,QString("POVCTS"));
-	QString result("");
-	if (caps.wCaps & JOYCAPS_POVCTS)
-	{
-		result.append("True");
-	} else {
-		result.append("False");
-	}
-	item->setText(1,result);
-}
-*/

@@ -59,17 +59,20 @@ RCSGInputDevicesManager::~RCSGInputDevicesManager()
 void enumeratingInputDevices()
 {
 	globalInputDevicesHolder.clear();
-	for(UINT i=0; i<joyGetNumDevs(); i++) 
-	{
-		JOYINFOEX joyinfoex;
-		joyinfoex.dwSize = sizeof(JOYINFOEX);
-		joyinfoex.dwFlags = JOY_RETURNALL;
+	MMRESULT dwResult;
 
-		if(joyGetPosEx(i, &joyinfoex)==JOYERR_NOERROR)
+	UINT joyId = 0; 
+
+	JOYINFOEX joyinfoex;
+	joyinfoex.dwSize = sizeof(JOYINFOEX);
+	joyinfoex.dwFlags = JOY_RETURNALL;
+
+	while ((dwResult = joyGetPosEx(joyId++,&joyinfoex)) != JOYERR_PARMS)
+	{
+		if(dwResult == JOYERR_NOERROR)
 		{
-			globalInputDevicesHolder.append(i);
+			globalInputDevicesHolder.append(joyId-1);
 		}
-		joyReleaseCapture(i);
 	}
 }
 

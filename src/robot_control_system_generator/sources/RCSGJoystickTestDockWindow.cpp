@@ -31,48 +31,24 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QtWidgets>
-#include <QSvgRenderer>
+#include <QWidget>
+#include <QPushButton>
+#include <QHBoxLayout>
 
-#include "RCSGAvailableJoysticksGraphicsItem.h"
+#include "windows.h"
+#include "RCSGJoystickTestDockWindow.h"
 
-RCSGAvailableJoysticksGraphicsItem::RCSGAvailableJoysticksGraphicsItem(QGraphicsItem *parent)
-  : QGraphicsObject(parent)
+RCSGJoystickTestDockWindow::RCSGJoystickTestDockWindow(QWidget *parent)
+	:QWidget(parent)
 {
-	setAcceptDrops(true);
-	itemFont = QFont("Helvetica",10);
-	QFontMetrics fontMetric(itemFont);
-	itemLabel = "Available Joysticks";
-	itemBoundsRect = QRectF(0, 0, itemFont.pointSize()*2+fontMetric.width(itemLabel), itemFont.pointSize()*4.5+25);
-}
+	QPushButton *button1 = new QPushButton("One");
+	QPushButton *button2 = new QPushButton("Two");
+	QPushButton *button3 = new QPushButton("Three");
 
-QRectF RCSGAvailableJoysticksGraphicsItem::boundingRect() const
-{
-	return itemBoundsRect;
-}
+	QHBoxLayout *layout = new QHBoxLayout;
+	layout->addWidget(button1);
+	layout->addWidget(button2);
+	layout->addWidget(button3);
 
-void RCSGAvailableJoysticksGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
-
-	painter->setBrush(Qt::lightGray);
-	painter->setFont(itemFont);
-	painter->drawRoundedRect(0, 0, itemBoundsRect.width(), itemBoundsRect.height(), 10, 10, Qt::AbsoluteSize);
-	painter->drawText(QPoint(itemFont.pointSize(), 1.5*itemFont.pointSize()), itemLabel);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
+	setLayout(layout);
 }

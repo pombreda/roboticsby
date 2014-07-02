@@ -83,7 +83,7 @@ RCSGMainWindow::RCSGMainWindow(QWidget *p) : QMainWindow(p), hDevNotify(NULL),co
 	
 }
 
-RCSGMainWindow::~RCSGMainWindow() 
+RCSGMainWindow::~RCSGMainWindow()
 {
 	if (hDevNotify!=NULL)
 	{
@@ -142,10 +142,33 @@ void RCSGMainWindow::createActions()
 
 	aboutQtAction = new QAction(tr("About &Qt"), this);
 	connect(aboutQtAction, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+
+	toolsCameraPreviewAction = new QAction(tr("Camera &preview"), this);
+	toolsCameraPreviewAction->setCheckable(true);
+	toolsCameraPreviewAction->setChecked(false);
+	toolsCameraPreviewAction->setObjectName(QStringLiteral("Camera preview info"));
+	connect(toolsCameraPreviewAction, SIGNAL(triggered()), this, SLOT(onCameraPreviewAction()));
+
+	toolsJoystickTestAction = new QAction(tr("Joystick &test"), this);
+	toolsJoystickTestAction->setCheckable(true);
+	toolsJoystickTestAction->setChecked(false);
+	toolsJoystickTestAction->setObjectName(QStringLiteral("Joystick test info"));
+	connect(toolsJoystickTestAction, SIGNAL(triggered()), this, SLOT(onJoystickTestAction()));
+
+	toolsCommunicationConsoleAction = new QAction(tr("Communication &console"), this);
+	toolsCommunicationConsoleAction->setCheckable(true);
+	toolsCommunicationConsoleAction->setChecked(false);
+	toolsCommunicationConsoleAction->setObjectName(QStringLiteral("Communication console"));
+	connect(toolsCommunicationConsoleAction, SIGNAL(triggered()), this, SLOT(onCommunicationConsoleAction()));
 }
 
 void RCSGMainWindow::createMenus()
 {
+	toolsMenu = menuBar()->addMenu(tr("&Tools"));
+	toolsMenu->addAction(toolsCameraPreviewAction);
+	toolsMenu->addAction(toolsJoystickTestAction);
+	toolsMenu->addAction(toolsCommunicationConsoleAction);
+
 	helpMenu = menuBar()->addMenu(tr("&Help"));
 	helpMenu->addAction(aboutAction);
 	helpMenu->addAction(aboutQtAction);
@@ -307,6 +330,36 @@ void RCSGMainWindow::createDockWindows()
 		connect(cameraInfoDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onCameraAction(bool)));
 		cameraInfoDockWidget->hide();
 	}
+	if (!toolsCameraPreviewAction->isChecked())
+	{
+		cameraPreviewDockWidget = new QDockWidget(tr("RCSG cameras preview"), this);
+		cameraPreviewDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		cameraPreview = new RCSGCameraPreviewDockWindow(cameraPreviewDockWidget);
+		cameraPreviewDockWidget->setWidget(cameraPreview);
+		addDockWidget(Qt::RightDockWidgetArea, cameraPreviewDockWidget);
+		connect(cameraPreviewDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onCameraPreviewAction(bool)));
+		cameraPreviewDockWidget->hide();
+	}
+	if (!toolsJoystickTestAction->isChecked())
+	{
+		joystickTestDockWidget = new QDockWidget(tr("RCSG joystick test"), this);
+		joystickTestDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		joystickTest = new RCSGJoystickTestDockWindow(joystickTestDockWidget);
+		joystickTestDockWidget->setWidget(joystickTest);
+		addDockWidget(Qt::RightDockWidgetArea, joystickTestDockWidget);
+		connect(joystickTestDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onJoystickTestAction(bool)));
+		joystickTestDockWidget->hide();
+	}
+	if (!toolsCommunicationConsoleAction->isChecked())
+	{
+		communicationConsoleDockWidget = new QDockWidget(tr("RCSG communication console"), this);
+		communicationConsoleDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		communicationConsole = new RCSGCommunicationConsoleDockWindow(communicationConsoleDockWidget);
+		communicationConsoleDockWidget->setWidget(communicationConsole);
+		addDockWidget(Qt::RightDockWidgetArea, communicationConsoleDockWidget);
+		connect(communicationConsoleDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onCommunicationConsoleAction(bool)));
+		communicationConsoleDockWidget->hide();
+	}
 	if (!robotsAction->isEnabled())
 	{
 		robotsInfoDockWidget = new QDockWidget(tr("RCSG robots info"), this);
@@ -386,6 +439,39 @@ void RCSGMainWindow::onJoystickAction(bool visible)
 	joystickAction->setEnabled(!visible);
 }
 
+void RCSGMainWindow::onCommunicationConsoleAction()
+{
+	toolsCommunicationConsoleAction->setChecked(toolsCommunicationConsoleAction->isChecked());
+	displayCommunicationConsoleDockWindow();
+}
+
+void RCSGMainWindow::onCommunicationConsoleAction( bool checked )
+{
+	toolsCommunicationConsoleAction->setChecked(checked);
+}
+
+void RCSGMainWindow::onJoystickTestAction()
+{
+	toolsJoystickTestAction->setChecked(toolsJoystickTestAction->isChecked());
+	displayJoystickTestDockWindow();
+}
+
+void RCSGMainWindow::onJoystickTestAction( bool checked )
+{
+	toolsJoystickTestAction->setChecked(checked);
+}
+
+void RCSGMainWindow::onCameraPreviewAction()
+{
+	toolsCameraPreviewAction->setChecked(toolsCameraPreviewAction->isChecked());
+	displayCameraPreviewDockWindow();
+}
+
+void RCSGMainWindow::onCameraPreviewAction(bool checked)
+{
+	toolsCameraPreviewAction->setChecked(checked);
+}
+
 void RCSGMainWindow::onCameraAction()
 {
 	ñameraAction->setEnabled(!ñameraAction->isEnabled());
@@ -455,6 +541,38 @@ void RCSGMainWindow::displayCameraInfoDockWindow()
 	}
 }
 
+void RCSGMainWindow::displayCameraPreviewDockWindow()
+{
+	if (toolsCameraPreviewAction->isChecked())
+	{
+		cameraPreviewDockWidget->show();
+		cameraPreviewDockWidget->raise();
+	} else {
+		cameraPreviewDockWidget->hide();
+	}
+}
+
+void RCSGMainWindow::displayJoystickTestDockWindow()
+{
+	if (toolsJoystickTestAction->isChecked())
+	{
+		joystickTestDockWidget->show();
+		joystickTestDockWidget->raise();
+	} else {
+		joystickTestDockWidget->hide();
+	}
+}
+
+void RCSGMainWindow::displayCommunicationConsoleDockWindow()
+{
+	if (toolsCommunicationConsoleAction->isChecked())
+	{
+		communicationConsoleDockWidget->show();
+		communicationConsoleDockWidget->raise();
+	} else {
+		communicationConsoleDockWidget->hide();
+	}
+}
 void RCSGMainWindow::displayRobotsInfoDockWindow()
 {
 	if (!robotsAction->isEnabled())
@@ -489,6 +607,7 @@ void RCSGMainWindow::cameraDevicesAvailable()
 	{
 		emit onCameraAction();
 		emit cameraInfo->updateDevicesInformation(cameraDevices);
+		emit cameraPreview->updateCameraPreviewList(cameraDevices);
 	}
 }
 

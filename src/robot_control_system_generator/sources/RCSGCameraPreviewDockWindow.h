@@ -31,48 +31,27 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QtWidgets>
-#include <QSvgRenderer>
+#ifndef RCSGCAMERAPREVIEWDOCKWINDOW_H
+#define RCSGCAMERAPREVIEWDOCKWINDOW_H
 
-#include "RCSGAvailableJoysticksGraphicsItem.h"
+#include <QGroupBox>
+#include <QVBoxLayout>
+#include <QWidget>
 
-RCSGAvailableJoysticksGraphicsItem::RCSGAvailableJoysticksGraphicsItem(QGraphicsItem *parent)
-  : QGraphicsObject(parent)
+class RCSGCameraPreviewDockWindow : public QWidget
 {
-	setAcceptDrops(true);
-	itemFont = QFont("Helvetica",10);
-	QFontMetrics fontMetric(itemFont);
-	itemLabel = "Available Joysticks";
-	itemBoundsRect = QRectF(0, 0, itemFont.pointSize()*2+fontMetric.width(itemLabel), itemFont.pointSize()*4.5+25);
-}
+	Q_OBJECT
 
-QRectF RCSGAvailableJoysticksGraphicsItem::boundingRect() const
-{
-	return itemBoundsRect;
-}
+public:
+	RCSGCameraPreviewDockWindow(QWidget *parent = 0);
 
-void RCSGAvailableJoysticksGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	public slots:
+		void updateCameraPreviewList(QHash<QString,QObject*>* cameraDevices);
+private:
+	QGroupBox *cameraPreviewGroupBox;
+	QGroupBox *cameraPreviewThreadsStatusGroupBox;
+	QVBoxLayout *mainCameraPreviewListLayout;
+	QVBoxLayout *mainCameraPreviewThreadsStatusLayout;
+};
 
-	painter->setBrush(Qt::lightGray);
-	painter->setFont(itemFont);
-	painter->drawRoundedRect(0, 0, itemBoundsRect.width(), itemBoundsRect.height(), 10, 10, Qt::AbsoluteSize);
-	painter->drawText(QPoint(itemFont.pointSize(), 1.5*itemFont.pointSize()), itemLabel);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
-}
-
-void RCSGAvailableJoysticksGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
-{
-	Q_UNUSED(event);
-}
+#endif // RCSGCAMERAPREVIEWDOCKWINDOW_H

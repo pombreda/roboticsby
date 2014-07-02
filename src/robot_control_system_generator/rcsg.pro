@@ -16,7 +16,9 @@ HEADERS    = sources\Version.h\
              sources\RCSGConsoleDockWindow.h\
              sources\RCSGComPortsInfoDockWindow.h\
              sources\RCSGJoysticksInfoDockWindow.h\
+             sources\RCSGJoystickTestDockWindow.h\
              sources\RCSGCommunicationProtocol.h\
+             sources\RCSGCommunicationConsoleDockWindow.h\
              sources\RCSGRobotsInfoDockWindow.h\
              sources\RCSGControlSystemGeneratorDockWindow.h\
              sources\RCSGUserGraphicsItem.h\
@@ -29,6 +31,7 @@ HEADERS    = sources\Version.h\
              sources\RCSGCameraGraphicsItem.h\
              sources\RCSGCameraDevice.h\
              sources\RCSGCameraInfoDockWindow.h\
+             sources\RCSGCameraPreviewDockWindow.h\
              sources\RCSGCameraDevicesManager.h\
              sources\RCSGAvailableUsersGraphicsItem.h\
              sources\RCSGAvailableRobotsGraphicsItem.h\
@@ -49,8 +52,10 @@ SOURCES    = sources\main.cpp\
              sources\RCSGHockeyRobot.cpp\
              sources\RCSGConsoleDockWindow.cpp\
              sources\RCSGComPortsInfoDockWindow.cpp\
+             sources\RCSGJoystickTestDockWindow.cpp\
              sources\RCSGJoysticksInfoDockWindow.cpp\
              sources\RCSGCommunicationProtocol.cpp\
+             sources\RCSGCommunicationConsoleDockWindow.cpp\
              sources\RCSGRobotsInfoDockWindow.cpp\
              sources\RCSGControlSystemGeneratorDockWindow.cpp\
              sources\RCSGUserGraphicsItem.cpp\
@@ -62,6 +67,7 @@ SOURCES    = sources\main.cpp\
              sources\RCSGJoystickGraphicsItem.cpp\
              sources\RCSGCameraGraphicsItem.cpp\
              sources\RCSGCameraDevice.cpp\
+             sources\RCSGCameraPreviewDockWindow.cpp\
              sources\RCSGCameraInfoDockWindow.cpp\
              sources\RCSGCameraDevicesManager.cpp\
              sources\RCSGAvailableUsersGraphicsItem.cpp\
@@ -78,5 +84,5 @@ RESOURCES  = rcsg.qrc
 
 win32 {
    RC_FILE = rcsg.rc
-   LIBS += -lsetupapi -ladvapi32 -lhid -lOle32 -lMfplat -lMf
+   LIBS += -lsetupapi -ladvapi32 -lhid -lOle32 -lMfplat -lMf -lmfuuid -lStrmbase
 }

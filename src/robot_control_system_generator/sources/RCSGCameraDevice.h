@@ -35,6 +35,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RCSGCAMERADEVICE_H_
 
 #include <QObject>
+#include <QVector>
+#include <mfapi.h>
 
 #include <windows.h>
 
@@ -44,15 +46,23 @@ class RCSGCameraDevice : public QObject
 
 public:
 	RCSGCameraDevice(const UINT &cameraSlot);
+	~RCSGCameraDevice();
+
 	UINT cameraDeviceSlot() const;
 	QString cameraDeviceDescription() const;
 	QString cameraDeviceVendor() const;
+	QVector<QHash<QString,QString>> cameraDeviceCapacites() const;
 
 private:
 	template <class T> void safeRelease(T **ppT);
 	WORD extractVid(LPCWSTR symbolicLink);
 	WORD extractPid(LPCWSTR symbolicLink);
+	QString decodeMediaTypeKey(const GUID &giud);
+	QString decodeMediaTypeValue(const GUID &giud, const PROPVARIANT &variant);
+	void sortMediaTypesDeviceCapacitesByFrameSize();
 	UINT cameraSlot;
+	QVector<IMFMediaType*>* cameraMediaTypes;
+	QVector<QHash<QString,QString>> cameraMediaTypesDeviceCapacites;
 	QString cameraDescription;
 	QString cameraVendor;
 };

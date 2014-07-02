@@ -64,15 +64,15 @@ void RCSGAvailableUsersGraphicsItem::paint(QPainter *painter, const QStyleOption
 
 void RCSGAvailableUsersGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableUsersGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableUsersGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }

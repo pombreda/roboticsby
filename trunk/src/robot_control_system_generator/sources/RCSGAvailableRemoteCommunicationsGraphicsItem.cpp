@@ -64,15 +64,15 @@ void RCSGAvailableRemoteCommunicationsGraphicsItem::paint(QPainter *painter, con
 
 void RCSGAvailableRemoteCommunicationsGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableRemoteCommunicationsGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableRemoteCommunicationsGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }

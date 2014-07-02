@@ -41,11 +41,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "RCSGConsoleDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
+#include "RCSGCommunicationConsoleDockWindow.h"
 #include "RCSGInputDevicesManager.h"
 #include "RCSGRobotsManager.h"
 #include "RCSGComPortsInfoDockWindow.h"
 #include "RCSGCameraInfoDockWindow.h"
+#include "RCSGCameraPreviewDockWindow.h"
 #include "RCSGJoysticksInfoDockWindow.h"
+#include "RCSGJoystickTestDockWindow.h"
 #include "RCSGRobotsInfoDockWindow.h"
 #include "RCSGControlSystemGeneratorDockWindow.h"
 
@@ -90,6 +93,9 @@ private:
 	void displayComPortsInfoDockWindow();
 	void displayJoysticksInfoDockWindow();
 	void displayCameraInfoDockWindow();
+	void displayCameraPreviewDockWindow();
+	void displayJoystickTestDockWindow();
+	void displayCommunicationConsoleDockWindow();
 	void displayRobotsInfoDockWindow();
 	void displayControlSystemGeneratorDockWindow();
 
@@ -98,8 +104,13 @@ private:
 	QIcon createIconFromSVG(const QString &filename);
 
 	QMenu *helpMenu;
+	QMenu *toolsMenu;
 
 	QStatusBar *statusbar;
+
+	QAction *toolsCameraPreviewAction;
+	QAction *toolsJoystickTestAction;
+	QAction *toolsCommunicationConsoleAction;
 
 	QAction *aboutAction;
 	QAction *aboutQtAction;
@@ -116,8 +127,11 @@ private:
 
 	RCSGConsoleDockWindow *console;
 	RCSGComPortsInfoDockWindow *comPortsInfo;
+	RCSGCommunicationConsoleDockWindow *communicationConsole;
 	RCSGJoysticksInfoDockWindow *joysticksInfo;
+	RCSGJoystickTestDockWindow *joystickTest;
 	RCSGCameraInfoDockWindow *cameraInfo;
+	RCSGCameraPreviewDockWindow *cameraPreview;
 	RCSGRobotsInfoDockWindow *robotsInfo;
 	RCSGControlSystemGeneratorDockWindow *controlSystemGeneratorDockWindow;
 
@@ -127,6 +141,9 @@ private:
 	QDockWidget *robotsInfoDockWidget;
 	QDockWidget *controlSystemGeneratorDockWidget;
 	QDockWidget *cameraInfoDockWidget;
+	QDockWidget *cameraPreviewDockWidget;
+	QDockWidget *communicationConsoleDockWidget;
+	QDockWidget *joystickTestDockWidget;
 
 	QMutex canUpdateDevice;
 
@@ -149,6 +166,12 @@ private:
 		void onJoystickAction(bool visible);
 		void onCameraAction();
 		void onCameraAction(bool visible);
+		void onCameraPreviewAction();
+		void onCameraPreviewAction(bool checked);
+		void onJoystickTestAction();
+		void onJoystickTestAction(bool checked);
+		void onCommunicationConsoleAction();
+		void onCommunicationConsoleAction(bool checked);
 		void onRobotsAction();
 		void onRobotsAction(bool visible);
 		void onControlSystemGeneratorAction();

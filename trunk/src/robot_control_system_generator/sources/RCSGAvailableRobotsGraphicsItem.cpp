@@ -64,15 +64,15 @@ void RCSGAvailableRobotsGraphicsItem::paint(QPainter *painter, const QStyleOptio
 
 void RCSGAvailableRobotsGraphicsItem::dragEnterEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableRobotsGraphicsItem::dragLeaveEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }
 
 void RCSGAvailableRobotsGraphicsItem::dropEvent( QGraphicsSceneDragDropEvent *event )
 {
-
+	Q_UNUSED(event);
 }

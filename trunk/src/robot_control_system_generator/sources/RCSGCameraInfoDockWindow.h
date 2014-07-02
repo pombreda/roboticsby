@@ -46,18 +46,6 @@ public:
 
 	public slots:
 		void updateDevicesInformation(QHash<QString,QObject*>* cameraDevices);
-	/*	void extractXaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractYaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractZaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractRaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractUaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractVaxis(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractPollingFrequency(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractButtonsNumber(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractPOV(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractPOV4DIR(QTreeWidgetItem *item, JOYCAPS caps);
-		void extractPOVCTS(QTreeWidgetItem *item, JOYCAPS caps);	
-	*/
 };
 
 #endif // RCSGCAMERAINFODOCKWINDOW_H

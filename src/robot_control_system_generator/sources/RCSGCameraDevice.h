@@ -50,6 +50,7 @@ public:
 
 	UINT cameraDeviceSlot() const;
 	QString cameraDeviceDescription() const;
+	QVector<IMFMediaType*>* cameraDeviceMediaTypes() const;
 	QString cameraDeviceVendor() const;
 	QVector<QHash<QString,QString>> cameraDeviceCapacites() const;
 

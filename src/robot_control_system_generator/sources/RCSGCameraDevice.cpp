@@ -516,3 +516,8 @@ void RCSGCameraDevice::sortMediaTypesDeviceCapacitesByFrameSize()
 {
 	qSort(cameraMediaTypesDeviceCapacites.begin(),cameraMediaTypesDeviceCapacites.end(),lessThanWidth);
 }
+
+QVector<IMFMediaType*>* RCSGCameraDevice::cameraDeviceMediaTypes() const
+{
+	return cameraMediaTypes;
+}

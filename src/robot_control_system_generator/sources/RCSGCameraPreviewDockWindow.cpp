@@ -66,14 +66,25 @@ RCSGCameraPreviewDockWindow::RCSGCameraPreviewDockWindow(QWidget *parent)
 	setLayout(mainLayout);
 }
 
+void clearLayout(QLayout* layout, bool deleteWidgets = true)
+{
+	while (QLayoutItem* item = layout->takeAt(0))
+	{
+		QWidget* widget;
+		if (  (deleteWidgets)
+			&& (widget = item->widget())  ) {
+				delete widget;
+		}
+		if (QLayout* childLayout = item->layout()) {
+			clearLayout(childLayout, deleteWidgets);
+		}
+		delete item;
+	}
+}
+
 void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*>* cameraDevices)
 {
-	foreach (QObject *object, mainCameraPreviewListLayout->children()) {
-		QWidget *widget = qobject_cast<QWidget*>(object);
-		if (widget) {
-			delete widget;
-		}
-	}
+	clearLayout(mainCameraPreviewListLayout);
 
 	QHash<QString,QObject*>::iterator iterator;
 	for (iterator = cameraDevices->begin(); iterator != cameraDevices->end(); ++iterator)
@@ -86,12 +97,25 @@ void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*
 			QLabel *cameraDeviceProductName = new QLabel;
 			cameraDeviceProductName->setText(QString("[%1] %2").arg(QString::number(device->cameraDeviceSlot()),device->cameraDeviceDescription()));
 			cameraDeviceItemLayout->addWidget(cameraDeviceProductName);
-			
+			QVector<IMFMediaType*>* mediaTypes = device->cameraDeviceMediaTypes();
 			QComboBox *cameraDeviceMediaTypes = new QComboBox;
+			if (mediaTypes!=NULL)
+			{
+				QVector<QHash<QString,QString>> capacites = device->cameraDeviceCapacites();		
+				QVector<QHash<QString,QString>>::Iterator iterator; 
+				for (iterator = capacites.begin(); iterator != capacites.end(); ++iterator)
+				{
+					QHash<QString,QString> hashTable = (*iterator);
+					QHash<QString,QString>::iterator iteratorHash;
+					cameraDeviceMediaTypes->addItem(QString("%1, %2").arg(hashTable[QString("MF_MT_FRAME_SIZE")],hashTable[QString("MF_MT_FRAME_RATE")]));
+				}
+			}
 
 			cameraDeviceItemLayout->addWidget(cameraDeviceMediaTypes);
 
 			QPushButton *cameraDevicePreview = new QPushButton;
+			cameraDevicePreview->setText(tr("Preview"));
+			cameraDevicePreview->setToolTip(QString("Starting preview for [%1] %2").arg(QString::number(device->cameraDeviceSlot()),device->cameraDeviceDescription()));
 
 			cameraDeviceItemLayout->addWidget(cameraDevicePreview);
 

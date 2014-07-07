@@ -45,6 +45,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGCameraDevice.h"
 #include "RCSGCameraPreviewDockWindow.h"
 
+void clearLayout(QLayout* layout, bool deleteWidgets = true)
+{
+	while (QLayoutItem* item = layout->takeAt(0))
+	{
+		QWidget* widget;
+		if (  (deleteWidgets)
+			&& (widget = item->widget())  ) {
+				delete widget;
+		}
+		if (QLayout* childLayout = item->layout()) {
+			clearLayout(childLayout, deleteWidgets);
+		}
+		delete item;
+	}
+}
+
 RCSGCameraPreviewDockWindow::RCSGCameraPreviewDockWindow(QWidget *parent)
 	:QWidget(parent)
 {
@@ -66,22 +82,6 @@ RCSGCameraPreviewDockWindow::RCSGCameraPreviewDockWindow(QWidget *parent)
 	setLayout(mainLayout);
 }
 
-void clearLayout(QLayout* layout, bool deleteWidgets = true)
-{
-	while (QLayoutItem* item = layout->takeAt(0))
-	{
-		QWidget* widget;
-		if (  (deleteWidgets)
-			&& (widget = item->widget())  ) {
-				delete widget;
-		}
-		if (QLayout* childLayout = item->layout()) {
-			clearLayout(childLayout, deleteWidgets);
-		}
-		delete item;
-	}
-}
-
 void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*>* cameraDevices)
 {
 	clearLayout(mainCameraPreviewListLayout);
@@ -93,12 +93,16 @@ void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*
 		if (device!=NULL)
 		{
 			QHBoxLayout *cameraDeviceItemLayout = new QHBoxLayout;
-			
+			cameraDeviceItemLayout->setObjectName(QString::number(device->cameraDeviceSlot()));
+
 			QLabel *cameraDeviceProductName = new QLabel;
+			cameraDeviceProductName->setObjectName(QString::number(device->cameraDeviceSlot()));
 			cameraDeviceProductName->setText(QString("[%1] %2").arg(QString::number(device->cameraDeviceSlot()),device->cameraDeviceDescription()));
 			cameraDeviceItemLayout->addWidget(cameraDeviceProductName);
 			QVector<IMFMediaType*>* mediaTypes = device->cameraDeviceMediaTypes();
 			QComboBox *cameraDeviceMediaTypes = new QComboBox;
+			cameraDeviceMediaTypes->setObjectName(QString::number(device->cameraDeviceSlot()));
+
 			if (mediaTypes!=NULL)
 			{
 				QVector<QHash<QString,QString>> capacites = device->cameraDeviceCapacites();		
@@ -114,8 +118,10 @@ void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*
 			cameraDeviceItemLayout->addWidget(cameraDeviceMediaTypes);
 
 			QPushButton *cameraDevicePreview = new QPushButton;
+			cameraDevicePreview->setObjectName(QString::number(device->cameraDeviceSlot()));
 			cameraDevicePreview->setText(tr("Preview"));
 			cameraDevicePreview->setToolTip(QString("Starting preview for [%1] %2").arg(QString::number(device->cameraDeviceSlot()),device->cameraDeviceDescription()));
+			connect(cameraDevicePreview, SIGNAL(clicked()), this, SLOT(startPreviewThread()));
 
 			cameraDeviceItemLayout->addWidget(cameraDevicePreview);
 
@@ -123,3 +129,52 @@ void RCSGCameraPreviewDockWindow::updateCameraPreviewList(QHash<QString,QObject*
 		}
 	}
 }
+
+void RCSGCameraPreviewDockWindow::startPreviewThread()
+{
+	QPushButton* cameraDevicePreview = qobject_cast<QPushButton*>(sender());
+	QComboBox* cameraDeviceMediaTypes = NULL;
+
+	if( cameraDevicePreview != NULL ) 
+	{ 
+		QVBoxLayout *itemsLayout = qobject_cast<QVBoxLayout*>(cameraDevicePreview->parentWidget()->layout());
+		QString objectName = cameraDevicePreview->objectName();
+		if( itemsLayout != NULL ) 
+		{ 
+			for (int i = 0; i < itemsLayout->count(); ++i)
+			{
+				QHBoxLayout* cameraDeviceItemLayout = qobject_cast<QHBoxLayout*>(itemsLayout->itemAt(i)->layout());
+				if (cameraDeviceItemLayout!=NULL)
+				{
+					if (cameraDeviceItemLayout->objectName()==objectName)
+					{
+						cameraDeviceMediaTypes = NULL;
+						for (int j = 0; j < cameraDeviceItemLayout->count(); ++j)
+						{
+							cameraDeviceMediaTypes = qobject_cast<QComboBox*>(cameraDeviceItemLayout->itemAt(i)->widget());
+							if (cameraDeviceMediaTypes!=NULL)
+							{
+								if (cameraDeviceMediaTypes->objectName()==objectName)
+								{
+									break;
+								}
+							}
+						}
+						if (cameraDeviceMediaTypes!=NULL)
+						{
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (cameraDeviceMediaTypes!=NULL)
+	{
+		UINT selectedMediaType = cameraDeviceMediaTypes->currentIndex();
+		selectedMediaType=+1;
+	}
+}
+
+

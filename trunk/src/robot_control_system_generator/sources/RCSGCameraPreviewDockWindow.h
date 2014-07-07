@@ -47,11 +47,14 @@ public:
 
 	public slots:
 		void updateCameraPreviewList(QHash<QString,QObject*>* cameraDevices);
+
 private:
 	QGroupBox *cameraPreviewGroupBox;
 	QGroupBox *cameraPreviewThreadsStatusGroupBox;
 	QVBoxLayout *mainCameraPreviewListLayout;
 	QVBoxLayout *mainCameraPreviewThreadsStatusLayout;
+	private slots:
+		void startPreviewThread();
 };
 
 #endif // RCSGCAMERAPREVIEWDOCKWINDOW_H

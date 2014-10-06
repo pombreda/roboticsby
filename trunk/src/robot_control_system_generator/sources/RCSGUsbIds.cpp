@@ -156,53 +156,54 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		0x0fca,0x0fce,0x0fcf,0x0fd0,0x0fd1,0x0fd2,0x0fd4,0x0fd5,0x0fd9,0x0fda,0x0fdc,0x0fde,0x0fe0,0x0fe4,0x0fe5,0x0fe6,0x0fe9,0x0fea,0x0feb,0x0fec,
 		0x0fed,0x0fee,0x0fef,0x0ff6,0x0ff7,0x0ffc,0x0ffd,0x0fff,0x1000,0x1001,0x1003,0x1004,0x1005,0x1006,0x1009,0x100a,0x100b,0x100d,0x1010,0x1011,
 		0x1012,0x1013,0x1014,0x1015,0x1016,0x1017,0x1019,0x1020,0x1022,0x1025,0x1026,0x1027,0x1028,0x1029,0x102a,0x102b,0x102c,0x102d,0x1031,0x1032,
-		0x1033,0x1038,0x1039,0x103d,0x1043,0x1044,0x1046,0x1048,0x104b,0x104c,0x104d,0x104f,0x1050,0x1053,0x1054,0x1055,0x1056,0x1057,0x1058,0x1059,
-		0x105c,0x105d,0x105e,0x105f,0x1060,0x1063,0x1065,0x106a,0x106c,0x106d,0x106e,0x106f,0x1076,0x107b,0x107d,0x107e,0x107f,0x1082,0x1083,0x1084,
-		0x108a,0x108b,0x108c,0x108e,0x1099,0x109a,0x109b,0x109f,0x10a0,0x10a3,0x10a9,0x10aa,0x10ab,0x10ac,0x10ae,0x10af,0x10b5,0x10b8,0x10bb,0x10bc,
-		0x10bd,0x10bf,0x10c3,0x10c4,0x10c5,0x10c6,0x10cb,0x10cc,0x10cd,0x10ce,0x10cf,0x10d1,0x10d4,0x10d5,0x10d6,0x10de,0x10df,0x10e0,0x10e1,0x10e2,
-		0x10ec,0x10f0,0x10f1,0x10f5,0x10fb,0x10fd,0x10fe,0x1100,0x1101,0x1108,0x110a,0x1110,0x1111,0x1112,0x1113,0x111e,0x112a,0x112e,0x112f,0x1130,
-		0x1131,0x1132,0x1136,0x113c,0x113d,0x1141,0x1142,0x1145,0x1146,0x1147,0x114b,0x114c,0x114d,0x114f,0x115b,0x1162,0x1163,0x1164,0x1165,0x1166,
-		0x1167,0x1168,0x116e,0x116f,0x1175,0x117d,0x117e,0x1182,0x1183,0x1184,0x1188,0x1189,0x118f,0x1190,0x1191,0x1196,0x1197,0x1198,0x1199,0x119a,
-		0x119b,0x11a0,0x11a3,0x11aa,0x11ab,0x11ac,0x11b0,0x11be,0x11c5,0x11ca,0x11db,0x11e6,0x11f5,0x11f6,0x11f7,0x1203,0x1209,0x120e,0x120f,0x1210,
-		0x121e,0x1223,0x1228,0x1230,0x1233,0x1234,0x1235,0x1241,0x124a,0x124b,0x124c,0x125c,0x125f,0x1260,0x1264,0x1266,0x1267,0x126c,0x126d,0x126e,
-		0x126f,0x1274,0x1275,0x1278,0x1283,0x1286,0x1291,0x1292,0x1293,0x1294,0x129b,0x12a7,0x12ab,0x12b8,0x12b9,0x12ba,0x12c4,0x12cf,0x12d1,0x12d2,
-		0x12d6,0x12d7,0x12d8,0x12e6,0x12ef,0x12f5,0x12f7,0x12fd,0x12ff,0x1307,0x1308,0x1310,0x1312,0x1313,0x131d,0x132a,0x132b,0x1342,0x1343,0x1345,
-		0x1347,0x1348,0x134c,0x134e,0x1357,0x1366,0x136b,0x1370,0x1371,0x1376,0x137b,0x1385,0x138a,0x138e,0x1390,0x1391,0x1395,0x1397,0x1398,0x13ad,
-		0x13b0,0x13b1,0x13b2,0x13b3,0x13ba,0x13be,0x13ca,0x13cf,0x13d0,0x13d1,0x13d2,0x13d3,0x13dc,0x13dd,0x13e1,0x13e5,0x13e6,0x13ea,0x13ec,0x13ee,
-		0x13fd,0x13fe,0x1400,0x1402,0x1403,0x1409,0x140e,0x1410,0x1415,0x1419,0x1421,0x1429,0x142a,0x142b,0x1430,0x1431,0x1435,0x1436,0x143c,0x1443,
-		0x1446,0x1453,0x1456,0x1457,0x145f,0x1460,0x1461,0x1462,0x1472,0x147a,0x147e,0x147f,0x1482,0x1484,0x1485,0x1487,0x148e,0x148f,0x1491,0x1493,
-		0x1497,0x1498,0x149a,0x14aa,0x14ad,0x14ae,0x14af,0x14b0,0x14b2,0x14c0,0x14c2,0x14c8,0x14cd,0x14d8,0x14dd,0x14e0,0x14e1,0x14e4,0x14e5,0x14ea,
-		0x14ed,0x14f7,0x1500,0x1501,0x1509,0x1513,0x1514,0x1516,0x1518,0x1519,0x1520,0x1524,0x1527,0x1529,0x152a,0x152d,0x152e,0x1532,0x153b,0x1546,
-		0x1547,0x154a,0x154b,0x154d,0x154e,0x154f,0x1554,0x1557,0x1568,0x156f,0x1570,0x157b,0x157e,0x1582,0x1587,0x158d,0x158e,0x1598,0x15a2,0x15a4,
-		0x15a8,0x15a9,0x15aa,0x15ad,0x15ba,0x15c0,0x15c2,0x15c5,0x15c6,0x15c8,0x15c9,0x15ca,0x15d5,0x15d9,0x15dc,0x15e0,0x15e1,0x15e4,0x15e8,0x15e9,
-		0x15ec,0x15f4,0x1604,0x1606,0x1608,0x160a,0x160e,0x1614,0x1619,0x1621,0x1628,0x162a,0x162f,0x1630,0x1631,0x1645,0x1649,0x164a,0x164c,0x1657,
-		0x165b,0x165c,0x1660,0x1668,0x1669,0x166a,0x1677,0x1679,0x1680,0x1681,0x1682,0x1684,0x1685,0x1686,0x1687,0x1688,0x1689,0x168c,0x1690,0x1696,
-		0x1697,0x16a5,0x16a6,0x16ab,0x16ac,0x16b4,0x16b5,0x16c0,0x16ca,0x16cc,0x16d0,0x16d1,0x16d3,0x16d5,0x16d6,0x16d8,0x16dc,0x16df,0x16f0,0x16f5,
-		0x1706,0x1707,0x170b,0x170d,0x1711,0x1724,0x1725,0x1726,0x172f,0x1733,0x1736,0x1737,0x173d,0x1740,0x1743,0x1748,0x174c,0x174f,0x1753,0x1756,
-		0x1759,0x1761,0x1772,0x1776,0x177f,0x1781,0x1782,0x1784,0x1787,0x1788,0x1796,0x1797,0x1799,0x179d,0x17a0,0x17a4,0x17a5,0x17a7,0x17a8,0x17b3,
-		0x17b5,0x17ba,0x17c3,0x17cc,0x17cf,0x17d0,0x17d3,0x17e9,0x17eb,0x17ef,0x17f4,0x17f5,0x17f6,0x1809,0x1822,0x1831,0x1832,0x183d,0x1843,0x1849,
-		0x1852,0x1854,0x185b,0x1861,0x1862,0x1870,0x1871,0x1873,0x187c,0x187f,0x1892,0x1894,0x1897,0x189f,0x18a4,0x18a5,0x18b1,0x18b4,0x18b6,0x18b7,
-		0x18c5,0x18cd,0x18d1,0x18d5,0x18d9,0x18dc,0x18dd,0x18e3,0x18e8,0x18ea,0x18ec,0x18fd,0x1908,0x190d,0x1914,0x1915,0x1923,0x1926,0x192f,0x1930,
-		0x1931,0x1934,0x1941,0x1943,0x1949,0x194f,0x1951,0x1953,0x1954,0x195d,0x1965,0x1967,0x196b,0x1970,0x1975,0x1976,0x1977,0x197d,0x1989,0x198f,
-		0x1990,0x1995,0x199b,0x199e,0x199f,0x19a8,0x19ab,0x19af,0x19b2,0x19b4,0x19b5,0x19b6,0x19b9,0x19c2,0x19ca,0x19cf,0x19d2,0x19db,0x19e1,0x19e8,
-		0x19ef,0x19f7,0x19fa,0x19ff,0x1a08,0x1a0a,0x1a12,0x1a1d,0x1a25,0x1a2a,0x1a2c,0x1a32,0x1a34,0x1a36,0x1a40,0x1a41,0x1a44,0x1a4a,0x1a4b,0x1a5a,
-		0x1a61,0x1a6a,0x1a6d,0x1a6e,0x1a6f,0x1a72,0x1a79,0x1a7b,0x1a7c,0x1a81,0x1a86,0x1a89,0x1a8b,0x1a8d,0x1a98,0x1aa4,0x1aa5,0x1aa6,0x1aad,0x1ab1,
-		0x1acb,0x1acc,0x1ad1,0x1ad4,0x1adb,0x1ae4,0x1ae7,0x1aed,0x1aef,0x1af1,0x1afe,0x1b04,0x1b0e,0x1b1c,0x1b20,0x1b22,0x1b26,0x1b27,0x1b28,0x1b32,
-		0x1b36,0x1b3b,0x1b3f,0x1b47,0x1b48,0x1b52,0x1b59,0x1b5a,0x1b65,0x1b71,0x1b72,0x1b73,0x1b75,0x1b76,0x1b80,0x1b86,0x1b88,0x1b8c,0x1b8d,0x1b8e,
-		0x1b8f,0x1b96,0x1b98,0x1b99,0x1ba1,0x1ba2,0x1ba4,0x1ba6,0x1ba8,0x1bad,0x1bae,0x1bbb,0x1bc4,0x1bc5,0x1bc7,0x1bce,0x1bcf,0x1bd0,0x1bd5,0x1bde,
-		0x1bef,0x1bf0,0x1bf5,0x1bf6,0x1bfd,0x1c02,0x1c04,0x1c0c,0x1c0d,0x1c10,0x1c13,0x1c1a,0x1c1b,0x1c1f,0x1c20,0x1c21,0x1c22,0x1c26,0x1c27,0x1c31,
-		0x1c34,0x1c37,0x1c3d,0x1c3e,0x1c40,0x1c49,0x1c4f,0x1c6b,0x1c6c,0x1c73,0x1c77,0x1c78,0x1c79,0x1c7a,0x1c7b,0x1c83,0x1c87,0x1c88,0x1c89,0x1c8e,
-		0x1c98,0x1c9e,0x1ca0,0x1ca1,0x1cac,0x1cb3,0x1cb4,0x1cb6,0x1cbe,0x1cbf,0x1cc0,0x1cca,0x1ccd,0x1cd4,0x1cd5,0x1cd6,0x1cde,0x1cdf,0x1ce0,0x1ce1,
-		0x1cf1,0x1cfc,0x1cfd,0x1d03,0x1d07,0x1d08,0x1d09,0x1d0a,0x1d0b,0x1d0f,0x1d14,0x1d17,0x1d19,0x1d1f,0x1d20,0x1d27,0x1d34,0x1d45,0x1d4d,0x1d50,
-		0x1d57,0x1d5b,0x1d6b,0x1d90,0x1de1,0x1e0e,0x1e10,0x1e17,0x1e1d,0x1e1f,0x1e29,0x1e3d,0x1e41,0x1e4e,0x1e54,0x1e68,0x1e71,0x1e74,0x1e7d,0x1ebb,
-		0x1eda,0x1edb,0x1ee8,0x1ef6,0x1f28,0x1f3a,0x1f44,0x1f48,0x1f4d,0x1f6f,0x1f75,0x1f82,0x1f84,0x1f87,0x1f9b,0x1fab,0x1fbd,0x1fc9,0x1fde,0x1fe7,
-		0x1ff7,0x1fff,0x2001,0x2002,0x200c,0x2013,0x2019,0x2040,0x2047,0x2080,0x2087,0x20a0,0x20b1,0x20b3,0x20b7,0x20df,0x20f4,0x2101,0x2149,0x2162,
-		0x2184,0x21a1,0x21d6,0x2222,0x2227,0x2232,0x2233,0x2237,0x228d,0x22a6,0x22b8,0x22b9,0x22ba,0x2304,0x2318,0x2341,0x2373,0x2375,0x2406,0x2443,
-		0x2478,0x2632,0x2650,0x2659,0x2730,0x2735,0x2770,0x2821,0x2899,0x2c02,0x2c1a,0x2fb2,0x3125,0x3176,0x3275,0x3334,0x3340,0x3504,0x3538,0x3579,
-		0x3636,0x3838,0x3923,0x40bb,0x4101,0x4102,0x413c,0x4146,0x4242,0x4317,0x4348,0x4572,0x4586,0x4670,0x4752,0x4757,0x4766,0x4855,0x4971,0x4d46,
-		0x5032,0x5041,0x50c2,0x5173,0x5219,0x5345,0x544d,0x5543,0x5555,0x55aa,0x5656,0x595a,0x5986,0x5a57,0x6000,0x601a,0x6189,0x6253,0x636c,0x6472,
-		0x6547,0x6615,0x6666,0x6677,0x6891,0x695c,0x6993,0x6a75,0x7104,0x726c,0x734c,0x7392,0x8086,0x8087,0x80ee,0x8282,0x8341,0x9016,0x9022,0x9148,
-		0x9710,0x99fa,0x9ac4,0xa128,0xa168,0xa600,0xa727,0xabcd,0xc251,0xcace,0xd209,0xe4e4,0xeb03,0xeb1a,0xeb2a,0xf003,0xf4ec};
+		0x1033,0x1038,0x1039,0x103a,0x103d,0x1043,0x1044,0x1046,0x1048,0x104b,0x104c,0x104d,0x104f,0x1050,0x1053,0x1054,0x1055,0x1056,0x1057,0x1058,
+		0x1059,0x105c,0x105d,0x105e,0x105f,0x1060,0x1063,0x1065,0x106a,0x106c,0x106d,0x106e,0x106f,0x1076,0x107b,0x107d,0x107e,0x107f,0x1082,0x1083,
+		0x1084,0x108a,0x108b,0x108c,0x108e,0x1099,0x109a,0x109b,0x109f,0x10a0,0x10a3,0x10a9,0x10aa,0x10ab,0x10ac,0x10ae,0x10af,0x10b5,0x10b8,0x10bb,
+		0x10bc,0x10bd,0x10bf,0x10c3,0x10c4,0x10c5,0x10c6,0x10cb,0x10cc,0x10cd,0x10ce,0x10cf,0x10d1,0x10d4,0x10d5,0x10d6,0x10de,0x10df,0x10e0,0x10e1,
+		0x10e2,0x10ec,0x10f0,0x10f1,0x10f5,0x10fb,0x10fd,0x10fe,0x1100,0x1101,0x1108,0x110a,0x1110,0x1111,0x1112,0x1113,0x111e,0x112a,0x112e,0x112f,
+		0x1130,0x1131,0x1132,0x1136,0x113c,0x113d,0x1141,0x1142,0x1145,0x1146,0x1147,0x114b,0x114c,0x114d,0x114f,0x115b,0x1162,0x1163,0x1164,0x1165,
+		0x1166,0x1167,0x1168,0x116e,0x116f,0x1175,0x117d,0x117e,0x1182,0x1183,0x1184,0x1188,0x1189,0x118f,0x1190,0x1191,0x1196,0x1197,0x1198,0x1199,
+		0x119a,0x119b,0x11a0,0x11a3,0x11aa,0x11ab,0x11ac,0x11b0,0x11be,0x11c5,0x11ca,0x11db,0x11e6,0x11f5,0x11f6,0x11f7,0x1203,0x1209,0x120e,0x120f,
+		0x1210,0x121e,0x1223,0x1228,0x1230,0x1233,0x1234,0x1235,0x1241,0x124a,0x124b,0x124c,0x125c,0x125f,0x1260,0x1264,0x1266,0x1267,0x126c,0x126d,
+		0x126e,0x126f,0x1274,0x1275,0x1278,0x1283,0x1286,0x1291,0x1292,0x1293,0x1294,0x129b,0x12a7,0x12ab,0x12b8,0x12b9,0x12ba,0x12c4,0x12cf,0x12d1,
+		0x12d2,0x12d6,0x12d7,0x12d8,0x12e6,0x12ef,0x12f5,0x12f7,0x12fd,0x12ff,0x1307,0x1308,0x1310,0x1312,0x1313,0x131d,0x132a,0x132b,0x133e,0x1342,
+		0x1343,0x1345,0x1347,0x1348,0x134c,0x134e,0x1357,0x1366,0x136b,0x1370,0x1371,0x1376,0x137b,0x1385,0x138a,0x138e,0x1390,0x1391,0x1395,0x1397,
+		0x1398,0x13ad,0x13b0,0x13b1,0x13b2,0x13b3,0x13ba,0x13be,0x13ca,0x13cf,0x13d0,0x13d1,0x13d2,0x13d3,0x13dc,0x13dd,0x13e1,0x13e5,0x13e6,0x13ea,
+		0x13ec,0x13ee,0x13fd,0x13fe,0x1400,0x1402,0x1403,0x1409,0x140e,0x1410,0x1415,0x1419,0x1421,0x1429,0x142a,0x142b,0x1430,0x1431,0x1435,0x1436,
+		0x143c,0x1443,0x1446,0x1453,0x1456,0x1457,0x145f,0x1460,0x1461,0x1462,0x1472,0x147a,0x147e,0x147f,0x1482,0x1484,0x1485,0x1487,0x148e,0x148f,
+		0x1491,0x1493,0x1497,0x1498,0x149a,0x14aa,0x14ad,0x14ae,0x14af,0x14b0,0x14b2,0x14c0,0x14c2,0x14c8,0x14cd,0x14d8,0x14dd,0x14e0,0x14e1,0x14e4,
+		0x14e5,0x14ea,0x14ed,0x14f7,0x1500,0x1501,0x1509,0x1513,0x1514,0x1516,0x1518,0x1519,0x1520,0x1524,0x1527,0x1529,0x152a,0x152d,0x152e,0x1532,
+		0x153b,0x1546,0x1547,0x154a,0x154b,0x154d,0x154e,0x154f,0x1554,0x1557,0x1568,0x156f,0x1570,0x157b,0x157e,0x1582,0x1587,0x158d,0x158e,0x1598,
+		0x15a2,0x15a4,0x15a8,0x15a9,0x15aa,0x15ad,0x15ba,0x15c0,0x15c2,0x15c5,0x15c6,0x15c8,0x15c9,0x15ca,0x15d5,0x15d9,0x15dc,0x15e0,0x15e1,0x15e4,
+		0x15e8,0x15e9,0x15ec,0x15f4,0x1604,0x1606,0x1608,0x160a,0x160e,0x1614,0x1619,0x1621,0x1628,0x162a,0x162f,0x1630,0x1631,0x1645,0x1649,0x164a,
+		0x164c,0x1657,0x165b,0x165c,0x1660,0x1668,0x1669,0x166a,0x1677,0x1679,0x1680,0x1681,0x1682,0x1684,0x1685,0x1686,0x1687,0x1688,0x1689,0x168c,
+		0x1690,0x1696,0x1697,0x16a5,0x16a6,0x16ab,0x16ac,0x16b4,0x16b5,0x16c0,0x16ca,0x16cc,0x16d0,0x16d1,0x16d3,0x16d5,0x16d6,0x16d8,0x16dc,0x16df,
+		0x16f0,0x16f5,0x1706,0x1707,0x170b,0x170d,0x1711,0x1724,0x1725,0x1726,0x172f,0x1733,0x1736,0x1737,0x173d,0x1740,0x1743,0x1748,0x174c,0x174f,
+		0x1753,0x1756,0x1759,0x1761,0x1772,0x1776,0x177f,0x1781,0x1782,0x1784,0x1787,0x1788,0x1796,0x1797,0x1799,0x179d,0x17a0,0x17a4,0x17a5,0x17a7,
+		0x17a8,0x17b3,0x17b5,0x17ba,0x17c3,0x17cc,0x17cf,0x17d0,0x17d3,0x17e9,0x17eb,0x17ef,0x17f4,0x17f5,0x17f6,0x1809,0x1822,0x1831,0x1832,0x183d,
+		0x1843,0x1849,0x1852,0x1854,0x185b,0x1861,0x1862,0x1870,0x1871,0x1873,0x187c,0x187f,0x1892,0x1894,0x1897,0x189f,0x18a4,0x18a5,0x18b1,0x18b4,
+		0x18b6,0x18b7,0x18c5,0x18cd,0x18d1,0x18d5,0x18d9,0x18dc,0x18dd,0x18e3,0x18e8,0x18ea,0x18ec,0x18fd,0x1908,0x190d,0x1914,0x1915,0x1923,0x1926,
+		0x192f,0x1930,0x1931,0x1934,0x1941,0x1943,0x1949,0x194f,0x1951,0x1953,0x1954,0x195d,0x1965,0x1967,0x196b,0x1970,0x1975,0x1976,0x1977,0x197d,
+		0x1989,0x198f,0x1990,0x1995,0x199b,0x199e,0x199f,0x19a8,0x19ab,0x19af,0x19b2,0x19b4,0x19b5,0x19b6,0x19b9,0x19c2,0x19ca,0x19cf,0x19d2,0x19db,
+		0x19e1,0x19e8,0x19ef,0x19f7,0x19fa,0x19ff,0x1a08,0x1a0a,0x1a12,0x1a1d,0x1a25,0x1a2a,0x1a2c,0x1a32,0x1a34,0x1a36,0x1a40,0x1a41,0x1a44,0x1a4a,
+		0x1a4b,0x1a5a,0x1a61,0x1a6a,0x1a6d,0x1a6e,0x1a6f,0x1a72,0x1a79,0x1a7b,0x1a7c,0x1a81,0x1a86,0x1a89,0x1a8b,0x1a8d,0x1a98,0x1aa4,0x1aa5,0x1aa6,
+		0x1aad,0x1ab1,0x1acb,0x1acc,0x1ad1,0x1ad4,0x1adb,0x1ae4,0x1ae7,0x1aed,0x1aef,0x1af1,0x1afe,0x1b04,0x1b0e,0x1b1c,0x1b20,0x1b22,0x1b26,0x1b27,
+		0x1b28,0x1b32,0x1b36,0x1b3b,0x1b3f,0x1b47,0x1b48,0x1b52,0x1b59,0x1b5a,0x1b65,0x1b71,0x1b72,0x1b73,0x1b75,0x1b76,0x1b80,0x1b86,0x1b88,0x1b8c,
+		0x1b8d,0x1b8e,0x1b8f,0x1b96,0x1b98,0x1b99,0x1ba1,0x1ba2,0x1ba4,0x1ba6,0x1ba8,0x1bad,0x1bae,0x1bbb,0x1bc4,0x1bc5,0x1bc7,0x1bce,0x1bcf,0x1bd0,
+		0x1bd5,0x1bde,0x1bef,0x1bf0,0x1bf5,0x1bf6,0x1bfd,0x1c02,0x1c04,0x1c0c,0x1c0d,0x1c10,0x1c13,0x1c1a,0x1c1b,0x1c1f,0x1c20,0x1c21,0x1c22,0x1c26,
+		0x1c27,0x1c31,0x1c34,0x1c37,0x1c3d,0x1c3e,0x1c40,0x1c49,0x1c4f,0x1c6b,0x1c6c,0x1c73,0x1c77,0x1c78,0x1c79,0x1c7a,0x1c7b,0x1c83,0x1c87,0x1c88,
+		0x1c89,0x1c8e,0x1c98,0x1c9e,0x1ca0,0x1ca1,0x1cac,0x1cb3,0x1cb4,0x1cb6,0x1cbe,0x1cbf,0x1cc0,0x1cca,0x1ccd,0x1cd4,0x1cd5,0x1cd6,0x1cde,0x1cdf,
+		0x1ce0,0x1ce1,0x1cf1,0x1cfc,0x1cfd,0x1d03,0x1d07,0x1d08,0x1d09,0x1d0a,0x1d0b,0x1d0f,0x1d14,0x1d17,0x1d19,0x1d1f,0x1d20,0x1d27,0x1d34,0x1d45,
+		0x1d4d,0x1d50,0x1d57,0x1d5b,0x1d6b,0x1d90,0x1de1,0x1e0e,0x1e10,0x1e17,0x1e1d,0x1e1f,0x1e29,0x1e3d,0x1e41,0x1e4e,0x1e54,0x1e68,0x1e71,0x1e74,
+		0x1e7d,0x1ebb,0x1eda,0x1edb,0x1ee8,0x1ef6,0x1f28,0x1f3a,0x1f44,0x1f48,0x1f4d,0x1f6f,0x1f75,0x1f82,0x1f84,0x1f87,0x1f9b,0x1fab,0x1fbd,0x1fc9,
+		0x1fde,0x1fe7,0x1ff7,0x1fff,0x2001,0x2002,0x200c,0x2013,0x2019,0x2040,0x2047,0x2080,0x2087,0x20a0,0x20b1,0x20b3,0x20b7,0x20df,0x20f4,0x2101,
+		0x2149,0x2162,0x2184,0x21a1,0x21d6,0x2222,0x2227,0x2232,0x2233,0x2237,0x228d,0x22a6,0x22b8,0x22b9,0x22ba,0x2304,0x2318,0x2341,0x2373,0x2375,
+		0x2406,0x2443,0x2478,0x249c,0x2632,0x2639,0x2650,0x2659,0x2676,0x2730,0x2735,0x2770,0x2821,0x2899,0x2c02,0x2c1a,0x2fb2,0x3125,0x3176,0x3275,
+		0x3334,0x3340,0x3504,0x3538,0x3579,0x3636,0x3838,0x3923,0x40bb,0x4101,0x4102,0x413c,0x4146,0x4242,0x4317,0x4348,0x4572,0x4586,0x4670,0x4752,
+		0x4757,0x4766,0x4855,0x4971,0x4d46,0x5032,0x5041,0x50c2,0x5173,0x5219,0x5345,0x544d,0x5543,0x5555,0x55aa,0x5656,0x595a,0x5986,0x5a57,0x6000,
+		0x601a,0x6189,0x6253,0x636c,0x6472,0x6547,0x6615,0x6666,0x6677,0x6891,0x695c,0x6993,0x6a75,0x7104,0x726c,0x734c,0x7392,0x8086,0x8087,0x80ee,
+		0x8282,0x8341,0x9016,0x9022,0x9148,0x9710,0x99fa,0x9ac4,0xa128,0xa168,0xa600,0xa727,0xabcd,0xc251,0xcace,0xd209,0xe4e4,0xeb03,0xeb1a,0xeb2a,
+		0xf003,0xf4ec};
 
 
 		char* mids[] = {
@@ -430,7 +431,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"Celltrix Technology Co., Ltd","Grundig","MySmart.Com","Auerswald GmbH & Co. KG","Genpix Electronics, LLC",
 		"Arris Interactive LLC","Nisca Corp.","ActivCard, Inc.","ACTiSYS Corp.","Memory Corp.",
 		"Workbit Corp.","Psion Dacom Home Networks, Ltd","City Electronics, Ltd","Electronics Testing Center, Taiwan","NeoMagic, Inc.",
-		"Vreelin Engineering, Inc.","Com One","Novatel Wireless","KRF Tech, Ltd","A4 Tech Co., Ltd",
+		"Vreelin Engineering, Inc.","Com One","Novatel Wireless","KRF Tech, Ltd","A4Tech Co., Ltd.",
 		"Measurement Computing Corp.","Aimex Corp.","Fellowes, Inc.","Addonics Technologies Corp.","Intellon Corp.",
 		"Jo-Dan International, Inc.","Silutia, Inc.","Real 3D, Inc.","AKAI  Professional M.I. Corp.","Chen-Source, Inc.",
 		"IM Networks, Inc.","Xitel","GoFlight, Inc.","AresCom","RocketChips, Inc.",
@@ -510,7 +511,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"Timex Corp.","Rimage Corp.","emsys GmbH","Sendo","Intermagic Corp.",
 		"Kontron Medical AG","Technotools Corp.","BroadMAX Technologies, Inc.","Amphenol","SKNet Co., Ltd",
 		"Domex Technology Corp.","TerraTec Electronic GmbH","Bang Olufsen","LabJack Corporation","NewChip S.r.l.",
-		"JS Digitech, Inc.","Hitachi Shin Din Cable, Ltd","Z-Com","Validation Technologies International","pico Technology",
+		"JS Digitech, Inc.","Hitachi Shin Din Cable, Ltd","Z-Com","Validation Technologies International","Pico Technology",
 		"e-Conn Electronic Co., Ltd","ENE Technology, Inc.","Atheros Communications, Inc.","Fomtex Corp.","Cellink Co., Ltd",
 		"Compucable Corp.","ishoni Networks","Clarisys, Inc.","Central System Research Co., Ltd","Inviso, Inc.",
 		"Minolta-QMS, Inc.","SAFA MEDIA Co., Ltd.","telos EDV Systementwicklung GmbH","UTStarcom","Contemporary Controls",
@@ -594,175 +595,176 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"Speedy Industrial Supplies, Pte., Ltd","Elitegroup Computer Systems (ECS)","Labtec","Shinko Shoji Co., Ltd","Hyper-Paltek",
 		"Newly Corp.","Time Domain","Inovys Corp.","Atlantic Coast Telesys","Ramos Technology Co., Ltd",
 		"Infotronic America, Inc.","Etoms Electronics Corp.","Winic Corp.","Comax Technology, Inc.","C-One Technology Corp.",
-		"Nucam Corp.","SteelSeries ApS","devolo AG","Stanton","iCreate Technologies Corp.",
-		"Chu Yuen Enterprise Co., Ltd","Winbond Electronics Corp. [hex]","Targus Group International","Mylex / Buslogic","AMCO TEC International, Inc.",
-		"Newport Corporation","WB Electronics","Yubico.com","Immanuel Electronics Co., Ltd","BMS International Beheer N.V.",
-		"Complex Micro Interconnection Co., Ltd","Hsin Chen Ent Co., Ltd","ON Semiconductor","Western Digital Technologies, Inc.","Giesecke & Devrient GmbH",
-		"Hong Ji Electric Wire & Cable (Dongguan) Co., Ltd","Delkin Devices, Inc.","Valence Semiconductor Design, Ltd","Chin Shong Enterprise Co., Ltd","Easthome Industrial Co., Ltd",
-		"Motorola Electronics Taiwan, Ltd [hex]","CCYU Technology","Loyal Legend, Ltd","Curitel Communications, Inc.","San Chieh Manufacturing, Ltd",
-		"ConectL","Money Controls","GCT Semiconductor, Inc.","Gateway, Inc.","Arlec Australia, Ltd",
-		"Midoriya Electric Co., Ltd","KidzMouse, Inc.","Shin-Etsukaken Co., Ltd","Canon Electronics, Inc.","Pantech Co., Ltd",
-		"Chloride Power Protection","Grand-tek Technology Co., Ltd","Robert Bosch GmbH","Lotes Co., Ltd.","Surface Optics Corp.",
-		"DATASOFT Systems GmbH","Hisense","eSOL Co., Ltd","Hirotech, Inc.","Mitsubishi Materials Corp.",
-		"SK Teletech Co., Ltd","Cables To Go","USI Co., Ltd","Honeywell, Inc.","Princeton Technology Corp.",
-		"Liebert Corp.","Comodo (PLX?)","DiBcom","TM Technology, Inc.","Dinging Technology Co., Ltd",
-		"TMT Technology, Inc.","SmartHome","Universal Laser Systems, Inc.","Cygnal Integrated Products, Inc.","Sanei Electric, Inc.",
-		"Intec, Inc.","Eratech","GBM Connector Co., Ltd","Kycon, Inc.","Silicon Labs",
-		"Velleman Components, Inc.","Hottinger Baldwin Measurement","Man Boon Manufactory, Ltd","Uni Class Technology Co., Ltd","Actions Semiconductor Co., Ltd",
-		"Authenex, Inc.","In-Win Development, Inc.","Post-Op Video, Inc.","CablePlus, Ltd","Nada Electronics, Ltd",
-		"Vast Technologies, Inc.","Nexio Co., Ltd","Importek","Turtle Beach","Pictos Technologies, Inc.",
-		"Anubis Electronics, Ltd","Thrane & Thrane","VirTouch, Ltd","EasyPass Industrial Co., Ltd","Brightcom Technologies, Ltd",
-		"Moxa Technologies Co., Ltd.","Analog Devices Canada, Ltd (Allied Telesyn)","Pandora International Ltd.","YM ELECTRIC CO., Ltd","Medion AG",
-		"VSO Electric Co., Ltd","RedRat","Master Hill Electric Wire and Cable Co., Ltd","Cellon International, Inc.","Tenx Technology, Inc.",
-		"Integrated System Solution Corp.","Toshiba Corp., Digital Media Equipment [hex]","CTS Electronincs","Arin Tech Co., Ltd","Mapower Electronics Co., Ltd",
-		"V One Multimedia, Pte., Ltd","CyberScan Technologies, Inc.","Japan Radio Company","Shimane SANYO Electric Co., Ltd.","Ever Great Electric Wire and Cable Co., Ltd",
-		"Sphairon Access Systems GmbH","Tinius Olsen Testing Machine Co., Inc.","Alpha Imaging Technology Corp.","Wavecom","Salix Technology Co., Ltd.",
-		"Secugen Corp.","DeLorme Publishing, Inc.","YUAN High-Tech Development Co., Ltd","Telson Electronics Co., Ltd","Bantam Interactive Technologies",
-		"Salient Systems Corp.","BizConn International Corp.","Gigastorage Corp.","Silicon 10 Technology Corp.","Shengyih Steel Mold Co., Ltd",
-		"Santa Electronic, Inc.","JNC, Inc.","Venture Corp., Ltd","Compaq Computer Corp. [hex] (Digital Dream ??)","Kyocera Elco Corp.",
-		"Bloomberg L.P.","Acer Communications & Multimedia","You Yang Technology Co., Ltd","Tripace","Loyalty Founder Enterprise Co., Ltd",
-		"Yankee Robotics, LLC","Technoimagia Co., Ltd","StarShine Technology Corp.","Sierra Wireless, Inc.","ZHAN QI Technology Co., Ltd",
-		"ruwido austria GmbH","Chipcon AS","Technovas Co., Ltd","GlobalMedia Group, LLC","Exito Electronics Co., Ltd",
-		"Nike","ATECH FLASH TECHNOLOGY","R&D International NV","Inmax","VeriFone Inc",
-		"Topfield Co., Ltd.","K.I. Technology Co. Ltd.","Siemens AG","Prolific","Alcatel (?)",
-		"TSC Auto ID Technology Co., Ltd","InterBiometrics","Hudson Soft Co., Ltd","Magellan","DigiTech",
-		"Jungsoft Co., Ltd","SKYCABLE ENTERPRISE. CO., LTD.","Datapaq Limited","Chipidea-Microelectronica, S.A.","Denver Electronics",
-		"Brain Actuated Technologies","Focusrite-Novation","Belkin","AirVast","Nyko (Honey Bee)",
-		"MXI - Memory Experts International, Inc.","Apogee Inc.","A-DATA Technology Co., Ltd.","Standard Microsystems Corp.","Covidien Energy-based Devices",
-		"Pirelli Broadband Solutions","Logic3 / SpectraVideo plc","Aristocrat Technologies","Bel Stewart","Strobe Data, Inc.",
-		"TwinMOS","Ensoniq","Xaxero Marine Software Engineering, Ltd.","Starlight Xpress","zebris Medical GmbH",
-		"Marvell Semiconductor, Inc.","Qualcomm Flarion Technologies, Inc. / Leadtek Research, Inc.","Innomedia","Belkin Components [hex]","RISO KAGAKU CORP.",
-		"CyberTAN Technology","Trendchip Technologies Corp.","Honey Bee Electronic International Ltd.","Zhejiang Xinya Electronic Technology Co., Ltd.","E28",
-		"Licensed by Sony Computer Entertainment America","Autocue Group Ltd","DEXIN","Huawei Technologies Co., Ltd.","LINE TECH INDUSTRIAL CO., LTD.",
-		"EMS Dr. Thomas Wuensche","BETTER WIRE FACTORY CO., LTD.","Araneus Information Systems Oy","Waldorf Music GmbH","Tapwave, Inc.",
-		"Dynamic System Electronics Corp.","Memorex Products, Inc.","AIN Comm. Technology Co., Ltd","Fascinating Electronics, Inc.","Transcend Information, Inc.",
-		"Shuttle, Inc.","Roper","ICS Electronics","ThorLabs","Natural Point",
-		"Envara Inc.","Konica Minolta","Mobility","Citizen Systems","Sino Lite Technology Corp.",
-		"Moravian Instruments","Katsuragawa Electric Co., Ltd.","PanJit International Inc.","Digby's Bitpile, Inc. DBA D Bit","P&E Microcomputer Systems",
-		"SEGGER","STEC","Swissbit","CNet Technology Inc.","Vimtron Electronics Co., Ltd.",
-		"SCAPS GmbH","Netgear, Inc","Validity Sensors, Inc.","Jungo LTD","TOMTOM B.V.",
-		"IdealTEK, Inc.","Sennheiser Communications","BEHRINGER International GmbH","Q-tec","Baltech",
-		"PerkinElmer Optoelectronics","Linksys","Alesis","Nippon Dics Co., Ltd.","PCPlay",
-		"Ricoh Printing Systems, Ltd.","JyeTai Precision Industrial Co., Ltd.","Wisair Ltd.","Techsan Electronics Co., Ltd.","A-Max Technology Macao Commercial Offshore Co. Ltd.",
-		"Shark Multimedia","IMC Networks","ALEREON, INC.","i.Tech Dynamic Limited","Kaibo Wire & Cable (Shenzhen) Co., Ltd.",
-		"Rane","TechnoScope Co., Ltd.","Hengstler","Zydacron","MosArt",
-		"Initio Corporation","Kingston Technology Company Inc.","Axxion Group Corp.","Bowe Bell & Howell","Sitronix",
-		"IDS Imaging Development Systems GmbH","Telechips, Inc.","Novatel Wireless","Nam Tai E&E Products Ltd. or OmniVision Technologies, Inc.","ABILITY ENTERPRISE CO., LTD.",
-		"Sensor Technology","Vega Technologies Industrial (Austria) Co.","Thales E-Transactions","Arbiter Systems, Inc.","RedOctane",
-		"Pertech Resources, Inc.","Wistron NeWeb","Denali Software, Inc.","Altek Corporation","Digilent",
-		"X.J.GROUP","Radio Shack","Extending Wire & Cable Co., Ltd.","First International Computer, Inc.","Trust",
-		"Tatung Co.","Staccato Communications","Micro Star International","Huawei-3Com","Formosa Industrial Computing, Inc.",
-		"Upek","Hama GmbH & Co., KG","Vaillant","Elsa AG [hex]","Silicom",
-		"DSP Group, Ltd.","EVATRONIX SA","Ralink Technology, Corp.","Futronic Technology Co. Ltd.","Suunto",
-		"Panstrong Company Ltd.","Microtek International Inc.","Imagination Technologies","WideView Technology Inc.","CTK Corporation",
-		"Printronix Inc.","ATP Electronics Inc.","StarTech.com Ltd.","Ralink Technology, Corp.","Rockwell Automation, Inc.",
-		"Gemlight Computer, Ltd","Zytronic","Super Top","JAMER INDUSTRIES CO., LTD.","Raritan Computer, Inc.",
-		"WiNRADiO Communications","Dialogue Technology Corp.","Broadcom Corp.","SAIN Information & Communications Co., Ltd.","Planex Communications",
-		"Shure Inc.","TechniSat Digital GmbH","Ellisys","Pine-Tum Enterprise Co., Ltd.","First International Computer, Inc.",
-		"medMobile","Actel","CompUSA","Cheshire Engineering Corp.","Comneon",
-		"Bitwire Corp.","ENE Technology Inc","Silicon Portals","UBIQUAM Co., Ltd.","Thesycon Systemsoftware & Consulting GmbH",
-		"JMicron Technology Corp. / JMicron USA Technology Corp.","LG (HLDS)","Razer USA, Ltd","TerraTec Electronic GmbH","U-Blox AG",
-		"SG Intec Ltd & Co KG","Celectronic GmbH","PNY","ConnectCounty Holdings Berhad","D&M Holdings, Inc. (Denon/Marantz)",
-		"SNBC CO., Ltd","Prolink Microsystems Corp.","OQO","Sunf Pu Technology Co., Ltd","Quantum Corporation",
-		"ALLTOP TECHNOLOGY CO., LTD.","Ketron SRL","TRENDnet","Fiberline","SMA Technologie AG",
-		"Oakley Inc.","JDS Uniphase Corporation (JDSU)","Kunshan Guoji Electronics Co., Ltd.","Freescale Semiconductor, Inc.","Afatech Technologies, Inc.",
-		"Teams Power Limited","Gemtek","Gearway Electronics (Dong Guan) Co., Ltd.","VMware Inc.","Olimex Ltd.",
-		"XL Imaging","SoundGraph Inc.","Advance Multimedia Internet Technology Inc. (AMIT)","Laboratoires MXM","KTF Technologies",
-		"D-Box Technologies","Textech International Ltd.","Coulomb Electronics Ltd.","Trust International B.V.","Hynix Semiconductor Inc.",
-		"Seong Ji Industrial Co., Ltd.","RSA","Numark","SohoWare","Pacific Digital Corp.",
-		"Belcarra Technologies Corp.","HanfTek","Tascam","Umax","Inside Out Networks [hex]",
-		"VIA Technologies, Inc.","INRO","Amoi Electronics","L & K Precision Technology Co., Ltd.","Wionics Research",
-		"Stonestreet One, Inc.","Airgo Networks Inc.","WiQuest Communications, Inc.","2Wire, Inc.","Good Way Technology",
-		"Cross Match Technologies GmbH","SofTec Microsystems","ChipX","Matrix Vision GmbH","Struck Innovative Systeme GmbH",
-		"Frontier Design Group","Kondo Kagaku","Creatix Polymedia GmbH","Actiontec Electronics, Inc. [hex]","PiKRON Ltd. [hex]",
-		"Clipsal","China Huada Integrated Circuit Design (Group) Co., Ltd. (CIDC Group)","Total Phase","Golden Bridge Electech Inc.","Prevo Technologies, Inc.",
-		"Maxwise Production Enterprise Ltd.","Godspeed Computer Corp.","Delock","ZOOM Corporation","Kingmax Digital Inc.",
-		"Saab AB","Razer USA, Ltd","Atheros Communications","Askey Computer Corp. [hex]","Hitachi Video and Information System, Inc.",
-		"VTec Test, Inc.","Shenzhen Zhengerya Cable Co., Ltd.","Unigraf","Global Sun Technology","Dongguan ChingLung Wire & Cable Co., Ltd.",
-		"iStation","Persentec, Inc.","Van Ooijen Technische Informatica","Wireless Cables, Inc.","silex technology, Inc.",
-		"MCS","Suprema Inc.","Frontline Test Equipment, Inc.","AnyDATA Corporation","JABLOCOM s.r.o.",
-		"CMOTECH Co., Ltd.","Wiener, Plein & Baus","King Billion Electronics Co., Ltd.","GN ReSound A/S","Futurelogic Inc.",
-		"BlueView Technologies, Inc.","ARTIMI","Swissonic","Avnera","Leica Microsystems",
-		"Meyer Instruments (MIS)","Vitesse Semiconductor","Axesstel, Inc.","Waltop International Corp.","Cellink Technology Co., Ltd",
-		"CANON IMAGING SYSTEM TECHNOLOGIES INC.","Linksys","QSENN","Senao","General Atomics",
-		"MQP Electronics","ASMedia Technology Inc.","Syntek","GERTEC Telecomunicacoes Ltda.","ENENSYS Technologies",
-		"LucidPort Technology, Inc.","ASUSTek Computer, Inc. (wrong ID)","System Level Solutions, Inc.","Arowana","Sweex",
-		"Multiple Vendors","Spreadtrum Communications Inc.","TopSeed Technology Corp.","ATI AIB","ShenZhen Litkconn Technology Co., Ltd.",
-		"Printrex, Inc.","JALCO CO., LTD.","Thales Norway A/S","Ricavision International, Inc.","Samson Technologies Corp.",
-		"Concept2","Advanced Connection Technology Inc.","MICOMSOFT CO., LTD.","Kamstrup A/S","Grey Innovation",
-		"Lunatone","SAURIS GmbH","Singim International Corp.","Native Instruments","Hip Hing Cable & Plug Mfy. Ltd.",
-		"Sanford L.P.","Korea Techtron Co., Ltd.","DisplayLink","Cornice, Inc.","Lenovo",
-		"WaveSense","K.K. Rocky","Unicomp, Inc","Advantech","Twinhan",
-		"Gwo Jinn Industries Co., Ltd.","Huizhou Shenghua Industrial Co., Ltd.","VIVOphone","Vaisala","ASRock Incorporation",
-		"GYROCOM C&C Co., LTD","Memory Devices Ltd.","Compro","Tech Technology Industrial Company","Teridian Semiconductor Corp.",
-		"Nexio Co., Ltd","Aveo Technology Corp.","Navilock","Alienware Corporation","Siano Mobile Silicon",
-		"Vast Technologies, Inc.","Topseed","Evertop Wire Cable Co.","3Shape A/S","CSSN",
-		"Verbatim, Ltd","Petalynx","e3C Technologies","Mikkon Technology Limited","Zotek Electronic Co., Ltd.",
-		"AMIT Technology, Inc.","Ecamm","Google Inc.","Starline International Group Limited","Kaba",
-		"LKC Technologies, Inc.","Planon System Solutions Inc.","Fitipower Integrated Technology Inc","Qcom","Matrox Graphics, Inc.",
-		"Arkmicro Technologies Inc.","FineArch Inc.","GEMBIRD","Motorola GSG","Alco Digital Devices Limited",
-		"Nordic Semiconductor ASA","FitLinxx","NextWindow","Avago Technologies, Pte.","Shenzhen Xianhe Technology Co., Ltd.",
-		"Ningbo Broad Telecommunication Co., Ltd.","Feature Integration Technology Inc. (Fintek)","Dream Link","Sensoray Co., Inc.","Lab126, Inc.",
-		"PreSonus Audio Electronics, Inc.","Hyperstone AG","Ironkey Inc.","Radiient Technologies","Itron Technology iONE",
-		"Uniden Corporation","CASIO HITACHI Mobile Communications Co., Ltd.","Wispro Technology Inc.","Dane-Elec Corp. USA","Dongguan Guneetal Wire & Cable Co., Ltd.",
-		"Chipsbrand Microelectronics (HK) Co., Ltd.","T-Logic","Leuze electronic","Nuconn Technology Corp.","Beceem Communications Inc.",
-		"Acron Precision Industrial Co., Ltd.","Trillium Technology Pty. Ltd.","MicroStrain, Inc.","The Imaging Source Europe GmbH","Benica Corporation",
-		"Biforst Technology Inc.","Bodelin","S Life","Batronix","Celestron",
-		"B & W Group","Infotech Logistic, LLC","Data Robotics","Futuba","Mindtribe",
-		"Parrot SA","ZTE WCDMA Technologies MSM","KFI Printers","WeiDuan Electronic Accessory (S.Z.) Co., Ltd.","Industrial Technology Research Institute",
-		"Pak Heng Technology (Shenzhen) Co., Ltd.","RODE Microphones","Gampaq Co.Ltd","Dynex","Bellwood International, Inc.",
-		"USB-IF non-workshop","KES Co., Ltd.","Veho","Amphenol East Asia Ltd.","Seagate Branded Solutions",
-		"China Resource Semico Co., Ltd","Quanta Microsystems, Inc.","ACRUX","Biwin Technology Ltd.","Terminus Technology Inc.",
-		"Action Electronics Co., Ltd.","VASCO Data Security International","Silicon Image","SafeBoot International B.V.","Tandberg Data",
-		"Abbott Diabetes Care","Spansion Inc.","SamYoung Electronics Co., Ltd","Global Unichip Corp.","Sagem Orga GmbH",
-		"Physik Instrumente","Bayer Health Care LLC","Lumberg Connect  GmbH & Co. KG","Evoluent","Holtek Semiconductor, Inc.",
-		"QinHeng Electronics","Dynalith Systems Co., Ltd.","SGS Taiwan Ltd.","BandRich, Inc.","Leica Camera AG",
-		"Data Drive Thru, Inc.","UBeacon Technologies, Inc.","eFortune Technology Corp.","KeeTouch","Rigol Technologies",
-		"Salcomp Plc","Midiplus Co, Ltd.","Desay Wire Co., Ltd.","APS","SEL C662 Serial Cable",
-		"ic-design Reinhard Gottinger GmbH","X-TENSIONS","High Top Precision Electronic Co., Ltd.","Conntech Electronic (Suzhou) Corporation","Connect One Ltd.",
-		"A. Eberle GmbH & Co. KG","Meilhaus Electronic GmbH","BLUTRONICS S.r.l.","Corsair","MStar Semiconductor, Inc.",
-		"WiLinx Corp.","Cellex Power Products, Inc.","Current Electronics Inc.","NAVIsis Inc.","Ugobe Life Forms, Inc.",
-		"ViXS Systems, Inc.","iPassion Technology Inc.","Generalplus Technology Inc.","Energizer Holdings, Inc.","Plastron Precision Co., Ltd.",
-		"ARH Inc.","K.S. Terminals Inc.","Chao Zhou Kai Yuan Electric Co., Ltd.","The Hong Kong Standards and Testing Centre Ltd.","Fushicai",
-		"ATERGI TECHNOLOGY CO., LTD.","Fresco Logic","Ovislink Corp.","Legend Silicon Corp.","Afatech",
-		"Dongguan Guanshang Electronics Co., Ltd.","ShenMing Electron (Dong Guan) Co., Ltd.","Altium Limited","e-MOVE Technology Co., Ltd.","Amlogic, Inc.",
-		"MA LABS, Inc.","N-Trig","YMax Communications Corp.","Shenzhen Yuanchuan Electronic","JINQ CHERN ENTERPRISE CO., LTD.",
-		"Lite Metals & Plastic (Shenzhen) Co., Ltd.","Ember Corporation","Abilis Systems","China Telecommunication Technology Labs","Harmonix Music",
-		"Vuzix Corporation","T & A Mobile Phones","Ford Motor Co.","AVIXE Technology (China) Ltd.","Telit Wireless Solutions",
-		"Contac Cable Industrial Limited","Sunplus Innovation Technology Inc.","Hangzhou Riyue Electronic Co., Ltd.","BG Systems, Inc.","P-TWO INDUSTRIES, INC.",
-		"Shenzhen Tongyuan Network-Communication Cables Co., Ltd","RealVision Inc.","Extranet Systems Inc.","Orient Semiconductor Electronics, Ltd.","TouchPack",
-		"Kreton Corporation","QNAP System Inc.","Ionics EMS, Inc.","Relm Wireless","Lanterra Industrial Co., Ltd.",
-		"ALECTRONIC LIMITED","Datel Electronics Ltd.","Volkswagen of America, Inc.","Goldvish S.A.","Fuji Electric Device Technology Co., Ltd.",
-		"ADDMM LLC","ZHONGSHAN CHIANG YU ELECTRIC CO., LTD.","Shanghai Haiying Electronics Co., Ltd.","HuiYang D & S Cable Co., Ltd.","LS Cable Ltd.",
-		"SpringCard","Authorizer Technologies, Inc.","NONIN MEDICAL INC.","Wep Peripherals","EZPrototypes",
-		"Cherng Weei Technology Corp.","SiGma Micro","Philips & Lite-ON Digital Solutions Corporation","Skydigital Inc.","AMT",
-		"Kaetat Industrial Co., Ltd.","Datascope Corp.","Unigen Corporation","LighTuning Technology Inc.","LUXSHARE PRECISION INDUSTRY (SHENZHEN) CO., LTD.",
-		"Schomaecker GmbH","2N TELEKOMUNIKACE a.s.","Somagic, Inc.","HONGKONG WEIDIDA ELECTRON LIMITED","ASTRON INTERNATIONAL CORP.",
-		"ALPINE ELECTRONICS, INC.","OMEGA TECHNOLOGY","ACCARIO Inc.","Symwave","Kinstone",
-		"Aces Electronic Co., Ltd.","OPEX CORPORATION","IdeaCom Technology Inc.","Luminary Micro Inc.","FORTAT SKYMARK INDUSTRIAL COMPANY",
-		"PlantSense","NextWave Broadband Inc.","Bodatong Technology (Shenzhen) Co., Ltd.","adp corporation","Firecomms Ltd.",
-		"Antonio Precise Products Manufactory Ltd.","Telecommunications Technology Association (TTA)","WonTen Technology Co., Ltd.","EDIMAX TECHNOLOGY CO., LTD.","Amphenol KAE",
-		"Dresden Elektronik","ANDES TECHNOLOGY CORPORATION","Flextronics Digital Design Japan, LTD.","iCON","Solid-Motion",
-		"NINGBO HENTEK DRAGON ELECTRONICS CO., LTD.","TechFaith Wireless Technology Limited","Johnson Controls, Inc. The Automotive Business Unit","HAN HUA CABLE & WIRE TECHNOLOGY (J.X.) CO., LTD.","Sonix Technology Co., Ltd.",
-		"ALPHA-SAT TECHNOLOGY LIMITED","C-Thru Music Ltd.","Dexatek Technology Ltd.","Diostech Co., Ltd.","SAMTACK INC.",
-		"ASUS","Dream Cheeky","Touch","PEGATRON CORPORATION","OpenMoko, Inc.",
-		"Xenta","Smartronix, Inc.","Linux Foundation","Citizen","Actions Microelectronics Co.",
-		"Qualcomm / Option","Point Grey Research, Inc.","Mirion Technologies Dosimetry Services Division","Lumension Security","INVIA",
-		"Festo AG & Co. KG","Chipsbank Microelectronics Co., Ltd","Cleverscope","Cubeternet","TypeMatrix",
-		"TrekStor GmbH & Co. KG","NZXT","Coby Electronics Corporation","ROCCAT","NuCORE Technology, Inc.",
-		"AirTies Wireless Networks","Blackmagic design","ONDA COMMUNICATION S.p.a.","EADS Deutschland GmbH","Cal-Comp",
-		"Onda (unverified)","The Neat Company","H-TRONIC GmbH","G-Tek Electronics Group","Aliph",
-		"Innostor Technology Corporation","TANDBERG","Alere, Inc.","Stantum","Ubiquiti Networks, Inc.",
-		"Samsung Opto-Electroncs Co., Ltd.","Delphin Technology AG","NXP Semiconductors","ILX Lightwave Corporation","Vertex Wireless Co., Ltd.",
-		"CVT Electronics.Co.,Ltd","Ideofy Inc.","D-Link Corp.","DAP Technologies","Reloop",
-		"PCTV Systems","PLANEX","Hauppauge","Texas Instruments","Barnes & Noble",
-		"Cando","Clay Logic","XMOS Ltd","Hanvon","Qi Hardware",
-		"Simtec Electronics","TRENDnet","ActionStar","Advanced Silicon S.A.","Creative (?)",
-		"GW Instek","Emotiv Systems Pty. Ltd.","Agecodagis SARL","MacAlly","SAMWOO Enterprise",
-		"Silicon Motion","RadioShack Corporation","Kobo Inc.","8D Technologies inc.","Pie Digital, Inc.",
-		"Motorola PCS","eTurboTouch Technology, Inc.","Technology Innovation Holdings, Ltd","Pinnacle Systems, Inc.","Shining Technologies, Inc. [hex]",
-		"Arduino SA","Pumatronix Ltda","Digit@lway, Inc.","SANHO Digital Electronics Co., Ltd.","Aessent Technology Ltd",
-		"Tripp-Lite","TwinMOS","Electronics For Imaging, Inc. [hex]","Sundtek","Citizen",
+		"Nucam Corp.","SteelSeries ApS","devolo AG","PSA","Stanton",
+		"iCreate Technologies Corp.","Chu Yuen Enterprise Co., Ltd","Winbond Electronics Corp. [hex]","Targus Group International","Mylex / Buslogic",
+		"AMCO TEC International, Inc.","Newport Corporation","WB Electronics","Yubico.com","Immanuel Electronics Co., Ltd",
+		"BMS International Beheer N.V.","Complex Micro Interconnection Co., Ltd","Hsin Chen Ent Co., Ltd","ON Semiconductor","Western Digital Technologies, Inc.",
+		"Giesecke & Devrient GmbH","Hong Ji Electric Wire & Cable (Dongguan) Co., Ltd","Delkin Devices, Inc.","Valence Semiconductor Design, Ltd","Chin Shong Enterprise Co., Ltd",
+		"Easthome Industrial Co., Ltd","Motorola Electronics Taiwan, Ltd [hex]","CCYU Technology","Loyal Legend, Ltd","Curitel Communications, Inc.",
+		"San Chieh Manufacturing, Ltd","ConectL","Money Controls","GCT Semiconductor, Inc.","Gateway, Inc.",
+		"Arlec Australia, Ltd","Midoriya Electric Co., Ltd","KidzMouse, Inc.","Shin-Etsukaken Co., Ltd","Canon Electronics, Inc.",
+		"Pantech Co., Ltd","Chloride Power Protection","Grand-tek Technology Co., Ltd","Robert Bosch GmbH","Lotes Co., Ltd.",
+		"Surface Optics Corp.","DATASOFT Systems GmbH","Hisense","eSOL Co., Ltd","Hirotech, Inc.",
+		"Mitsubishi Materials Corp.","SK Teletech Co., Ltd","Cables To Go","USI Co., Ltd","Honeywell, Inc.",
+		"Princeton Technology Corp.","Liebert Corp.","Comodo (PLX?)","DiBcom","TM Technology, Inc.",
+		"Dinging Technology Co., Ltd","TMT Technology, Inc.","SmartHome","Universal Laser Systems, Inc.","Cygnal Integrated Products, Inc.",
+		"Sanei Electric, Inc.","Intec, Inc.","Eratech","GBM Connector Co., Ltd","Kycon, Inc.",
+		"Silicon Labs","Velleman Components, Inc.","Hottinger Baldwin Measurement","Man Boon Manufactory, Ltd","Uni Class Technology Co., Ltd",
+		"Actions Semiconductor Co., Ltd","Authenex, Inc.","In-Win Development, Inc.","Post-Op Video, Inc.","CablePlus, Ltd",
+		"Nada Electronics, Ltd","Vast Technologies, Inc.","Nexio Co., Ltd","Importek","Turtle Beach",
+		"Pictos Technologies, Inc.","Anubis Electronics, Ltd","Thrane & Thrane","VirTouch, Ltd","EasyPass Industrial Co., Ltd",
+		"Brightcom Technologies, Ltd","Moxa Technologies Co., Ltd.","Analog Devices Canada, Ltd (Allied Telesyn)","Pandora International Ltd.","YM ELECTRIC CO., Ltd",
+		"Medion AG","VSO Electric Co., Ltd","RedRat","Master Hill Electric Wire and Cable Co., Ltd","Cellon International, Inc.",
+		"Tenx Technology, Inc.","Integrated System Solution Corp.","Toshiba Corp., Digital Media Equipment [hex]","CTS Electronincs","Arin Tech Co., Ltd",
+		"Mapower Electronics Co., Ltd","V One Multimedia, Pte., Ltd","CyberScan Technologies, Inc.","Japan Radio Company","Shimane SANYO Electric Co., Ltd.",
+		"Ever Great Electric Wire and Cable Co., Ltd","Sphairon Access Systems GmbH","Tinius Olsen Testing Machine Co., Inc.","Alpha Imaging Technology Corp.","Wavecom",
+		"Salix Technology Co., Ltd.","Secugen Corp.","DeLorme Publishing, Inc.","YUAN High-Tech Development Co., Ltd","Telson Electronics Co., Ltd",
+		"Bantam Interactive Technologies","Salient Systems Corp.","BizConn International Corp.","Gigastorage Corp.","Silicon 10 Technology Corp.",
+		"Shengyih Steel Mold Co., Ltd","Santa Electronic, Inc.","JNC, Inc.","Venture Corp., Ltd","Compaq Computer Corp. [hex] (Digital Dream ??)",
+		"Kyocera Elco Corp.","Bloomberg L.P.","Acer Communications & Multimedia","You Yang Technology Co., Ltd","Tripace",
+		"Loyalty Founder Enterprise Co., Ltd","Yankee Robotics, LLC","Technoimagia Co., Ltd","StarShine Technology Corp.","Sierra Wireless, Inc.",
+		"ZHAN QI Technology Co., Ltd","ruwido austria GmbH","Chipcon AS","Technovas Co., Ltd","GlobalMedia Group, LLC",
+		"Exito Electronics Co., Ltd","Nike","ATECH FLASH TECHNOLOGY","R&D International NV","Inmax",
+		"VeriFone Inc","Topfield Co., Ltd.","K.I. Technology Co. Ltd.","Siemens AG","Prolific",
+		"Alcatel (?)","TSC Auto ID Technology Co., Ltd","InterBiometrics","Hudson Soft Co., Ltd","Magellan",
+		"DigiTech","Jungsoft Co., Ltd","SKYCABLE ENTERPRISE. CO., LTD.","Datapaq Limited","Chipidea-Microelectronica, S.A.",
+		"Denver Electronics","Brain Actuated Technologies","Focusrite-Novation","Belkin","AirVast",
+		"Nyko (Honey Bee)","MXI - Memory Experts International, Inc.","Apogee Inc.","A-DATA Technology Co., Ltd.","Standard Microsystems Corp.",
+		"Covidien Energy-based Devices","Pirelli Broadband Solutions","Logic3 / SpectraVideo plc","Aristocrat Technologies","Bel Stewart",
+		"Strobe Data, Inc.","TwinMOS","Ensoniq","Xaxero Marine Software Engineering, Ltd.","Starlight Xpress",
+		"zebris Medical GmbH","Marvell Semiconductor, Inc.","Qualcomm Flarion Technologies, Inc. / Leadtek Research, Inc.","Innomedia","Belkin Components [hex]",
+		"RISO KAGAKU CORP.","CyberTAN Technology","Trendchip Technologies Corp.","Honey Bee Electronic International Ltd.","Zhejiang Xinya Electronic Technology Co., Ltd.",
+		"E28","Licensed by Sony Computer Entertainment America","Autocue Group Ltd","DEXIN","Huawei Technologies Co., Ltd.",
+		"LINE TECH INDUSTRIAL CO., LTD.","EMS Dr. Thomas Wuensche","BETTER WIRE FACTORY CO., LTD.","Araneus Information Systems Oy","Waldorf Music GmbH",
+		"Tapwave, Inc.","Dynamic System Electronics Corp.","Memorex Products, Inc.","AIN Comm. Technology Co., Ltd","Fascinating Electronics, Inc.",
+		"Transcend Information, Inc.","Shuttle, Inc.","Roper","ICS Electronics","ThorLabs",
+		"Natural Point","Envara Inc.","Konica Minolta","Kemper Digital GmbH","Mobility",
+		"Citizen Systems","Sino Lite Technology Corp.","Moravian Instruments","Katsuragawa Electric Co., Ltd.","PanJit International Inc.",
+		"Digby's Bitpile, Inc. DBA D Bit","P&E Microcomputer Systems","SEGGER","STEC","Swissbit",
+		"CNet Technology Inc.","Vimtron Electronics Co., Ltd.","SCAPS GmbH","Netgear, Inc","Validity Sensors, Inc.",
+		"Jungo LTD","TOMTOM B.V.","IdealTEK, Inc.","Sennheiser Communications","BEHRINGER International GmbH",
+		"Q-tec","Baltech","PerkinElmer Optoelectronics","Linksys","Alesis",
+		"Nippon Dics Co., Ltd.","PCPlay","Ricoh Printing Systems, Ltd.","JyeTai Precision Industrial Co., Ltd.","Wisair Ltd.",
+		"Techsan Electronics Co., Ltd.","A-Max Technology Macao Commercial Offshore Co. Ltd.","Shark Multimedia","IMC Networks","ALEREON, INC.",
+		"i.Tech Dynamic Limited","Kaibo Wire & Cable (Shenzhen) Co., Ltd.","Rane","TechnoScope Co., Ltd.","Hengstler",
+		"Zydacron","MosArt","Initio Corporation","Kingston Technology Company Inc.","Axxion Group Corp.",
+		"Bowe Bell & Howell","Sitronix","IDS Imaging Development Systems GmbH","Telechips, Inc.","Novatel Wireless",
+		"Nam Tai E&E Products Ltd. or OmniVision Technologies, Inc.","ABILITY ENTERPRISE CO., LTD.","Sensor Technology","Vega Technologies Industrial (Austria) Co.","Thales E-Transactions",
+		"Arbiter Systems, Inc.","RedOctane","Pertech Resources, Inc.","Wistron NeWeb","Denali Software, Inc.",
+		"Altek Corporation","Digilent","X.J.GROUP","Radio Shack","Extending Wire & Cable Co., Ltd.",
+		"First International Computer, Inc.","Trust","Tatung Co.","Staccato Communications","Micro Star International",
+		"Huawei-3Com","Formosa Industrial Computing, Inc.","Upek","Hama GmbH & Co., KG","Vaillant",
+		"Elsa AG [hex]","Silicom","DSP Group, Ltd.","EVATRONIX SA","Ralink Technology, Corp.",
+		"Futronic Technology Co. Ltd.","Suunto","Panstrong Company Ltd.","Microtek International Inc.","Imagination Technologies",
+		"WideView Technology Inc.","CTK Corporation","Printronix Inc.","ATP Electronics Inc.","StarTech.com Ltd.",
+		"Ralink Technology, Corp.","Rockwell Automation, Inc.","Gemlight Computer, Ltd","Zytronic","Super Top",
+		"JAMER INDUSTRIES CO., LTD.","Raritan Computer, Inc.","WiNRADiO Communications","Dialogue Technology Corp.","Broadcom Corp.",
+		"SAIN Information & Communications Co., Ltd.","Planex Communications","Shure Inc.","TechniSat Digital GmbH","Ellisys",
+		"Pine-Tum Enterprise Co., Ltd.","First International Computer, Inc.","medMobile","Actel","CompUSA",
+		"Cheshire Engineering Corp.","Comneon","Bitwire Corp.","ENE Technology Inc","Silicon Portals",
+		"UBIQUAM Co., Ltd.","Thesycon Systemsoftware & Consulting GmbH","JMicron Technology Corp. / JMicron USA Technology Corp.","LG (HLDS)","Razer USA, Ltd",
+		"TerraTec Electronic GmbH","U-Blox AG","SG Intec Ltd & Co KG","Celectronic GmbH","PNY",
+		"ConnectCounty Holdings Berhad","D&M Holdings, Inc. (Denon/Marantz)","SNBC CO., Ltd","Prolink Microsystems Corp.","OQO",
+		"Sunf Pu Technology Co., Ltd","Quantum Corporation","ALLTOP TECHNOLOGY CO., LTD.","Ketron SRL","TRENDnet",
+		"Fiberline","SMA Technologie AG","Oakley Inc.","JDS Uniphase Corporation (JDSU)","Kunshan Guoji Electronics Co., Ltd.",
+		"Freescale Semiconductor, Inc.","Afatech Technologies, Inc.","Teams Power Limited","Gemtek","Gearway Electronics (Dong Guan) Co., Ltd.",
+		"VMware Inc.","Olimex Ltd.","XL Imaging","SoundGraph Inc.","Advance Multimedia Internet Technology Inc. (AMIT)",
+		"Laboratoires MXM","KTF Technologies","D-Box Technologies","Textech International Ltd.","Coulomb Electronics Ltd.",
+		"Trust International B.V.","Hynix Semiconductor Inc.","Seong Ji Industrial Co., Ltd.","RSA","Numark",
+		"SohoWare","Pacific Digital Corp.","Belcarra Technologies Corp.","HanfTek","Tascam",
+		"Umax","Inside Out Networks [hex]","VIA Technologies, Inc.","INRO","Amoi Electronics",
+		"L & K Precision Technology Co., Ltd.","Wionics Research","Stonestreet One, Inc.","Airgo Networks Inc.","WiQuest Communications, Inc.",
+		"2Wire, Inc.","Good Way Technology","Cross Match Technologies GmbH","SofTec Microsystems","ChipX",
+		"Matrix Vision GmbH","Struck Innovative Systeme GmbH","Frontier Design Group","Kondo Kagaku","Creatix Polymedia GmbH",
+		"Actiontec Electronics, Inc. [hex]","PiKRON Ltd. [hex]","Clipsal","China Huada Integrated Circuit Design (Group) Co., Ltd. (CIDC Group)","Total Phase",
+		"Golden Bridge Electech Inc.","Prevo Technologies, Inc.","Maxwise Production Enterprise Ltd.","Godspeed Computer Corp.","Delock",
+		"ZOOM Corporation","Kingmax Digital Inc.","Saab AB","Razer USA, Ltd","Atheros Communications",
+		"Askey Computer Corp. [hex]","Hitachi Video and Information System, Inc.","VTec Test, Inc.","Shenzhen Zhengerya Cable Co., Ltd.","Unigraf",
+		"Global Sun Technology","Dongguan ChingLung Wire & Cable Co., Ltd.","iStation","Persentec, Inc.","Van Ooijen Technische Informatica",
+		"Wireless Cables, Inc.","silex technology, Inc.","MCS","Suprema Inc.","Frontline Test Equipment, Inc.",
+		"AnyDATA Corporation","JABLOCOM s.r.o.","CMOTECH Co., Ltd.","Wiener, Plein & Baus","King Billion Electronics Co., Ltd.",
+		"GN ReSound A/S","Futurelogic Inc.","BlueView Technologies, Inc.","ARTIMI","Swissonic",
+		"Avnera","Leica Microsystems","Meyer Instruments (MIS)","Vitesse Semiconductor","Axesstel, Inc.",
+		"Waltop International Corp.","Cellink Technology Co., Ltd","CANON IMAGING SYSTEM TECHNOLOGIES INC.","Linksys","QSENN",
+		"Senao","General Atomics","MQP Electronics","ASMedia Technology Inc.","Syntek",
+		"GERTEC Telecomunicacoes Ltda.","ENENSYS Technologies","LucidPort Technology, Inc.","ASUSTek Computer, Inc. (wrong ID)","System Level Solutions, Inc.",
+		"Arowana","Sweex","Multiple Vendors","Spreadtrum Communications Inc.","TopSeed Technology Corp.",
+		"ATI AIB","ShenZhen Litkconn Technology Co., Ltd.","Printrex, Inc.","JALCO CO., LTD.","Thales Norway A/S",
+		"Ricavision International, Inc.","Samson Technologies Corp.","Concept2","Advanced Connection Technology Inc.","MICOMSOFT CO., LTD.",
+		"Kamstrup A/S","Grey Innovation","Lunatone","SAURIS GmbH","Singim International Corp.",
+		"Native Instruments","Hip Hing Cable & Plug Mfy. Ltd.","Sanford L.P.","Korea Techtron Co., Ltd.","DisplayLink",
+		"Cornice, Inc.","Lenovo","WaveSense","K.K. Rocky","Unicomp, Inc",
+		"Advantech","Twinhan","Gwo Jinn Industries Co., Ltd.","Huizhou Shenghua Industrial Co., Ltd.","VIVOphone",
+		"Vaisala","ASRock Incorporation","GYROCOM C&C Co., LTD","Memory Devices Ltd.","Compro",
+		"Tech Technology Industrial Company","Teridian Semiconductor Corp.","Nexio Co., Ltd","Aveo Technology Corp.","Navilock",
+		"Alienware Corporation","Siano Mobile Silicon","Vast Technologies, Inc.","Topseed","Evertop Wire Cable Co.",
+		"3Shape A/S","CSSN","Verbatim, Ltd","Petalynx","e3C Technologies",
+		"Mikkon Technology Limited","Zotek Electronic Co., Ltd.","AMIT Technology, Inc.","Ecamm","Google Inc.",
+		"Starline International Group Limited","Kaba","LKC Technologies, Inc.","Planon System Solutions Inc.","Fitipower Integrated Technology Inc",
+		"Qcom","Matrox Graphics, Inc.","Arkmicro Technologies Inc.","FineArch Inc.","GEMBIRD",
+		"Motorola GSG","Alco Digital Devices Limited","Nordic Semiconductor ASA","FitLinxx","NextWindow",
+		"Avago Technologies, Pte.","Shenzhen Xianhe Technology Co., Ltd.","Ningbo Broad Telecommunication Co., Ltd.","Feature Integration Technology Inc. (Fintek)","Dream Link",
+		"Sensoray Co., Inc.","Lab126, Inc.","PreSonus Audio Electronics, Inc.","Hyperstone AG","Ironkey Inc.",
+		"Radiient Technologies","Itron Technology iONE","Uniden Corporation","CASIO HITACHI Mobile Communications Co., Ltd.","Wispro Technology Inc.",
+		"Dane-Elec Corp. USA","Dongguan Guneetal Wire & Cable Co., Ltd.","Chipsbrand Microelectronics (HK) Co., Ltd.","T-Logic","Leuze electronic",
+		"Nuconn Technology Corp.","Beceem Communications Inc.","Acron Precision Industrial Co., Ltd.","Trillium Technology Pty. Ltd.","MicroStrain, Inc.",
+		"The Imaging Source Europe GmbH","Benica Corporation","Biforst Technology Inc.","Bodelin","S Life",
+		"Batronix","Celestron","B & W Group","Infotech Logistic, LLC","Data Robotics",
+		"Futuba","Mindtribe","Parrot SA","ZTE WCDMA Technologies MSM","KFI Printers",
+		"WeiDuan Electronic Accessory (S.Z.) Co., Ltd.","Industrial Technology Research Institute","Pak Heng Technology (Shenzhen) Co., Ltd.","RODE Microphones","Gampaq Co.Ltd",
+		"Dynex","Bellwood International, Inc.","USB-IF non-workshop","KES Co., Ltd.","Veho",
+		"Amphenol East Asia Ltd.","Seagate Branded Solutions","China Resource Semico Co., Ltd","Quanta Microsystems, Inc.","ACRUX",
+		"Biwin Technology Ltd.","Terminus Technology Inc.","Action Electronics Co., Ltd.","VASCO Data Security International","Silicon Image",
+		"SafeBoot International B.V.","Tandberg Data","Abbott Diabetes Care","Spansion Inc.","SamYoung Electronics Co., Ltd",
+		"Global Unichip Corp.","Sagem Orga GmbH","Physik Instrumente","Bayer Health Care LLC","Lumberg Connect  GmbH & Co. KG",
+		"Evoluent","Holtek Semiconductor, Inc.","QinHeng Electronics","Dynalith Systems Co., Ltd.","SGS Taiwan Ltd.",
+		"BandRich, Inc.","Leica Camera AG","Data Drive Thru, Inc.","UBeacon Technologies, Inc.","eFortune Technology Corp.",
+		"KeeTouch","Rigol Technologies","Salcomp Plc","Midiplus Co, Ltd.","Desay Wire Co., Ltd.",
+		"APS","SEL C662 Serial Cable","ic-design Reinhard Gottinger GmbH","X-TENSIONS","High Top Precision Electronic Co., Ltd.",
+		"Conntech Electronic (Suzhou) Corporation","Connect One Ltd.","A. Eberle GmbH & Co. KG","Meilhaus Electronic GmbH","BLUTRONICS S.r.l.",
+		"Corsair","MStar Semiconductor, Inc.","WiLinx Corp.","Cellex Power Products, Inc.","Current Electronics Inc.",
+		"NAVIsis Inc.","Ugobe Life Forms, Inc.","ViXS Systems, Inc.","iPassion Technology Inc.","Generalplus Technology Inc.",
+		"Energizer Holdings, Inc.","Plastron Precision Co., Ltd.","ARH Inc.","K.S. Terminals Inc.","Chao Zhou Kai Yuan Electric Co., Ltd.",
+		"The Hong Kong Standards and Testing Centre Ltd.","Fushicai","ATERGI TECHNOLOGY CO., LTD.","Fresco Logic","Ovislink Corp.",
+		"Legend Silicon Corp.","Afatech","Dongguan Guanshang Electronics Co., Ltd.","ShenMing Electron (Dong Guan) Co., Ltd.","Altium Limited",
+		"e-MOVE Technology Co., Ltd.","Amlogic, Inc.","MA LABS, Inc.","N-Trig","YMax Communications Corp.",
+		"Shenzhen Yuanchuan Electronic","JINQ CHERN ENTERPRISE CO., LTD.","Lite Metals & Plastic (Shenzhen) Co., Ltd.","Ember Corporation","Abilis Systems",
+		"China Telecommunication Technology Labs","Harmonix Music","Vuzix Corporation","T & A Mobile Phones","Ford Motor Co.",
+		"AVIXE Technology (China) Ltd.","Telit Wireless Solutions","Contac Cable Industrial Limited","Sunplus Innovation Technology Inc.","Hangzhou Riyue Electronic Co., Ltd.",
+		"BG Systems, Inc.","P-TWO INDUSTRIES, INC.","Shenzhen Tongyuan Network-Communication Cables Co., Ltd","RealVision Inc.","Extranet Systems Inc.",
+		"Orient Semiconductor Electronics, Ltd.","TouchPack","Kreton Corporation","QNAP System Inc.","Ionics EMS, Inc.",
+		"Relm Wireless","Lanterra Industrial Co., Ltd.","ALECTRONIC LIMITED","Datel Electronics Ltd.","Volkswagen of America, Inc.",
+		"Goldvish S.A.","Fuji Electric Device Technology Co., Ltd.","ADDMM LLC","ZHONGSHAN CHIANG YU ELECTRIC CO., LTD.","Shanghai Haiying Electronics Co., Ltd.",
+		"HuiYang D & S Cable Co., Ltd.","LS Cable Ltd.","SpringCard","Authorizer Technologies, Inc.","NONIN MEDICAL INC.",
+		"Wep Peripherals","EZPrototypes","Cherng Weei Technology Corp.","SiGma Micro","Philips & Lite-ON Digital Solutions Corporation",
+		"Skydigital Inc.","AMT","Kaetat Industrial Co., Ltd.","Datascope Corp.","Unigen Corporation",
+		"LighTuning Technology Inc.","LUXSHARE PRECISION INDUSTRY (SHENZHEN) CO., LTD.","Schomaecker GmbH","2N TELEKOMUNIKACE a.s.","Somagic, Inc.",
+		"HONGKONG WEIDIDA ELECTRON LIMITED","ASTRON INTERNATIONAL CORP.","ALPINE ELECTRONICS, INC.","OMEGA TECHNOLOGY","ACCARIO Inc.",
+		"Symwave","Kinstone","Aces Electronic Co., Ltd.","OPEX CORPORATION","IdeaCom Technology Inc.",
+		"Luminary Micro Inc.","FORTAT SKYMARK INDUSTRIAL COMPANY","PlantSense","NextWave Broadband Inc.","Bodatong Technology (Shenzhen) Co., Ltd.",
+		"adp corporation","Firecomms Ltd.","Antonio Precise Products Manufactory Ltd.","Telecommunications Technology Association (TTA)","WonTen Technology Co., Ltd.",
+		"EDIMAX TECHNOLOGY CO., LTD.","Amphenol KAE","Dresden Elektronik","ANDES TECHNOLOGY CORPORATION","Flextronics Digital Design Japan, LTD.",
+		"iCON","Solid-Motion","NINGBO HENTEK DRAGON ELECTRONICS CO., LTD.","TechFaith Wireless Technology Limited","Johnson Controls, Inc. The Automotive Business Unit",
+		"HAN HUA CABLE & WIRE TECHNOLOGY (J.X.) CO., LTD.","Sonix Technology Co., Ltd.","ALPHA-SAT TECHNOLOGY LIMITED","C-Thru Music Ltd.","Dexatek Technology Ltd.",
+		"Diostech Co., Ltd.","SAMTACK INC.","ASUS","Dream Cheeky","Touch",
+		"PEGATRON CORPORATION","OpenMoko, Inc.","Xenta","Smartronix, Inc.","Linux Foundation",
+		"Citizen","Actions Microelectronics Co.","Qualcomm / Option","Point Grey Research, Inc.","Mirion Technologies Dosimetry Services Division",
+		"Lumension Security","INVIA","Festo AG & Co. KG","Chipsbank Microelectronics Co., Ltd","Cleverscope",
+		"Cubeternet","TypeMatrix","TrekStor GmbH & Co. KG","NZXT","Coby Electronics Corporation",
+		"ROCCAT","NuCORE Technology, Inc.","AirTies Wireless Networks","Blackmagic design","ONDA COMMUNICATION S.p.a.",
+		"EADS Deutschland GmbH","Cal-Comp","Onda (unverified)","The Neat Company","H-TRONIC GmbH",
+		"G-Tek Electronics Group","Aliph","Innostor Technology Corporation","TANDBERG","Alere, Inc.",
+		"Stantum","Ubiquiti Networks, Inc.","Samsung Opto-Electroncs Co., Ltd.","Delphin Technology AG","NXP Semiconductors",
+		"ILX Lightwave Corporation","Vertex Wireless Co., Ltd.","CVT Electronics.Co.,Ltd","Ideofy Inc.","D-Link Corp.",
+		"DAP Technologies","Reloop","PCTV Systems","PLANEX","Hauppauge",
+		"Texas Instruments","Barnes & Noble","Cando","Clay Logic","XMOS Ltd",
+		"Hanvon","Qi Hardware","Simtec Electronics","TRENDnet","ActionStar",
+		"Advanced Silicon S.A.","Creative (?)","GW Instek","Emotiv Systems Pty. Ltd.","Agecodagis SARL",
+		"MacAlly","SAMWOO Enterprise","Silicon Motion","RadioShack Corporation","Kobo Inc.",
+		"8D Technologies inc.","Pie Digital, Inc.","Motorola PCS","eTurboTouch Technology, Inc.","Technology Innovation Holdings, Ltd",
+		"Pinnacle Systems, Inc.","Shining Technologies, Inc. [hex]","Arduino SA","Pumatronix Ltda","Digit@lway, Inc.",
+		"SANHO Digital Electronics Co., Ltd.","Aessent Technology Ltd","Tripp-Lite","M2Tech s.r.l.","TwinMOS",
+		"Xsens","Electronics For Imaging, Inc. [hex]","Sundtek","Basler AG","Citizen",
 		"DigitalWay","NHJ, Ltd","ASUSTek Computer Inc.","Toptronic Industrial Co., Ltd","Planex Communications",
 		"Dolphin Peripherals","Fujitsu, Ltd","Eagletron","Whanam Electronics Co., Ltd","VidzMedia Pte Ltd",
 		"AEI","Yakumo","Micro Star","Power Quotient International Co., Ltd","DIVA",
@@ -878,8 +880,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	{
 		DWORD mid[] = {0x0902,0x2002,0x2015,0x2018,0x2019,0x201c,0x201d,0x2022,0x2040,0x2041,0x2042,0x2043,0x2044,0x2045,0x2046,0x2047,0x2048,0x2049,0x204a,0x204b,
 		0x204c,0x204d,0x204e,0x204f,0x2060,0x2061,0x2062,0x2063,0x2064,0x2065,0x2066,0x2068,0x2069,0x2103,0x2104,0x2105,0x2106,0x2107,0x2109,0x210d,
-		0x2110,0x2122,0x2141,0x2310,0x2fe4,0x2ff0,0x2ffa,0x2ffb,0x2ffd,0x2fff,0x3301,0x3312,0x4102,0x5601,0x5603,0x6119,0x6124,0x6127,0x6129,0x6200,
-		0x7603,0x7604,0x7605,0x7606,0x7611,0x7613,0x7614,0x7615,0x7617,0x7800,0xff07};
+		0x2110,0x2122,0x2141,0x2310,0x2fe4,0x2fe6,0x2fea,0x2ff0,0x2ff4,0x2ffa,0x2ffb,0x2ffd,0x2fff,0x3301,0x3312,0x4102,0x5601,0x5603,0x6119,0x6124,
+		0x6127,0x6129,0x6200,0x7603,0x7604,0x7605,0x7606,0x7611,0x7613,0x7614,0x7615,0x7617,0x7800,0xff07};
 		char* mids[] = {"4-Port Hub","Mass Storage Device","at90usbkey sample firmware (HID keyboard)","at90usbkey sample firmware (CDC ACM)","stk525 sample firmware (microphone)",
 		"at90usbkey sample firmware (HID mouse)","at90usbkey sample firmware (HID generic)","at90usbkey sample firmware (composite device)","LUFA Test PID","LUFA Mouse Demo Application",
 		"LUFA Keyboard Demo Application","LUFA Joystick Demo Application","LUFA CDC Demo Application","LUFA Mass Storage Demo Application","LUFA Audio Output Demo Application",
@@ -889,12 +891,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"LUFA Multiple Report HID Demo","LUFA Virtual Serial/Mass Storage Demo","LUFA Webserver Project","JTAG ICE mkII","AVR ISP mkII",
 		"AVRONE!","STK600 development board","AVR Dragon","STK541 ZigBee Development Board","XPLAIN evaluation kit (CDC ACM)",
 		"AVR JTAGICE3 Debugger and Programmer","XMEGA-A1 Explained evaluation kit","ICE debugger","EVK11xx evaluation board","ATxmega32A4U DFU bootloader",
-		"atmega32u2 DFU bootloader","at90usb162 DFU bootloader","at90usb AVR DFU bootloader","at89c5130/c5131 DFU bootloader","at89c5132/c51snd1c DFU bootloader",
-		"at43301 4-Port Hub","4-Port Hub","AirVast W-Buddie WN210","at76c510 Prism-II 802.11b Access Point","Cisco 7920 WiFi IP Phone",
-		"AT91SAM CDC Demo Application","at91sam SAMBA bootloader","AT91SAM HID Keyboard Demo Application","AT91SAM Mass Storage Demo Application","AT91SAM HID Mouse Demo Application",
-		"D-Link DWL-120 802.11b Wireless Adapter [Atmel at76c503a]","at76c503a 802.11b Adapter","at76c503a 802.11b Adapter","at76c505 802.11b Adapter","at76c510 rfmd2948 802.11b Access Point",
-		"WL-1130 USB","AT76c505a Wireless Adapter","AT76C505AMX Wireless Adapter","AT76C505AS Wireless Adapter","Mini Album",
-		"Tux Droid fish dongle"};
+		"Cactus V6 (DFU)","Cactus RF60 (DFU)","atmega32u2 DFU bootloader","atmega32u4 DFU bootloader","at90usb162 DFU bootloader",
+		"at90usb AVR DFU bootloader","at89c5130/c5131 DFU bootloader","at89c5132/c51snd1c DFU bootloader","at43301 4-Port Hub","4-Port Hub",
+		"AirVast W-Buddie WN210","at76c510 Prism-II 802.11b Access Point","Cisco 7920 WiFi IP Phone","AT91SAM CDC Demo Application","at91sam SAMBA bootloader",
+		"AT91SAM HID Keyboard Demo Application","AT91SAM Mass Storage Demo Application","AT91SAM HID Mouse Demo Application","D-Link DWL-120 802.11b Wireless Adapter [Atmel at76c503a]","at76c503a 802.11b Adapter",
+		"at76c503a 802.11b Adapter","at76c505 802.11b Adapter","at76c510 rfmd2948 802.11b Access Point","WL-1130 USB","AT76c505a Wireless Adapter",
+		"AT76C505AMX Wireless Adapter","AT76C505AS Wireless Adapter","Mini Album","Tux Droid fish dongle"};
 		InsertProducts(0x03eb, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -906,30 +908,30 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x0004,0x0011,0x0012,0x0024,0x002a,0x0101,0x0102,0x0104,0x0105,0x0107,0x010c,0x0111,0x0117,0x011c,0x011d,0x0121,0x0122,0x0139,0x0201,0x0202,
-		0x0204,0x0205,0x0207,0x020c,0x0211,0x0212,0x0217,0x0218,0x0304,0x0305,0x0307,0x0311,0x0312,0x0314,0x0317,0x0324,0x0401,0x0404,0x0405,0x0411,
-		0x0412,0x0417,0x0423,0x042a,0x0441,0x0504,0x0505,0x0507,0x050c,0x0511,0x0512,0x0517,0x051d,0x0601,0x0604,0x0605,0x0611,0x0612,0x0624,0x0701,
-		0x0704,0x0705,0x0711,0x0712,0x0714,0x0801,0x0804,0x0805,0x0811,0x0817,0x0901,0x0904,0x0912,0x0917,0x0924,0x094a,0x0a01,0x0a17,0x0b01,0x0b0c,
-		0x0b17,0x0c17,0x0c24,0x0d12,0x0d17,0x0e17,0x0f0c,0x0f11,0x0f12,0x0f17,0x1001,0x1002,0x1004,0x1005,0x1011,0x1016,0x1017,0x1024,0x1027,0x1102,
-		0x1104,0x1105,0x1111,0x1116,0x1117,0x1151,0x1202,0x1204,0x1205,0x1211,0x1217,0x1302,0x1305,0x1311,0x1312,0x1317,0x1327,0x1405,0x1411,0x1424,
-		0x1502,0x1504,0x150c,0x1511,0x1512,0x1517,0x1524,0x1539,0x1602,0x1604,0x1605,0x1611,0x1617,0x161d,0x1624,0x1702,0x1704,0x1705,0x1711,0x1712,
-		0x1717,0x171d,0x1801,0x1802,0x1804,0x1805,0x1811,0x1812,0x1817,0x181d,0x1902,0x1904,0x1911,0x1917,0x1a02,0x1a11,0x1a17,0x1b02,0x1b04,0x1b05,
-		0x1b07,0x1c02,0x1c17,0x1d02,0x1d17,0x1d24,0x1e02,0x1e11,0x1e17,0x1f02,0x1f11,0x1f12,0x1f17,0x1f1d,0x2001,0x2002,0x2004,0x2005,0x2012,0x201d,
-		0x2039,0x2102,0x2104,0x2112,0x211d,0x2202,0x2205,0x2212,0x2217,0x2302,0x2304,0x2305,0x2311,0x2312,0x2317,0x231d,0x2402,0x2404,0x2405,0x2417,
-		0x241d,0x2424,0x2502,0x2504,0x2505,0x2512,0x2514,0x2517,0x251d,0x2524,0x2602,0x2605,0x2611,0x2617,0x2624,0x2702,0x2704,0x2717,0x2724,0x2811,
-		0x2817,0x2902,0x2911,0x2917,0x2a11,0x2a17,0x2b11,0x2b17,0x2c12,0x2c17,0x2c24,0x2d05,0x2d11,0x2d17,0x2e11,0x2e17,0x2e24,0x2f11,0x2f17,0x2f24,
-		0x3002,0x3004,0x3005,0x3011,0x3017,0x3102,0x3104,0x3111,0x3117,0x311d,0x3202,0x3207,0x3211,0x3217,0x3302,0x3304,0x3312,0x3317,0x3402,0x3404,
-		0x3417,0x3502,0x3504,0x3511,0x3517,0x3602,0x3611,0x3617,0x3711,0x3717,0x3724,0x3802,0x3807,0x3817,0x3902,0x3a02,0x3a11,0x3a17,0x3b02,0x3b05,
-		0x3b11,0x3b17,0x3c02,0x3c05,0x3c11,0x3c17,0x3d02,0x3d11,0x3d17,0x3e02,0x3e17,0x3f02,0x3f11,0x4002,0x4004,0x4102,0x4105,0x4111,0x4117,0x4202,
-		0x4205,0x4211,0x4217,0x4302,0x4305,0x4311,0x4317,0x4402,0x4417,0x4502,0x4505,0x4507,0x4511,0x4512,0x4517,0x4605,0x4611,0x4717,0x4811,0x4911,
-		0x4b11,0x4c11,0x4c17,0x4d11,0x4d17,0x4e11,0x4f11,0x4f17,0x5004,0x5011,0x5017,0x5111,0x5211,0x5307,0x5311,0x5312,0x5411,0x5511,0x5611,0x5617,
-		0x5711,0x5717,0x5811,0x5817,0x5911,0x5912,0x5a11,0x5b11,0x5c11,0x5c12,0x5c17,0x5d11,0x5e11,0x6004,0x6102,0x6104,0x6117,0x6202,0x6204,0x6217,
-		0x6302,0x6317,0x6402,0x6411,0x6417,0x6502,0x6511,0x6602,0x6611,0x6617,0x6702,0x6717,0x6802,0x6811,0x6817,0x6911,0x6917,0x6a02,0x6a11,0x6a17,
-		0x6b02,0x6b11,0x6c11,0x6c17,0x6f17,0x7004,0x7102,0x7104,0x7117,0x7202,0x7204,0x7217,0x7302,0x7304,0x7311,0x7317,0x7404,0x7417,0x7504,0x7517,
-		0x7604,0x7611,0x7617,0x7702,0x7704,0x7717,0x7804,0x7817,0x7917,0x7a02,0x7a04,0x7a17,0x7b02,0x7b17,0x7c17,0x7d04,0x7d17,0x7e04,0x8017,0x8104,
-		0x8117,0x811c,0x8204,0x8207,0x8217,0x8317,0x8404,0x8417,0x8504,0x8604,0x8607,0x8704,0x8711,0x8804,0x8904,0x8c07,0x8c11,0x9002,0x9102,0x9302,
-		0x9402,0x9502,0x9602,0x9702,0x9802,0x9902,0x9a02,0x9b02,0x9b07,0x9c02,0xa004,0xa011,0xb002,0xb102,0xb107,0xb116,0xb202,0xb302,0xb402,0xb502,
-		0xb602,0xb702,0xb802,0xb902,0xba02,0xbb02,0xbc02,0xbd02,0xbef4,0xc002,0xc102,0xc202,0xc302,0xc402,0xc502,0xc602,0xc702,0xc802,0xd104,0xefbe,
-		0xf0be,0xf1be};
+		0x0204,0x0205,0x0207,0x020c,0x0211,0x0212,0x0217,0x0218,0x0304,0x0305,0x0307,0x0311,0x0312,0x0314,0x0317,0x0324,0x034a,0x0401,0x0404,0x0405,
+		0x0411,0x0412,0x0417,0x0423,0x042a,0x0441,0x0504,0x0505,0x0507,0x050c,0x0511,0x0512,0x0517,0x051d,0x0601,0x0604,0x0605,0x0611,0x0612,0x0624,
+		0x0701,0x0704,0x0705,0x0711,0x0712,0x0714,0x0801,0x0804,0x0805,0x0811,0x0817,0x0901,0x0904,0x0912,0x0917,0x0924,0x094a,0x0a01,0x0a17,0x0b01,
+		0x0b0c,0x0b17,0x0c17,0x0c24,0x0d12,0x0d17,0x0e17,0x0f0c,0x0f11,0x0f12,0x0f17,0x1001,0x1002,0x1004,0x1005,0x1011,0x1016,0x1017,0x1024,0x1027,
+		0x1102,0x1104,0x1105,0x1111,0x1116,0x1117,0x1151,0x1202,0x1204,0x1205,0x1211,0x1217,0x1302,0x1305,0x1311,0x1312,0x1317,0x1327,0x134a,0x1405,
+		0x1411,0x1424,0x1502,0x1504,0x150c,0x1511,0x1512,0x1517,0x1524,0x1539,0x1602,0x1604,0x1605,0x1611,0x1617,0x161d,0x1624,0x1702,0x1704,0x1705,
+		0x1711,0x1712,0x1717,0x171d,0x1801,0x1802,0x1804,0x1805,0x1811,0x1812,0x1817,0x181d,0x1902,0x1904,0x1911,0x1917,0x1a02,0x1a11,0x1a17,0x1b02,
+		0x1b04,0x1b05,0x1b07,0x1c02,0x1c17,0x1d02,0x1d17,0x1d24,0x1e02,0x1e11,0x1e17,0x1f02,0x1f11,0x1f12,0x1f17,0x1f1d,0x2001,0x2002,0x2004,0x2005,
+		0x2012,0x201d,0x2039,0x2102,0x2104,0x2112,0x211d,0x2202,0x2205,0x2212,0x2217,0x2302,0x2304,0x2305,0x2311,0x2312,0x2317,0x231d,0x2402,0x2404,
+		0x2405,0x2417,0x241d,0x2424,0x2502,0x2504,0x2505,0x2512,0x2514,0x2517,0x251d,0x2524,0x2602,0x2605,0x2611,0x2617,0x2624,0x2702,0x2704,0x2717,
+		0x2724,0x2811,0x2817,0x2902,0x2911,0x2917,0x2a11,0x2a17,0x2b11,0x2b17,0x2c12,0x2c17,0x2c24,0x2d05,0x2d11,0x2d17,0x2e11,0x2e17,0x2e24,0x2f11,
+		0x2f17,0x2f24,0x3002,0x3004,0x3005,0x3011,0x3017,0x3102,0x3104,0x3111,0x3117,0x311d,0x3202,0x3207,0x3211,0x3217,0x3302,0x3304,0x3312,0x3317,
+		0x3402,0x3404,0x3417,0x3502,0x3504,0x3511,0x3517,0x3602,0x3611,0x3617,0x3711,0x3717,0x3724,0x3802,0x3807,0x3817,0x3902,0x3a02,0x3a11,0x3a17,
+		0x3b02,0x3b05,0x3b11,0x3b17,0x3c02,0x3c05,0x3c11,0x3c17,0x3d02,0x3d11,0x3d17,0x3e02,0x3e17,0x3f02,0x3f11,0x4002,0x4004,0x4102,0x4105,0x4111,
+		0x4117,0x4202,0x4205,0x4211,0x4217,0x4302,0x4305,0x4311,0x4317,0x4402,0x4417,0x4502,0x4505,0x4507,0x4511,0x4512,0x4517,0x4605,0x4611,0x4717,
+		0x4811,0x4911,0x4b11,0x4c11,0x4c17,0x4d11,0x4d17,0x4e11,0x4f11,0x4f17,0x5004,0x5011,0x5017,0x5111,0x5211,0x5307,0x5311,0x5312,0x5411,0x5511,
+		0x5611,0x5617,0x5711,0x5717,0x5811,0x5817,0x5911,0x5912,0x5a11,0x5b11,0x5c11,0x5c12,0x5c17,0x5d11,0x5e11,0x6004,0x6102,0x6104,0x6117,0x6202,
+		0x6204,0x6217,0x6302,0x6317,0x6402,0x6411,0x6417,0x6502,0x6511,0x6602,0x6611,0x6617,0x6702,0x6717,0x6802,0x6811,0x6817,0x6911,0x6917,0x6a02,
+		0x6a11,0x6a17,0x6b02,0x6b11,0x6c11,0x6c17,0x6f17,0x7004,0x7102,0x7104,0x7117,0x7202,0x7204,0x7217,0x7302,0x7304,0x7311,0x7317,0x7404,0x7417,
+		0x7504,0x7517,0x7604,0x7611,0x7617,0x7702,0x7704,0x7717,0x7804,0x7817,0x7917,0x7a02,0x7a04,0x7a17,0x7b02,0x7b17,0x7c17,0x7d04,0x7d17,0x7e04,
+		0x8017,0x8104,0x8117,0x811c,0x8204,0x8207,0x8217,0x8317,0x8404,0x8417,0x8504,0x8604,0x8607,0x8704,0x8711,0x8804,0x8904,0x8c07,0x8c11,0x9002,
+		0x9102,0x9302,0x9402,0x9502,0x9602,0x9702,0x9802,0x9902,0x9a02,0x9b02,0x9b07,0x9c02,0xa004,0xa011,0xb002,0xb102,0xb107,0xb116,0xb202,0xb302,
+		0xb402,0xb502,0xb602,0xb702,0xb802,0xb902,0xba02,0xbb02,0xbc02,0xbd02,0xbef4,0xc002,0xc102,0xc202,0xc302,0xc402,0xc502,0xc602,0xc702,0xc802,
+		0xd104,0xefbe,0xf0be,0xf1be};
 		char* mids[] = {"DeskJet 895c","OfficeJet G55","DeskJet 1125C Printer Port","KU-0316 Keyboard","LaserJet P1102",
 		"ScanJet 4100c","PhotoSmart S20","DeskJet 880c/970c","ScanJet 4200c","CD-Writer Plus",
 		"Multimedia Keyboard Hub","G55xi Printer/Scanner/Copier","LaserJet 3200","hn210w 802.11b Adapter","Bluetooth 1.2 Interface [Broadcom BCM2035]",
@@ -937,96 +939,96 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"DeskJet 815c","ScanJet 3300c","CD-Writer Plus 8200e","Multimedia Keyboard","OfficeJet G85",
 		"DeskJet 1220C","LaserJet 2200","APOLLO P2500/2600","DeskJet 810c/812c","ScanJet 4300c",
 		"CD-Writer+ CD-4e","OfficeJet G85xi","Color Inkjet CP1700","designjet 30/130 series","LaserJet 1200",
-		"SK-2885 keyboard","ScanJet 5200c","DeskJet 830c/832c","ScanJet 3400cse","OfficeJet G95",
-		"Printing Support","LaserJet 1200 series","HS-COMBO Cardreader","LaserJet M1132 MFP","HP Prime Calculator",
-		"DeskJet 885c","ScanJet 2100c","DVD+RW","5219 Wireless Keyboard","OfficeJet K60",
-		"DeckJet 450","LaserJet 1000","Bluetooth Interface","ScanJet 6300c","DeskJet 840c",
-		"ScanJet 2200c","OfficeJet K60xi","business inkjet 3000","Bluetooth Dongle","ScanJet 5300c/5370c",
-		"DeskJet 825c","ScanJet 4400c","OfficeJet K80","DeskJet 1180c","Printing Support",
-		"ScanJet 7400c","DeskJet 816c","HP4470C","OfficeJet K80xi","LaserJet 3300",
-		"ScanJet 2300c","DeskJet 845c","Printing Support","LaserJet 3330","Modular Smartcard Keyboard",
-		"Optical Mouse [672662-001]","ScanJet 2400c","color LaserJet 3700","ScanJet 82x0C","Wireless Keyboard and Optical Mouse receiver",
-		"LaserJet 2300d","LaserJet 1010","Bluetooth Dongle","OfficeJet 9100 series","LaserJet 1012",
-		"LaserJet 1015","Wireless Keyboard and Optical Mouse receiver","OfficeJet V40","Printing Support","LaserJet 1150",
-		"Photo Scanner 1000","PhotoSmart 140 series","DeskJet 970c/970cse","ScanJet 5400c","OfficeJet V40xi",
-		"Jornada 548 / iPAQ HW6515 Pocket PC","LaserJet 1300","Smart Card Keyboard","Virtual keyboard and mouse","PhotoSmart 240 series",
-		"DeskJet 959c","ScanJet 5470c/5490c","OfficeJet v60","Jornada 568 Pocket PC","LaserJet 1300n",
-		"PSC-750xi Printer/Scanner/Copier","PhotoSmart 320 series","DeskJet 930c","ScanJet 4500C/5550C","OfficeJet v60xi",
-		"LaserJet 2300L","PhotoSmart 370 series","ScanJet 4570c","OfficeJet V30","DeskJet 460",
-		"LaserJet 1005","iLO Virtual Hub","ScanJet 3670","PSC 750","f2105 Monitor Hub",
-		"PhotoSmart 420 series","DeskJet 920c","Mood Lighting (Microchip Technology Inc.)","PSC 750xi","Printing Support",
-		"color LaserJet 3500","Smart Card Keyboard - KR","Mini Magnetic Stripe Reader","PhotoSmart 330 series","DeskJet 940c",
-		"ScanJet 5530C PhotoSmart","psc 780","LaserJet 3015","Wireless Rechargeable Optical Mouse (HID)","Smart Card Keyboard - JP",
-		"PhotoSmart 380 series","DeskJet 948C","ScanJet 5590","psc 780xi","Printing Support",
-		"LaserJet 3020","Bluetooth 2.0 Interface [Broadcom BCM2045]","Inkjet P-2000U","PhotoSmart 470 series","DeskJet 916C",
-		"ScanJet 7650","PSC 720","OfficeJet Pro K550","LaserJet 3030","Bluetooth 2.0 Interface",
-		"PhotoSmart A430 series","DeskJet 3820","OfficeJet V45","LaserJet 3380","PhotoSmart A510 series",
-		"OfficeJet 5100 series","color LaserJet 4650","PhotoSmart A610 series","DeskJet 3810","ScanJet 4850C/4890C",
-		"Premium Starter Webcam","PhotoSmart A710 series","Color LaserJet 2550l","PhotoSmart A310 series","LaserJet 1320",
-		"Barcode scanner","PhotoSmart A320 Printer series","PSC-950","LaserJet 1160 series","PhotoSmart A440 Printer series",
-		"PSC 920","OfficeJet Pro K5300","color LaserJet 5550","un2400 Gobi Wireless Modem","Floppy",
-		"Hub","DeskJet 640c","ScanJet 3570c","OfficeJet Pro K5400","un2400 Gobi Wireless Modem (QDL mode)",
-		"Cashdrawer","PhotoSmart 7345","DeskJet 630c","OfficeJet Pro L7500","Sierra MC5725 [ev2210]",
-		"PhotoSmart 7600 series","ScanJet 3500c","OfficeJet Pro L7600","color LaserJet 9500 MFP","PhotoSmart 7600 series",
-		"DeskJet 656c","ScanJet 3970c","OfficeJet d series","OfficeJet Pro L7700","LaserJet 4350",
-		"Broadcom 2070 Bluetooth Combo","PhotoSmart 7700 series","Deskjet F2280 series","ScanJet 4070 PhotoSmart","LaserJet 4250",
-		"Gobi 2000 Wireless Modem (QDL mode)","LP1965 19\" Monitor Hub","PhotoSmart 7700 series","DeskJet F4200 series","ScanJet 3770",
-		"OfficeJet Pro L7300 / Compaq LA2405 series monitor","4-port hub","LaserJet 2410","Gobi 2000 Wireless Modem","LP3065 30\" Monitor Hub",
-		"PhotoSmart A520 series","ScanJet 3800c","OfficeJet 7100 series","Color LaserJet 2820 series","Pole Display (HP522 2 x 20 Line Display)",
-		"PhotoSmart A620 series","DeskJet 915","Color LaserJet 2830","Magnetic Stripe Reader IDRA-334133-HP","PSC-2100",
-		"Color LaserJet 2840","PhotoSmart A820 series","PSC 2200","LaserJet 2420","PSC 2150 series",
-		"LaserJet 2430","PSC 2170 series","LaserJet 1020","Officejet J4680","LaserJet 1022",
-		"Logitech M-UAL-96 Mouse","Scanjet 7000","OfficeJet 6110","Printing Support","PSC 1000",
-		"LaserJet 2600n","LP2275w Monitor Hub","PSC 1200","EWS 2605dn","LP2475w Monitor Hub",
-		"PhotoSmart P1000","DeskJet 980c","ScanJet 4670v","PSC 1100 series","Printing Support",
-		"PhotoSmart P1100 Printer w/ Card Reader","DeskJet 960c","OfficeJet 4100 series","EWS 2605dtn","Atheros AR9285 Malbec Bluetooth Adapter",
-		"PhotoSmart 1215","4 GB flash drive","OfficeJet 4105 series","LaserJet 3050","PhotoSmart 1218",
-		"DeskJet 990c","OfficeJet J6410","LaserJet 3052","PhotoSmart 1115","DeskJet 6122",
-		"LaserJet 3055","PhotoSmart 230","DeskJet 6127c","PSC 2300","LaserJet 3390",
-		"PhotoSmart 1315","PSC 2410 PhotoSmart","Color LaserJet 2605","PSC 2500","EWS UPD",
-		"Webcam","PhotoSmart 100","c485w Flash Drive","LaserJet P2015 series","PhotoSmart 130",
-		"PhotoSmart 7150","OfficeJet 5500 series","Printing Support","PhotoSmart 7150~","Scanjet N8460",
-		"PSC 1300 series","LaserJet M1005 MFP","PhotoSmart 7350","Scanjet Professional 1000 Mobile Scanner","PSC 1358",
-		"EWS UPD","PhotoSmart 7350~","OfficeJet 4215","LaserJet P1005","PhotoSmart 7550",
-		"LaserJet P1006","PhotoSmart 7550~","PSC-1315/PSC-1317","PhotoSmart 635/715/720/735/935 (storage)","cp1160",
-		"PhotoSmart 618","ScanJet 4370","OfficeJet 7200 series","LaserJet 1018","PhotoSmart 812",
-		"ScanJet G3010","OfficeJet 7300 series","EWS CM1015","PhotoSmart 850 (ptp)","ScanJet G3110",
-		"OfficeJet 7400 series","Color LaserJet CM1017","PhotoSmart 935 (ptp)","EWS UPD","PhotoSmart 945 (PTP mode)",
-		"ScanJet G4010","External HDD","PhotoSmart 2600","E709n [Officejet 6500 Wireless]","EWS UPD",
-		"ScanJet G4050","PhotoSmart 2700","Color LaserJet CP1215","PSC 1600","PSC 2350",
-		"OfficeJet 6200","PSC 1500 series","EWS UPD","PSC 1400","EWS UPD",
-		"PhotoSmart 2570 series","OfficeJet 5600 (USBHUB)","Color LaserJet CM1312 MFP","DeskJet 995c","PhotoSmart 3100 series",
-		"EWS UPD","PhotoSmart 3200 series","PhotoSmart 3300 series","v165w Stick","OfficeJet 6300",
-		"Officejet Pro 8500A","OfficeJet 4300","DeskJet F300 series","PhotoSmart C3180","LaserJet M1120 MFP",
-		"PhotoSmart C4100 series","LaserJet M1120n MFP","PhotoSmart C5100 series","LaserJet M1319f MFP","PhotoSmart C6180",
-		"Officejet Pro 8600","PhotoSmart C7100 series","OfficeJet J2100 series","PhotoSmart C4200 Printer series","OfficeJet 6700",
-		"LaserJet P2055 series","PhotoSmart C5200 series","PhotoSmart D7400 series","DeskJet 5550","Hewlett Packard Digital Camera",
-		"DeskJet 5650c","color LaserJet 3550","PhotoSmart 215","DeskJet 5150c","Color LaserJet 4700",
-		"PhotoSmart 318/612","Color LaserJet 4730mfp","PhotoSmart 715 (ptp)","PhotoSmart C8100 series","LaserJet 5200",
-		"PhotoSmart 120 (ptp)","PhotoSmart C7200 series","PhotoSmart 320","PhotoSmart C4380 series","LaserJet 5200L",
-		"PhotoSmart 720 (ptp)","Color LaserJet 3000","PhotoSmart 620 (ptp)","PhotoSmart D5300 series","Color LaserJet 3800",
-		"PhotoSmart D7200 series","Color LaserJet 3600","PhotoSmart 735 (ptp)","PhotoSmart C6200 series","LaserJet 4240",
-		"PhotoSmart R707 (PTP mode)","Photosmart C4500 series","Photosmart C4480","Color LaserJet 4610","Color LaserJet CP6015 series",
-		"DeskJet 3320c","PhotoSmart 635 (PTP mode)","DeskJet 3420c","CM8060 Color MFP with Edgeline Technology","PhotoSmart 43x (ptp)",
-		"DeskJet 36xx","LaserJet M5035 MFP","PhotoSmart M307 (PTP mode)","DeskJet 35xx","Photosmart Premium C309",
-		"LaserJet P3005","Printing Support","LaserJet M4345 MFP","Printing Support","LaserJet M3035 MFP",
-		"DeskJet 3940","DeskJet F2492 All-in-One","LaserJet P3004","PhotoSmart R817 (PTP mode)","DeskJet D4100",
-		"CM8050 Color MFP with Edgeline Technology","DeskJet D1360","Color LaserJet CP3505","LaserJet M5025 MFP","PhotoSmart M415 (PTP mode)",
-		"DeskJet D2460","LaserJet M3027 MFP","PhotoSmart M23 (PTP mode)","Color LaserJet CP4005","Color LaserJet CM6040 series",
-		"DeskJet F2100 Printer series","Color LaserJet CM4730 MFP","DeskJet F4100 Printer series","LaserJet P4515","Printing Support",
-		"LaserJet P4015","Ethernet HN210E","Printing Support","FHA-3510 2.4GHz Wireless Optical Mobile Mouse","LaserJet P4014",
-		"LaserJet M9050 MFP","DeskJet 6800 series","LaserJet M9040 MFP","DeskJet 6600 series","DeskJet 5440",
-		"Optical Mobile Mouse","DeskJet 5940","Deskjet 2050 J510","DeskJet 6980 series","DeskJet 6940 series",
-		"Digital Stereo Headset","Deskjet F4500 series","PhotoSmart M437","PhotoSmart M537","PhotoSmart R930 series",
-		"PhotoSmart R837","PhotoSmart R840 series","PhotoSmart M730 series","PhotoSmart R740 series","PhotoSmart Mz60 series",
-		"PhotoSmart M630 series","PhotoSmart E330 series","PhotoSmart M540 series","Portable Drive","PhotoSmart M440 series",
-		"DeskJet 5850c","Deskjet 3050A","PhotoSmart 7200 series","PhotoSmart 7200 series","v255w/c310w Flash Drive",
-		"Webcam","PhotoSmart 7600 series","PhotoSmart 7600 series","PhotoSmart 7700 series","PhotoSmart 7700 series",
-		"PhotoSmart 7900 series","PhotoSmart 7900 series","PhotoSmart 7400 series","PhotoSmart 7800 series","PhotoSmart 8100 series",
-		"PhotoSmart 8400 series","PhotoSmart 8700 series","PhotoSmart Pro B9100 series","NEC Picty760","PhotoSmart 7800 series",
-		"PhotoSmart 8000 series","PhotoSmart 8200 series","DeskJet D2300","PhotoSmart D5100 series","PhotoSmart D6100 series",
-		"PhotoSmart D7100 series","PhotoSmart D7300 series","PhotoSmart D5060 Printer","Bluetooth Dongle","NEC Picty900",
-		"NEC Picty920","NEC Picty800"};
+		"SK-2885 keyboard","Elite Keyboard","ScanJet 5200c","DeskJet 830c/832c","ScanJet 3400cse",
+		"OfficeJet G95","Printing Support","LaserJet 1200 series","HS-COMBO Cardreader","LaserJet M1132 MFP",
+		"HP Prime Calculator","DeskJet 885c","ScanJet 2100c","DVD+RW","5219 Wireless Keyboard",
+		"OfficeJet K60","DeckJet 450","LaserJet 1000","Bluetooth Interface","ScanJet 6300c",
+		"DeskJet 840c","ScanJet 2200c","OfficeJet K60xi","business inkjet 3000","Bluetooth Dongle",
+		"ScanJet 5300c/5370c","DeskJet 825c","ScanJet 4400c","OfficeJet K80","DeskJet 1180c",
+		"Printing Support","ScanJet 7400c","DeskJet 816c","HP4470C","OfficeJet K80xi",
+		"LaserJet 3300","ScanJet 2300c","DeskJet 845c","Printing Support","LaserJet 3330",
+		"Modular Smartcard Keyboard","Optical Mouse [672662-001]","ScanJet 2400c","color LaserJet 3700","ScanJet 82x0C",
+		"Wireless Keyboard and Optical Mouse receiver","LaserJet 2300d","LaserJet 1010","Bluetooth Dongle","OfficeJet 9100 series",
+		"LaserJet 1012","LaserJet 1015","Wireless Keyboard and Optical Mouse receiver","OfficeJet V40","Printing Support",
+		"LaserJet 1150","Photo Scanner 1000","PhotoSmart 140 series","DeskJet 970c/970cse","ScanJet 5400c",
+		"OfficeJet V40xi","Jornada 548 / iPAQ HW6515 Pocket PC","LaserJet 1300","Smart Card Keyboard","Virtual keyboard and mouse",
+		"PhotoSmart 240 series","DeskJet 959c","ScanJet 5470c/5490c","OfficeJet v60","Jornada 568 Pocket PC",
+		"LaserJet 1300n","PSC-750xi Printer/Scanner/Copier","PhotoSmart 320 series","DeskJet 930c","ScanJet 4500C/5550C",
+		"OfficeJet v60xi","LaserJet 2300L","PhotoSmart 370 series","ScanJet 4570c","OfficeJet V30",
+		"DeskJet 460","LaserJet 1005","iLO Virtual Hub","Optical Mouse","ScanJet 3670",
+		"PSC 750","f2105 Monitor Hub","PhotoSmart 420 series","DeskJet 920c","Mood Lighting (Microchip Technology Inc.)",
+		"PSC 750xi","Printing Support","color LaserJet 3500","Smart Card Keyboard - KR","Mini Magnetic Stripe Reader",
+		"PhotoSmart 330 series","DeskJet 940c","ScanJet 5530C PhotoSmart","psc 780","LaserJet 3015",
+		"Wireless Rechargeable Optical Mouse (HID)","Smart Card Keyboard - JP","PhotoSmart 380 series","DeskJet 948C","ScanJet 5590",
+		"psc 780xi","Printing Support","LaserJet 3020","Bluetooth 2.0 Interface [Broadcom BCM2045]","Inkjet P-2000U",
+		"PhotoSmart 470 series","DeskJet 916C","ScanJet 7650","PSC 720","OfficeJet Pro K550",
+		"LaserJet 3030","Bluetooth 2.0 Interface","PhotoSmart A430 series","DeskJet 3820","OfficeJet V45",
+		"LaserJet 3380","PhotoSmart A510 series","OfficeJet 5100 series","color LaserJet 4650","PhotoSmart A610 series",
+		"DeskJet 3810","ScanJet 4850C/4890C","Premium Starter Webcam","PhotoSmart A710 series","Color LaserJet 2550l",
+		"PhotoSmart A310 series","LaserJet 1320","Barcode scanner","PhotoSmart A320 Printer series","PSC-950",
+		"LaserJet 1160 series","PhotoSmart A440 Printer series","PSC 920","OfficeJet Pro K5300","color LaserJet 5550",
+		"un2400 Gobi Wireless Modem","Floppy","Hub","DeskJet 640c","ScanJet 3570c",
+		"OfficeJet Pro K5400","un2400 Gobi Wireless Modem (QDL mode)","Cashdrawer","PhotoSmart 7345","DeskJet 630c",
+		"OfficeJet Pro L7500","Sierra MC5725 [ev2210]","PhotoSmart 7600 series","ScanJet 3500c","OfficeJet Pro L7600",
+		"color LaserJet 9500 MFP","PhotoSmart 7600 series","DeskJet 656c","ScanJet 3970c","OfficeJet d series",
+		"OfficeJet Pro L7700","LaserJet 4350","Broadcom 2070 Bluetooth Combo","PhotoSmart 7700 series","Deskjet F2280 series",
+		"ScanJet 4070 PhotoSmart","LaserJet 4250","Gobi 2000 Wireless Modem (QDL mode)","LP1965 19\" Monitor Hub","PhotoSmart 7700 series",
+		"DeskJet F4200 series","ScanJet 3770","OfficeJet Pro L7300 / Compaq LA2405 series monitor","4-port hub","LaserJet 2410",
+		"Gobi 2000 Wireless Modem","LP3065 30\" Monitor Hub","PhotoSmart A520 series","ScanJet 3800c","OfficeJet 7100 series",
+		"Color LaserJet 2820 series","Pole Display (HP522 2 x 20 Line Display)","PhotoSmart A620 series","DeskJet 915","Color LaserJet 2830",
+		"Magnetic Stripe Reader IDRA-334133-HP","PSC-2100","Color LaserJet 2840","PhotoSmart A820 series","PSC 2200",
+		"LaserJet 2420","PSC 2150 series","LaserJet 2430","PSC 2170 series","LaserJet 1020",
+		"Officejet J4680","LaserJet 1022","Logitech M-UAL-96 Mouse","Scanjet 7000","OfficeJet 6110",
+		"Printing Support","PSC 1000","LaserJet 2600n","LP2275w Monitor Hub","PSC 1200",
+		"EWS 2605dn","LP2475w Monitor Hub","PhotoSmart P1000","DeskJet 980c","ScanJet 4670v",
+		"PSC 1100 series","Printing Support","PhotoSmart P1100 Printer w/ Card Reader","DeskJet 960c","OfficeJet 4100 series",
+		"EWS 2605dtn","Atheros AR9285 Malbec Bluetooth Adapter","PhotoSmart 1215","4 GB flash drive","OfficeJet 4105 series",
+		"LaserJet 3050","PhotoSmart 1218","DeskJet 990c","OfficeJet J6410","LaserJet 3052",
+		"PhotoSmart 1115","DeskJet 6122","LaserJet 3055","PhotoSmart 230","DeskJet 6127c",
+		"PSC 2300","LaserJet 3390","PhotoSmart 1315","PSC 2410 PhotoSmart","Color LaserJet 2605",
+		"PSC 2500","EWS UPD","Webcam","PhotoSmart 100","c485w Flash Drive",
+		"LaserJet P2015 series","PhotoSmart 130","PhotoSmart 7150","OfficeJet 5500 series","Printing Support",
+		"PhotoSmart 7150~","Scanjet N8460","PSC 1300 series","LaserJet M1005 MFP","PhotoSmart 7350",
+		"Scanjet Professional 1000 Mobile Scanner","PSC 1358","EWS UPD","PhotoSmart 7350~","OfficeJet 4215",
+		"LaserJet P1005","PhotoSmart 7550","LaserJet P1006","PhotoSmart 7550~","PSC-1315/PSC-1317",
+		"PhotoSmart 635/715/720/735/935 (storage)","cp1160","PhotoSmart 618","ScanJet 4370","OfficeJet 7200 series",
+		"LaserJet 1018","PhotoSmart 812","ScanJet G3010","OfficeJet 7300 series","EWS CM1015",
+		"PhotoSmart 850 (ptp)","ScanJet G3110","OfficeJet 7400 series","Color LaserJet CM1017","PhotoSmart 935 (ptp)",
+		"EWS UPD","PhotoSmart 945 (PTP mode)","ScanJet G4010","External HDD","PhotoSmart 2600",
+		"E709n [Officejet 6500 Wireless]","EWS UPD","ScanJet G4050","PhotoSmart 2700","Color LaserJet CP1215",
+		"PSC 1600","PSC 2350","OfficeJet 6200","PSC 1500 series","EWS UPD",
+		"PSC 1400","EWS UPD","PhotoSmart 2570 series","OfficeJet 5600 (USBHUB)","Color LaserJet CM1312 MFP",
+		"DeskJet 995c","PhotoSmart 3100 series","EWS UPD","PhotoSmart 3200 series","PhotoSmart 3300 series",
+		"v165w Stick","OfficeJet 6300","Officejet Pro 8500A","OfficeJet 4300","DeskJet F300 series",
+		"PhotoSmart C3180","LaserJet M1120 MFP","PhotoSmart C4100 series","LaserJet M1120n MFP","PhotoSmart C5100 series",
+		"LaserJet M1319f MFP","PhotoSmart C6180","Officejet Pro 8600","PhotoSmart C7100 series","OfficeJet J2100 series",
+		"PhotoSmart C4200 Printer series","OfficeJet 6700","LaserJet P2055 series","PhotoSmart C5200 series","PhotoSmart D7400 series",
+		"DeskJet 5550","Hewlett Packard Digital Camera","DeskJet 5650c","color LaserJet 3550","PhotoSmart 215",
+		"DeskJet 5150c","Color LaserJet 4700","PhotoSmart 318/612","Color LaserJet 4730mfp","PhotoSmart 715 (ptp)",
+		"PhotoSmart C8100 series","LaserJet 5200","PhotoSmart 120 (ptp)","PhotoSmart C7200 series","PhotoSmart 320",
+		"PhotoSmart C4380 series","LaserJet 5200L","PhotoSmart 720 (ptp)","Color LaserJet 3000","PhotoSmart 620 (ptp)",
+		"PhotoSmart D5300 series","Color LaserJet 3800","PhotoSmart D7200 series","Color LaserJet 3600","PhotoSmart 735 (ptp)",
+		"PhotoSmart C6200 series","LaserJet 4240","PhotoSmart R707 (PTP mode)","Photosmart C4500 series","Photosmart C4480",
+		"Color LaserJet 4610","Color LaserJet CP6015 series","DeskJet 3320c","PhotoSmart 635 (PTP mode)","DeskJet 3420c",
+		"CM8060 Color MFP with Edgeline Technology","PhotoSmart 43x (ptp)","DeskJet 36xx","LaserJet M5035 MFP","PhotoSmart M307 (PTP mode)",
+		"DeskJet 35xx","Photosmart Premium C309","LaserJet P3005","Printing Support","LaserJet M4345 MFP",
+		"Printing Support","LaserJet M3035 MFP","DeskJet 3940","DeskJet F2492 All-in-One","LaserJet P3004",
+		"PhotoSmart R817 (PTP mode)","DeskJet D4100","CM8050 Color MFP with Edgeline Technology","DeskJet D1360","Color LaserJet CP3505",
+		"LaserJet M5025 MFP","PhotoSmart M415 (PTP mode)","DeskJet D2460","LaserJet M3027 MFP","PhotoSmart M23 (PTP mode)",
+		"Color LaserJet CP4005","Color LaserJet CM6040 series","DeskJet F2100 Printer series","Color LaserJet CM4730 MFP","DeskJet F4100 Printer series",
+		"LaserJet P4515","Printing Support","LaserJet P4015","Ethernet HN210E","Printing Support",
+		"FHA-3510 2.4GHz Wireless Optical Mobile Mouse","LaserJet P4014","LaserJet M9050 MFP","DeskJet 6800 series","LaserJet M9040 MFP",
+		"DeskJet 6600 series","DeskJet 5440","Optical Mobile Mouse","DeskJet 5940","Deskjet 2050 J510",
+		"DeskJet 6980 series","DeskJet 6940 series","Digital Stereo Headset","Deskjet F4500 series","PhotoSmart M437",
+		"PhotoSmart M537","PhotoSmart R930 series","PhotoSmart R837","PhotoSmart R840 series","PhotoSmart M730 series",
+		"PhotoSmart R740 series","PhotoSmart Mz60 series","PhotoSmart M630 series","PhotoSmart E330 series","PhotoSmart M540 series",
+		"Portable Drive","PhotoSmart M440 series","DeskJet 5850c","Deskjet 3050A","PhotoSmart 7200 series",
+		"PhotoSmart 7200 series","v255w/c310w Flash Drive","Webcam","PhotoSmart 7600 series","PhotoSmart 7600 series",
+		"PhotoSmart 7700 series","PhotoSmart 7700 series","PhotoSmart 7900 series","PhotoSmart 7900 series","PhotoSmart 7400 series",
+		"PhotoSmart 7800 series","PhotoSmart 8100 series","PhotoSmart 8400 series","PhotoSmart 8700 series","PhotoSmart Pro B9100 series",
+		"NEC Picty760","PhotoSmart 7800 series","PhotoSmart 8000 series","PhotoSmart 8200 series","DeskJet D2300",
+		"PhotoSmart D5100 series","PhotoSmart D6100 series","PhotoSmart D7100 series","PhotoSmart D7300 series","PhotoSmart D5060 Printer",
+		"Bluetooth Dongle","NEC Picty900","NEC Picty920","NEC Picty800"};
 		InsertProducts(0x03f0, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1066,9 +1068,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		0x8372,0x8a28,0x8a98,0x8b28,0x8b29,0x8b2a,0x8b2b,0x8b2c,0x9132,0x9133,0x9135,0x9136,0x9e90,0x9f80,0xa6d0,0xa951,0xabb8,0xb810,0xb811,0xb812,
 		0xb9b0,0xbaf8,0xbcd8,0xbcd9,0xbcda,0xbdc8,0xbfd8,0xbfd9,0xbfda,0xbfdb,0xbfdc,0xc630,0xc631,0xc632,0xc633,0xc634,0xc7d0,0xc8b8,0xc8b9,0xc8ba,
 		0xc8bb,0xc8bc,0xc8bd,0xc8be,0xc8bf,0xcc48,0xcc49,0xcc4a,0xcff8,0xd010,0xd011,0xd012,0xd013,0xd491,0xd578,0xd6f8,0xd738,0xd739,0xd9a9,0xd9aa,
-		0xe0d0,0xe521,0xe6c8,0xe700,0xe729,0xe888,0xe889,0xe88a,0xe88b,0xe88c,0xe8d8,0xe8dc,0xea90,0xed71,0xed72,0xed73,0xed74,0xef10,0xf070,0xf0e9,
-		0xf1a0,0xf208,0xf3c0,0xf608,0xf60b,0xf680,0xf758,0xf7c0,0xf850,0xf918,0xfa00,0xfa01,0xfa02,0xfa03,0xfa04,0xfa20,0xfc08,0xfc09,0xfc0b,0xfc0c,
-		0xfc0d,0xfc82,0xfd48,0xfd49,0xff08,0xff18,0xff19,0xff1a,0xff1b,0xff1c,0xff1d,0xff1e,0xff1f};
+		0xe0d0,0xe521,0xe6c8,0xe700,0xe729,0xe888,0xe889,0xe88a,0xe88b,0xe88c,0xe8d8,0xe8dc,0xea90,0xed71,0xed72,0xed73,0xed74,0xef10,0xf070,0xf0c8,
+		0xf0c9,0xf0e9,0xf1a0,0xf208,0xf3c0,0xf608,0xf60b,0xf680,0xf758,0xf7c0,0xf850,0xf918,0xfa00,0xfa01,0xfa02,0xfa03,0xfa04,0xfa20,0xfc08,0xfc09,
+		0xfc0b,0xfc0c,0xfc0d,0xfc82,0xfd48,0xfd49,0xff08,0xff18,0xff19,0xff1a,0xff1b,0xff1c,0xff1d,0xff1e,0xff1f};
 		char* mids[] = {"H4SMK 7 Port Hub","Serial Converter","JTAG adapter","IronLogic RFID Adapter [Z-2 USB]","FT232 USB-Serial (UART) IC",
 		"Lumel PD12","Serial Converter","Serial Converter","Serial Converter","FT2232C Dual USB-UART/FIFO IC",
 		"FT4232H Quad HS USB-UART/FIFO IC","FT232H Single HS USB-UART/FIFO IC","Bridge(I2C/SPI/UART/FIFO)","Dev board JTAG (FT232H based)","4 Port Hub",
@@ -1088,14 +1090,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"Total Phase Aardvark I2C/SPI Host Adapter","EVER Sinline XL Series UPS","PYRAMID Computer GmbH LCD","Elster Unicom III Optical Probe","Segway Robotic Mobility Platforms 200",
 		"Expert ISDN Control USB","USB-RS232 OptoBridge","Expert mouseCLOCK USB II","Precision Clock MSF USB","Expert mouseCLOCK USB II HBG",
 		"Aaronia AG Spectran Spectrum Analyzer","Aaronia AG UBBV Preamplifier","Eclo 1-Wire Adapter","HAMEG HO870 Serial Port","HAMEG HO720 Serial Port",
-		"HAMEG HO730 Serial Port","HAMEG HO820 Serial Port","FT1245BL","Serial Converter 422/485 [Vardaan VEUSB422R3]","Tagsys L-P101",
-		"Asix PRESTO Programmer","Papenmeier Braille-Display","4N-GALAXY Serial Converter","CTI USB-485-Mini","CTI USB-Nano-485",
-		"Suunto Sports Instrument","GW Instek GDS-8x0 Oscilloscope","ZeitControl Cardsystems TagTracer MIFARE","USB-UIRT (Universal Infrared Receiver+Transmitter)","Ant8 Logic Probe",
-		"Matrix Orbital USB Serial","Matrix Orbital MX2 or MX3","Matrix Orbital MX4 or MX5","Matrix Orbital VK/LK202 Family","Matrix Orbital VK/LK204 Family",
-		"Ross-Tech HEX-USB","Crystalfontz CFA-632 USB LCD","Crystalfontz CFA-634 USB LCD","Crystalfontz CFA-633 USB LCD","Crystalfontz CFA-631 USB LCD",
-		"Crystalfontz CFA-635 USB LCD","SEMC DSS-20/DSS-25 SyncStation","ShipModul MiniPlex-4xUSB NMEA Multiplexer","ShipModul MiniPlex-4xUSB-AIS NMEA Multiplexer","ToolHouse LoopBack Adapter",
-		"ScienceScope Logbook ML","Logbook Bus","Logbook Bus","Logbook Bus","ScienceScope Logbook LS",
-		"ScienceScope Logbook HS","Logbook Bus","Logbook Bus"};
+		"HAMEG HO730 Serial Port","HAMEG HO820 Serial Port","FT1245BL","Serial Converter 422/485 [Vardaan VEUSB422R3]","SPROG Decoder Programmer",
+		"SPROG-DCC CAN-USB","Tagsys L-P101","Asix PRESTO Programmer","Papenmeier Braille-Display","4N-GALAXY Serial Converter",
+		"CTI USB-485-Mini","CTI USB-Nano-485","Suunto Sports Instrument","GW Instek GDS-8x0 Oscilloscope","ZeitControl Cardsystems TagTracer MIFARE",
+		"USB-UIRT (Universal Infrared Receiver+Transmitter)","Ant8 Logic Probe","Matrix Orbital USB Serial","Matrix Orbital MX2 or MX3","Matrix Orbital MX4 or MX5",
+		"Matrix Orbital VK/LK202 Family","Matrix Orbital VK/LK204 Family","Ross-Tech HEX-USB","Crystalfontz CFA-632 USB LCD","Crystalfontz CFA-634 USB LCD",
+		"Crystalfontz CFA-633 USB LCD","Crystalfontz CFA-631 USB LCD","Crystalfontz CFA-635 USB LCD","SEMC DSS-20/DSS-25 SyncStation","ShipModul MiniPlex-4xUSB NMEA Multiplexer",
+		"ShipModul MiniPlex-4xUSB-AIS NMEA Multiplexer","ToolHouse LoopBack Adapter","ScienceScope Logbook ML","Logbook Bus","Logbook Bus",
+		"Logbook Bus","ScienceScope Logbook LS","ScienceScope Logbook HS","Logbook Bus","Logbook Bus"
+		};
 		InsertProducts(0x0403, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1115,7 +1118,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	{
 		DWORD mid[] = {0x0011,0x0012,0x0014,0x0019,0x001a,0x0025,0x0027,0x002c,0x0034,0x003f,0x0040,0x004e,0x004f,0x0050,0x0058,0x0059,0x005a,0x006a,0x007d,0x007e,
 		0x0081,0x0082,0x0094,0x0095,0x00a9,0x00aa,0x00ab,0x00ac,0x00ae,0x00af,0x00b0,0x00b2,0x00c0,0x00f7,0x011d,0x0203,0x021d,0x0248,0x0249,0x02b4,
-		0x02b6,0x0300,0x0301,0x55aa,0x55ab,0x8010,0x8011,0xefbe,0xf0be};
+		0x02b6,0x02bc,0x0300,0x0301,0x55aa,0x55ab,0x8010,0x8011,0xefbe,0xf0be};
 		char* mids[] = {"PC98 Series Layout Keyboard Mouse","ATerm IT75DSU ISDN TA","Japanese Keyboard","109 Japanese Keyboard with Bus-Powered Hub","PC98 Series Layout Keyboard with Bus-Powered Hub",
 		"Mini Keyboard with Bus-Powered Hub","MultiSync Monitor","Clik!-USB Drive","109 Japanese Keyboard with One-touch start buttons","Wireless Keyboard with One-touch start buttons",
 		"Floppy","SuperScript 1400 Series","Wireless Keyboard with One-touch start buttons","7-port hub","HighSpeed Hub",
@@ -1124,8 +1127,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"AtermITX72 128K Support Standard","AtermITX62 128K Support Standard","AtermIT42 128K Support Standard","INSMATEV70G-MAX Standard","AtermITX70 128K Support Standard",
 		"AtermITX80 128K Support Standard","AtermITX80D 128K Support Standard","Wireless Remocon","Smart Display PK-SD10","e228 Mobile Phone",
 		"HID Audio Controls","Aterm WL54SU2 802.11g Wireless Adapter [Atheros AR5523]","Aterm PA-WL54GU","Aterm WL300NU-G","Aterm WL300NU-AG",
-		"Aterm WL300NU-GS 802.11n Wireless Adapter","LifeTouch Note","LifeTouch Note (debug mode)","Hub","Hub [iMac/iTouch kbd]",
-		"Intellibase Hub","Intellibase Hub","P!cty 900 [HP DJ]","P!cty 920 [HP DJ 812c]"};
+		"Aterm WL300NU-GS 802.11n Wireless Adapter","Computer Monitor","LifeTouch Note","LifeTouch Note (debug mode)","Hub",
+		"Hub [iMac/iTouch kbd]","Intellibase Hub","Intellibase Hub","P!cty 900 [HP DJ]","P!cty 920 [HP DJ 812c]"
+		};
 		InsertProducts(0x0409, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1310,14 +1314,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0423, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0acd,0x0fdc,0x10cd,0x2020,0x20cd,0x20fc,0x2228,0x223a,0x2503,0x2504,0x2507,0x2512,0x2513,0x2514,0x2517,0x2524,0x2602,0x2640,0x4060,
-		0x4064,0x7500,0x9512,0x9514,0xa700,0xec00};
+		DWORD mid[] = {0x0001,0x0acd,0x0fdc,0x10cd,0x2020,0x20cd,0x20fc,0x2228,0x223a,0x2503,0x2504,0x2507,0x2512,0x2513,0x2514,0x2517,0x2524,0x2602,0x2640,0x2660,
+		0x4060,0x4064,0x7500,0x9512,0x9514,0xa700,0xec00};
 		char* mids[] = {"Integrated Hub","Sitecom Internal Multi Memory reader/writer MD-005","Floppy","Sitecom Internal Multi Memory reader/writer MD-005","USB Hub",
 		"Sitecom Internal Multi Memory reader/writer MD-005","6-in-1 Card Reader","9-in-2 Card Reader","8-in-1 Card Reader","USB 2.0 Hub",
 		"USB 2.0 Hub","hub","USB 2.0 Hub","2.0 Hub","USB 2.0 Hub",
-		"Hub","USB MultiSwitch Hub","USB 2.0 Hub","USB 2.0 Hub","Ultra Fast Media Reader",
-		"Ultra Fast Media Reader","LAN7500 Ethernet 10/100/1000 Adapter","SMC9512/9514 USB Hub","SMC9514 Hub","2 Port Hub",
-		"SMSC9512/9514 Fast Ethernet Adapter"};
+		"Hub","USB MultiSwitch Hub","USB 2.0 Hub","USB 2.0 Hub","Hub",
+		"Ultra Fast Media Reader","Ultra Fast Media Reader","LAN7500 Ethernet 10/100/1000 Adapter","SMC9512/9514 USB Hub","SMC9514 Hub",
+		"2 Port Hub","SMSC9512/9514 Fast Ethernet Adapter"};
 		InsertProducts(0x0424, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1467,8 +1471,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0451, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0021,0x0050,0x0051};
-		char* mids[] = {"HID Monitor Controls","Diamond Pro 900u CRT Monitor","Integrated Hub"};
+		DWORD mid[] = {0x0021,0x0050,0x0051,0x0100};
+		char* mids[] = {"HID Monitor Controls","Diamond Pro 900u CRT Monitor","Integrated Hub","Control Panel for Leica TCS SP5"};
 		InsertProducts(0x0452, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1483,7 +1487,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x0150,0x0151,0x0162,0x0163,0x0817,0x5401};
-		char* mids[] = {"Super Talent 1GB Flash Drive","Super Flash 1GB / GXT  64MB Flash Drive","SiS162 usb Wireless LAN Adapter","802.11 Wireless LAN Adapter","SiS-184-ASUS-4352.17 touch panel",
+		char* mids[] = {"Super Talent 1GB Flash Drive","Super Flash 1GB / GXT  64MB Flash Drive","SiS162 usb Wireless LAN Adapter","SiS163U 802.11 Wireless LAN Adapter","SiS-184-ASUS-4352.17 touch panel",
 		"Wireless Adapter RO80211GS-USB"};
 		InsertProducts(0x0457, mid, mids, ARRAYSIZE(mid));
 	}
@@ -1647,98 +1651,98 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x0082,0x0200,0x0203,0x0301,0x0401,0x0402,0x040f,0x0430,0x0801,0x0802,0x0804,0x0805,0x0807,0x0808,0x0809,0x080a,0x080f,0x0810,0x0819,0x081b,
-		0x081d,0x0820,0x0821,0x0825,0x0828,0x082d,0x0830,0x0840,0x0843,0x0850,0x0870,0x0890,0x0892,0x0894,0x0895,0x0896,0x0897,0x0899,0x089d,0x08a0,
-		0x08a1,0x08a2,0x08a3,0x08a6,0x08a7,0x08a9,0x08aa,0x08ac,0x08ad,0x08ae,0x08af,0x08b0,0x08b1,0x08b2,0x08b3,0x08b4,0x08b5,0x08b9,0x08bd,0x08c0,
-		0x08c1,0x08c2,0x08c3,0x08c5,0x08c6,0x08c7,0x08c9,0x08ca,0x08cb,0x08cc,0x08ce,0x08cf,0x08d0,0x08d7,0x08d8,0x08d9,0x08da,0x08dd,0x08e0,0x08e1,
-		0x08f0,0x08f1,0x08f2,0x08f3,0x08f4,0x08f5,0x08f6,0x0900,0x0901,0x0903,0x0905,0x0910,0x0920,0x0921,0x0922,0x0928,0x0929,0x092a,0x092b,0x092c,
-		0x092d,0x092e,0x092f,0x0950,0x0960,0x0970,0x0990,0x0991,0x0992,0x0994,0x09a1,0x09a2,0x09a4,0x09a5,0x09a6,0x09b0,0x09b2,0x09c0,0x09c1,0x0a01,
-		0x0a02,0x0a03,0x0a04,0x0a07,0x0a0b,0x0a0c,0x0a13,0x0a17,0x0a1f,0x0a29,0x0a38,0x0a4d,0x0b02,0x8801,0xb305,0xbfe4,0xc000,0xc001,0xc002,0xc003,
-		0xc004,0xc005,0xc00b,0xc00c,0xc00d,0xc00e,0xc00f,0xc011,0xc012,0xc014,0xc015,0xc016,0xc018,0xc019,0xc01a,0xc01b,0xc01c,0xc01d,0xc01e,0xc024,
-		0xc025,0xc030,0xc031,0xc032,0xc033,0xc034,0xc035,0xc036,0xc037,0xc038,0xc03d,0xc03e,0xc03f,0xc040,0xc041,0xc042,0xc043,0xc044,0xc045,0xc046,
-		0xc047,0xc048,0xc049,0xc050,0xc051,0xc053,0xc054,0xc058,0xc05a,0xc05b,0xc05d,0xc05f,0xc061,0xc062,0xc063,0xc064,0xc066,0xc068,0xc069,0xc06a,
-		0xc06b,0xc06c,0xc077,0xc101,0xc110,0xc111,0xc112,0xc11f,0xc121,0xc122,0xc124,0xc125,0xc126,0xc12b,0xc201,0xc202,0xc207,0xc208,0xc209,0xc20a,
-		0xc20b,0xc20c,0xc20d,0xc20e,0xc211,0xc212,0xc213,0xc214,0xc215,0xc216,0xc218,0xc219,0xc21a,0xc21c,0xc21d,0xc21e,0xc21f,0xc221,0xc222,0xc223,
-		0xc225,0xc226,0xc227,0xc228,0xc229,0xc22a,0xc22b,0xc22d,0xc22e,0xc245,0xc246,0xc248,0xc24a,0xc24d,0xc24e,0xc281,0xc283,0xc285,0xc286,0xc287,
-		0xc291,0xc293,0xc294,0xc295,0xc298,0xc299,0xc29b,0xc29c,0xc2a0,0xc2a1,0xc301,0xc302,0xc303,0xc305,0xc307,0xc308,0xc309,0xc30a,0xc30b,0xc30c,
-		0xc30d,0xc30e,0xc30f,0xc311,0xc312,0xc313,0xc315,0xc316,0xc317,0xc318,0xc31a,0xc31b,0xc31c,0xc31d,0xc401,0xc402,0xc403,0xc404,0xc408,0xc501,
-		0xc502,0xc503,0xc504,0xc505,0xc506,0xc508,0xc509,0xc50a,0xc50b,0xc50c,0xc50d,0xc50e,0xc510,0xc512,0xc513,0xc514,0xc515,0xc517,0xc518,0xc51a,
-		0xc51b,0xc521,0xc525,0xc526,0xc529,0xc52b,0xc52d,0xc52e,0xc52f,0xc532,0xc603,0xc605,0xc606,0xc621,0xc623,0xc625,0xc626,0xc627,0xc628,0xc629,
-		0xc62b,0xc640,0xc702,0xc703,0xc704,0xc705,0xc707,0xc708,0xc709,0xc70a,0xc70b,0xc70c,0xc70d,0xc70e,0xc70f,0xc712,0xc714,0xc715,0xc71a,0xc71d,
-		0xc71f,0xc720,0xca03,0xca04,0xcab1,0xd001};
+		0x081d,0x0820,0x0821,0x0825,0x0828,0x082d,0x0830,0x0837,0x0840,0x0843,0x0850,0x0870,0x0890,0x0892,0x0894,0x0895,0x0896,0x0897,0x0899,0x089d,
+		0x08a0,0x08a1,0x08a2,0x08a3,0x08a6,0x08a7,0x08a9,0x08aa,0x08ac,0x08ad,0x08ae,0x08af,0x08b0,0x08b1,0x08b2,0x08b3,0x08b4,0x08b5,0x08b9,0x08bd,
+		0x08c0,0x08c1,0x08c2,0x08c3,0x08c5,0x08c6,0x08c7,0x08c9,0x08ca,0x08cb,0x08cc,0x08ce,0x08cf,0x08d0,0x08d7,0x08d8,0x08d9,0x08da,0x08dd,0x08e0,
+		0x08e1,0x08f0,0x08f1,0x08f2,0x08f3,0x08f4,0x08f5,0x08f6,0x0900,0x0901,0x0903,0x0905,0x0910,0x0920,0x0921,0x0922,0x0928,0x0929,0x092a,0x092b,
+		0x092c,0x092d,0x092e,0x092f,0x0950,0x0960,0x0970,0x0990,0x0991,0x0992,0x0994,0x09a1,0x09a2,0x09a4,0x09a5,0x09a6,0x09b0,0x09b2,0x09c0,0x09c1,
+		0x0a01,0x0a02,0x0a03,0x0a04,0x0a07,0x0a0b,0x0a0c,0x0a13,0x0a17,0x0a1f,0x0a29,0x0a38,0x0a4d,0x0b02,0x8801,0xb305,0xbfe4,0xc000,0xc001,0xc002,
+		0xc003,0xc004,0xc005,0xc00b,0xc00c,0xc00d,0xc00e,0xc00f,0xc011,0xc012,0xc014,0xc015,0xc016,0xc018,0xc019,0xc01a,0xc01b,0xc01c,0xc01d,0xc01e,
+		0xc024,0xc025,0xc030,0xc031,0xc032,0xc033,0xc034,0xc035,0xc036,0xc037,0xc038,0xc03d,0xc03e,0xc03f,0xc040,0xc041,0xc042,0xc043,0xc044,0xc045,
+		0xc046,0xc047,0xc048,0xc049,0xc050,0xc051,0xc053,0xc054,0xc058,0xc05a,0xc05b,0xc05d,0xc05f,0xc061,0xc062,0xc063,0xc064,0xc066,0xc068,0xc069,
+		0xc06a,0xc06b,0xc06c,0xc077,0xc101,0xc110,0xc111,0xc112,0xc11f,0xc121,0xc122,0xc124,0xc125,0xc126,0xc12b,0xc201,0xc202,0xc207,0xc208,0xc209,
+		0xc20a,0xc20b,0xc20c,0xc20d,0xc20e,0xc211,0xc212,0xc213,0xc214,0xc215,0xc216,0xc218,0xc219,0xc21a,0xc21c,0xc21d,0xc21e,0xc21f,0xc221,0xc222,
+		0xc223,0xc225,0xc226,0xc227,0xc228,0xc229,0xc22a,0xc22b,0xc22d,0xc22e,0xc245,0xc246,0xc248,0xc24a,0xc24d,0xc24e,0xc281,0xc283,0xc285,0xc286,
+		0xc287,0xc291,0xc293,0xc294,0xc295,0xc298,0xc299,0xc29b,0xc29c,0xc2a0,0xc2a1,0xc301,0xc302,0xc303,0xc305,0xc307,0xc308,0xc309,0xc30a,0xc30b,
+		0xc30c,0xc30d,0xc30e,0xc30f,0xc311,0xc312,0xc313,0xc315,0xc316,0xc317,0xc318,0xc31a,0xc31b,0xc31c,0xc31d,0xc401,0xc402,0xc403,0xc404,0xc408,
+		0xc501,0xc502,0xc503,0xc504,0xc505,0xc506,0xc508,0xc509,0xc50a,0xc50b,0xc50c,0xc50d,0xc50e,0xc510,0xc512,0xc513,0xc514,0xc515,0xc517,0xc518,
+		0xc51a,0xc51b,0xc521,0xc525,0xc526,0xc529,0xc52b,0xc52d,0xc52e,0xc52f,0xc532,0xc534,0xc603,0xc605,0xc606,0xc621,0xc623,0xc625,0xc626,0xc627,
+		0xc628,0xc629,0xc62b,0xc640,0xc702,0xc703,0xc704,0xc705,0xc707,0xc708,0xc709,0xc70a,0xc70b,0xc70c,0xc70d,0xc70e,0xc70f,0xc712,0xc714,0xc715,
+		0xc71a,0xc71d,0xc71f,0xc720,0xca03,0xca04,0xcab1,0xd001};
 		char* mids[] = {"Acer Aspire 5672 Webcam","WingMan Extreme Joystick","M2452 Keyboard","M4848 Mouse","HP PageScan",
 		"NEC PageScan","Logitech/Storm PageScan","Mic (Cordless)","QuickCam Home","Webcam C200",
 		"Webcam C250","Webcam C300","Webcam B500","Webcam C600","Webcam Pro 9000",
 		"Portable Webcam C905","Webcam C120","QuickCam Pro","Webcam C210","Webcam C310",
 		"HD Webcam C510","QuickCam VC","HD Webcam C910","Webcam C270","HD Webcam B990",
-		"HD Pro Webcam C920","QuickClip","QuickCam Express","Webcam C930e","QuickCam Web",
-		"QuickCam Express","QuickCam Traveler","OrbiCam","CrystalCam","QuickCam for Dell Notebooks",
-		"OrbiCam","QuickCam for Dell Notebooks","QuickCam for Dell Notebooks","QuickCam E2500 series","QuickCam IM",
-		"QuickCam IM with sound","Labtec Webcam Pro","QuickCam QuickCam Chat","QuickCam IM","QuickCam Image",
-		"Notebook Deluxe","Labtec Notebooks","QuickCam Cool","QuickCam Communicate STX","QuickCam for Notebooks",
-		"QuickCam Easy/Cool","QuickCam 3000 Pro [pwc]","QuickCam Notebook Pro","QuickCam Pro 4000","QuickCam Zoom",
-		"QuickCam Zoom","QuickCam Sphere","QuickCam IM","Microphone (Pro 4000)","QuickCam Pro 3000",
-		"QuickCam Fusion","QuickCam PTZ","Camera (Notebooks Pro)","QuickCam Pro 5000","QuickCam for DELL Notebooks",
-		"QuickCam OEM Cisco VT Camera II","QuickCam Ultra Vision","Mic (Fusion)","Mic (Notebooks Pro)","Mic (PTZ)",
-		"QuickCam Pro 5000","QuickCam UpdateMe","QuickCam Express","QuickCam Communicate STX","QuickCam for Notebook Deluxe",
-		"QuickCam IM/Connect","QuickCam Messanger","QuickCam for Notebooks","QuickCam Express","Labtec Webcam",
-		"QuickCam Messenger","QuickCam Express","Microphone (Messenger)","QuickCam Express","Labtec Webcam",
-		"QuickCam Messenger Communicate","QuickCam Messenger Plus","ClickSmart 310","ClickSmart 510","ClickSmart 820",
-		"ClickSmart 820","QuickCam Cordless","QuickCam Express","Labtec Webcam","QuickCam Live",
-		"QuickCam Express","Labtec Webcam Pro","QuickCam for Notebooks","Labtec Webcam Plus","QuickCam Chat",
-		"QuickCam Express / Go","QuickCam Chat","QuickCam Express Plus","Pocket Camera","ClickSmart 420",
-		"Pocket750","QuickCam Pro 9000","QuickCam Pro for Notebooks","QuickCam Communicate Deluxe","QuickCam Orbit/Sphere AF",
-		"QuickCam Communicate MP/S5500","QuickCam Communicate Deluxe/S7500","QuickCam E 3500","Quickcam 3000 For Business","QuickCam Vision Pro",
-		"Acer OrbiCam","Fujitsu Webcam","QuickCam for Dell Notebooks Mic","QuickCam Deluxe for Notebooks","USB Headset",
-		"Premium Stereo USB Headset 350","Logitech USB Microphone","V20 portable speakers (USB powered)","Z-10 Speakers","ClearChat Pro USB",
-		"Clear Chat Comfort USB Headset","Z-5 Speakers","G330 Headset","G930","H600 [Wireless Headset]",
-		"Headset H340","G430 Surround Sound Gaming Headset","C-UV35 [Bluetooth Mini-Receiver] (HID proxy mode)","Video Camera","BT Mini-Receiver",
-		"Premium Optical Wheel Mouse","N43 [Pilot Mouse]","N48/M-BB48 [FirstMouse Plus]","M-BA47 [MouseMan Plus]","MouseMan",
-		"WingMan Gaming Mouse","WingMan Gaming Wheel Mouse","MouseMan Wheel","Optical Wheel Mouse","MouseMan Wheel+",
-		"M-BJ58/M-BJ69 Optical Wheel Mouse","MouseMan Traveler/Mobile","Optical MouseMan","Mouseman Dual Optical","Corded Workstation Mouse",
-		"Corded Workstation Mouse","Optical Wheel Mouse","Optical Wheel Mouse","Optical Tilt Wheel Mouse","M-BQ85 Optical Wheel Mouse",
-		"MX310 Optical Mouse","Optical Mouse","MX510 Optical Mouse","MX518 Optical Mouse","MX300 Optical Mouse",
-		"MX500 Optical Mouse","iFeel Mouse","iFeel Mouse+","MouseMan iFeel","iFeel MouseMan+",
-		"MouseMan Optical","Mouse","Mouse","Mouse","Mouse",
-		"M-BT96a Pilot Optical Mouse","Premium Optical Wheel Mouse (M-BT58)","M-BT85 [UltraX Optical Mouse]","Corded Tilt-Wheel Mouse","G5 Laser Mouse",
-		"G3 Laser Mouse","MX320/MX400 Laser Mouse","LX3 Optical Mouse","Optical Mouse","RX1000 Laser Mouse",
-		"Laser Mouse M-UAL120","G9 Laser Mouse","G5 Laser Mouse","RX 250 Optical Mouse","G3 (MX518) Optical Mouse",
-		"Laser Mouse","Bluetooth mini-receiver","M115 Mouse","M90/M100 Optical Mouse","M-U0004 810-001317 [B110 Optical USB Mouse]",
-		"Optical Mouse","M115 Optical Mouse","RX1500 Laser Mouse","M-UAS144 [LS1 Laser Mouse]","DELL Laser Mouse",
-		"M110 corded optical mouse (M-B0001)","G9x Laser Mouse","G500 Laser Mouse","M500 Laser Mouse","USB Optical Mouse",
-		"G700 Wireless Gaming Mouse","Optical Mouse","M105 Optical Mouse","UltraX Media Remote","Harmony 785/885 Remote",
-		"Harmony 525 Remote","Harmony 890 Remote","Harmony 900/1100 Remote","Harmony One Remote","Harmony 650/700 Remote",
-		"Harmony 300 Remote","Harmony 200 Remote","Harmony Link","Harmony Touch Remote","WingMan Extreme Joystick with Throttle",
-		"WingMan Formula","WingMan Extreme Digital 3D","WingMan Gamepad Extreme","WingMan Gamepad","WingMan RumblePad",
-		"WingMan Action Pad","WingMan Precision","WingMan Attack 2","WingMan Formula GP","iTouch Cordless Reciever",
-		"WingMan Extreme Digital 3D","J-UH16 (Freedom 2.4 Cordless Joystick)","ATK3 (Attack III Joystick)","Extreme 3D Pro","Dual Action Gamepad",
-		"Logitech RumblePad 2 USB","Cordless RumblePad 2","Precision Gamepad","G13 Advanced Gameboard","F310 Gamepad [XInput Mode]",
-		"F510 Gamepad [XInput Mode]","F710 Wireless Gamepad [XInput Mode]","G11/G15 Keyboard / Keyboard","G15 Keyboard / LCD","G11/G15 Keyboard / USB Hub",
-		"G11/G15 Keyboard / G keys","G15 Refresh Keyboard","G15 Refresh Keyboard","G19 Gaming Keyboard","G19 Gaming Keyboard Macro Interface",
-		"Gaming Keyboard G110","Gaming Keyboard G110 G-keys","G510 Gaming Keyboard","G510 Gaming Keyboard onboard audio","G400 Optical Mouse",
-		"Gaming Mouse G300","G105 Gaming Keyboard","G600 Gaming Mouse","G710 Gaming Keyboard","G500s Laser Gaming Mouse",
-		"WingMan Force","WingMan Force 3D","WingMan Strike Force 3D","Force 3D Pro","Flight System G940",
-		"WingMan Formula Force","WingMan Formula Force GP","Driving Force","Momo Force Steering Wheel","Driving Force Pro",
-		"G25 Racing Wheel","G27 Racing Wheel","Speed Force Wireless Wheel for Wii","Wingman Force Feedback Mouse","WingMan Force Feedback Mouse",
-		"iTouch Keyboard","iTouch Pro Keyboard","iTouch Keyboard","Internet Keyboard","Internet Keyboard",
-		"Internet Navigator Keyboard","Internet Keyboard","iTouch Composite","NetPlay Keyboard","Internet Keys (X)",
-		"Internet Keys","UltraX Keyboard (Y-BL49)","Logicool HID-Compliant Keyboard (106 key)","Y-UF49 [Internet Pro Keyboard]","DeLuxe 250 Keyboard",
-		"Internet 350 Keyboard","Classic Keyboard 200","HID-Compliant Keyboard","Wave Corded Keyboard","Illuminated Keyboard",
-		"Comfort Wave 450","Compact Keyboard K300","Keyboard K120","Media Keyboard K200","TrackMan Marble Wheel",
-		"Marble Mouse (2-button)","Turbo TrackMan Marble FX","TrackMan Wheel","Marble Mouse (4-button)","Cordless Mouse Receiver",
-		"Cordless Mouse & iTouch Keys","Cordless Mouse+Keyboard Receiver","Cordless Mouse+Keyboard Receiver","Cordless Mouse+Keyboard Receiver","MX700 Cordless Mouse Receiver",
-		"Cordless Trackball","Cordless Keyboard & Mouse","Cordless Mouse","Cordless Desktop Optical","Cordless Desktop S510",
-		"Cordless Mouse","Cordless Mouse Receiver","Cordless Mouse","LX-700 Cordless Desktop Receiver","MX3000 Cordless Desktop Receiver",
-		"Cordless Mouse","Cordless 2.4 GHz Presenter Presentation remote control","LX710 Cordless Desktop Laser","MX610 Laser Cordless Mouse","MX Revolution/G7 Cordless Mouse",
-		"V220 Cordless Optical Mouse for Notebooks","Cordless Mouse Receiver","MX Revolution Cordless Mouse","Nano Receiver","Logitech Keyboard + Mice",
-		"Unifying Receiver","R700 Remote Presenter receiver","MK260 Wireless Combo Receiver","Unifying Receiver","Unifying Receiver",
-		"3Dconnexion Spacemouse Plus XT","3Dconnexion CADman","3Dconnexion Spacemouse Classic","3Dconnexion Spaceball 5000","3Dconnexion Space Traveller 3D Mouse",
-		"3Dconnexion Space Pilot 3D Mouse","3Dconnexion Space Navigator 3D Mouse","3Dconnexion Space Explorer 3D Mouse","3Dconnexion Space Navigator for Notebooks","3Dconnexion SpacePilot Pro 3D Mouse",
-		"3Dconnexion Space Mouse Pro","NuLOOQ navigator","Cordless Presenter","Elite Keyboard Y-RP20 + Mouse MX900 (Bluetooth)","diNovo Wireless Desktop",
-		"MX900 Bluetooth Wireless Hub (C-UJ16A)","Bluetooth wireless hub","Bluetooth wireless hub","BT Mini-Receiver (HCI mode)","MX5000 Cordless Desktop",
-		"BT Mini-Receiver (HID proxy mode)","BT Mini-Receiver (HID proxy mode)","Bluetooth wireless hub","MX1000 Bluetooth Laser Mouse","Bluetooth wireless hub",
-		"Bluetooth wireless hub","diNovo Edge Keyboard","Bluetooth wireless hub","Bluetooth wireless hub","Bluetooth wireless hub",
-		"diNovo Mini Wireless Keyboard","Bluetooth wireless hub","MOMO Racing","Formula Vibration Feedback Wheel","Cordless Keyboard for Wii HID Receiver",
-		"QuickCam Pro"};
+		"HD Pro Webcam C920","QuickClip","BCC950 ConferenceCam","QuickCam Express","Webcam C930e",
+		"QuickCam Web","QuickCam Express","QuickCam Traveler","OrbiCam","CrystalCam",
+		"QuickCam for Dell Notebooks","OrbiCam","QuickCam for Dell Notebooks","QuickCam for Dell Notebooks","QuickCam E2500 series",
+		"QuickCam IM","QuickCam IM with sound","Labtec Webcam Pro","QuickCam QuickCam Chat","QuickCam IM",
+		"QuickCam Image","Notebook Deluxe","Labtec Notebooks","QuickCam Cool","QuickCam Communicate STX",
+		"QuickCam for Notebooks","QuickCam Easy/Cool","QuickCam 3000 Pro [pwc]","QuickCam Notebook Pro","QuickCam Pro 4000",
+		"QuickCam Zoom","QuickCam Zoom","QuickCam Sphere","QuickCam IM","Microphone (Pro 4000)",
+		"QuickCam Pro 3000","QuickCam Fusion","QuickCam PTZ","Camera (Notebooks Pro)","QuickCam Pro 5000",
+		"QuickCam for DELL Notebooks","QuickCam OEM Cisco VT Camera II","QuickCam Ultra Vision","Mic (Fusion)","Mic (Notebooks Pro)",
+		"Mic (PTZ)","QuickCam Pro 5000","QuickCam UpdateMe","QuickCam Express","QuickCam Communicate STX",
+		"QuickCam for Notebook Deluxe","QuickCam IM/Connect","QuickCam Messanger","QuickCam for Notebooks","QuickCam Express",
+		"Labtec Webcam","QuickCam Messenger","QuickCam Express","Microphone (Messenger)","QuickCam Express",
+		"Labtec Webcam","QuickCam Messenger Communicate","QuickCam Messenger Plus","ClickSmart 310","ClickSmart 510",
+		"ClickSmart 820","ClickSmart 820","QuickCam Cordless","QuickCam Express","Labtec Webcam",
+		"QuickCam Live","QuickCam Express","Labtec Webcam Pro","QuickCam for Notebooks","Labtec Webcam Plus",
+		"QuickCam Chat","QuickCam Express / Go","QuickCam Chat","QuickCam Express Plus","Pocket Camera",
+		"ClickSmart 420","Pocket750","QuickCam Pro 9000","QuickCam Pro for Notebooks","QuickCam Communicate Deluxe",
+		"QuickCam Orbit/Sphere AF","QuickCam Communicate MP/S5500","QuickCam Communicate Deluxe/S7500","QuickCam E 3500","Quickcam 3000 For Business",
+		"QuickCam Vision Pro","Acer OrbiCam","Fujitsu Webcam","QuickCam for Dell Notebooks Mic","QuickCam Deluxe for Notebooks",
+		"USB Headset","Premium Stereo USB Headset 350","Logitech USB Microphone","V20 portable speakers (USB powered)","Z-10 Speakers",
+		"ClearChat Pro USB","Clear Chat Comfort USB Headset","Z-5 Speakers","G330 Headset","G930",
+		"H600 [Wireless Headset]","Headset H340","G430 Surround Sound Gaming Headset","C-UV35 [Bluetooth Mini-Receiver] (HID proxy mode)","Video Camera",
+		"BT Mini-Receiver","Premium Optical Wheel Mouse","N43 [Pilot Mouse]","N48/M-BB48 [FirstMouse Plus]","M-BA47 [MouseMan Plus]",
+		"MouseMan","WingMan Gaming Mouse","WingMan Gaming Wheel Mouse","MouseMan Wheel","Optical Wheel Mouse",
+		"MouseMan Wheel+","M-BJ58/M-BJ69 Optical Wheel Mouse","MouseMan Traveler/Mobile","Optical MouseMan","Mouseman Dual Optical",
+		"Corded Workstation Mouse","Corded Workstation Mouse","Optical Wheel Mouse","Optical Wheel Mouse","Optical Tilt Wheel Mouse",
+		"M-BQ85 Optical Wheel Mouse","MX310 Optical Mouse","Optical Mouse","MX510 Optical Mouse","MX518 Optical Mouse",
+		"MX300 Optical Mouse","MX500 Optical Mouse","iFeel Mouse","iFeel Mouse+","MouseMan iFeel",
+		"iFeel MouseMan+","MouseMan Optical","Mouse","Mouse","Mouse",
+		"Mouse","M-BT96a Pilot Optical Mouse","Premium Optical Wheel Mouse (M-BT58)","M-BT85 [UltraX Optical Mouse]","Corded Tilt-Wheel Mouse",
+		"G5 Laser Mouse","G3 Laser Mouse","MX320/MX400 Laser Mouse","LX3 Optical Mouse","Optical Mouse",
+		"RX1000 Laser Mouse","Laser Mouse M-UAL120","G9 Laser Mouse","G5 Laser Mouse","RX 250 Optical Mouse",
+		"G3 (MX518) Optical Mouse","Laser Mouse","Bluetooth mini-receiver","M115 Mouse","M90/M100 Optical Mouse",
+		"M-U0004 810-001317 [B110 Optical USB Mouse]","Optical Mouse","M115 Optical Mouse","RX1500 Laser Mouse","M-UAS144 [LS1 Laser Mouse]",
+		"DELL Laser Mouse","M110 corded optical mouse (M-B0001)","G9x Laser Mouse","G500 Laser Mouse","M500 Laser Mouse",
+		"USB Optical Mouse","G700 Wireless Gaming Mouse","Optical Mouse","M105 Optical Mouse","UltraX Media Remote",
+		"Harmony 785/885 Remote","Harmony 525 Remote","Harmony 890 Remote","Harmony 900/1100 Remote","Harmony One Remote",
+		"Harmony 650/700 Remote","Harmony 300 Remote","Harmony 200 Remote","Harmony Link","Harmony Touch Remote",
+		"WingMan Extreme Joystick with Throttle","WingMan Formula","WingMan Extreme Digital 3D","WingMan Gamepad Extreme","WingMan Gamepad",
+		"WingMan RumblePad","WingMan Action Pad","WingMan Precision","WingMan Attack 2","WingMan Formula GP",
+		"iTouch Cordless Reciever","WingMan Extreme Digital 3D","J-UH16 (Freedom 2.4 Cordless Joystick)","ATK3 (Attack III Joystick)","Extreme 3D Pro",
+		"Dual Action Gamepad","Logitech RumblePad 2 USB","Cordless RumblePad 2","Precision Gamepad","G13 Advanced Gameboard",
+		"F310 Gamepad [XInput Mode]","F510 Gamepad [XInput Mode]","F710 Wireless Gamepad [XInput Mode]","G11/G15 Keyboard / Keyboard","G15 Keyboard / LCD",
+		"G11/G15 Keyboard / USB Hub","G11/G15 Keyboard / G keys","G15 Refresh Keyboard","G15 Refresh Keyboard","G19 Gaming Keyboard",
+		"G19 Gaming Keyboard Macro Interface","Gaming Keyboard G110","Gaming Keyboard G110 G-keys","G510 Gaming Keyboard","G510 Gaming Keyboard onboard audio",
+		"G400 Optical Mouse","Gaming Mouse G300","G105 Gaming Keyboard","G600 Gaming Mouse","G710 Gaming Keyboard",
+		"G500s Laser Gaming Mouse","WingMan Force","WingMan Force 3D","WingMan Strike Force 3D","Force 3D Pro",
+		"Flight System G940","WingMan Formula Force","WingMan Formula Force GP","Driving Force","Momo Force Steering Wheel",
+		"Driving Force Pro","G25 Racing Wheel","G27 Racing Wheel","Speed Force Wireless Wheel for Wii","Wingman Force Feedback Mouse",
+		"WingMan Force Feedback Mouse","iTouch Keyboard","iTouch Pro Keyboard","iTouch Keyboard","Internet Keyboard",
+		"Internet Keyboard","Internet Navigator Keyboard","Internet Keyboard","iTouch Composite","NetPlay Keyboard",
+		"Internet Keys (X)","Internet Keys","UltraX Keyboard (Y-BL49)","Logicool HID-Compliant Keyboard (106 key)","Y-UF49 [Internet Pro Keyboard]",
+		"DeLuxe 250 Keyboard","Internet 350 Keyboard","Classic Keyboard 200","HID-Compliant Keyboard","Wave Corded Keyboard",
+		"Illuminated Keyboard","Comfort Wave 450","Compact Keyboard K300","Keyboard K120","Media Keyboard K200",
+		"TrackMan Marble Wheel","Marble Mouse (2-button)","Turbo TrackMan Marble FX","TrackMan Wheel","Marble Mouse (4-button)",
+		"Cordless Mouse Receiver","Cordless Mouse & iTouch Keys","Cordless Mouse+Keyboard Receiver","Cordless Mouse+Keyboard Receiver","Cordless Mouse+Keyboard Receiver",
+		"MX700 Cordless Mouse Receiver","Cordless Trackball","Cordless Keyboard & Mouse","Cordless Mouse","Cordless Desktop Optical",
+		"Cordless Desktop S510","Cordless Mouse","Cordless Mouse Receiver","Cordless Mouse","LX-700 Cordless Desktop Receiver",
+		"MX3000 Cordless Desktop Receiver","Cordless Mouse","Cordless 2.4 GHz Presenter Presentation remote control","LX710 Cordless Desktop Laser","MX610 Laser Cordless Mouse",
+		"MX Revolution/G7 Cordless Mouse","V220 Cordless Optical Mouse for Notebooks","Cordless Mouse Receiver","MX Revolution Cordless Mouse","Nano Receiver",
+		"Logitech Keyboard + Mice","Unifying Receiver","R700 Remote Presenter receiver","MK260 Wireless Combo Receiver","Unifying Receiver",
+		"Unifying Receiver","Unifying Receiver","3Dconnexion Spacemouse Plus XT","3Dconnexion CADman","3Dconnexion Spacemouse Classic",
+		"3Dconnexion Spaceball 5000","3Dconnexion Space Traveller 3D Mouse","3Dconnexion Space Pilot 3D Mouse","3Dconnexion Space Navigator 3D Mouse","3Dconnexion Space Explorer 3D Mouse",
+		"3Dconnexion Space Navigator for Notebooks","3Dconnexion SpacePilot Pro 3D Mouse","3Dconnexion Space Mouse Pro","NuLOOQ navigator","Cordless Presenter",
+		"Elite Keyboard Y-RP20 + Mouse MX900 (Bluetooth)","diNovo Wireless Desktop","MX900 Bluetooth Wireless Hub (C-UJ16A)","Bluetooth wireless hub","Bluetooth wireless hub",
+		"BT Mini-Receiver (HCI mode)","MX5000 Cordless Desktop","BT Mini-Receiver (HID proxy mode)","BT Mini-Receiver (HID proxy mode)","Bluetooth wireless hub",
+		"MX1000 Bluetooth Laser Mouse","Bluetooth wireless hub","Bluetooth wireless hub","diNovo Edge Keyboard","Bluetooth wireless hub",
+		"Bluetooth wireless hub","Bluetooth wireless hub","diNovo Mini Wireless Keyboard","Bluetooth wireless hub","MOMO Racing",
+		"Formula Vibration Feedback Wheel","Cordless Keyboard for Wii HID Receiver","QuickCam Pro"};
 		InsertProducts(0x046d, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -1846,9 +1850,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x047f, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0004,0x0011,0x0014,0x0100,0xa006,0xa007,0xa009,0xd010};
+		DWORD mid[] = {0x0001,0x0004,0x0011,0x0014,0x0100,0xa006,0xa007,0xa009,0xa00d,0xb001,0xd010};
 		char* mids[] = {"InTouch Module","InTouch Module","InTouch Module","InTouch Module","Stor.E Slim USB 3.0",
-		"External Disk 1.5TB","External Disk USB 3.0","Stor.E Basics","External Disk 3TB"};
+		"External Disk 1.5TB","External Disk USB 3.0","Stor.E Basics","STOR.E BASICS 500GB","Stor.E Partner",
+		"External Disk 3TB"};
 		InsertProducts(0x0480, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2018,12 +2023,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		0x30f5,0x30f6,0x30f8,0x30f9,0x30fa,0x30fc,0x30fd,0x30fe,0x30ff,0x3100,0x310b,0x310e,0x310f,0x3110,0x3115,0x3116,0x3117,0x3119,0x311a,0x311b,
 		0x311c,0x3125,0x3126,0x3127,0x3128,0x312d,0x3136,0x3137,0x3138,0x3139,0x313a,0x3141,0x3142,0x3143,0x3145,0x3146,0x3147,0x3148,0x3149,0x314b,
 		0x314c,0x314d,0x314e,0x314f,0x3150,0x3155,0x315a,0x315b,0x315d,0x315e,0x315f,0x3160,0x3170,0x3171,0x3173,0x3174,0x3175,0x3176,0x3177,0x317a,
-		0x3184,0x3185,0x3186,0x318d,0x318e,0x318f,0x3191,0x3192,0x3193,0x3195,0x3196,0x319a,0x31aa,0x31ab,0x31ad,0x31af,0x31b0,0x31b1,0x31bc,0x31bd,
-		0x31be,0x31bf,0x31c0,0x31c1,0x31c2,0x31c3,0x31c4,0x31cf,0x31dd,0x31df,0x31e0,0x31e1,0x31e4,0x31e5,0x31e6,0x31e7,0x31ea,0x31ee,0x31ef,0x31f0,
-		0x31f1,0x31f2,0x31f3,0x31f4,0x31f5,0x31f6,0x31f7,0x31f8,0x31ff,0x3209,0x320f,0x3210,0x3211,0x3212,0x3214,0x3218,0x3223,0x3224,0x3225,0x3226,
-		0x3227,0x3228,0x3229,0x322a,0x322b,0x322c,0x3233,0x3234,0x3235,0x3236,0x3237,0x3238,0x323b,0x323e,0x323f,0x3240,0x3241,0x3242,0x3243,0x3244,
-		0x3245,0x3247,0x3248,0x3249,0x324a,0x3255,0x3256,0x3258,0x3259,0x325a,0x325b,0x325c,0x325e,0x325f,0x3260,0x3261,0x3262,0x3264,0x3265,0x3268,
-		0x3271,0x3276,0x3277,0x327d,0x3288,0x3289,0x328a};
+		0x3184,0x3185,0x3186,0x318d,0x318e,0x318f,0x3191,0x3192,0x3193,0x3195,0x3196,0x319a,0x319b,0x31aa,0x31ab,0x31ad,0x31af,0x31b0,0x31b1,0x31bc,
+		0x31bd,0x31be,0x31bf,0x31c0,0x31c1,0x31c2,0x31c3,0x31c4,0x31cf,0x31dd,0x31df,0x31e0,0x31e1,0x31e4,0x31e5,0x31e6,0x31e7,0x31ea,0x31ee,0x31ef,
+		0x31f0,0x31f1,0x31f2,0x31f3,0x31f4,0x31f5,0x31f6,0x31f7,0x31f8,0x31ff,0x3209,0x320f,0x3210,0x3211,0x3212,0x3214,0x3218,0x3223,0x3224,0x3225,
+		0x3226,0x3227,0x3228,0x3229,0x322a,0x322b,0x322c,0x3233,0x3234,0x3235,0x3236,0x3237,0x3238,0x323b,0x323e,0x323f,0x3240,0x3241,0x3242,0x3243,
+		0x3244,0x3245,0x3247,0x3248,0x3249,0x324a,0x3255,0x3256,0x3258,0x3259,0x325a,0x325b,0x325c,0x325e,0x325f,0x3260,0x3261,0x3262,0x3263,0x3264,
+		0x3265,0x3268,0x3271,0x3276,0x3277,0x3278,0x327d,0x327f,0x3284,0x3286,0x3288,0x3289,0x328a};
 		char* mids[] = {"BJ Printer Hub","PD Printer Storage","BJC-8200","BJC-3000 Color Printer","BJC-6100",
 		"BJC-6200","BJC-6500","BJC-85","BJC-2110 Color Printer","LR1",
 		"BJC-55","S600 Printer","S400","S450 Printer","S800",
@@ -2106,26 +2111,27 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"PowerShot SD790 IS DIGITAL ELPH / Digital IXUS 90 IS / IXY DIGITAL 95 IS","IXY Digital 25 IS","PowerShot A590","PowerShot A580","PC1267 [Powershot A470]",
 		"Digital IXUS 80 IS (PTP mode)","SELPHY ES2","SELPHY ES20","PowerShot SX100 IS","PowerShot A1000 IS",
 		"PowerShot G10","PowerShot A2000 IS","PowerShot SX110 IS","PowerShot SD990 IS DIGITAL ELPH / Digital IXUS 980 IS / IXY DIGITAL 3000 IS","PowerShot SX1 IS",
-		"PowerShot SD880 IS DIGITAL ELPH / Digital IXUS 870 IS / IXY DIGITAL 920 IS","EOS 7D","SELPHY CP770","SELPHY CP760","PowerShot E1",
-		"SELPHY ES3","SELPHY ES30","SELPHY CP530","PowerShot D10","PowerShot SD960 IS DIGITAL ELPH / Digital IXUS 110 IS / IXY DIGITAL 510 IS",
-		"PowerShot A2100 IS","PowerShot A480","PowerShot SX200 IS","PowerShot SD970 IS DIGITAL ELPH / Digital IXUS 990 IS / IXY DIGITAL 830 IS","PowerShot SD780 IS DIGITAL ELPH / Digital IXUS 100 IS / IXY DIGITAL 210 IS",
-		"PowerShot A1100 IS","PowerShot SD1200 IS DIGITAL ELPH / Digital IXUS 95 IS / IXY DIGITAL 110 IS","EOS Rebel T1i / EOS 500D / EOS Kiss X3","SELPHY CP780","PowerShot G11",
-		"PowerShot SX120 IS","PowerShot S90","PowerShot SX20 IS","Digital IXUS 200 IS","PowerShot SD940 IS DIGITAL ELPH / Digital IXUS 120 IS / IXY DIGITAL 220 IS",
-		"SELPHY CP790","EOS Rebel T2i / EOS 550D / EOS Kiss X4","SELPHY ES40","PowerShot A495","PowerShot A490",
-		"PowerShot A3100 IS / PowerShot A3150 IS","PowerShot A3000 IS","PowerShot Digital ELPH SD1400 IS","PowerShot SD1300 IS / IXUS 105","Powershot SD3500 IS / IXUS 210 IS",
-		"PowerShot SX210 IS","Powershot SD4000 IS / IXUS 300 HS / IXY 30S","Powershot SD4500 IS / IXUS 1000 HS / IXY 50S","Digital IXUS 55","Vixia HF S21 A",
-		"PowerShot G12","Powershot SX30 IS","PowerShot SX130 IS","Powershot S95","SELPHY CP800",
-		"EOS 600D / Rebel T3i (ptp)","PowerShot A3300 IS","PowerShot A3200 IS","PowerShot ELPH 500 HS / IXUS 310 HS","PowerShow A800",
-		"PowerShot ELPH 100 HS / IXUS 115 HS","PowerShot SX230 HS","PowerShot ELPH 300 HS / IXUS 220 HS","PowerShot A2200","Powershot A1200",
-		"PowerShot SX220 HS","PowerShot G1 X","PowerShot SX150 IS","PowerShot ELPH 510 HS / IXUS 1100 HS","PowerShot S100",
-		"PowerShot ELPH 310 HS / IXUS 230 HS","PowerShot SX40 HS","EOS Rebel T4i","PowerShot A1300","PowerShot A810",
-		"PowerShot ELPH 320 HS / IXUS 240 HS","PowerShot ELPH 110 HS / IXUS 125 HS","PowerShot D20","PowerShot A4000 IS","PowerShot SX260 HS",
-		"PowerShot SX240 HS","PowerShot ELPH 520 HS / IXUS 500 HS","PowerShot A3400 IS","PowerShot A2400 IS","PowerShot A2300",
-		"SELPHY CP900","SELPHY CP810","PowerShot G15","PowerShot SX50 HS","PowerShot SX160 IS",
-		"PowerShot S110","PowerShot SX500 IS","PowerShot N","PowerShot SX280 HS","PowerShot SX270 HS",
-		"PowerShot A3500 IS","PowerShot A2600","PowerShot A1400","Powershot ELPH 130 IS / IXUS 140","PowerShot ELPH 330 HS / IXUS 255 HS",
-		"PowerShot A2500","PowerShot SX170 IS","PowerShot SX510 HS","Powershot ELPH 115 IS / IXUS 132","Powershot ELPH 135 / IXUS 145",
-		"PowerShot ELPH 340 HS / IXUS 265 HS","PowerShot ELPH 150 IS / IXUS 155"};
+		"PowerShot SD880 IS DIGITAL ELPH / Digital IXUS 870 IS / IXY DIGITAL 920 IS","EOS 7D","EOS 50D","SELPHY CP770","SELPHY CP760",
+		"PowerShot E1","SELPHY ES3","SELPHY ES30","SELPHY CP530","PowerShot D10",
+		"PowerShot SD960 IS DIGITAL ELPH / Digital IXUS 110 IS / IXY DIGITAL 510 IS","PowerShot A2100 IS","PowerShot A480","PowerShot SX200 IS","PowerShot SD970 IS DIGITAL ELPH / Digital IXUS 990 IS / IXY DIGITAL 830 IS",
+		"PowerShot SD780 IS DIGITAL ELPH / Digital IXUS 100 IS / IXY DIGITAL 210 IS","PowerShot A1100 IS","PowerShot SD1200 IS DIGITAL ELPH / Digital IXUS 95 IS / IXY DIGITAL 110 IS","EOS Rebel T1i / EOS 500D / EOS Kiss X3","SELPHY CP780",
+		"PowerShot G11","PowerShot SX120 IS","PowerShot S90","PowerShot SX20 IS","Digital IXUS 200 IS",
+		"PowerShot SD940 IS DIGITAL ELPH / Digital IXUS 120 IS / IXY DIGITAL 220 IS","SELPHY CP790","EOS Rebel T2i / EOS 550D / EOS Kiss X4","SELPHY ES40","PowerShot A495",
+		"PowerShot A490","PowerShot A3100 IS / PowerShot A3150 IS","PowerShot A3000 IS","PowerShot Digital ELPH SD1400 IS","PowerShot SD1300 IS / IXUS 105",
+		"Powershot SD3500 IS / IXUS 210 IS","PowerShot SX210 IS","Powershot SD4000 IS / IXUS 300 HS / IXY 30S","Powershot SD4500 IS / IXUS 1000 HS / IXY 50S","Digital IXUS 55",
+		"Vixia HF S21 A","PowerShot G12","Powershot SX30 IS","PowerShot SX130 IS","Powershot S95",
+		"SELPHY CP800","EOS 600D / Rebel T3i (ptp)","PowerShot A3300 IS","PowerShot A3200 IS","PowerShot ELPH 500 HS / IXUS 310 HS",
+		"PowerShow A800","PowerShot ELPH 100 HS / IXUS 115 HS","PowerShot SX230 HS","PowerShot ELPH 300 HS / IXUS 220 HS","PowerShot A2200",
+		"Powershot A1200","PowerShot SX220 HS","PowerShot G1 X","PowerShot SX150 IS","PowerShot ELPH 510 HS / IXUS 1100 HS",
+		"PowerShot S100","PowerShot ELPH 310 HS / IXUS 230 HS","PowerShot SX40 HS","EOS Rebel T4i","PowerShot A1300",
+		"PowerShot A810","PowerShot ELPH 320 HS / IXUS 240 HS","PowerShot ELPH 110 HS / IXUS 125 HS","PowerShot D20","PowerShot A4000 IS",
+		"PowerShot SX260 HS","PowerShot SX240 HS","PowerShot ELPH 520 HS / IXUS 500 HS","PowerShot A3400 IS","PowerShot A2400 IS",
+		"PowerShot A2300","SELPHY CP900","SELPHY CP810","PowerShot G15","PowerShot SX50 HS",
+		"PowerShot SX160 IS","PowerShot S110","PowerShot SX500 IS","PowerShot N","PowerShot SX280 HS",
+		"PowerShot SX270 HS","PowerShot A3500 IS","PowerShot A2600","PowerShot SX275 HS","PowerShot A1400",
+		"Powershot ELPH 130 IS / IXUS 140","PowerShot ELPH 330 HS / IXUS 255 HS","PowerShot A2500","PowerShot SX170 IS","PowerShot SX510 HS",
+		"PowerShot S200","Powershot ELPH 115 IS / IXUS 132","EOS Rebel T5 / EOS 1200D / EOS Kiss X70","PowerShot D30","PowerShot SX600 HS",
+		"Powershot ELPH 135 / IXUS 145","PowerShot ELPH 340 HS / IXUS 265 HS","PowerShot ELPH 150 IS / IXUS 155"};
 		InsertProducts(0x04a9, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2168,18 +2174,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x04b3, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0002,0x0033,0x0060,0x0100,0x0101,0x0102,0x0130,0x0306,0x0407,0x0bad,0x1002,0x1006,0x2050,0x2830,0x4235,0x4381,0x4611,0x4616,0x5201,
-		0x5202,0x5500,0x5a9b,0x6370,0x6560,0x6830,0x6831,0x7417,0x8329,0x8613,0x8614,0x861f,0xbca1,0xcc04,0xcc06,0xd5d5,0xde61,0xde64,0xf000,0xf111,
-		0xf115,0xfd13};
+		DWORD mid[] = {0x0001,0x0002,0x0033,0x0060,0x0100,0x0101,0x0102,0x0130,0x0306,0x0407,0x0bad,0x1002,0x1006,0x2050,0x2830,0x3813,0x4235,0x4381,0x4611,0x4616,
+		0x5201,0x5202,0x5500,0x5a9b,0x6370,0x6560,0x6830,0x6831,0x7417,0x8329,0x8613,0x8614,0x861f,0xbca1,0xcc04,0xcc06,0xd5d5,0xde61,0xde64,0xf000,
+		0xf111,0xf115,0xfd13};
 		char* mids[] = {"Mouse","CY7C63x0x Thermometer","Mouse","Wireless optical mouse","Cino FuzzyScan F760-B",
 		"Keyboard/Hub","Keyboard with APM","MyIRC Remote Receiver","Telephone Receiver","Optical Skype Mouse",
 		"MetaGeek Wi-Spy","CY7C63001 R100 FM Radio","Human Interface Device","hub","Opera1 DVB-S (cold state)",
-		"Monitor 02 Driver","SCAPS USC-1 Scanner Controller","Storage Adapter FX2 (CY)","Flash Disk (TPP)","Combi Keyboard-Hub (Hub)",
-		"Combi Keyboard-Hub (Keyboard)","HID->COM RS232 Adapter","Dacal CD/DVD Library D-101/DC-300/DC-016RW","ViewMate Desktop Mouse CC2201","CY7C65640 USB-2.0 \"TetraHub\"",
-		"CY7C68300A EZ-USB AT2 USB 2.0 to ATA/ATAPI","Storage Adapter ISD-300LP (CY)","Wireless PC Lock/Ultra Mouse","USB To keyboard/Mouse Converter","CY7C68013 EZ-USB FX2 USB 2.0 Development Kit",
-		"DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","Anysee E30 USB 2.0 DVB-T Receiver","Barcode Reader","Centor USB RACIA-ALVAR USB PORT","Centor-P RACIA-ALVAR USB PORT",
-		"CY7C63x0x Zoltrix Z-Boxer GamePad","Barcode Reader","Barcode Reader","CY30700 Licorice evaluation board","CY8CKIT-002 PSoC MiniProg3 Rev A Program and debug kit",
-		"PSoC FirstTouch Programmer","Programmable power socket"};
+		"NANO BIOS Programmer","Monitor 02 Driver","SCAPS USC-1 Scanner Controller","Storage Adapter FX2 (CY)","Flash Disk (TPP)",
+		"Combi Keyboard-Hub (Hub)","Combi Keyboard-Hub (Keyboard)","HID->COM RS232 Adapter","Dacal CD/DVD Library D-101/DC-300/DC-016RW","ViewMate Desktop Mouse CC2201",
+		"CY7C65640 USB-2.0 \"TetraHub\"","CY7C68300A EZ-USB AT2 USB 2.0 to ATA/ATAPI","Storage Adapter ISD-300LP (CY)","Wireless PC Lock/Ultra Mouse","USB To keyboard/Mouse Converter",
+		"CY7C68013 EZ-USB FX2 USB 2.0 Development Kit","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","Anysee E30 USB 2.0 DVB-T Receiver","Barcode Reader","Centor USB RACIA-ALVAR USB PORT",
+		"Centor-P RACIA-ALVAR USB PORT","CY7C63x0x Zoltrix Z-Boxer GamePad","Barcode Reader","Barcode Reader","CY30700 Licorice evaluation board",
+		"CY8CKIT-002 PSoC MiniProg3 Rev A Program and debug kit","PSoC FirstTouch Programmer","Programmable power socket"};
 		InsertProducts(0x04b4, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2353,13 +2359,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x04d7, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0002,0x0003,0x000a,0x000b,0x0032,0x0033,0x0036,0x00e0,0x0a04,0x8000,0x8001,0x8101,0x8107,0x9004,0x900a,0xc001,0xf8da,0xfaff,0xfb00,0xfbb2,
-		0xfbba,0xfbbb,0xfc92,0xffef};
+		DWORD mid[] = {0x0002,0x0003,0x000a,0x000b,0x0032,0x0033,0x0036,0x00e0,0x04cd,0x0a04,0x8000,0x8001,0x8101,0x8107,0x9004,0x900a,0xc001,0xf4b5,0xf8da,0xf91c,
+		0xfaff,0xfb00,0xfbb2,0xfbba,0xfbbb,0xfc1e,0xfc92,0xffef};
 		char* mids[] = {"PicoLCD 20x2","PICkit 2 Microcontroller Programmer","CDC RS-232 Emulation Demo","PIC18F2550 (32K Flashable 10 Channel, 10 Bit A/D USB Microcontroller)","PICkit1",
-		"PICkit2","PICkit Serial Analyzer","PIC32 Starter Board","AGP LIN Serial Analyzer","In-Circuit Debugger",
-		"ICD2 in-circuit debugger","PIC24F Starter Kit","Microstick II","Microchip REAL ICE","PICkit3",
-		"PicoLCD 20x4","Hughski Ltd. ColorHug","Dangerous Prototypes BusPirate v4 Bootloader mode","Dangerous Prototypes BusPirate v4","GCUSB-nStep stepper motor controller",
-		"DiscFerret Magnetic Disc Analyser (bootloader mode)","DiscFerret Magnetic Disc Analyser (active mode)","Open Bench Logic Sniffer","PICoPLC [APStech]"};
+		"PICkit2","PICkit Serial Analyzer","PIC32 Starter Board","28Cxxx EEPROM Programmer","AGP LIN Serial Analyzer",
+		"In-Circuit Debugger","ICD2 in-circuit debugger","PIC24F Starter Kit","Microstick II","Microchip REAL ICE",
+		"PICkit3","PicoLCD 20x4","SmartScope","Hughski Ltd. ColorHug","SPROG IIv3",
+		"Dangerous Prototypes BusPirate v4 Bootloader mode","Dangerous Prototypes BusPirate v4","GCUSB-nStep stepper motor controller","DiscFerret Magnetic Disc Analyser (bootloader mode)","DiscFerret Magnetic Disc Analyser (active mode)",
+		"Bachrus Speedometer Interface","Open Bench Logic Sniffer","PICoPLC [APStech]"};
 		InsertProducts(0x04d8, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2443,10 +2450,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		0x4f1f,0x5000,0x5001,0x5002,0x5003,0x5004,0x5005,0x5006,0x500d,0x5010,0x5011,0x5013,0x5015,0x501b,0x5021,0x5026,0x5027,0x502b,0x5032,0x503b,
 		0x503d,0x5041,0x5050,0x5051,0x5055,0x507d,0x507f,0x5080,0x5081,0x5082,0x5083,0x508a,0x508b,0x508c,0x5090,0x5091,0x5092,0x5093,0x5095,0x510f,
 		0x5119,0x511c,0x5121,0x5123,0x5a00,0x5a01,0x5a03,0x5a04,0x5a08,0x5a0f,0x5b01,0x5b02,0x5b03,0x5b04,0x5b05,0x5b11,0x5f00,0x5f01,0x5f02,0x5f03,
-		0x5f04,0x5f05,0x6032,0x6034,0x60b3,0x60c4,0x61b6,0x6601,0x6602,0x6603,0x6611,0x6613,0x6615,0x6617,0x6619,0x661b,0x661e,0x6620,0x6622,0x6624,
-		0x662e,0x6630,0x6632,0x663e,0x663f,0x6640,0x6651,0x6702,0x6708,0x6709,0x6734,0x6759,0x675a,0x675b,0x6772,0x6795,0x6802,0x6806,0x6807,0x681c,
-		0x681d,0x6843,0x684e,0x685b,0x685c,0x685d,0x685e,0x6860,0x6863,0x6865,0x6866,0x6868,0x6875,0x6876,0x6877,0x6888,0x6889,0x689a,0x689e,0x68aa,
-		0x7011,0x7021,0x7061,0x7080,0x7081,0x8001,0xe020,0xe021,0xe022,0xf000,0xff30};
+		0x5f04,0x5f05,0x6032,0x6033,0x6034,0x60b3,0x60c4,0x6124,0x61b6,0x6601,0x6602,0x6603,0x6611,0x6613,0x6615,0x6617,0x6619,0x661b,0x661e,0x6620,
+		0x6622,0x6624,0x662e,0x6630,0x6632,0x663e,0x663f,0x6640,0x6651,0x6702,0x6708,0x6709,0x6734,0x6759,0x675a,0x675b,0x6772,0x6795,0x6802,0x6806,
+		0x6807,0x681c,0x681d,0x6843,0x684e,0x685b,0x685c,0x685d,0x685e,0x6860,0x6863,0x6865,0x6866,0x6868,0x6875,0x6876,0x6877,0x6888,0x6889,0x689a,
+		0x689e,0x68aa,0x7011,0x7021,0x7061,0x7080,0x7081,0x8001,0xe020,0xe021,0xe022,0xf000,0xff30};
 		char* mids[] = {"Kingston Flash Drive (128MB)","Connect3D Flash Drive","Connect3D Flash Drive","E2530 / GT-C3350 Phones (Mass storage mode)","MP3 Player and Recorder",
 		"SDC-200Z","NX100","S2 Portable [JMicron] (500GB)","HX-MU064DA portable harddisk","WIS09ABGN LinkStick Wireless LAN Adapter",
 		"Digital Photo Frame Mass Storage","Digital Photo Frame Mini Monitor","ML-4600","Docuprint P1210","ML-6060 laser printer",
@@ -2475,21 +2482,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"YP-NDU","Yepp MP3 Player","YP-800","YP-90","Meizu M6 MiniPlayer",
 		"Memory Stick Reader/Writer","Memory Stick Reader/Writer","Memory Stick Reader/Writer","Memory Stick Reader/Writer","Memory Stick Reader/Writer",
 		"SEW-2001u Card","NEXiO Sync","NEXiO Sync","NEXiO Sync","NEXiO Sync",
-		"NEXiO Sync","STORY Station 1TB","G2 Portable hard drive","G2 Portable hard drive","M2 Portable Hard Drive",
-		"M2 Portable Hard Drive USB 3.0","M3 Portable Hard Drive 1TB","Mobile Phone","Galaxy","Galaxy",
-		"MITs Sync","MITs Sync","MITs Sync","MITs Sync","MITs Sync",
-		"MITs Sync","Handheld","Handheld","Handheld","Handheld",
-		"MITs Sync","MITs Sync","MITs Sync","D900e Phone","SGH-E720/SGH-E840",
-		"Usb Modem Enumerator","i8510 Innov8","X830","U600 Phone","U600",
-		"Juke","D900e Media Player","D900e Mass Storage","D900e Camera","Standalone LTE device (Trial)",
-		"S5230","Standalone HSPA device","Composite LTE device (Trial)","Composite HSPA device","Galaxy Portal/Spica/S",
-		"Galaxy Portal/Spica Android Phone","E2530 Phone (Samsung Kies mode)","Wave (GT-S8500)","GT-I9100 Phone [Galaxy S II] (mass storage mode)","GT-I9250 Phone [Galaxy Nexus] (Mass storage mode)",
-		"GT-I9100 Phone [Galaxy S II] (Download mode)","GT-I9100 / GT-C3350 Phones (USB Debugging mode)","GT-I9100 Phone [Galaxy S II], GT-I9300 Phone [Galaxy S III], GT-P7500 [Galaxy Tab 10.1] , GT-I9500 [Galaxy S 4]","GT-I9500 [Galaxy S4] / GT-I9250 [Galaxy Nexus] (network tethering)","GT-I9300 Phone [Galaxy S III] (PTP mode)",
-		"GT-I9300 Phone [Galaxy S III] (debugging mode)","Escape Composite driver for Android Phones: Modem+Diagnostic+ADB","GT-B3710 Standalone LTE device (Commercial)","GT-B3710 LTE Modem","Galaxy S",
-		"GT-B3730 Composite LTE device (Commercial)","GT-B3730 Composite LTE device (Commercial)","LTE Storage Driver [CMC2xx]","GT-S5670 [Galaxy Fit]","Reality",
-		"SEW-2003U Card","Bluetooth Device","eHome Infrared Receiver","Anycall SCH-W580","Human Interface Device",
-		"Handheld","SERI E02 SCOM 6200 UMTS Phone","SERI E02 SCOM 6200 Virtual UARTs","SERI E02 SCOM 6200 Flash Load Disk","Intensity 3 (Mass Storage Mode)",
-		"SG_iMON"};
+		"NEXiO Sync","STORY Station 1TB","G2 Portable hard drive","G2 Portable device","G2 Portable hard drive",
+		"M2 Portable Hard Drive","M2 Portable Hard Drive USB 3.0","D3 Station External Hard Drive","M3 Portable Hard Drive 1TB","Mobile Phone",
+		"Galaxy","Galaxy","MITs Sync","MITs Sync","MITs Sync",
+		"MITs Sync","MITs Sync","MITs Sync","Handheld","Handheld",
+		"Handheld","Handheld","MITs Sync","MITs Sync","MITs Sync",
+		"D900e Phone","SGH-E720/SGH-E840","Usb Modem Enumerator","i8510 Innov8","X830",
+		"U600 Phone","U600","Juke","D900e Media Player","D900e Mass Storage",
+		"D900e Camera","Standalone LTE device (Trial)","S5230","Standalone HSPA device","Composite LTE device (Trial)",
+		"Composite HSPA device","Galaxy Portal/Spica/S","Galaxy Portal/Spica Android Phone","E2530 Phone (Samsung Kies mode)","Wave (GT-S8500)",
+		"GT-I9100 Phone [Galaxy S II] (mass storage mode)","GT-I9250 Phone [Galaxy Nexus] (Mass storage mode)","GT-I9100 Phone [Galaxy S II] (Download mode)","GT-I9100 / GT-C3350 Phones (USB Debugging mode)","GT-I9100 Phone [Galaxy S II], GT-I9300 Phone [Galaxy S III], GT-P7500 [Galaxy Tab 10.1] , GT-I9500 [Galaxy S 4]",
+		"GT-I9500 [Galaxy S4] / GT-I9250 [Galaxy Nexus] (network tethering)","GT-I9300 Phone [Galaxy S III] (PTP mode)","GT-I9300 Phone [Galaxy S III] (debugging mode)","Escape Composite driver for Android Phones: Modem+Diagnostic+ADB","GT-B3710 Standalone LTE device (Commercial)",
+		"GT-B3710 LTE Modem","Galaxy S","GT-B3730 Composite LTE device (Commercial)","GT-B3730 Composite LTE device (Commercial)","LTE Storage Driver [CMC2xx]",
+		"GT-S5670 [Galaxy Fit]","Reality","SEW-2003U Card","Bluetooth Device","eHome Infrared Receiver",
+		"Anycall SCH-W580","Human Interface Device","Handheld","SERI E02 SCOM 6200 UMTS Phone","SERI E02 SCOM 6200 Virtual UARTs",
+		"SERI E02 SCOM 6200 Flash Load Disk","Intensity 3 (Mass Storage Mode)","SG_iMON"};
 		InsertProducts(0x04e8, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2504,28 +2511,28 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x04f1, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0002,0x0110,0x0111,0x0112,0x0116,0x0200,0x0201,0x0220,0x0402,0x0403,0x0418,0x0760,0x0841,0x0860,0x1121,0xa001,0xa120,0xa121,0xa122,
-		0xa123,0xa124,0xa128,0xa133,0xa136,0xa204,0xa208,0xa209,0xa20a,0xa20c,0xa210,0xb008,0xb009,0xb010,0xb012,0xb013,0xb015,0xb016,0xb018,0xb021,
-		0xb022,0xb023,0xb024,0xb025,0xb027,0xb028,0xb029,0xb036,0xb044,0xb057,0xb059,0xb064,0xb070,0xb071,0xb083,0xb091,0xb104,0xb107,0xb14c,0xb15c,
-		0xb175,0xb1aa,0xb1b4,0xb1b9,0xb1cf,0xb1d6,0xb1e4,0xb213,0xb217,0xb221,0xb230,0xb257,0xb26b,0xb272,0xb2b0,0xb2b9,0xb2da,0xb2ea,0xb330,0xb354,
-		0xb394};
+		DWORD mid[] = {0x0001,0x0002,0x0110,0x0111,0x0112,0x0116,0x0200,0x0201,0x0220,0x0402,0x0403,0x0418,0x0618,0x0760,0x0841,0x0860,0x1121,0xa001,0xa120,0xa121,
+		0xa122,0xa123,0xa124,0xa128,0xa133,0xa136,0xa204,0xa208,0xa209,0xa20a,0xa20c,0xa210,0xb008,0xb009,0xb010,0xb012,0xb013,0xb015,0xb016,0xb018,
+		0xb021,0xb022,0xb023,0xb024,0xb025,0xb027,0xb028,0xb029,0xb036,0xb044,0xb057,0xb059,0xb064,0xb070,0xb071,0xb083,0xb091,0xb104,0xb107,0xb14c,
+		0xb15c,0xb175,0xb1aa,0xb1b4,0xb1b9,0xb1cf,0xb1d6,0xb1e4,0xb213,0xb217,0xb221,0xb230,0xb257,0xb26b,0xb272,0xb2b0,0xb2b9,0xb2da,0xb2ea,0xb330,
+		0xb354,0xb394};
 		char* mids[] = {"KU-8933 Keyboard","NT68P81 Keyboard","KU-2971 Keyboard","KU-9908 Keyboard","KU-8933 Keyboard with PS/2 Mouse port",
 		"KU-2971/KU-0325 Keyboard","KBR-0108","Gaming Keyboard KPD0250","Wireless HID Receiver","Genius LuxeMate i200 Keyboard",
-		"KU-0420 keyboard","KU-0418 Tactical Pad","Acer KU-0760 Keyboard","HP Multimedia Keyboard","2.4G Multimedia Wireless Kit",
-		"Periboard 717 Mini Wireless Keyboard","E-Video DC-100 Camera","ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)",
-		"ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)","PC Camera (SN9C202 + OV7663 + EEPROM)","Gateway Webcam","LabTec Webcam 5500",
-		"DSC WIA Device (1300)","DSC WIA Device (2320)","Labtec DC-2320","DSC WIA Device (3310)","DSC WIA Device (3320)",
-		"Audio Device","USB 2.0 Camera","Integrated Camera","Integrated Camera","1.3 MPixel UVC Webcam",
-		"USB 2.0 Camera","VGA 24fps UVC Webcam","VGA 30fps UVC Webcam","2M UVC Webcam","ViewSonic 1.3M, USB2.0 Webcam",
-		"Gateway USB 2.0 Webcam","Gateway USB 2.0 Webcam","USB 2.0 Webcam","Camera","Gateway USB 2.0 Webcam",
-		"VGA UVC Webcam","1.3M UVC Webcam","Asus Integrated 0.3M UVC Webcam","Acer CrystalEye Webcam","integrated USB webcam",
-		"CKF7037 HP webcam","CNA7137 Integrated Webcam","Camera","2.0M UVC Webcam / CNF7129","CKF7063 Webcam (HP)",
-		"Webcam","CNF7069 Webcam","CNF7070 Webcam","CNF8050 Webcam","Sony Vaio Integrated Camera",
-		"4-Port Hub","Webcam-101","Lenovo Integrated Camera","Asus Integrated Webcam","Lenovo Integrated Camera",
-		"CNF9055 Toshiba Webcam","Toshiba Integrated Webcam","Fujitsu Integrated Camera","Lenovo Integrated Camera (0.3MP)","integrated camera",
-		"Integrated HP HD Webcam","Lenovo Integrated Camera","Sony Visual Communication Camera","Lenovo EasyCamera","Camera",
-		"Lenovo Integrated Camera UVC","thinkpad t430s camera","Integrated Camera [ThinkPad]","Asus 720p CMOS webcam","UVC 1.00 device HD UVC WebCam",
-		"Integrated Camera"};
+		"KU-0420 keyboard","KU-0418 Tactical Pad","RG-0618U Wireless HID Receiver & KG-0609 Wireless Keyboard with Touchpad","Acer KU-0760 Keyboard","HP Multimedia Keyboard",
+		"2.4G Multimedia Wireless Kit","Periboard 717 Mini Wireless Keyboard","E-Video DC-100 Camera","ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)",
+		"ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)","ORITE CCD Webcam(PC370R)","PC Camera (SN9C202 + OV7663 + EEPROM)","Gateway Webcam",
+		"LabTec Webcam 5500","DSC WIA Device (1300)","DSC WIA Device (2320)","Labtec DC-2320","DSC WIA Device (3310)",
+		"DSC WIA Device (3320)","Audio Device","USB 2.0 Camera","Integrated Camera","Integrated Camera",
+		"1.3 MPixel UVC Webcam","USB 2.0 Camera","VGA 24fps UVC Webcam","VGA 30fps UVC Webcam","2M UVC Webcam",
+		"ViewSonic 1.3M, USB2.0 Webcam","Gateway USB 2.0 Webcam","Gateway USB 2.0 Webcam","USB 2.0 Webcam","Camera",
+		"Gateway USB 2.0 Webcam","VGA UVC Webcam","1.3M UVC Webcam","Asus Integrated 0.3M UVC Webcam","Acer CrystalEye Webcam",
+		"integrated USB webcam","CKF7037 HP webcam","CNA7137 Integrated Webcam","Camera","2.0M UVC Webcam / CNF7129",
+		"CKF7063 Webcam (HP)","Webcam","CNF7069 Webcam","CNF7070 Webcam","CNF8050 Webcam",
+		"Sony Vaio Integrated Camera","4-Port Hub","Webcam-101","Lenovo Integrated Camera","Asus Integrated Webcam",
+		"Lenovo Integrated Camera","CNF9055 Toshiba Webcam","Toshiba Integrated Webcam","Fujitsu Integrated Camera","Lenovo Integrated Camera (0.3MP)",
+		"integrated camera","Integrated HP HD Webcam","Lenovo Integrated Camera","Sony Visual Communication Camera","Lenovo EasyCamera",
+		"Camera","Lenovo Integrated Camera UVC","thinkpad t430s camera","Integrated Camera [ThinkPad]","Asus 720p CMOS webcam",
+		"UVC 1.00 device HD UVC WebCam","Integrated Camera"};
 		InsertProducts(0x04f2, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2545,8 +2552,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		0x0183,0x0184,0x0185,0x0186,0x0187,0x0188,0x018a,0x018c,0x018d,0x018e,0x018f,0x0190,0x0191,0x0192,0x0193,0x0194,0x0195,0x0196,0x0197,0x019a,
 		0x01a2,0x01a3,0x01a4,0x01a5,0x01a6,0x01a7,0x01a8,0x01a9,0x01aa,0x01ab,0x01ae,0x01af,0x01b0,0x01b1,0x01b2,0x01b4,0x01b5,0x01b6,0x01b7,0x01b8,
 		0x01ba,0x01bd,0x01be,0x01bf,0x01c0,0x01c1,0x01c2,0x01c3,0x01c4,0x01c5,0x01ca,0x01ce,0x01cf,0x01d0,0x01d1,0x01d4,0x01d5,0x01d6,0x01df,0x01e0,
-		0x01e1,0x01e2,0x01e3,0x01e4,0x01e7,0x01e9,0x01ea,0x01eb,0x01f4,0x0217,0x0223,0x0248,0x1000,0x1002,0x2002,0x2004,0x2015,0x2016,0x201a,0x201b,
-		0x2027,0x202b,0x2100};
+		0x01e1,0x01e2,0x01e3,0x01e4,0x01e7,0x01e9,0x01ea,0x01eb,0x01f4,0x0217,0x0223,0x0248,0x02b3,0x1000,0x1002,0x2002,0x2004,0x2015,0x2016,0x201a,
+		0x201b,0x2027,0x202b,0x2100};
 		char* mids[] = {"HL-1050 Laser Printer","Printer","HL-1240 Laser Printer","HL-1250 Laser Printer","HL-1270 Laser Printer",
 		"Printer","P2500 series","Printer","Printer","HL-1440 Laser Printer",
 		"HL-1450 series","HL-1470N series","Printer","Printer","Printer",
@@ -2585,9 +2592,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"MFC-230C","MFC-235C","MFC-260C","DCP-155C","MFC-265C",
 		"DCP-153C","DCP-157C","DCP-353C","DCP-357C","MFC-7340",
 		"DCP-7040","DCP-7030","MFC-7320","MFC-5890CN","MFC-8480DN",
-		"DCP-365CN","DCP-7055 scanner/printer","Printer","Printer","PTUSB Printing",
-		"PT-2300/2310 p-Touch Laber Printer","QL-500 P-touch label printer","QL-550 P-touch label printer","PT-18R P-touch label printer","QL-650TD P-Touch Label Printer",
-		"QL-560 P-Touch Label Printer","PT-7600 P-Touch Label Printer","Card Reader Writer"};
+		"DCP-365CN","DCP-7055 scanner/printer","MFC J4510DW","Printer","Printer",
+		"PTUSB Printing","PT-2300/2310 p-Touch Laber Printer","QL-500 P-touch label printer","QL-550 P-touch label printer","PT-18R P-touch label printer",
+		"QL-650TD P-Touch Label Printer","QL-560 P-Touch Label Printer","PT-7600 P-Touch Label Printer","Card Reader Writer"};
 		InsertProducts(0x04f9, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2599,7 +2606,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		DWORD mid[] = {0x0003,0x0005,0x0013,0x0015,0x00d3,0x0171,0x0201,0x0232,0x0538,0x0561,0x05d8,0x0c15,0x0c25,0x1528,0x1533,0x2080,0x500c,0x504a,0x504b,0x5330,
 		0x5331,0x5360,0x5563,0x5720,0x6333,0x7333,0x757a,0xffff};
 		char* mids[] = {"CM1092 / Wintech CM-5098 Optical Mouse","USB OpticalWheel Mouse","ViewMate Desktop Mouse CC2201","ViewMate Desktop Mouse CC2201","00052486 / Laser Mouse M1052 [hama]",
-		"SPCA1527A/SPCA1528 SD card camera (Mass Storage mode)","RS232C Adapter","Fingerprint","Wireless Optical Mouse 2.4G [Bright]","Flexcam 100",
+		"SPCA1527A/SPCA1528 SD card camera (Mass Storage mode)","SPCP825 RS232C Adapter","Fingerprint","Wireless Optical Mouse 2.4G [Bright]","Flexcam 100",
 		"Wireless keyboard/mouse","SPIF215A SATA bridge","SATALink SPIF225A","SPCA1527A/SPCA1528 SD card camera (webcam mode)","Mass Storage",
 		"ASUS Webcam","CA500C Digital Camera","Aiptek Mini PenCam 1.3","Aiptek Mega PockerCam 1.3/Maxell MaxPocket LE 1.3","Digitrex 2110",
 		"Vivitar Vivicam 10","Sunplus Generic Digital Camera","Digital Media Player MP3/WMA [The Sharper Image]","Card Reader Driver","Siri A9 UVC chipset",
@@ -2646,10 +2653,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	{
 		DWORD mid[] = {0x0004,0x0012,0x0013,0x0017,0x003a,0x0050,0x0081,0x0083,0x0084,0x0102,0x0103,0x0106,0x0108,0x0109,0x0115,0x0119,0x0121,0x0122,0x0131,0x016a,
 		0x0200,0x0201,0x0208,0x0210,0x0211,0x0224,0x0234,0x0237,0x0240,0x0249,0x0257,0x0304,0x0307,0x0409,0x0416,0x0551,0x065a,0x0706,0x0802,0x0803,
-		0x0805,0x0815,0x0826,0x0980,0x1004,0x1102,0x1103,0x1106,0x1109,0x11f2,0x1202,0x1203,0x2103,0x21f1,0x21f2,0x258a,0x3101,0x3201,0x4050,0x5055,
-		0x6050,0x6051,0x615a,0x7050,0x7051,0x705a,0x705b,0x705c,0x705e,0x706a,0x8053,0x805c,0x805e,0x815c,0x815f,0x825a,0x825b,0x845a,0x905b,0x905c,
-		0x935a,0x935b,0x945a,0x945b,0xd321};
-		char* mids[] = {"Direct Connect","F8T012 Bluetooth Adapter","F8T013 Bluetooth Adapter","B8T017 Bluetooth+EDR 2.1","Universal Media Reader",
+		0x0805,0x0815,0x0826,0x0980,0x1004,0x1102,0x1103,0x1106,0x1109,0x110a,0x11f2,0x1202,0x1203,0x2103,0x21f1,0x21f2,0x258a,0x3101,0x3201,0x4050,
+		0x5055,0x6050,0x6051,0x615a,0x7050,0x7051,0x705a,0x705b,0x705c,0x705e,0x706a,0x8053,0x805c,0x805e,0x815c,0x815f,0x825a,0x825b,0x845a,0x905b,
+		0x905c,0x935a,0x935b,0x945a,0x945b,0xd321};
+		char* mids[] = {"Direct Connect","F8T012 Bluetooth Adapter","F8T013 Bluetooth Adapter","B8T017 Bluetooth+EDR 2.1 / F4U017 USB 2.0 7-port Hub","Universal Media Reader",
 		"F5D6050 802.11b Wireless Adapter v2000 [Atmel at76c503a]","F8T001v2 Bluetooth","Bluetooth Device","F8T003v2 Bluetooth","Flip KVM",
 		"F5U103 Serial Adapter [etek]","VideoBus II Adapter, Video","F1DE108B KVM","F5U109/F5U409 PDA Adapter","SCSI Adapter",
 		"F5U120-PC Dual PS/2 Ports / F5U118-UNV ADB Adapter","F5D5050 100Mbps Ethernet","Ethernet Adapter","Bluetooth Device with trace filter","Bluetooth Mini Dongle",
@@ -2658,15 +2665,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"F5U257 Serial","FSU304 USB 2.0 - 4 Ports Hub","USB 2.0 - 7 ports Hub [FSU307]","F5U409 Serial","Staples 12416 7 port desktop hub",
 		"F6C550-AVR UPS","F8T065BF Mini Bluetooth 4.0 Adapter","2-N-1 7-Port Hub (Lower half)","Nostromo n40 Gamepad","Nostromo 1745 GamePad",
 		"Nostromo N50 GamePad","Nostromo n52 HID SpeedPad Mouse Wheel","ErgoFit Wireless Optical Mouse (HID)","HID UPS Battery","F9L1004 802.11n Surf N300 XR Wireless Adapter [Realtek RTL8192CU]",
-		"F7D1102 N150/Surf Micro Wireless Adapter v1000 [Realtek RTL8188CUS]","F9L1103 N750 DB 802.11abgn 2x3:3 [Ralink RT3573]","F9L1106v1 802.11a/b/g/n/ac Wireless Adapter [Broadcom BCM43526]","F9L1109v1 802.11a/b/g/n/ac Wireless Adapter [Realtek RTL8812AU]","ISY Wireless Micro Adapter IWL 2000 [RTL8188CUS]",
-		"F5U120-PC Parallel Printer Port","F5U120-PC Serial Port","F7D2102 802.11n N300 Micro Wireless Adapter v3000 [Realtek RTL8192CU]","N300 WLAN N Adapter [ISY]","RTL8192CU 802.11n WLAN Adapter [ISY IWL 4000]",
-		"F5U258 Host to Host cable","F1DF102U/F1DG102U Flip Hub","F1DF102U/F1DG102U Flip KVM","ZD1211B","F5D5055 Gigabit Network Adapter [AX88xxx]",
-		"F6D6050 802.11abgn Wireless Adapter [Broadcom BCM4323]","F5D6051 802.11b Wireless Network Adapter [ZyDAS ZD1201]","F7D4101 / F9L1101 802.11abgn Wireless Adapter [Broadcom BCM4323]","F5D7050 Wireless G Adapter v1000/v2000 [Intersil ISL3887]","F5D7051 802.11g Adapter v1000 [Broadcom 4320 USB]",
-		"F5D7050 Wireless G Adapter v3000 [Ralink RT2571W]","Wireless G Adapter","F5D7050 Wireless G Adapter v4000 [Zydas ZD1211B]","F5D7050 Wireless G Adapter v5000 [Realtek RTL8187B]","2-N-1 7-Port Hub (Upper half)",
-		"F5D8053 N Wireless USB Adapter v1000/v4000 [Ralink RT2870]","F5D8053 N Wireless Adapter v3000 [Ralink RT2870]","F5D8053 N Wireless USB Adapter v5000 [Realtek RTL8192U]","F5D8053 N Wireless USB Adapter v3000 [Ralink RT2870]","F5D8053 N Wireless USB Adapter v6000 [Realtek RTL8192SU]",
-		"F5D8055 N+ Wireless Adapter v1000 [Ralink RT2870]","F5D8055 N+ Wireless Adapter v2000 [Ralink RT3072]","F7D2101 802.11n Surf & Share Wireless Adapter v1000 [Realtek RTL8192SU]","F5D9050 Wireless G+ MIMO Network Adapter v3000 [Ralink RT2573]","F5D9050 Wireless G+ MIMO Network Adapter v4000 [Ralink RT2573]",
-		"F6D4050 N150 Enhanced Wireless Network Adapter v1000 [Ralink RT3070]","F6D4050 N150 Enhanced Wireless Network Adapter v2000 [Ralink RT3070]","F7D1101 v1 Basic Wireless Adapter [Realtek RTL8188SU]","F7D1101 v2 Basic Wireless Adapter [Ralink RT3370]","Dynex DX-NUSB 802.11bgn Wireless Adapter [Broadcom BCM43231]"
-		};
+		"F7D1102 N150/Surf Micro Wireless Adapter v1000 [Realtek RTL8188CUS]","F9L1103 N750 DB 802.11abgn 2x3:3 [Ralink RT3573]","F9L1106v1 802.11a/b/g/n/ac Wireless Adapter [Broadcom BCM43526]","F9L1109v1 802.11a/b/g/n/ac Wireless Adapter [Realtek RTL8812AU]","F9L1101v2 802.11abgn Wireless Adapter [Realtek RTL8192DU]",
+		"ISY Wireless Micro Adapter IWL 2000 [RTL8188CUS]","F5U120-PC Parallel Printer Port","F5U120-PC Serial Port","F7D2102 802.11n N300 Micro Wireless Adapter v3000 [Realtek RTL8192CU]","N300 WLAN N Adapter [ISY]",
+		"RTL8192CU 802.11n WLAN Adapter [ISY IWL 4000]","F5U258 Host to Host cable","F1DF102U/F1DG102U Flip Hub","F1DF102U/F1DG102U Flip KVM","ZD1211B",
+		"F5D5055 Gigabit Network Adapter [AX88xxx]","F6D6050 802.11abgn Wireless Adapter [Broadcom BCM4323]","F5D6051 802.11b Wireless Network Adapter [ZyDAS ZD1201]","F7D4101 / F9L1101v1 802.11abgn Wireless Adapter [Broadcom BCM4323]","F5D7050 Wireless G Adapter v1000/v2000 [Intersil ISL3887]",
+		"F5D7051 802.11g Adapter v1000 [Broadcom 4320 USB]","F5D7050 Wireless G Adapter v3000 [Ralink RT2571W]","Wireless G Adapter","F5D7050 Wireless G Adapter v4000 [Zydas ZD1211B]","F5D7050 Wireless G Adapter v5000 [Realtek RTL8187B]",
+		"2-N-1 7-Port Hub (Upper half)","F5D8053 N Wireless USB Adapter v1000/v4000 [Ralink RT2870]","F5D8053 N Wireless Adapter v3000 [Ralink RT2870]","F5D8053 N Wireless USB Adapter v5000 [Realtek RTL8192U]","F5D8053 N Wireless USB Adapter v3000 [Ralink RT2870]",
+		"F5D8053 N Wireless USB Adapter v6000 [Realtek RTL8192SU]","F5D8055 N+ Wireless Adapter v1000 [Ralink RT2870]","F5D8055 N+ Wireless Adapter v2000 [Ralink RT3072]","F7D2101 802.11n Surf & Share Wireless Adapter v1000 [Realtek RTL8192SU]","F5D9050 Wireless G+ MIMO Network Adapter v3000 [Ralink RT2573]",
+		"F5D9050 Wireless G+ MIMO Network Adapter v4000 [Ralink RT2573]","F6D4050 N150 Enhanced Wireless Network Adapter v1000 [Ralink RT3070]","F6D4050 N150 Enhanced Wireless Network Adapter v2000 [Ralink RT3070]","F7D1101 v1 Basic Wireless Adapter [Realtek RTL8188SU]","F7D1101 v2 Basic Wireless Adapter [Ralink RT3370]",
+		"Dynex DX-NUSB 802.11bgn Wireless Adapter [Broadcom BCM43231]"};
 		InsertProducts(0x050d, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -2778,10 +2785,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0546, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x1002,0x1006,0x2131,0x2235,0x2710,0x2720,0x2727,0x2750,0x2810,0x4d90,0x7777,0x9999};
+		DWORD mid[] = {0x0001,0x1002,0x1006,0x2131,0x2235,0x2710,0x2720,0x2727,0x2750,0x2810,0x4d90,0x7000,0x7777,0x9999};
 		char* mids[] = {"ICSI Bluetooth Device","Python2 WDM Encoder","Hantek DSO-2100 UF","AN2131 EZUSB Microcontroller","AN2235 EZUSB-FX Microcontroller",
 		"EZ-Link Loader (EZLNKLDR.SYS)","AN2720 USB-USB Bridge","Xircom PGUNET USB-USB Bridge","EZ-Link (EZLNKUSB.SYS)","Cypress ATAPI Bridge",
-		"AmScope MD1900 camera","Bluetooth Device","AN2131 uninitialized (?)"};
+		"AmScope MD1900 camera","PowerSpec MCE460 Front Panel LED Display","Bluetooth Device","AN2131 uninitialized (?)"};
 		InsertProducts(0x0547, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -3499,9 +3506,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x05f3, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x1104,0x2202,0x2206,0x2601,0x2602,0x5204};
+		DWORD mid[] = {0x1104,0x2202,0x2206,0x2601,0x2602,0x4204,0x5204};
 		char* mids[] = {"Magellan 2200VS","Point of Sale Handheld Scanner","Datalogic Gryphon GFS4170","Datalogin Magellan 1000i Barcode Scanner","Datalogic Magellan 1100i Barcode Scanner",
-		"Datalogic Gryphon GFS4170 (config mode)"};
+		"Datalogic Gryphon GFS4470 Fixed Scanner","Datalogic Gryphon GFS4170 (config mode)"};
 		InsertProducts(0x05f9, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -3806,10 +3813,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0686, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x00d3,0x00e2,0x00f1,0x00f2,0x00f3,0x00f4,0x00fa,0x00ff,0x0500,0x0501,0x0504};
-		char* mids[] = {"OEM 3 axis 5 button joystick","HFX OEM Joystick","Pro Throttle","Flight Sim Pedals","Fighterstick",
-		"Combatstick","Ch Throttle Quadrant","Flight Sim Yoke","GameStick 3D","CH Pro Pedals",
-		"F-16 Combat Stick"};
+		DWORD mid[] = {0x00d3,0x00e2,0x00f0,0x00f1,0x00f2,0x00f3,0x00f4,0x00fa,0x00ff,0x0500,0x0501,0x0504};
+		char* mids[] = {"OEM 3 axis 5 button joystick","HFX OEM Joystick","Multi-Function Panel","Pro Throttle","Flight Sim Pedals",
+		"Fighterstick","Combatstick","Ch Throttle Quadrant","Flight Sim Yoke","GameStick 3D",
+		"CH Pro Pedals","F-16 Combat Stick"};
 		InsertProducts(0x068e, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -4316,8 +4323,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		DWORD mid[] = {0x0001,0x0002,0x0005,0x0100,0x0200,0x0400,0x0621,0x0720,0x0729,0x0810,0x0830,0x1234,0x5150,0x5151,0x5153,0x5204,0x5402,0x5406,0x5408,0x540e,
 		0x5530,0x5567,0x556c,0x556d,0x5571,0x5576,0x5580,0x5581,0x5e10,0x6100,0x7100,0x7101,0x7102,0x7103,0x7104,0x7105,0x7106,0x7112,0x7113,0x7114,
 		0x7115,0x7301,0x7302,0x7400,0x7401,0x7420,0x7421,0x7422,0x7423,0x7430,0x7431,0x7432,0x7433,0x7434,0x7435,0x7450,0x7451,0x7460,0x7480,0x7481,
-		0x74b0,0x74b1,0x74c0,0x74c1,0x74c2,0x74c3,0x74d0,0x74d1,0x8181,0x8183,0x8185,0x8888,0x8889,0x8919,0x8989,0x9191,0x9219,0x9292,0x9393,0x9595,
-		0x9797,0x9919,0x9999,0xa7c1,0xa7e8,0xb2b3,0xb4b5};
+		0x74b0,0x74b1,0x74c0,0x74c1,0x74c2,0x74c3,0x74d0,0x74d1,0x74e5,0x8181,0x8183,0x8185,0x8888,0x8889,0x8919,0x8989,0x9191,0x9219,0x9292,0x9393,
+		0x9595,0x9797,0x9919,0x9999,0xa7c1,0xa7e8,0xb2b3,0xb4b5};
 		char* mids[] = {"SDDR-05a ImageMate CompactFlash Reader","SDDR-31 ImageMate II CompactFlash Reader","SDDR-05b (CF II) ImageMate CompactFlash Reader","ImageMate SDDR-12","SDDR-09 (SSFDC) ImageMate SmartMedia Reader [eusb]",
 		"SecureMate SD/MMC Reader","SDDR-86 Imagemate 6-in-1 Reader","Sansa C200 series in recovery mode","Sansa E200 series in recovery mode","SDDR-75 ImageMate CF-SM Reader",
 		"ImageMate CF/MMC/SD Reader","Cruzer Mini Flash Drive","SDCZ2 Cruzer Mini Flash Drive (thin)","Cruzer Micro Flash Drive","Cruzer Flash Drive",
@@ -4331,11 +4338,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"Sansa M200 series V4 (msc)","Sansa Clip (mtp)","Sansa Clip (msc)","Sansa Clip V2 (mtp)","Sansa Clip V2 (msc)",
 		"Sansa C250","Sansa C240","Sansa Express","Sansa Connect","Sansa Connect (in recovery mode)",
 		"Sansa View (msc)","Sansa View (mtp)","Sansa Fuze (mtp)","Sansa Fuze (msc)","Sansa Fuze V2 (mtp)",
-		"Sansa Fuze V2 (msc)","Sansa Clip+ (mtp)","Sansa Clip+ (msc)","Pen Flash","Hi-Speed Mass Storage Device",
-		"SDCZ2 Cruzer Mini Flash Drive (older, thick)","Card Reader","SDDR-88 Imagemate 8-in-1 Reader","Card Reader","ImageMate 12-in-1 Reader",
-		"ImageMate CF","Card Reader","ImageMate CF Reader/Writer","ImageMate SD-MMC","ImageMate xD-SM",
-		"ImageMate MS-PRO","Card Reader","SDDR-99 5-in-1 Reader","Storage device (SD card reader)","SDDR-113 MicroMate SDHC Reader",
-		"SDDR-103 MobileMate SD+ Reader","SDDR-89 V4 ImageMate 12-in-1 Reader"};
+		"Sansa Fuze V2 (msc)","Sansa Clip+ (mtp)","Sansa Clip+ (msc)","Sansa Clip Zip","Pen Flash",
+		"Hi-Speed Mass Storage Device","SDCZ2 Cruzer Mini Flash Drive (older, thick)","Card Reader","SDDR-88 Imagemate 8-in-1 Reader","Card Reader",
+		"ImageMate 12-in-1 Reader","ImageMate CF","Card Reader","ImageMate CF Reader/Writer","ImageMate SD-MMC",
+		"ImageMate xD-SM","ImageMate MS-PRO","Card Reader","SDDR-99 5-in-1 Reader","Storage device (SD card reader)",
+		"SDDR-113 MicroMate SDHC Reader","SDDR-103 MobileMate SD+ Reader","SDDR-89 V4 ImageMate 12-in-1 Reader"};
 		InsertProducts(0x0781, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -4413,13 +4420,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x07a6, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0004,0x000c,0x000d,0x0011,0x0012,0x0017,0x0018,0x001a,0x001c,0x002e,0x002f,0x0031,0x003c,0x003f,0x0041,0x0042,0x0043,0x0047,0x0051,
-		0x7613,0x9601};
+		DWORD mid[] = {0x0001,0x0004,0x000c,0x000d,0x0011,0x0012,0x0017,0x0018,0x001a,0x001c,0x0020,0x002e,0x002f,0x0031,0x003c,0x003f,0x0041,0x0042,0x0043,0x0047,
+		0x0051,0x7613,0x9601};
 		char* mids[] = {"Ether USB-T Ethernet [klsi]","FEther USB-TX Ethernet [pegasus]","WirelessLAN USB-11","FEther USB-TXS","Wireless LAN USB-11 mini",
 		"Stick-11 802.11b Adapter","FEther USB2-TX","Wireless LAN USB-11 mini 2","ULUSB-11 Key","CG-WLUSB2GT 802.11g Wireless Adapter [Intersil ISL3880]",
-		"CG-WLUSB2GPX [Ralink RT2571W]","CG-WLUSB2GNL","CG-WLUSB2GS 802.11bg [Atheros AR5523]","CG-WLUSB2GNL","CG-WLUSB300AGN",
-		"CG-WLUSB300GNS","CG-WLUSB300GNM","CG-WLUSB300N rev A2 [Realtek RTL8192U]","CG-WLUSBNM","CG-WLUSB300NM",
-		"Stick-11 V2 802.11b Adapter","FEther USB-TXC"};
+		"CG-WLUSB2GTST 802.11g Wireless Adapter [Intersil ISL3887]","CG-WLUSB2GPX [Ralink RT2571W]","CG-WLUSB2GNL","CG-WLUSB2GS 802.11bg [Atheros AR5523]","CG-WLUSB2GNL",
+		"CG-WLUSB300AGN","CG-WLUSB300GNS","CG-WLUSB300GNM","CG-WLUSB300N rev A2 [Realtek RTL8192U]","CG-WLUSBNM",
+		"CG-WLUSB300NM","Stick-11 V2 802.11b Adapter","FEther USB-TXC"};
 		InsertProducts(0x07aa, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -4534,11 +4541,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x07c9, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0002,0x0026,0x0337,0x0837,0x1228,0x1830,0x3835,0x850a,0x850b,0xa309,0xa801,0xa815,0xa827,0xa867,0xb800,0xe880,0xe882};
+		DWORD mid[] = {0x0002,0x0026,0x0337,0x0837,0x1228,0x1830,0x3835,0x850a,0x850b,0xa309,0xa801,0xa815,0xa827,0xa867,0xb300,0xb800,0xe880,0xe882};
 		char* mids[] = {"AVerTV PVR USB/EZMaker Pro Device","AVerTV","A867 DVB-T dongle","H837 Hybrid ATSC/QAM","MPEG-2 Capture Device (M038)",
 		"AVerTV Volar Video Capture (H830)","AVerTV Volar Green HD (A835B)","AverTV Volar Black HD (A850)","AverTV Red HD+ (A850T)","AVerTV DVB-T (A309)",
-		"AVerTV DVB-T (A800)","AVerTV DVB-T Volar X (A815)","AVerTV Hybrid Volar HX (A827)","AVerTV DVB-T (A867)","MR800 FM Radio",
-		"MPEG-2 Capture Device (E880)","MPEG-2 Capture Device (E882)"};
+		"AVerTV DVB-T (A800)","AVerTV DVB-T Volar X (A815)","AVerTV Hybrid Volar HX (A827)","AVerTV DVB-T (A867)","A300 DVB-T TV receiver",
+		"MR800 FM Radio","MPEG-2 Capture Device (E880)","MPEG-2 Capture Device (E882)"};
 		InsertProducts(0x07ca, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -4756,16 +4763,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0839, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x1046,0x1060,0x1f4d,0x3046,0x3060,0x3501,0x3502,0x3503,0x4501,0x4502,0x4505,0x4507,0x4521,0x5046,0x5501,0x6500,0x6618,0x7511,0x7512,0x7522,
-		0x8522,0x8541,0xa512,0xa618,0xa701,0xb004,0xb522,0xbb01,0xc003,0xc501,0xc561,0xd522,0xe501,0xe503,0xe506,0xf501,0xf502,0xf522};
+		DWORD mid[] = {0x1046,0x1060,0x1f4d,0x3046,0x3060,0x3501,0x3502,0x3503,0x4501,0x4502,0x4505,0x4507,0x4521,0x4531,0x5046,0x5501,0x6500,0x6618,0x7511,0x7512,
+		0x7522,0x8522,0x8541,0xa512,0xa618,0xa701,0xb004,0xb522,0xbb01,0xc003,0xc501,0xc561,0xd522,0xe501,0xe503,0xe506,0xf501,0xf502,0xf522};
 		char* mids[] = {"10/100 Ethernet [pegasus]","HomeLine Adapter","SMC8013WG Broadband Remote NDIS Device","10/100 Series Adapter","1/10/100 Adapter",
 		"2664W","WN3501D Wireless Adapter","T-Sinus 111 Wireless Adapter","T-Sinus 154data","Siemens S30853-S1016-R107 802.11g Wireless Adapter [Intersil ISL3886]",
-		"SMCWUSB-G 802.11bg","SMCWUSBT-G2 802.11g Wireless Adapter [Atheros AR5523]","Siemens S30863-S1016-R107-2 802.11g Wireless Adapter [Intersil ISL3887]","SpeedStream 10/100 Ethernet [pegasus]","Wireless Adapter 11g",
-		"Cable Modem","802.11n Wireless Adapter","Arcadyan 802.11N Wireless Adapter","Arcadyan 802.11N Wireless Adapter","Arcadyan 802.11N Wireless Adapter",
-		"Arcadyan 802.11N Wireless Adapter","WN4501F 802.11g Wireless Adapter [Intersil ISL3887]","Arcadyan 802.11N Wireless Adapter","SMCWUSBS-N EZ Connect N Draft 11n Wireless Adapter [Ralink RT2870]","SMCWUSBS-N3 EZ Connect N Wireless Adapter [Ralink RT3070]",
-		"CPWUE001 USB/Ethernet Adapter","SMCWUSBS-N2 EZ Connect N Wireless Adapter [Ralink RT2870]","BlueExpert Bluetooth Device","802.11b Wireless Adapter","Zoom 4410 Wireless-G [Intersil ISL3887]",
-		"802.11a/g Wireless Adapter","Speedport W 102 Stick IEEE 802.11n USB 2.0 Adapter","ZD1211B","Arcadyan WN4501 802.11b/g","WUS-201 802.11bg",
-		"802.11g Wireless Adapter","802.11g Wireless Adapter","Arcadyan WN7512 802.11n"};
+		"SMCWUSB-G 802.11bg","SMCWUSBT-G2 802.11g Wireless Adapter [Atheros AR5523]","Siemens S30863-S1016-R107-2 802.11g Wireless Adapter [Intersil ISL3887]","T-Com Sinus 154 data II [Intersil ISL3887]","SpeedStream 10/100 Ethernet [pegasus]",
+		"Wireless Adapter 11g","Cable Modem","802.11n Wireless Adapter","Arcadyan 802.11N Wireless Adapter","Arcadyan 802.11N Wireless Adapter",
+		"Arcadyan 802.11N Wireless Adapter","Arcadyan 802.11N Wireless Adapter","WN4501F 802.11g Wireless Adapter [Intersil ISL3887]","Arcadyan 802.11N Wireless Adapter","SMCWUSBS-N EZ Connect N Draft 11n Wireless Adapter [Ralink RT2870]",
+		"SMCWUSBS-N3 EZ Connect N Wireless Adapter [Ralink RT3070]","CPWUE001 USB/Ethernet Adapter","SMCWUSBS-N2 EZ Connect N Wireless Adapter [Ralink RT2870]","BlueExpert Bluetooth Device","802.11b Wireless Adapter",
+		"Zoom 4410 Wireless-G [Intersil ISL3887]","802.11a/g Wireless Adapter","Speedport W 102 Stick IEEE 802.11n USB 2.0 Adapter","ZD1211B","Arcadyan WN4501 802.11b/g",
+		"WUS-201 802.11bg","802.11g Wireless Adapter","802.11g Wireless Adapter","Arcadyan WN7512 802.11n"};
 		InsertProducts(0x083a, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -5038,6 +5045,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x08e3, mid, mids, ARRAYSIZE(mid));
 	}
 	{
+		DWORD mid[] = {0x0185};
+		char* mids[] = {"DDJ-WeGO2"};
+		InsertProducts(0x08e4, mid, mids, ARRAYSIZE(mid));
+	}
+	{
 		DWORD mid[] = {0x0001,0x0430,0x0432,0x0435,0x0437,0x1359,0x2202,0x3437,0x3438,0x3478,0x34ec,0x4433,0x5501,0x5503,0xace0};
 		char* mids[] = {"GemPC-Touch 430","GemPC430 SmartCard Reader","GemPC432 SmartCard Reader","GemPC435 SmartCard Reader","GemPC433 SL SmartCard Reader",
 		"UA SECURE STORAGE TOKEN","Gem e-Seal Pro Token","GemPC Twin SmartCard Reader","GemPC Key SmartCard Reader","PinPad Smart Card Reader",
@@ -5233,7 +5245,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"TravelDrive","TravelDrive","TravelDrive","TravelDrive","TravelDrive",
 		"TravelDrive","TravelDrive","TravelDrive","TravelDrive","TravelDrive",
 		"TravelDrive","256M Stick","512M Stick","TravelDrive","Kingston DataTraveler 2.0 Stick (512M)",
-		"Kingston DataTraveler 2.0 Stick (1GB)","Flash Memory","TransMemory Flash Memory","Kingston DataTraveler 2.0 Stick (2GB)","Kingston DataTraveler 102 Flash Drive / HEMA Flash Drive 2 GB / PNY Attache 4GB Stick"
+		"Kingston DataTraveler 2.0 Stick (1GB)","Flash Memory","TransMemory Flash Memory","Kingston DataTraveler 2.0 Stick (2GB)","Kingston DataTraveler 102/2.0 / HEMA Flash Drive 2 GB / PNY Attache 4GB Stick"
 		};
 		InsertProducts(0x0930, mid, mids, ARRAYSIZE(mid));
 	}
@@ -5315,9 +5327,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0955, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0200,0x0202,0x0407,0x0518,0x0a07,0x1745,0x2918};
+		DWORD mid[] = {0x0200,0x0202,0x0407,0x0518,0x0a07,0x1507,0x1745,0x2918};
 		char* mids[] = {"E-Video DC-350 Camera","E-Video DC-350 Camera","33220A Waveform Generator","82357B GPIB Interface","34411A Multimeter",
-		"Test and Measurement Device (IVI)","U2702A oscilloscope"};
+		"33210A Waveform Generator","Test and Measurement Device (IVI)","U2702A oscilloscope"};
 		InsertProducts(0x0957, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -5466,7 +5478,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x0006,0x000a,0x000e,0x0018,0x001a,0x002a,0x022b,0x024f,0x0260,0x032b,0x8090,0x9033,0x9066,0x9090};
-		char* mids[] = {"Optical Mouse WOP-35 / Trust 450L Optical Mouse","Optical Mouse Opto 510D","X-F710F Optical Mouse 3xFire Gaming Mouse","Trust Human Interface Device","Wireless Mouse & RXM-15 Receiver",
+		char* mids[] = {"Optical Mouse WOP-35 / Trust 450L Optical Mouse","Optical Mouse Opto 510D / OP-620D","X-F710F Optical Mouse 3xFire Gaming Mouse","Trust Human Interface Device","Wireless Mouse & RXM-15 Receiver",
 		"Wireless Optical Mouse NB-30","Wireless Mouse (Battery Free)","RF Receiver and G6-20D Wireless Optical Mouse","KV-300H Isolation Keyboard","Wireless Mouse (Battery Free)",
 		"X-718BK Oscar Optical Gaming Mouse","X-718BK Optical Mouse","F3 V-Track Gaming Mouse","XL-730K / XL-750BK / XL-755BK Mice"};
 		InsertProducts(0x09da, mid, mids, ARRAYSIZE(mid));
@@ -5748,8 +5760,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0aad, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0002};
-		char* mids[] = {"OBID RFID-Reader"};
+		DWORD mid[] = {0x0002,0x0004};
+		char* mids[] = {"OBID RFID-Reader","OBID classic-pro"};
 		InsertProducts(0x0ab1, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -5841,19 +5853,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	{
 		DWORD mid[] = {0x0001,0x1101,0x1706,0x1707,0x1708,0x170b,0x170c,0x170d,0x1712,0x1715,0x1716,0x1717,0x171b,0x171c,0x171f,0x1723,0x1724,0x1726,0x172a,0x172b,
 		0x1731,0x1732,0x1734,0x173c,0x173f,0x1742,0x1743,0x1751,0x175b,0x1760,0x1761,0x1774,0x1776,0x1779,0x1784,0x1786,0x1788,0x1791,0x179d,0x179e,
-		0x179f,0x17a0,0x17a1,0x17ab,0x17c9,0x4c80,0x4c90,0x4c91,0x4d00,0x4d01,0x4daf,0x5410,0x5412,0x6101,0x620a,0xb700};
+		0x179f,0x17a0,0x17a1,0x17ab,0x17c7,0x17c9,0x4c80,0x4c90,0x4c91,0x4d00,0x4d01,0x4daf,0x5410,0x5412,0x550f,0x6101,0x620a,0xb700};
 		char* mids[] = {"MeMO Pad HD 7 (CD-ROM mode)","Mass Storage (UISDMC4S)","WL-167G v1 802.11g Adapter [Ralink RT2571]","WL-167G v1 802.11g Adapter [Ralink RT2571]","Mass Storage Device",
-		"Mass Storage Device","WL-159g 802.11bg","802.11b/g Wireless Network Adapter","BT-183 Bluetooth 2.0+EDR adapter","2045 Bluetooth 2.0 Device with trace filter",
+		"Multi card reader","WL-159g 802.11bg","802.11b/g Wireless Network Adapter","BT-183 Bluetooth 2.0+EDR adapter","2045 Bluetooth 2.0 Device with trace filter",
 		"Bluetooth Device","WL169gE 802.11g Adapter [Broadcom 4320 USB]","A9T wireless 802.11bg","802.11b/g Wireless Network Adapter","My Cinema U3000 Mini [DiBcom DiB7700P]",
 		"WL-167G v2 802.11g Adapter [Ralink RT2571W]","RT2573","Laptop OLED Display","ASUS 802.11n Network Adapter","802.11n Network Adapter",
 		"802.11n Network Adapter","802.11n Network Adapter","ASUS AF-200","BT-183 Bluetooth 2.0","My Cinema U3100 Mini",
 		"802.11n Network Adapter","Xonar U1 Audio Station","BT-253 Bluetooth Adapter","Laptop OLED Display","802.11n Network Adapter",
 		"USB-N11 802.11n Network Adapter [Ralink RT2870]","Gobi Wireless Modem (QDL mode)","Gobi Wireless Modem","My Cinema U3100 Mini Plus [AF9035A]","USB-N13 802.11n Network Adapter (rev. A1) [Ralink RT3072]",
 		"USB-N10 802.11n Network Adapter [Realtek RTL8188SU]","BT-270 Bluetooth Adapter","WL-167G v3 802.11n Adapter [Realtek RTL8188SU]","USB-N53 802.11abgn Network Adapter [Ralink RT3572]","Eee Note EA800 (network mode)",
-		"Eee Note EA800 (tablet mode)","Xonar U3 sound card","Eee Note EA800 (mass storage mode)","USB-N13 802.11n Network Adapter (rev. B1) [Realtek RTL8192CU]","USB-AC53 802.11a/b/g/n/ac Wireless Adapter [Broadcom BCM43526]",
-		"Transformer Pad TF300TG","Transformer Pad Infinity TF700","Transformer Pad Infinity TF700 (Debug mode)","Transformer Prime TF201","Transformer Prime TF201 (debug mode)",
-		"Transformer Pad Infinity TF700 (Fastboot)","MeMO Pad HD 7 (MTP mode)","MeMO Pad HD 7 (PTP mode)","Cable Modem","Remote NDIS Device",
-		"Broadcom Bluetooth 2.1"};
+		"Eee Note EA800 (tablet mode)","Xonar U3 sound card","Eee Note EA800 (mass storage mode)","USB-N13 802.11n Network Adapter (rev. B1) [Realtek RTL8192CU]","WL-330NUL",
+		"USB-AC53 802.11a/b/g/n/ac Wireless Adapter [Broadcom BCM43526]","Transformer Pad TF300TG","Transformer Pad Infinity TF700","Transformer Pad Infinity TF700 (Debug mode)","Transformer Prime TF201",
+		"Transformer Prime TF201 (debug mode)","Transformer Pad Infinity TF700 (Fastboot)","MeMO Pad HD 7 (MTP mode)","MeMO Pad HD 7 (PTP mode)","ASUS fonepad 7",
+		"Cable Modem","Remote NDIS Device","Broadcom Bluetooth 2.1"};
 		InsertProducts(0x0b05, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -5873,9 +5885,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0b0d, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0420,0x094d,0x1022,0x2007,0x620c,0x9330};
-		char* mids[] = {"Jabra SPEAK 510","GN Netcom / Jabra REVO Wireless","Jabra PRO 9450, Type 9400BS (DECT Headset)","GN 2000 Stereo Corded Headset","Jabra BT620s",
-		"Jabra GN9330 Headset"};
+		DWORD mid[] = {0x034c,0x0420,0x094d,0x1022,0x2007,0x620c,0x9330};
+		char* mids[] = {"Jabra UC Voice 750 MS","Jabra SPEAK 510","GN Netcom / Jabra REVO Wireless","Jabra PRO 9450, Type 9400BS (DECT Headset)","GN 2000 Stereo Corded Headset",
+		"Jabra BT620s","Jabra GN9330 Headset"};
 		InsertProducts(0x0b0e, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -5927,12 +5939,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x1003,0x1004,0x1005,0x1006,0x1007,0x1008,0x1009,0x3001,0x3002,0x3003,0x3004,0x3005,0x3006,0x3007,0x3008,0x3009,0x300a,0x300b,0x300c,0x300d,
-		0x300e};
+		0x300e,0x3012,0x3014};
 		char* mids[] = {"Technotrend/Hauppauge USB-Nova","TT-PCline","Technotrend/Hauppauge USB-Nova","Technotrend/Hauppauge DEC3000-s","TT-micro plus Device",
 		"Technotrend/Hauppauge DEC2000-t","Technotrend/Hauppauge DEC2540-t","DVB-S receiver","DVB-C receiver","DVB-T receiver",
 		"TT TV-Stick","TT TV-Stick (8kB EEPROM)","TT-connect S-2400 DVB-S receiver","TT-connect S2-3600","TT-connect",
 		"TT-connect S-2400 DVB-S receiver (8kB EEPROM)","TT-connect S2-3650 CI","TT-connect C-3650 CI","TT-connect T-3650 CI","TT-connect CT-3650 CI",
-		"TT-connect C-2400"};
+		"TT-connect C-2400","TT-connect CT2-4650 CI","TT-TVStick CT2-4400"};
 		InsertProducts(0x0b48, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6094,14 +6106,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0bb4, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0502,0x0503,0x2000,0x2100,0x2200,0x2300,0x2320,0x3008,0x3101,0x3312,0x3320,0x3332,0x5020,0x5021,0x5030,0x5031,0x5070,0x50a1,0x50a5,0x5121,
-		0x5161,0xa003,0xa0a1,0xa0a4,0xab00};
+		DWORD mid[] = {0x0502,0x0503,0x2000,0x2100,0x2200,0x2300,0x2320,0x3008,0x3101,0x3312,0x3320,0x3332,0x5020,0x5021,0x5030,0x5031,0x5070,0x5071,0x50a1,0x50a5,
+		0x5121,0x5161,0xa003,0xa0a1,0xa0a4,0xab00,0xab20};
 		char* mids[] = {"ST3300601CB-RK 300 GB External Hard Drive","ST3250824A [Barracuda 7200.9]","Storage Adapter V3 (TPP)","FreeAgent Go","FreeAgent Go FW",
-		"Expansion Portable","USB 3.0 bridge [Portable Expansion Drive]","FreeAgent Desk 1TB","FreeAgent XTreme 640GB","SRD00F2 [Expansion Desktop Drive 2TB]",
+		"Expansion Portable","USB 3.0 bridge [Portable Expansion Drive]","FreeAgent Desk 1TB","FreeAgent XTreme 640GB","SRD00F2 Expansion Desktop Drive (STBV)",
 		"SRD00F2 [Expansion Desktop Drive]","Expansion","FreeAgent GoFlex","FreeAgent GoFlex USB 2.0","FreeAgent GoFlex Upgrade Cable STAE104",
-		"FreeAgent GoFlex USB 3.0","FreeAgent GoFlex Desk","FreeAgent GoFlex Desk","FreeAgent GoFlex Desk USB 3.0","FreeAgent GoFlex",
-		"FreeAgent GoFlex dock","Backup Plus","Backup Plus Desktop","Backup Plus Desktop Drive","Slim Portable Drive"
-		};
+		"FreeAgent GoFlex USB 3.0","FreeAgent GoFlex Desk","FreeAgent GoFlex Desk","FreeAgent GoFlex Desk","FreeAgent GoFlex Desk USB 3.0",
+		"FreeAgent GoFlex","FreeAgent GoFlex dock","Backup Plus","Backup Plus Desktop","Backup Plus Desktop Drive",
+		"Slim Portable Drive","Backup Plus Portable Drive"};
 		InsertProducts(0x0bc2, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6124,19 +6136,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	}
 	{
 		DWORD mid[] = {0x0103,0x0104,0x0106,0x0107,0x0108,0x0111,0x0113,0x0115,0x0116,0x0117,0x0118,0x0119,0x0129,0x0138,0x0139,0x0151,0x0152,0x0153,0x0156,0x0157,
-		0x0158,0x0159,0x0161,0x0168,0x0169,0x0171,0x0176,0x0178,0x0184,0x0186,0x0301,0x1724,0x2831,0x2832,0x2838,0x8150,0x8151,0x8171,0x8172,0x8174,
-		0x8176,0x8178,0x8179,0x817f,0x8187,0x8189,0x8192,0x8193,0x8197,0x8198,0x8199,0x8812};
+		0x0158,0x0159,0x0161,0x0168,0x0169,0x0171,0x0176,0x0178,0x0179,0x0184,0x0186,0x0301,0x1724,0x2831,0x2832,0x2838,0x5730,0x8150,0x8151,0x8171,
+		0x8172,0x8174,0x8176,0x8178,0x8179,0x817f,0x8187,0x8189,0x8192,0x8193,0x8197,0x8198,0x8199,0x8812};
 		char* mids[] = {"USB 2.0 Card Reader","Mass Storage Device","Mass Storage Device","Mass Storage Device","Mass Storage Device",
 		"RTS5111 Card Reader Controller","Mass Storage Device","Mass Storage Device (Multicard Reader)","RTS5116 Card Reader Controller","Mass Storage Device",
 		"Mass Storage Device","Storage Device (SD card reader)","RTS5129 Card Reader Controller","RTS5138 Card Reader Controller","RTS5139 Card Reader Controller",
 		"Mass Storage Device (Multicard Reader)","Mass Storage Device","Mass Storage Device","Mass Storage Device","Mass Storage Device",
 		"USB 2.0 multicard reader","RTS5159 Card Reader Controller","Mass Storage Device","Mass Storage Device","Mass Storage Device",
-		"Mass Storage Device","Mass Storage Device","Mass Storage Device","RTS5182 Card Reader","Card Reader",
-		"multicard reader","RTL8723AU 802.11n WLAN Adapter","RTL2831U DVB-T","RTL2832U DVB-T","RTL2838 DVB-T",
-		"RTL8150 Fast Ethernet Adapter","RTL8151 Adapteon Business Mobile Networks BV","RTL8188SU 802.11n WLAN Adapter","RTL8191SU 802.11n WLAN Adapter","RTL8192SU 802.11n WLAN Adapter",
-		"RTL8188CUS 802.11n WLAN Adapter","RTL8192CU 802.11n WLAN Adapter","RTL8188EUS 802.11n Wireless Network Adapter","RTL8188RU 802.11n WLAN Adapter","RTL8187 Wireless Adapter",
-		"RTL8187B Wireless 802.11g 54Mbps Network Adapter","RTL8191SU 802.11n Wireless Adapter","RTL8192DU 802.11an WLAN Adapter","RTL8187B Wireless Adapter","RTL8187B Wireless Adapter",
-		"RTL8187SU 802.11g WLAN Adapter","RTL8812AU 802.11a/b/g/n/ac WLAN Adapter"};
+		"Mass Storage Device","Mass Storage Device","Mass Storage Device","RTL8188ETV Wireless LAN 802.11n Network Adapter","RTS5182 Card Reader",
+		"Card Reader","multicard reader","RTL8723AU 802.11n WLAN Adapter","RTL2831U DVB-T","RTL2832U DVB-T",
+		"RTL2838 DVB-T","HP 2.0MP High Definition Webcam","RTL8150 Fast Ethernet Adapter","RTL8151 Adapteon Business Mobile Networks BV","RTL8188SU 802.11n WLAN Adapter",
+		"RTL8191SU 802.11n WLAN Adapter","RTL8192SU 802.11n WLAN Adapter","RTL8188CUS 802.11n WLAN Adapter","RTL8192CU 802.11n WLAN Adapter","RTL8188EUS 802.11n Wireless Network Adapter",
+		"RTL8188RU 802.11n WLAN Adapter","RTL8187 Wireless Adapter","RTL8187B Wireless 802.11g 54Mbps Network Adapter","RTL8191SU 802.11n Wireless Adapter","RTL8192DU 802.11an WLAN Adapter",
+		"RTL8187B Wireless Adapter","RTL8187B Wireless Adapter","RTL8187SU 802.11g WLAN Adapter","RTL8812AU 802.11a/b/g/n/ac WLAN Adapter"};
 		InsertProducts(0x0bda, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6441,8 +6453,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0ce5, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x1001};
-		char* mids[] = {"PicoScope3000 series PC Oscilloscope"};
+		DWORD mid[] = {0x1001,0x1007,0x1008,0x1009,0x100e,0x1012,0x1016,0x1018,0x1200,0x1201,0x1202,0x1203,0x1204,0x1211,0x1212};
+		char* mids[] = {"PicoScope3000 series PC Oscilloscope","PicoScope 2000 series PC Oscilloscope","PicoScope 5000 series PC Oscilloscope","PicoScope 4000 series PC Oscilloscope","PicoScope 6000 series PC Oscilloscope",
+		"PicoScope 3000A series PC Oscilloscope","PicoScope 2000A series PC Oscilloscope","PicoScope 4000A series PC Oscilloscope","PicoScope 2000 series PC Oscilloscope","PicoScope 3000 series PC Oscilloscope",
+		"PicoScope 4000 series PC Oscilloscope","PicoScope 5000 series PC Oscilloscope","PicoScope 6000 series PC Oscilloscope","PicoScope 3000 series PC Oscilloscope","PicoScope 4000 series PC Oscilloscope"
+		};
 		InsertProducts(0x0ce9, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6663,15 +6678,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0dab, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x1020,0x1967,0x3801,0x4011,0x4023,0x4600,0x5501,0x5502,0x5513,0x5515,0x5516,0x5580,0x5581,0x6823,0x6826,0x6855,0x6861,0x6865,0x6869,0x6874,
-		0x6877,0x6881,0x688a,0x6899,0x6970,0x697a,0x6982,0xa861,0xa874,0xa970,0xa97a,0xb970,0xb97a};
-		char* mids[] = {"PC2PC WLAN Card","Bluetooth Dongle","Motorola Bluetooth 2.1+EDR Device","Medion Flash XL V2.0 Card Reader","Lexar Mobile Card Reader",
-		"802.11b/g Turbo Wireless Adapter","Mass Storage Device","Mass Storage Device","MP3 Player","MP3 Player",
-		"MP3 Player","Mega Sky 580 DVB-T Tuner [M902x]","Mega Sky 580 DVB-T Tuner [GL861]","UB11B/MS-6823 802.11b Wi-Fi adapter","IEEE 802.11g Wireless Network Adapter",
-		"Bluetooth Device","MSI-6861 802.11g WiFi adapter","RT2570","RT2570","RT2573",
-		"RT2573","Bluetooth Class I EDR Device","Bluetooth Class I EDR Device","802.11bgn 1T1R Mini Card Wireless Adapter","MS-6970 BToes Bluetooth adapter",
-		"Bluetooth Dongle","Medion Flash XL Card Reader","RT2573","RT2573","Bluetooth dongle",
-		"Bluetooth EDR Device","Bluetooth EDR Device","Bluetooth EDR Device"};
+		DWORD mid[] = {0x1020,0x1967,0x3713,0x3801,0x4011,0x4023,0x4600,0x5501,0x5502,0x5513,0x5515,0x5516,0x5580,0x5581,0x6823,0x6826,0x6855,0x6861,0x6865,0x6869,
+		0x6874,0x6877,0x6881,0x688a,0x6899,0x6970,0x697a,0x6982,0xa861,0xa874,0xa970,0xa97a,0xb970,0xb97a};
+		char* mids[] = {"PC2PC WLAN Card","Bluetooth Dongle","Primo 73","Motorola Bluetooth 2.1+EDR Device","Medion Flash XL V2.0 Card Reader",
+		"Lexar Mobile Card Reader","802.11b/g Turbo Wireless Adapter","Mass Storage Device","Mass Storage Device","MP3 Player",
+		"MP3 Player","MP3 Player","Mega Sky 580 DVB-T Tuner [M902x]","Mega Sky 580 DVB-T Tuner [GL861]","UB11B/MS-6823 802.11b Wi-Fi adapter",
+		"IEEE 802.11g Wireless Network Adapter","Bluetooth Device","MSI-6861 802.11g WiFi adapter","RT2570","RT2570",
+		"RT2573","RT2573","Bluetooth Class I EDR Device","Bluetooth Class I EDR Device","802.11bgn 1T1R Mini Card Wireless Adapter",
+		"MS-6970 BToes Bluetooth adapter","Bluetooth Dongle","Medion Flash XL Card Reader","RT2573","RT2573",
+		"Bluetooth dongle","Bluetooth EDR Device","Bluetooth EDR Device","Bluetooth EDR Device"};
 		InsertProducts(0x0db0, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6680,8 +6695,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0db7, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x3000};
-		char* mids[] = {"Mbox 2"};
+		DWORD mid[] = {0x1000,0x3000};
+		char* mids[] = {"Mbox 1 [Mbox]","Mbox 2"};
 		InsertProducts(0x0dba, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -6887,8 +6902,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x0e67, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0101,0x6001};
-		char* mids[] = {"MA100 [USB-UART Bridge IC]","GEMBIRD Flexible keyboard KB-109F-B-DE"};
+		DWORD mid[] = {0x0101,0x030b,0x030c,0x6001};
+		char* mids[] = {"MA100 [USB-UART Bridge IC]","Truly Ergonomic Computer Keyboard (Device Firmware Update mode)","Truly Ergonomic Computer Keyboard","GEMBIRD Flexible keyboard KB-109F-B-DE"};
 		InsertProducts(0x0e6a, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -7290,6 +7305,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x1039, mid, mids, ARRAYSIZE(mid));
 	}
 	{
+		DWORD mid[] = {0xf000};
+		char* mids[] = {"Actia Evo XS"};
+		InsertProducts(0x103a, mid, mids, ARRAYSIZE(mid));
+	}
+	{
 		DWORD mid[] = {0x0100,0x0101};
 		char* mids[] = {"ScratchAmp","ScratchAmp"};
 		InsertProducts(0x103d, mid, mids, ARRAYSIZE(mid));
@@ -7324,8 +7344,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x104f, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0010,0x0110,0x0111,0x0211};
-		char* mids[] = {"Yubikey","Yubikey NEO OTP","Yubikey NEO OTP+CCID","Gnubby"};
+		DWORD mid[] = {0x0010,0x0110,0x0111,0x0200,0x0211};
+		char* mids[] = {"Yubikey","Yubikey NEO OTP","Yubikey NEO OTP+CCID","U2F Gnubby","Gnubby"
+		};
 		InsertProducts(0x1050, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -7334,15 +7355,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x1054, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0200,0x0400,0x0500,0x0702,0x0704,0x070a,0x071a,0x0730,0x0740,0x0741,0x0742,0x0748,0x0810,0x0900,0x0901,0x0902,0x0903,0x0910,0x1001,0x1003,
-		0x1010,0x1021,0x1023,0x1048,0x10a2,0x10a8,0x1100,0x1103,0x1104,0x1105,0x1123,0x1140};
+		DWORD mid[] = {0x0200,0x0400,0x0500,0x0702,0x0704,0x070a,0x070b,0x070c,0x071a,0x071d,0x0730,0x0740,0x0741,0x0742,0x0748,0x0810,0x0900,0x0901,0x0902,0x0903,
+		0x0910,0x1001,0x1003,0x1010,0x1021,0x1023,0x1048,0x10a2,0x10a8,0x1100,0x1103,0x1104,0x1105,0x1110,0x1111,0x1112,0x1123,0x1130,0x1140};
 		char* mids[] = {"FireWire USB Combo","External HDD","hub","Passport External HDD","Passport External HDD",
-		"My Passport Essential SE, My Passport for Mac (WDBAAB)","My Passport","My Passport Essential (WDBACY)","My Passport","My Passport Ultra",
-		"My Passport Essential SE","My Passport (WDBKXH)","My Passport Ultra","MyBook Essential External HDD","My Book Essential Edition (Green Ring)",
-		"My Book Pro Edition","My Book Premium Edition","MyBook Essential External HDD","Elements Desktop (WDE1U)","Elements 1000 GB",
-		"Elements Portable (WDBAAR)","Elements Desktop (WDBAAU)","Elements SE","Elements Portable (WDBU6Y)","Elements SE Portable (WDBPCK)",
-		"Elements Portable (WDBUZG)","My Book Essential Edition 2.0 (WDH1U)","My Book Studio","MyBook Mirror Edition External HDD","My Book Studio II",
-		"My Book 3.0","My Book Essential USB3.0"};
+		"My Passport Essential (WDBAAA), My Passport for Mac (WDBAAB), My Passport Essential SE (WDBABM), My Passport SE for Mac (WDBABW)","My Passport Elite (WDBAAC)","My Passport Studio (WDBAAE)","My Passport Essential (WDBAAA)","My Passport Studio (WDBALG)",
+		"My Passport Essential (WDBACY)","My Passport Essential (WDBACY)","My Passport Ultra","My Passport Essential SE","My Passport (WDBKXH)",
+		"My Passport Ultra (WDBZFP)","MyBook Essential External HDD","My Book Essential Edition (Green Ring) (WDG1U)","My Book Pro Edition (WDG1T)","My Book Premium Edition",
+		"My Book Essential Edition (Green Ring) (WDG1U)","Elements Desktop (WDE1U)","Elements 1000 GB","Elements Portable (WDBAAR)","Elements Desktop (WDBAAU)",
+		"Elements SE Portable (WDBABV)","Elements Portable (WDBU6Y)","Elements SE Portable (WDBPCK)","Elements Portable (WDBUZG)","My Book Essential Edition 2.0 (WDH1U)",
+		"My Book Studio","MyBook Mirror Edition External HDD","My Book Studio II","My Book Essential (WDBAAF), My Book for Mac (WDBAAG)","My Book Elite (WDBAAH)",
+		"My Book Studio (WDBAAJ), My Book Studio LX (WDBACH)","My Book 3.0 (WDBABP)","My Book Essential (WDBACW)","My Book Essential (WDBACW)"};
 		InsertProducts(0x1058, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -7989,6 +8011,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x132b, mid, mids, ARRAYSIZE(mid));
 	}
 	{
+		DWORD mid[] = {0x0815};
+		char* mids[] = {"Virus TI Desktop"};
+		InsertProducts(0x133e, mid, mids, ARRAYSIZE(mid));
+	}
+	{
 		DWORD mid[] = {0x0200,0x0201,0x0202,0x0203,0x0204,0x0304};
 		char* mids[] = {"EasiDock 200 Hub","EasiDock 200 Keyboard and Mouse Port","EasiDock 200 Serial Port","EasiDock 200 Printer Port","Ethernet",
 		"EasiDock Ethernet"};
@@ -8017,13 +8044,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x134c, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0503,0x0504};
-		char* mids[] = {"USB-ML-12 HCS08/HCS12 Multilink","DEMOJM"};
+		DWORD mid[] = {0x0089,0x0503,0x0504};
+		char* mids[] = {"OpenSDA - CDC Serial Port","USB-ML-12 HCS08/HCS12 Multilink","DEMOJM"};
 		InsertProducts(0x1357, mid, mids, ARRAYSIZE(mid));
 	}
 	{
 		DWORD mid[] = {0x0101};
-		char* mids[] = {"J-Link ARM"};
+		char* mids[] = {"J-Link PLUS"};
 		InsertProducts(0x1366, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -8049,9 +8076,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x1385, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0001,0x0005,0x0007,0x0008,0x0011,0x0018,0x003c,0x003d,0x0050};
+		DWORD mid[] = {0x0001,0x0005,0x0007,0x0008,0x0011,0x0018,0x003c,0x003d,0x003f,0x0050};
 		char* mids[] = {"VFS101 Fingerprint Reader","VFS301 Fingerprint Reader","VFS451 Fingerprint Reader","VFS300 Fingerprint Reader","VFS5011 Fingerprint Reader",
-		"Fingerprint scanner","VFS471 Fingerprint Reader","VFS491","Swipe Fingerprint Sensor"};
+		"Fingerprint scanner","VFS471 Fingerprint Reader","VFS491","VFS495 Fingerprint Reader","Swipe Fingerprint Sensor"
+		};
 		InsertProducts(0x138a, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -8138,7 +8166,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	{
 		DWORD mid[] = {0x3201,0x3202,0x3203,0x3204,0x3205,0x3206,0x3207,0x3208,0x3209,0x3211,0x3212,0x3213,0x3214,0x3215,0x3216,0x3217,0x3219,0x3220,0x3223,0x3224,
 		0x3226,0x3234,0x3236,0x3237,0x3239,0x3240,0x3241,0x3242,0x3243,0x3244,0x3247,0x3249,0x3262,0x3273,0x3274,0x3282,0x3284,0x3304,0x3306,0x3315,
-		0x3375,0x3392,0x3394,0x5070,0x5111,0x5115,0x5116,0x5122,0x5126,0x5702,0x5710,0x5716,0x7020,0x7022};
+		0x3375,0x3392,0x3394,0x5070,0x5111,0x5115,0x5116,0x5122,0x5126,0x5130,0x5702,0x5710,0x5716,0x7020,0x7022};
 		char* mids[] = {"VisionDTV USB-Ter/HAMA USB DVB-T device cold","VisionDTV USB-Ter/HAMA USB DVB-T device warm","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DNTV Live! Tiny USB2 BDA (No Remote)",
 		"DNTV Live! Tiny USB2 BDA (No Remote)","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DTV-DVB UDST7022BDA DVB-S Box(Without HID)","DTV-DVB Hybrid Analog/Capture / Pinnacle PCTV 310e",
 		"DTV-DVB UDTT704C - DVBT/NTSC/PAL Driver(PCM4)","DTV-DVB UDTT704D - DVBT/NTSC/PAL Driver (PCM4)","DTV-DVB UDTT704F -(MiniCard) DVBT/NTSC/PAL Driver(Without HID)","DTV-DVB UDAT7240 - ATSC/NTSC/PAL Driver(PCM4)","DTV-DVB UDTT 7047-USB 2.0 DVB-T Driver",
@@ -8148,8 +8176,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		"802.11 n/g/b Wireless LAN Adapter","Internal Bluetooth","802.11 n/g/b Wireless LAN USB Adapter","802.11 n/g/b Wireless LAN USB Mini-Card","DVB-T Dongle [RTL2832U]",
 		"DVB-T + GPS Minicard [RTL2832U]","Wireless LAN USB Mini-Card","Asus Integrated Bluetooth module [AR3011]","Mediao 802.11n WLAN [Realtek RTL8191SU]","Bluetooth module",
 		"Atheros AR3012 Bluetooth 4.0 Adapter","Azurewave 43228+20702","Bluetooth","Webcam","Integrated Webcam",
-		"Integrated Webcam","Integrated Webcam","2M Integrated Webcam","PC Cam","UVC VGA Webcam",
-		"UVC VGA Webcam","UVC VGA Webcam","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DTV-DVB UDST7022BDA DVB-S Box(Without HID)"};
+		"Integrated Webcam","Integrated Webcam","2M Integrated Webcam","PC Cam","Integrated Webcam",
+		"UVC VGA Webcam","UVC VGA Webcam","UVC VGA Webcam","DTV-DVB UDST7020BDA DVB-S Box(DVBS for MCE2005)","DTV-DVB UDST7022BDA DVB-S Box(Without HID)"
+		};
 		InsertProducts(0x13d3, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -8326,8 +8355,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x1491, mid, mids, ARRAYSIZE(mid));
 	}
 	{
-		DWORD mid[] = {0x0010,0x0019,0x001a};
-		char* mids[] = {"Bluebird [Ambit]","Duck [Ambit2]","Colibri [Ambit2 S]"};
+		DWORD mid[] = {0x0010,0x0019,0x001a,0x001d};
+		char* mids[] = {"Bluebird [Ambit]","Duck [Ambit2]","Colibri [Ambit2 S]","Greentit [Ambit2 R]"};
 		InsertProducts(0x1493, mid, mids, ARRAYSIZE(mid));
 	}
 	{
@@ -10168,11 +10197,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		InsertProducts(0x2632, mid, mids, ARRAYSIZE(mid));
 	}
 	{
+		DWORD mid[] = {0x0001,0x0002,0x0003,0x0011,0x0012,0x0013,0x0017};
+		char* mids[] = {"MTi-10 IMU","MTi-20 VRU","MTi-30 AHRS","MTi-100 IMU","MTi-200 VRU",
+		"MTi-300 AHRS","MTi-G-700 GPS INS"};
+		InsertProducts(0x2639, mid, mids, ARRAYSIZE(mid));
+	}
+	{
 		DWORD mid[] = {0x1101,0x1201,0x1202,0x1203,0x1204,0x1205,0x1206,0x1207,0x1208,0x1209,0x1210,0x1211,0x1212,0x1213};
 		char* mids[] = {"TNT DVB-T/DAB/DAB+/FM","FM Transmitter/Receiver","MediaTV Analog/FM/DVB-T","MediaTV Analog/FM/DVB-T MiniPCIe","MediaTV Analog/FM/ATSC",
 		"SkyTV Ultimate V","MediaTV DVB-T MiniPCIe","Sundtek HD Capture","Sundtek SkyTV Ultimate III","MediaTV Analog/FM/ATSC MiniPCIe",
 		"MediaTV Pro III (EU)","MediaTV Pro III (US)","MediaTV Pro III MiniPCIe (EU)","MediaTV Pro III MiniPCIe (US)"};
 		InsertProducts(0x2659, mid, mids, ARRAYSIZE(mid));
+	}
+	{
+		DWORD mid[] = {0xba02};
+		char* mids[] = {"ace"};
+		InsertProducts(0x2676, mid, mids, ARRAYSIZE(mid));
 	}
 	{
 		DWORD mid[] = {0x200f};

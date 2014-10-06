@@ -38,21 +38,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "RCSGCameraDeviceThread.h"
+
 class RCSGCameraPreviewDockWindow : public QWidget
 {
 	Q_OBJECT
 
 public:
 	RCSGCameraPreviewDockWindow(QWidget *parent = 0);
+	~RCSGCameraPreviewDockWindow();
 
 	public slots:
-		void updateCameraPreviewList(QHash<QString,QObject*>* cameraDevices);
+		void updateCameraPreviewList(QHash<QString,QObject*>* devices);
 
 private:
+	
 	QGroupBox *cameraPreviewGroupBox;
 	QGroupBox *cameraPreviewThreadsStatusGroupBox;
 	QVBoxLayout *mainCameraPreviewListLayout;
 	QVBoxLayout *mainCameraPreviewThreadsStatusLayout;
+	QHash<QString,QObject*>* cameraDevices;
+	QHash<QString,RCSGCameraDeviceThread*>* cameraThreads;
+	void clearCameraThreads();
+
 	private slots:
 		void startPreviewThread();
 };

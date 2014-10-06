@@ -36,7 +36,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "RCSGCommunicationProtocol.h"
 
-RCSGCommunicationProtocol::RCSGCommunicationProtocol(QUuid robotId):id(NULL)
+RCSGCommunicationProtocol::RCSGCommunicationProtocol(QUuid ):id(NULL)
 {
 	startSymbolOutcoming = '$';
 	endSymbolOutcoming = '#';

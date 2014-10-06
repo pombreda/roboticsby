@@ -102,10 +102,10 @@ void enumeratingCameraDevices()
 			}
 			safeRelease(ppDevices);
 			safeRelease(&pAttributes);
-			MFShutdown();
-			CoUninitialize();
 		}
 	}
+	MFShutdown();
+	CoUninitialize();
 }
 
 void RCSGCameraDevicesManager::populateDevices()
@@ -145,7 +145,7 @@ void RCSGCameraDevicesManager::finishedPopulatingDevices()
 	for (iterator = cameraDevices->begin(); iterator != cameraDevices->end(); ++iterator)
 	{
 		RCSGCameraDevice *device = qobject_cast<RCSGCameraDevice*>(iterator.value());
-		message.append(QString("%1: Slot %2 [%3] - [%4]\n").arg(QString::number(cameraCounter),QString::number(device->cameraDeviceSlot()),device->cameraDeviceVendor(),device->cameraDeviceDescription()));
+		message.append(QString("%1: Slot %2 [%3] - [%4]\n").arg(QString::number(cameraCounter),QString::number(device->cameraVideoDeviceSlot()),device->cameraDeviceVendor(),device->cameraDeviceDescription()));
 		cameraCounter++;
 	}
 	mainWindow->showApplicationConsoleMessage(message);

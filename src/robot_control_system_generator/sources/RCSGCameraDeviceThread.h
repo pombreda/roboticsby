@@ -31,54 +31,50 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RCSGCAMERADEVICE_H_
-#define RCSGCAMERADEVICE_H_
+#ifndef RCSGCAMERADEVICETHREAD_H_
+#define RCSGCAMERADEVICETHREAD_H_
 
 #include <QObject>
-#include <QVector>
+#include <QIcon>
 
 #include <windows.h>
-#include <mfapi.h>
 
-class RCSGCameraDevice : public QObject
+#include "RCSGCameraDevice.h"
+
+class RCSGCameraDeviceThread;
+
+typedef struct cameraDeviceThreadContext {
+	UINT mediaType;
+	RCSGCameraDevice *device;
+	RCSGCameraDeviceThread *cameraDeviceThread;
+	QIcon icon;
+	UINT frameWidth;
+	UINT frameHeight;
+	BOOL saveVideo;
+	BOOL saveAudio;
+} CameraDeviceThreadContext;
+
+class RCSGCameraDeviceThread : public QObject
 {
 	Q_OBJECT
 
 public:
-	RCSGCameraDevice(const UINT &cameraSlot);
-	~RCSGCameraDevice();
+	RCSGCameraDeviceThread(RCSGCameraDevice *device, UINT mediaType, BOOL saveVideo, BOOL saveAudio);
+	~RCSGCameraDeviceThread();
 
-	UINT cameraVideoDeviceSlot() const;
-	QString cameraDeviceDescription() const;
-	QString cameraAudioDeviceDescription() const;
-	QVector<IMFMediaType*>* cameraDeviceVideoMediaTypes() const;
-	QVector<IMFMediaType*>* cameraDeviceAudioMediaTypes() const;
-	QString cameraDeviceVendor() const;
-	QVector<QHash<QString,QString>> cameraDeviceVideoCapacites() const;
-	QVector<QHash<QString,QString>> cameraDeviceAudioCapacites() const;
+	void startCameraDeviceThread();
+
+signals:
+	void onCameraDeviceThreadError(const QString &message);
+	void onCameraDeviceThreadInformation(const QString &message);
 
 private:
-	template <class T> void safeRelease(T **ppT);
-	template <class T> void safeReleaseAllCount(T **ppT);
-	WORD extractVid(LPCWSTR symbolicLink);
-	WORD extractPid(LPCWSTR symbolicLink);
-	QString decodeMediaTypeKey(const GUID &giud);
-	QString decodeMediaTypeValue(const GUID &giud, const PROPVARIANT &variant);
-	void enumerateVideoCapabilities();
-	void enumerateAudioCapabilities();
-
-	UINT cameraVideoSlot;
-	UINT cameraAudioSlot;
-	QVector<IMFMediaType*>* cameraVideoMediaTypes;
-	QVector<IMFMediaType*>* cameraAudioMediaTypes;
-	QVector<QHash<QString,QString>> cameraMediaTypesVideoDeviceCapacites;
-	QVector<QHash<QString,QString>> cameraMediaTypesAudioDeviceCapacites;
-
-	QString cameraDescription;
-	QString cameraVendor;
-	QString cameraVideoUniqueDeviceId;
-	QString cameraAudioDescription;
-	QString cameraAudioUniqueDeviceId;
+	QIcon createIconFromSVG(const QString &filename);
+	RCSGCameraDevice *cameraDevice;
+	UINT cameraMediaType;
+	HANDLE globalCameraDeviceThreadHandle;
+	DWORD globalCameraDeviceThreadId;
+	CameraDeviceThreadContext *threadContext;
 };
 
-#endif //RCSGCAMERADEVICE_H_
+#endif //RCSGCAMERADEVICETHREAD_H_

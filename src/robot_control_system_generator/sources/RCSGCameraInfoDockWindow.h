@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RCSGCAMERAINFODOCKWINDOW_H
 
 #include <QTreeWidget>
+#include <QHash>
 #include <windows.h>
 
 class RCSGCameraInfoDockWindow : public QTreeWidget
@@ -45,7 +46,8 @@ public:
 	RCSGCameraInfoDockWindow(QWidget *parent = 0);
 
 	public slots:
-		void updateDevicesInformation(QHash<QString,QObject*>* cameraDevices);
+		void updateDevicesInformation(QHash<QString,QObject*>* devices);
+private:
 };
 
 #endif // RCSGCAMERAINFODOCKWINDOW_H

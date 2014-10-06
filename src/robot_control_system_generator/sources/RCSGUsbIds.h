@@ -53,8 +53,8 @@ static const char *licenseUsbIds =
 "	The latest version can be obtained from\n"
 "		http://www.linux-usb.org/usb.ids\n"
 "\n"
-" Version: 2014.05.05\n"
-" Date:    2014-05-05 20:34:03\n";
+" Version: 2014.08.25\n"
+" Date:    2014-08-25 20:34:08\n";
 
 class RCSGUsbIds
 {

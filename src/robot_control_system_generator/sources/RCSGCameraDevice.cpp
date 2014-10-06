@@ -33,142 +33,61 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QRegExp>
 #include <QStringList>
+#include <QSettings>
+
 #include <mfapi.h>
 #include <mfidl.h>
 #include <uuids.h>
+#include <dshow.h>
+
 #include "RCSGCameraDevice.h"
 #include "RCSGUsbIds.h"
 
 RCSGCameraDevice::RCSGCameraDevice(const UINT &cameraSlot)
 {
-	this->cameraSlot = cameraSlot;
+	this->cameraVideoSlot = cameraSlot;
 	cameraVendor.clear();
 	cameraDescription.clear();
-	cameraMediaTypes = new QVector<IMFMediaType*>;
-
-	if (SUCCEEDED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE)))
-	{
-		if (SUCCEEDED(MFStartup(MF_VERSION)))
-		{
-			IMFAttributes *iMFAttributes = NULL;
-			IMFActivate **iMFActivate = NULL;
-			if (SUCCEEDED(MFCreateAttributes(&iMFAttributes, 1)))
-			{
-				if (SUCCEEDED(iMFAttributes->SetGUID(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE, MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID)))
-				{
-					UINT32 count=0;
-					if (SUCCEEDED(MFEnumDeviceSources(iMFAttributes, &iMFActivate, &count)))
-					{
-						if(cameraSlot<count)
-						{
-							LPWSTR friendlyName = NULL;
-							LPWSTR symbolicLink = NULL;
-							UINT32 lenght = 0;
-							if(SUCCEEDED(iMFActivate[cameraSlot]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME,&friendlyName,&lenght)))
-							{
-								if(SUCCEEDED(iMFActivate[cameraSlot]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK,&symbolicLink,&lenght)))
-								{
-									cameraDescription.clear();
-									cameraVendor.clear();
-									RCSGUsbIds idsDataBase;
-									cameraVendor.append(idsDataBase.Manufacture(extractVid(symbolicLink)));
-									cameraDescription.append(idsDataBase.Product(extractVid(symbolicLink),extractPid(symbolicLink)));
-									if (cameraDescription.count()==0)
-									{
-										cameraDescription.append(QString::fromStdWString(friendlyName));
-									}
-
-									IMFMediaSource *iMFMediaSource = NULL;
-									
-									if (SUCCEEDED(iMFActivate[cameraSlot]->ActivateObject(IID_PPV_ARGS(&iMFMediaSource))))
-									{						
-										IMFPresentationDescriptor *iMFPresentationDescriptor = NULL;
-										IMFStreamDescriptor *iMFStreamDescriptor = NULL;
-										IMFMediaTypeHandler *iMFMediaTypeHandler = NULL;
-										IMFMediaType *iMFMediaType = NULL;
-										if (SUCCEEDED(iMFMediaSource->CreatePresentationDescriptor(&iMFPresentationDescriptor)))
-										{
-											BOOL selectedPresentationDescriptor;
-											if (SUCCEEDED(iMFPresentationDescriptor->GetStreamDescriptorByIndex(0, &selectedPresentationDescriptor, &iMFStreamDescriptor)))
-											{
-												if (SUCCEEDED(iMFStreamDescriptor->GetMediaTypeHandler(&iMFMediaTypeHandler)))
-												{
-													DWORD types = 0;
-													if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeCount(&types)))
-													{
-														cameraMediaTypesDeviceCapacites.clear();
-														for (DWORD i = 0; i < types; i++)
-														{
-															if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeByIndex(i, &iMFMediaType)))
-															{
-																cameraMediaTypes->append(iMFMediaType);
-																QHash<QString,QString> hashTable;
-																UINT32 cAttributes = 0;
-																if (SUCCEEDED(iMFMediaType->GetCount(&cAttributes)))
-																{					
-																	for (UINT32 nIndex = 0; nIndex < cAttributes; ++nIndex)
-																	{
-																		GUID guid;
-																		PROPVARIANT propertyVariant;
-																		PropVariantInit(&propertyVariant);
-																		if (SUCCEEDED(iMFMediaType->GetItemByIndex(nIndex, &guid, &propertyVariant)))
-																		{																			
-																			hashTable[decodeMediaTypeKey(guid)]=decodeMediaTypeValue(guid, propertyVariant);
-																		}
-																		PropVariantClear(&propertyVariant);
-																	}
-																}
-																cameraMediaTypesDeviceCapacites.append(hashTable);
-															}
-															safeRelease(&iMFMediaType);
-														}
-													}
-												}
-											}
-										}
-										safeRelease(&iMFPresentationDescriptor);
-										safeRelease(&iMFStreamDescriptor);
-										safeRelease(&iMFMediaTypeHandler);
-										safeRelease(&iMFMediaType);
-									}
-									safeRelease(&iMFMediaSource);
-									safeRelease(&iMFActivate[cameraSlot]);
-								
-									CoTaskMemFree(symbolicLink);
-									symbolicLink = NULL;
-								}
-								CoTaskMemFree(friendlyName);
-								friendlyName = NULL;
-							}
-						}
-						for(UINT32 i=0; i<count; i++)
-						{
-							safeRelease(&iMFActivate[i]);
-						}
-					}
-				}
-			}
-			safeRelease(iMFActivate);
-			safeRelease(&iMFAttributes);
-			MFShutdown();
-			CoUninitialize();
-		}
-	}
-	sortMediaTypesDeviceCapacitesByFrameSize();
+	cameraAudioDescription.clear();
+	cameraVideoUniqueDeviceId.clear();
+	cameraAudioUniqueDeviceId.clear();
+	cameraVideoMediaTypes = new QVector<IMFMediaType*>;
+	cameraAudioMediaTypes = new QVector<IMFMediaType*>;
+	enumerateVideoCapabilities();
+	enumerateAudioCapabilities();
 }
 
 RCSGCameraDevice::~RCSGCameraDevice()
 {
-	if (cameraMediaTypes != NULL)
+	if (cameraVideoMediaTypes != NULL)
 	{
-		QVector<IMFMediaType*>::iterator iterator;
-		for (iterator = cameraMediaTypes->begin(); iterator != cameraMediaTypes->end(); ++iterator)
+		cameraVideoMediaTypes->clear();
+		delete cameraVideoMediaTypes;
+		cameraVideoMediaTypes = NULL;
+	}
+	if (cameraAudioMediaTypes != NULL)
+	{
+		cameraAudioMediaTypes->clear();
+		delete cameraAudioMediaTypes;
+		cameraAudioMediaTypes = NULL;
+	}
+}
+
+template <class T> void RCSGCameraDevice::safeReleaseAllCount(T **ppT)
+{
+	if (ppT != NULL)
+	{
+		if (*ppT)
 		{
-			safeRelease(&(*iterator));
+			ULONG e = (*ppT)->Release();
+
+			while (e)
+			{
+				e = (*ppT)->Release();
+			}
+
+			*ppT = NULL;
 		}
-		cameraMediaTypes->clear();
-		delete cameraMediaTypes;
-		cameraMediaTypes = NULL;
 	}
 }
 
@@ -205,7 +124,14 @@ QString RCSGCameraDevice::decodeMediaTypeKey( const GUID &giud )
 	if (IsEqualGUID(giud,MF_MT_VIDEO_NOMINAL_RANGE)) return QString("MF_MT_VIDEO_NOMINAL_RANGE");
 	if (IsEqualGUID(giud,MF_MT_VIDEO_LIGHTING)) return QString("MF_MT_VIDEO_LIGHTING");
 	if (IsEqualGUID(giud,MF_MT_VIDEO_PRIMARIES)) return QString("MF_MT_VIDEO_PRIMARIES");
-	if (IsEqualGUID(giud,MF_MT_YUV_MATRIX)) return QString("MF_MT_YUV_MATRIX");	   
+	if (IsEqualGUID(giud,MF_MT_YUV_MATRIX)) return QString("MF_MT_YUV_MATRIX");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_NUM_CHANNELS)) return QString("MF_MT_AUDIO_NUM_CHANNELS");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_SAMPLES_PER_SECOND)) return QString("MF_MT_AUDIO_SAMPLES_PER_SECOND");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_BITS_PER_SAMPLE)) return QString("MF_MT_AUDIO_BITS_PER_SAMPLE");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_BLOCK_ALIGNMENT)) return QString("MF_MT_AUDIO_BLOCK_ALIGNMENT");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_AVG_BYTES_PER_SECOND)) return QString("MF_MT_AUDIO_AVG_BYTES_PER_SECOND");
+	if (IsEqualGUID(giud,MF_MT_AUDIO_CHANNEL_MASK)) return QString("MF_MT_AUDIO_CHANNEL_MASK");
+
 	return result;
 }
 
@@ -216,7 +142,8 @@ QString RCSGCameraDevice::decodeMediaTypeValue( const GUID &giud, const PROPVARI
 	{		
 		if (variant.vt == VT_CLSID)
 		{
-			if (IsEqualGUID(MEDIATYPE_Video,*variant.puuid)) return QString("MEDIATYPE_Video");
+			if (IsEqualGUID(MFMediaType_Video,*variant.puuid)) return QString("MFMediaType_Video");
+			if (IsEqualGUID(MFMediaType_Audio,*variant.puuid)) return QString("MFMediaType_Audio");
 		}
 	}
 	if (IsEqualGUID(giud,MF_MT_SUBTYPE))
@@ -279,6 +206,24 @@ QString RCSGCameraDevice::decodeMediaTypeValue( const GUID &giud, const PROPVARI
 			if (IsEqualGUID(MFVideoFormat_WMV3,*variant.puuid)) return QString("MFVideoFormat_WMV3");
 			if (IsEqualGUID(MFVideoFormat_WVC1,*variant.puuid)) return QString("MFVideoFormat_WVC1");
 			if (IsEqualGUID(MFVideoFormat_420O,*variant.puuid)) return QString("MFVideoFormat_420O");
+
+			if (IsEqualGUID(MFAudioFormat_AAC,*variant.puuid)) return QString("MFAudioFormat_AAC");
+			if (IsEqualGUID(MFAudioFormat_ADTS,*variant.puuid)) return QString("MFAudioFormat_ADTS");
+			if (IsEqualGUID(MFAudioFormat_Base,*variant.puuid)) return QString("MFAudioFormat_Base");
+			if (IsEqualGUID(MFAudioFormat_Dolby_AC3,*variant.puuid)) return QString("MFAudioFormat_Dolby_AC3");
+			if (IsEqualGUID(MFAudioFormat_Dolby_AC3_SPDIF,*variant.puuid)) return QString("MFAudioFormat_Dolby_AC3_SPDIF");
+			if (IsEqualGUID(MFAudioFormat_Dolby_DDPlus,*variant.puuid)) return QString("MFAudioFormat_Dolby_DDPlus");
+			if (IsEqualGUID(MFAudioFormat_DRM,*variant.puuid)) return QString("MFAudioFormat_DRM");
+			if (IsEqualGUID(MFAudioFormat_DTS,*variant.puuid)) return QString("MFAudioFormat_DTS");
+			if (IsEqualGUID(MFAudioFormat_Float,*variant.puuid)) return QString("MFAudioFormat_Float");
+			if (IsEqualGUID(MFAudioFormat_MP3,*variant.puuid)) return QString("MFAudioFormat_MP3");
+			if (IsEqualGUID(MFAudioFormat_MPEG,*variant.puuid)) return QString("MFAudioFormat_MPEG");
+			if (IsEqualGUID(MFAudioFormat_MSP1,*variant.puuid)) return QString("MFAudioFormat_MSP1");
+			if (IsEqualGUID(MFAudioFormat_PCM,*variant.puuid)) return QString("MFAudioFormat_PCM");
+			if (IsEqualGUID(MFAudioFormat_WMASPDIF,*variant.puuid)) return QString("MFAudioFormat_WMASPDIF");
+			if (IsEqualGUID(MFAudioFormat_WMAudio_Lossless,*variant.puuid)) return QString("MFAudioFormat_WMAudio_Lossless");
+			if (IsEqualGUID(MFAudioFormat_WMAudioV8,*variant.puuid)) return QString("MFAudioFormat_WMAudioV8");
+			if (IsEqualGUID(MFAudioFormat_WMAudioV9,*variant.puuid)) return QString("MFAudioFormat_WMAudioV9");
 		}
 	}
 	if (IsEqualGUID(giud,MF_MT_FRAME_SIZE))
@@ -439,9 +384,212 @@ QString RCSGCameraDevice::decodeMediaTypeValue( const GUID &giud, const PROPVARI
 			if (IsEqualGUID(FORMAT_MPEG2Video,*variant.puuid)) return QString("FORMAT_MPEG2Video");
 		}
 	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_NUM_CHANNELS))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			if (variant.cyVal.Lo == 1)
+			{
+				return QString("%1 channel").arg(QString::number(variant.cyVal.Lo));
+			} else 
+			{
+				return QString("%1 channels").arg(QString::number(variant.cyVal.Lo));
+			}
+		}
+	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_AVG_BYTES_PER_SECOND))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			return QString("%1 bytes").arg(QString::number(variant.cyVal.Lo));
+		}
+	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_BITS_PER_SAMPLE))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			return QString("%1 bits").arg(QString::number(variant.cyVal.Lo));
+		}
+	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_CHANNEL_MASK))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			result.clear();
+			BOOL firstValue = TRUE;
+			if (((variant.cyVal.Lo)&(SPEAKER_FRONT_LEFT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_FRONT_LEFT");
+				firstValue = FALSE;
+			}
+			if (((variant.cyVal.Lo)&(SPEAKER_FRONT_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_FRONT_CENTER");
+				firstValue = FALSE;
+			}
+			if (((variant.cyVal.Lo)&(SPEAKER_FRONT_LEFT_OF_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_FRONT_LEFT_OF_CENTER");
+				firstValue = FALSE;
+			}
+			if (((variant.cyVal.Lo)&(SPEAKER_FRONT_RIGHT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_FRONT_RIGHT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_FRONT_RIGHT_OF_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_FRONT_RIGHT_OF_CENTER");
+				firstValue = FALSE;
+			}		
+			if (((variant.cyVal.Lo)&(SPEAKER_BACK_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_BACK_CENTER");
+				firstValue = FALSE;
+			}			
+			if (((variant.cyVal.Lo)&(SPEAKER_BACK_LEFT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_BACK_LEFT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_BACK_RIGHT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_BACK_RIGHT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_LOW_FREQUENCY)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_LOW_FREQUENCY");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_SIDE_LEFT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_SIDE_LEFT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_SIDE_RIGHT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_SIDE_RIGHT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_BACK_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_BACK_CENTER");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_BACK_LEFT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_BACK_LEFT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_FRONT_RIGHT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_FRONT_RIGHT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_FRONT_CENTER)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_FRONT_CENTER");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_FRONT_LEFT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_FRONT_LEFT");
+				firstValue = FALSE;
+			}	
+			if (((variant.cyVal.Lo)&(SPEAKER_TOP_FRONT_RIGHT)))
+			{
+				if (!firstValue)
+				{
+					result.append(", ");
+				} 
+				result.append("SPEAKER_TOP_FRONT_RIGHT");
+				firstValue = FALSE;
+			}	
+			return result;
+		}
+	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_SAMPLES_PER_SECOND))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			return QString("%1").arg(QString::number(variant.cyVal.Lo));
+		}
+	}
+	if (IsEqualGUID(giud,MF_MT_AUDIO_BLOCK_ALIGNMENT))
+	{		
+		if (variant.vt == VT_UI4)
+		{
+			return QString("%1 bytes").arg(QString::number(variant.cyVal.Lo));
+		}
+	}
+
 	return result;
 }
-
 
 WORD RCSGCameraDevice::extractVid( LPCWSTR symbolicLink )
 {
@@ -483,9 +631,9 @@ WORD RCSGCameraDevice::extractPid( LPCWSTR symbolicLink )
 	return pid;
 }
 
-UINT RCSGCameraDevice::cameraDeviceSlot() const
+UINT RCSGCameraDevice::cameraVideoDeviceSlot() const
 {
-	return cameraSlot;
+	return cameraVideoSlot;
 }
 
 QString RCSGCameraDevice::cameraDeviceDescription() const
@@ -493,14 +641,24 @@ QString RCSGCameraDevice::cameraDeviceDescription() const
 	return cameraDescription;
 }
 
+QString RCSGCameraDevice::cameraAudioDeviceDescription() const
+{
+	return cameraAudioDescription;
+}
+
 QString RCSGCameraDevice::cameraDeviceVendor() const
 {
 	return cameraVendor;
 }
 
-QVector<QHash<QString,QString>> RCSGCameraDevice::cameraDeviceCapacites() const
+QVector<QHash<QString,QString>> RCSGCameraDevice::cameraDeviceVideoCapacites() const
 {
-	return cameraMediaTypesDeviceCapacites;
+	return cameraMediaTypesVideoDeviceCapacites;
+}
+
+QVector<QHash<QString,QString>> RCSGCameraDevice::cameraDeviceAudioCapacites() const
+{
+	return cameraMediaTypesAudioDeviceCapacites;
 }
 
 bool lessThanWidth(const QHash<QString,QString> &h1, const QHash<QString,QString> &h2)
@@ -512,12 +670,317 @@ bool lessThanWidth(const QHash<QString,QString> &h1, const QHash<QString,QString
 	return frameWidth1>frameWidth2;
 }
 
-void RCSGCameraDevice::sortMediaTypesDeviceCapacitesByFrameSize()
+QVector<IMFMediaType*>* RCSGCameraDevice::cameraDeviceVideoMediaTypes() const
 {
-	qSort(cameraMediaTypesDeviceCapacites.begin(),cameraMediaTypesDeviceCapacites.end(),lessThanWidth);
+	return cameraVideoMediaTypes;
 }
 
-QVector<IMFMediaType*>* RCSGCameraDevice::cameraDeviceMediaTypes() const
+QVector<IMFMediaType*>* RCSGCameraDevice::cameraDeviceAudioMediaTypes() const
 {
-	return cameraMediaTypes;
+	return cameraAudioMediaTypes;
+}
+
+void RCSGCameraDevice::enumerateVideoCapabilities()
+{
+	if (SUCCEEDED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE)))
+	{
+		if (SUCCEEDED(MFStartup(MF_VERSION)))
+		{
+			IMFAttributes* iMFAttributes = NULL;
+			IMFActivate** iMFActivate = NULL;
+			if (SUCCEEDED(MFCreateAttributes(&iMFAttributes, 1)))
+			{
+				if (SUCCEEDED(iMFAttributes->SetGUID(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE, MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID)))
+				{	
+					UINT32 ñount = 0 ;
+					if (SUCCEEDED(MFEnumDeviceSources(iMFAttributes, &iMFActivate, &ñount)))
+					{			
+						if(cameraVideoSlot<ñount)
+						{
+							LPWSTR friendlyName = NULL;
+							LPWSTR symbolicLink = NULL;
+							UINT32 lenght = 0;
+
+							if(SUCCEEDED(iMFActivate[cameraVideoSlot]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME,&friendlyName,&lenght)))
+							{
+								if(SUCCEEDED(iMFActivate[cameraVideoSlot]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK,&symbolicLink,&lenght)))
+								{
+									cameraDescription.clear();
+									cameraVendor.clear();
+									RCSGUsbIds idsDataBase;
+									cameraVideoUniqueDeviceId.append(QString::fromStdWString(symbolicLink));
+									cameraVendor.append(idsDataBase.Manufacture(extractVid(symbolicLink)));
+									cameraDescription.append(idsDataBase.Product(extractVid(symbolicLink),extractPid(symbolicLink)));
+									if (cameraDescription.count()==0)
+									{
+										cameraDescription.append(QString::fromStdWString(friendlyName));
+									}
+
+									IMFMediaSource* iMFMediaSource = NULL;
+									IMFActivate* device = iMFActivate[cameraVideoSlot];
+									if (SUCCEEDED(device->ActivateObject(__uuidof(IMFMediaSource), (void**) &iMFMediaSource)))
+									{						
+										/*
+										CComQIPtr<IAMCameraControl> spCameraControl(iMFMediaSource);
+										HRESULT hr = S_OK;
+										if(spCameraControl) {
+										long min, max, step, def, control;
+										hr = spCameraControl->GetRange(CameraControl_Tilt, &min, &max, &step, &def, &control);
+										if(SUCCEEDED(hr))
+										hr = spCameraControl->Set(CameraControl_Tilt, min, CameraControl_Flags_Manual);
+										}
+										CComQIPtr<IAMVideoProcAmp> spVideo(iMFMediaSource);
+										if(spVideo)
+										{
+										long min, max, step, def, control;
+										hr = spVideo->GetRange(VideoProcAmp_WhiteBalance, &min, &max, &step, &def, &control);
+										hr = spVideo->GetRange(VideoProcAmp_Sharpness, &min, &max, &step, &def, &control);
+										hr = spVideo->GetRange(VideoProcAmp_ColorEnable, &min, &max, &step, &def, &control);
+										}
+										*/
+
+										IMFPresentationDescriptor* iMFPresentationDescriptor = NULL;
+										IMFStreamDescriptor* iMFStreamDescriptor = NULL;
+										IMFMediaTypeHandler* iMFMediaTypeHandler = NULL;
+										IMFMediaType *iMFMediaType = NULL;
+
+										if (SUCCEEDED(iMFMediaSource->CreatePresentationDescriptor(&iMFPresentationDescriptor)))
+										{
+											BOOL selectedPresentationDescriptor;
+											if (SUCCEEDED(iMFPresentationDescriptor->GetStreamDescriptorByIndex(0, &selectedPresentationDescriptor, &iMFStreamDescriptor)))
+											{
+												if (SUCCEEDED(iMFStreamDescriptor->GetMediaTypeHandler(&iMFMediaTypeHandler)))
+												{
+													DWORD types = 0;
+													if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeCount(&types)))
+													{
+														cameraMediaTypesVideoDeviceCapacites.clear();
+														for (DWORD i = 0; i < types; i++)
+														{
+															if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeByIndex(i, &iMFMediaType)))
+															{
+																cameraVideoMediaTypes->append(iMFMediaType);
+																QHash<QString,QString> hashTable;
+																UINT32 cAttributes = 0;
+																if (SUCCEEDED(iMFMediaType->GetCount(&cAttributes)))
+																{					
+																	for (UINT32 nIndex = 0; nIndex < cAttributes; ++nIndex)
+																	{
+																		GUID guid;
+																		PROPVARIANT propertyVariant;
+																		PropVariantInit(&propertyVariant);
+																		if (SUCCEEDED(iMFMediaType->GetItemByIndex(nIndex, &guid, &propertyVariant)))
+																		{																			
+																			hashTable[decodeMediaTypeKey(guid)]=decodeMediaTypeValue(guid, propertyVariant);
+																		}
+																		PropVariantClear(&propertyVariant);
+																	}
+																}
+																cameraMediaTypesVideoDeviceCapacites.append(hashTable);
+															}
+														}
+														safeRelease(&iMFMediaType);
+													}
+												}
+											}
+										}
+										safeReleaseAllCount(&iMFMediaType);	
+										safeRelease(&iMFMediaTypeHandler);
+										safeRelease(&iMFStreamDescriptor);
+										safeReleaseAllCount(&iMFPresentationDescriptor);
+									}
+
+									iMFMediaSource->Stop();
+									iMFMediaSource->Shutdown();
+
+									device->DetachObject();
+									device->ShutdownObject();
+
+									safeRelease(&device);
+									safeReleaseAllCount(&iMFActivate[cameraVideoSlot]);
+
+									CoTaskMemFree(symbolicLink);
+									symbolicLink = NULL;
+								}
+								CoTaskMemFree(friendlyName);
+								friendlyName = NULL;
+							}
+						}
+					}	
+				}
+			}
+
+			safeReleaseAllCount(&iMFAttributes);
+			safeReleaseAllCount(iMFActivate);
+
+			MFShutdown();
+			CoUninitialize();
+		}
+	}
+}
+
+void RCSGCameraDevice::enumerateAudioCapabilities()
+{
+	if (SUCCEEDED(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE)))
+	{
+		if (SUCCEEDED(MFStartup(MF_VERSION)))
+		{
+			IMFAttributes* iMFAttributes = NULL;
+			IMFActivate** iMFActivate = NULL;
+			if (SUCCEEDED(MFCreateAttributes(&iMFAttributes, 1)))
+			{
+				if (SUCCEEDED(iMFAttributes->SetGUID(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE, MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_GUID)))
+				{
+					UINT32 count = 0;
+					if (SUCCEEDED(MFEnumDeviceSources(iMFAttributes, &(iMFActivate), &count)))
+					{				
+						LPWSTR audioSymbolicLink = NULL;
+						LPWSTR audioName = NULL;
+						UINT32 length = 0;
+						UINT32 cameraAudioSlot = 0; 
+
+						for (UINT i = 0; i<count; i++)
+						{
+							if(SUCCEEDED(iMFActivate[i]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_ENDPOINT_ID,&audioSymbolicLink,&length)))
+							{
+								if (length>38)
+								{
+									QString audioDeviceGuid;
+									QString videoDeviceUniqueString;  
+									audioDeviceGuid.append(QString::fromStdWString(audioSymbolicLink).right(38));
+									QSettings settings(QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Capture\\%1").arg(audioDeviceGuid),
+										QSettings::NativeFormat);
+									QStringList keyList = settings.allKeys();
+									for(int j=0;j<keyList.size(); j++)
+									{
+										QString key = keyList[j];
+										if (key==QString("Properties/{233164c8-1b2c-4c7d-bc68-b671687a2567},1"))
+										{
+											videoDeviceUniqueString = settings.value(key).toString();
+											break;
+										}
+									}
+									int index1 = videoDeviceUniqueString.indexOf(QString("\\\\?\\"),0);
+									int index2 = cameraVideoUniqueDeviceId.indexOf(QString("\\\\?\\"),0);
+									QString videoId1 = videoDeviceUniqueString.mid(index1, videoDeviceUniqueString.length());
+									QString videoId2 = cameraVideoUniqueDeviceId.mid(index2, cameraVideoUniqueDeviceId.length());
+									std::wstring videoId1WString = videoId1.toStdWString();
+									std::wstring videoId2WString = videoId2.toStdWString();
+									LPCWSTR videoId1Link = videoId1WString.c_str();
+									LPCWSTR videoId2Link = videoId2WString.c_str();
+
+									if (extractVid(videoId1Link)==extractVid(videoId2Link) && extractPid(videoId1Link)==extractPid(videoId2Link))
+									{
+										cameraAudioSlot = i;
+										break;
+									}
+									CoTaskMemFree(audioSymbolicLink);
+									audioSymbolicLink = NULL;
+								}							
+							}
+						}
+
+						if (audioSymbolicLink!=NULL)
+						{
+							cameraAudioUniqueDeviceId.append(QString::fromStdWString(audioSymbolicLink));
+						}
+
+						if (cameraAudioSlot<count && count>0)
+						{
+							if(SUCCEEDED(iMFActivate[cameraAudioSlot]->GetAllocatedString(MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME,&audioName,&length)))
+							{
+								if (cameraAudioDescription.count()==0)
+								{
+									cameraAudioDescription.append(QString::fromStdWString(audioName));
+								}
+
+								IMFMediaSource* iMFMediaSource = NULL;
+								IMFActivate* device = iMFActivate[cameraAudioSlot];
+								if (SUCCEEDED(device->ActivateObject(__uuidof(IMFMediaSource), (void**) &iMFMediaSource)))
+								{						
+									IMFPresentationDescriptor* iMFPresentationDescriptor = NULL;
+									IMFStreamDescriptor* iMFStreamDescriptor = NULL;
+									IMFMediaTypeHandler* iMFMediaTypeHandler = NULL;
+									IMFMediaType *iMFMediaType = NULL;
+
+									if (SUCCEEDED(iMFMediaSource->CreatePresentationDescriptor(&iMFPresentationDescriptor)))
+									{
+										BOOL selectedPresentationDescriptor;
+										if (SUCCEEDED(iMFPresentationDescriptor->GetStreamDescriptorByIndex(0, &selectedPresentationDescriptor, &iMFStreamDescriptor)))
+										{
+											if (SUCCEEDED(iMFStreamDescriptor->GetMediaTypeHandler(&iMFMediaTypeHandler)))
+											{
+												DWORD types = 0;
+												if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeCount(&types)))
+												{
+													cameraMediaTypesAudioDeviceCapacites.clear();
+													for (DWORD i = 0; i < types; i++)
+													{
+														if (SUCCEEDED(iMFMediaTypeHandler->GetMediaTypeByIndex(i, &iMFMediaType)))
+														{
+															cameraAudioMediaTypes->append(iMFMediaType);
+															QHash<QString,QString> hashTable;
+															UINT32 cAttributes = 0;
+															if (SUCCEEDED(iMFMediaType->GetCount(&cAttributes)))
+															{					
+																for (UINT32 nIndex = 0; nIndex < cAttributes; ++nIndex)
+																{
+																	GUID guid;
+																	PROPVARIANT propertyVariant;
+																	PropVariantInit(&propertyVariant);
+																	if (SUCCEEDED(iMFMediaType->GetItemByIndex(nIndex, &guid, &propertyVariant)))
+																	{																			
+																		hashTable[decodeMediaTypeKey(guid)]=decodeMediaTypeValue(guid, propertyVariant);
+																	}
+																	PropVariantClear(&propertyVariant);
+																}
+															}
+															cameraMediaTypesAudioDeviceCapacites.append(hashTable);
+														}
+													}
+													safeRelease(&iMFMediaType);
+												}
+											}
+										}
+										safeReleaseAllCount(&iMFMediaType);	
+										safeRelease(&iMFMediaTypeHandler);
+										safeRelease(&iMFStreamDescriptor);
+										safeReleaseAllCount(&iMFPresentationDescriptor);
+									}
+
+									iMFMediaSource->Stop();
+									iMFMediaSource->Shutdown();
+
+									device->DetachObject();
+									device->ShutdownObject();
+
+									safeRelease(&device);
+									safeReleaseAllCount(&iMFActivate[cameraAudioSlot]);
+								}
+								if (audioName!=NULL)
+								{
+									CoTaskMemFree(audioName);
+									audioName = NULL;
+								}
+							}
+							if (audioSymbolicLink!=NULL)
+							{						
+								CoTaskMemFree(audioSymbolicLink);
+								audioSymbolicLink = NULL;
+							}
+						}
+					}				
+					for(UINT32 i=0; i<count; i++)
+					{
+						safeReleaseAllCount(&iMFActivate[i]);
+					}
+				}
+			}
+			safeReleaseAllCount(&iMFAttributes);
+			safeReleaseAllCount(iMFActivate);
+
+			MFShutdown();
+			CoUninitialize();
+		}
+	}
 }

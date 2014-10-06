@@ -70,7 +70,7 @@ void RCSGCameraInfoDockWindow::updateDevicesInformation( QHash<QString,QObject*>
 			{			
 				QTreeWidgetItem *topLevelItem = new QTreeWidgetItem(this);
 				addTopLevelItem(topLevelItem);
-				topLevelItem->setText(0,QString("Slot %1").arg(QString::number(device->cameraDeviceSlot())));
+				topLevelItem->setText(0,QString("Slot %1").arg(QString::number(device->cameraVideoDeviceSlot())));
 				topLevelItem->setText(1,device->cameraDeviceDescription());
 				QTreeWidgetItem *vendorItem=new QTreeWidgetItem(topLevelItem);
 				vendorItem->setText(0,QString("Vendor"));
@@ -78,20 +78,50 @@ void RCSGCameraInfoDockWindow::updateDevicesInformation( QHash<QString,QObject*>
 				QTreeWidgetItem *productDescriptionItem=new QTreeWidgetItem(topLevelItem);
 				productDescriptionItem->setText(0,QString("Description"));
 				productDescriptionItem->setText(1,device->cameraDeviceDescription());		
-				QVector<QHash<QString,QString>> capacites = device->cameraDeviceCapacites();		
-				QVector<QHash<QString,QString>>::Iterator iterator; 
-				for (iterator = capacites.begin(); iterator != capacites.end(); ++iterator)
+				
+				QVector<QHash<QString,QString>> capacitesAudio = device->cameraDeviceAudioCapacites();		
+				QVector<QHash<QString,QString>>::Iterator iteratorAudio; 
+				for (iteratorAudio = capacitesAudio.begin(); iteratorAudio != capacitesAudio.end(); ++iteratorAudio)
 				{
-					QHash<QString,QString> hashTable = (*iterator);
+					QHash<QString,QString> hashTable = (*iteratorAudio);
 					QHash<QString,QString>::iterator iteratorHash;
 					QTreeWidgetItem *cameraPropertyList = new QTreeWidgetItem(topLevelItem);
-					cameraPropertyList->setText(0,QString("Media Type"));
-					cameraPropertyList->setText(1,QString("[%1 %2]").arg(hashTable[QString("MF_MT_FRAME_SIZE")],hashTable[QString("MF_MT_FRAME_RATE")]));
-					for (iteratorHash = hashTable.begin(); iteratorHash != hashTable.end(); ++iteratorHash)
+					cameraPropertyList->setText(0,device->cameraAudioDeviceDescription());
+					if (hashTable[QString("MF_MT_AUDIO_NUM_CHANNELS")].size()!=0 && hashTable[QString("MF_MT_AUDIO_AVG_BYTES_PER_SECOND")].size()!=0)
 					{
-						QTreeWidgetItem *cameraProperty = new QTreeWidgetItem(cameraPropertyList);
-						cameraProperty->setText(0,iteratorHash.key());
-						cameraProperty->setText(1,iteratorHash.value());
+						cameraPropertyList->setText(1,QString("[%1 %2]").arg(hashTable[QString("MF_MT_AUDIO_NUM_CHANNELS")],hashTable[QString("MF_MT_AUDIO_AVG_BYTES_PER_SECOND")]));
+					}				
+					for (iteratorHash = hashTable.begin(); iteratorHash != hashTable.end(); ++iteratorHash)
+					{					
+						if (iteratorHash.value().size()>0)
+						{
+							QTreeWidgetItem *cameraProperty = new QTreeWidgetItem(cameraPropertyList);
+							cameraProperty->setText(0,iteratorHash.key());
+							cameraProperty->setText(1,iteratorHash.value());
+						}
+					}
+				}
+
+				QVector<QHash<QString,QString>> capacitesVideo = device->cameraDeviceVideoCapacites();		
+				QVector<QHash<QString,QString>>::Iterator iteratorVideo; 
+				for (iteratorVideo = capacitesVideo.begin(); iteratorVideo != capacitesVideo.end(); ++iteratorVideo)
+				{
+					QHash<QString,QString> hashTable = (*iteratorVideo);
+					QHash<QString,QString>::iterator iteratorHash;
+					QTreeWidgetItem *cameraPropertyList = new QTreeWidgetItem(topLevelItem);
+					cameraPropertyList->setText(0,QString("Media Type Video"));
+					if (hashTable[QString("MF_MT_FRAME_SIZE")].size()!=0 && hashTable[QString("MF_MT_FRAME_RATE")].size()!=0)
+					{
+						cameraPropertyList->setText(1,QString("[%1 %2]").arg(hashTable[QString("MF_MT_FRAME_SIZE")],hashTable[QString("MF_MT_FRAME_RATE")]));
+					}				
+					for (iteratorHash = hashTable.begin(); iteratorHash != hashTable.end(); ++iteratorHash)
+					{					
+						if (iteratorHash.value().size()>0)
+						{
+							QTreeWidgetItem *cameraProperty = new QTreeWidgetItem(cameraPropertyList);
+							cameraProperty->setText(0,iteratorHash.key());
+							cameraProperty->setText(1,iteratorHash.value());
+						}
 					}
 				}
 			}

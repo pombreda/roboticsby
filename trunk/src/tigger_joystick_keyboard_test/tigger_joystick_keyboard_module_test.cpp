@@ -65,7 +65,7 @@ double globalJoysticksConfig[3][8][6]= {
 	{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {-1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}// default;
 };
 
-BOOL globalGIBROPressed[]={FALSE,FALSE,FALSE,FALSE,FALSE};
+BOOL globalGIBROPPressed[]={FALSE,FALSE,FALSE,FALSE,FALSE,FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 BYTE globalRobotScriptIdentifier[] = {'<','r','o','b','o','t','s','c','r','i','p','t','>'};
@@ -197,23 +197,27 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x47)
 						{
-							globalGIBROPressed[0]=TRUE;
+							globalGIBROPPressed[0]=TRUE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x49)
 						{
-							globalGIBROPressed[1]=TRUE;
+							globalGIBROPPressed[1]=TRUE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x42)
 						{
-							globalGIBROPressed[2]=TRUE;
+							globalGIBROPPressed[2]=TRUE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x52)
 						{
-							globalGIBROPressed[3]=TRUE;
+							globalGIBROPPressed[3]=TRUE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x4F)
 						{
-							globalGIBROPressed[4]=TRUE;
+							globalGIBROPPressed[4]=TRUE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x50)
+						{
+							globalGIBROPPressed[5]=TRUE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == VK_ESCAPE)
 						{
@@ -319,23 +323,27 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x47)
 						{
-							globalGIBROPressed[0]=FALSE;
+							globalGIBROPPressed[0]=FALSE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x49)
 						{
-							globalGIBROPressed[1]=FALSE;
+							globalGIBROPPressed[1]=FALSE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x42)
 						{
-							globalGIBROPressed[2]=FALSE;
+							globalGIBROPPressed[2]=FALSE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x52)
 						{
-							globalGIBROPressed[3]=FALSE;
+							globalGIBROPPressed[3]=FALSE;
 						}
 						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x4F)
 						{
-							globalGIBROPressed[4]=FALSE;
+							globalGIBROPPressed[4]=FALSE;
+						}
+						if (inputRecordBuffer[i].Event.KeyEvent.wVirtualKeyCode == 0x50)
+						{
+							globalGIBROPPressed[5]=FALSE;
 						}
 					}
 				}
@@ -1222,7 +1230,7 @@ int main(int argc, char** argv)
 				}
 			}
 
-			if (globalGIBROPressed[0]==TRUE)
+			if (globalGIBROPPressed[0]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','g','e','t','G','U','I','D','#'};
 				WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
@@ -1241,7 +1249,7 @@ int main(int argc, char** argv)
 				displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
 			}
 
-			if (globalGIBROPressed[1]==TRUE)
+			if (globalGIBROPPressed[1]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','I','n','f','o','r','m','a','t','i','o','n','#'};
 				if (updateToSelectedRobotGUID(commandBuffer))
@@ -1263,7 +1271,7 @@ int main(int argc, char** argv)
 				}
 			}
 
-			if (globalGIBROPressed[2]==TRUE)
+			if (globalGIBROPPressed[2]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','B','a','t','t','e','r','y','V','o','l','t','a','g','e','#'};
 				if (updateToSelectedRobotGUID(commandBuffer))
@@ -1285,7 +1293,7 @@ int main(int argc, char** argv)
 				}
 			}
 
-			if (globalGIBROPressed[3]==TRUE)
+			if (globalGIBROPPressed[3]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','g','e','t','R','S','S','I','#'};
 				if (updateToSelectedRobotGUID(commandBuffer))
@@ -1306,9 +1314,30 @@ int main(int argc, char** argv)
 					displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
 				}
 			}
-			if (globalGIBROPressed[4]==TRUE)
+			if (globalGIBROPPressed[4]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','o','f','f','#'};
+				if (updateToSelectedRobotGUID(commandBuffer))
+				{
+					WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
+					FlushFileBuffers(globalFileHandle);
+
+					if (globalIsOutcomingDataSaved!=FALSE)
+					{
+						if (globalOutcomingDataFileHandle != INVALID_HANDLE_VALUE)
+						{
+							DWORD bytesOutcomingDataWrite;
+							WriteFile(globalOutcomingDataFileHandle, globalRobotScriptIdentifier,  ARRAYSIZE(globalRobotScriptIdentifier), &bytesOutcomingDataWrite, NULL);
+							WriteFile(globalOutcomingDataFileHandle, commandBuffer,  ARRAYSIZE(commandBuffer), &bytesOutcomingDataWrite, NULL);
+							FlushFileBuffers(globalOutcomingDataFileHandle);
+						}
+					}
+					displaySendedToRobotInformation(commandBuffer, ARRAYSIZE(commandBuffer));
+				}
+			}
+			if (globalGIBROPPressed[5]==TRUE)
+			{
+				BYTE commandBuffer[]={'$','0','0','0','0','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','-','0','0','0','0','0','0','0','0','0','0','0','0','o','n','#'};
 				if (updateToSelectedRobotGUID(commandBuffer))
 				{
 					WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);
@@ -1345,7 +1374,7 @@ int main(int argc, char** argv)
 				}
 			}
 
-			if (globalGIBROPressed[0]==TRUE)
+			if (globalGIBROPPressed[0]==TRUE)
 			{
 				BYTE commandBuffer[]={'$','g','e','t','G','U','I','D','#'};
 				WriteFile(globalFileHandle, commandBuffer, ARRAYSIZE(commandBuffer), &bytesWrite, &globalOverlapWrite);

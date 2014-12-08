@@ -65,7 +65,7 @@ double globalJoysticksConfig[3][8][6]= {
 	{{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {-1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {1, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}}// default;
 };
 
-BOOL globalGIBROPressed[]={FALSE};
+BOOL globalGIBROPressed[]={FALSE,FALSE,FALSE,FALSE,FALSE};
 USHORT globalRobotDrivePowerLevel = 0;
 WCHAR globalCurrentExecutableDirectory[MAX_PATH];
 BYTE globalRobotScriptIdentifier[] = {'<','r','o','b','o','t','s','c','r','i','p','t','>'};
@@ -107,6 +107,12 @@ VOID WINAPI ThreadProcedureConsoleRead(PVOID*)
 	BOOL cycleRun = true;
 
 	handleStdInput = GetStdHandle(STD_INPUT_HANDLE);
+	if (handleStdInput == INVALID_HANDLE_VALUE) 
+		errorDetailedInformation(L"GetStdHandle");
+
+	DWORD fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS; 
+	if (! SetConsoleMode(handleStdInput, fdwMode) ) 
+		errorDetailedInformation(L"SetConsoleMode"); 
 
 	while(cycleRun)
 	{
@@ -1167,25 +1173,25 @@ int main(int argc, char** argv)
 				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
 				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
 			}
+			if (globalCursorPressed[0]==TRUE)
+			{
+				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+			}
 			if (globalCursorPressed[1]==TRUE)
 			{
 				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
 				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
-			}
-			if (globalCursorPressed[3]==TRUE)
-			{
-				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
-				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
 			}
 			if (globalCursorPressed[2]==TRUE)
 			{
 				byteBuffer[4]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
 				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
 			}
-			if (globalCursorPressed[0]==TRUE)
+			if (globalCursorPressed[3]==TRUE)
 			{
 				byteBuffer[4]=directRobotPowerValues[globalRobotDrivePowerLevel];
-				byteBuffer[7]=inDirectRobotPowerValues[globalRobotDrivePowerLevel];
+				byteBuffer[7]=directRobotPowerValues[globalRobotDrivePowerLevel];
 			}
 		}
 

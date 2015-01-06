@@ -35,7 +35,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPushButton>
 #include <QHBoxLayout>
 
-#include "windows.h"
 #include "RCSGCommunicationConsoleDockWindow.h"
 
 RCSGCommunicationConsoleDockWindow::RCSGCommunicationConsoleDockWindow(QWidget *parent)
@@ -49,5 +48,4 @@ RCSGCommunicationConsoleDockWindow::RCSGCommunicationConsoleDockWindow(QWidget *
 	layout->addWidget(button2);
 
 	setLayout(layout);
-
 }

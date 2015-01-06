@@ -40,7 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 int main(int argc, char **argv)
 {
 	int result = 0;
-	QT_REQUIRE_VERSION(argc, argv, "5.2.1");
+	QT_REQUIRE_VERSION(argc, argv, "5.4.0");
 
 	QApplication a(argc, argv);	
 	RCSGMainWindow mw(NULL);

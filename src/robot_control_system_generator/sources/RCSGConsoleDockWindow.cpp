@@ -44,7 +44,8 @@ RCSGConsoleDockWindow::RCSGConsoleDockWindow(QWidget *parent)
     p.setColor(QPalette::Base, Qt::black);
     p.setColor(QPalette::Text, Qt::green);
     setPalette(p);
-	setEnabled(false);
+	setEnabled(true);
+	setCursorWidth(0);
 }
 
 void RCSGConsoleDockWindow::putData(const QByteArray &data)

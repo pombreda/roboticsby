@@ -160,6 +160,12 @@ void RCSGMainWindow::createActions()
 	toolsCommunicationConsoleAction->setChecked(false);
 	toolsCommunicationConsoleAction->setObjectName(QStringLiteral("Communication console"));
 	connect(toolsCommunicationConsoleAction, SIGNAL(triggered()), this, SLOT(onCommunicationConsoleAction()));
+
+	toolsRobotFirmwareAction = new QAction(tr("Robot &firmware"), this);
+	toolsRobotFirmwareAction->setCheckable(true);
+	toolsRobotFirmwareAction->setChecked(false);
+	toolsRobotFirmwareAction->setObjectName(QStringLiteral("Robot firmware"));
+	connect(toolsRobotFirmwareAction, SIGNAL(triggered()), this, SLOT(onRobotFirmwareAction()));
 }
 
 void RCSGMainWindow::createMenus()
@@ -168,6 +174,7 @@ void RCSGMainWindow::createMenus()
 	toolsMenu->addAction(toolsCameraPreviewAction);
 	toolsMenu->addAction(toolsJoystickTestAction);
 	toolsMenu->addAction(toolsCommunicationConsoleAction);
+	toolsMenu->addAction(toolsRobotFirmwareAction);
 
 	helpMenu = menuBar()->addMenu(tr("&Help"));
 	helpMenu->addAction(aboutAction);
@@ -360,6 +367,16 @@ void RCSGMainWindow::createDockWindows()
 		connect(communicationConsoleDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onCommunicationConsoleAction(bool)));
 		communicationConsoleDockWidget->hide();
 	}
+	if (!toolsRobotFirmwareAction->isChecked())
+	{
+		robotFirmwareDockWidget = new QDockWidget(tr("RCSG robot firmware"), this);
+		robotFirmwareDockWidget->setAllowedAreas(Qt::AllDockWidgetAreas);
+		robotFirmware = new RCSGRobotFirmwareToolDockWindow(robotFirmwareDockWidget);
+		robotFirmwareDockWidget->setWidget(robotFirmware);
+		addDockWidget(Qt::RightDockWidgetArea, robotFirmwareDockWidget);
+		connect(robotFirmwareDockWidget, SIGNAL(visibilityChanged(bool)), this, SLOT(onRobotFirmwareAction(bool)));
+		robotFirmwareDockWidget->hide();
+	}
 	if (!robotsAction->isEnabled())
 	{
 		robotsInfoDockWidget = new QDockWidget(tr("RCSG robots info"), this);
@@ -448,6 +465,17 @@ void RCSGMainWindow::onCommunicationConsoleAction()
 void RCSGMainWindow::onCommunicationConsoleAction( bool checked )
 {
 	toolsCommunicationConsoleAction->setChecked(checked);
+}
+
+void RCSGMainWindow::onRobotFirmwareAction()
+{
+	toolsRobotFirmwareAction->setChecked(toolsRobotFirmwareAction->isChecked());
+	displayRobotFirmwareDockWindow();
+}
+
+void RCSGMainWindow::onRobotFirmwareAction( bool checked )
+{
+	toolsRobotFirmwareAction->setChecked(checked);
 }
 
 void RCSGMainWindow::onJoystickTestAction()
@@ -573,6 +601,18 @@ void RCSGMainWindow::displayCommunicationConsoleDockWindow()
 		communicationConsoleDockWidget->hide();
 	}
 }
+
+void RCSGMainWindow::displayRobotFirmwareDockWindow()
+{
+	if (toolsRobotFirmwareAction->isChecked())
+	{
+		robotFirmwareDockWidget->show();
+		robotFirmwareDockWidget->raise();
+	} else {
+		robotFirmwareDockWidget->hide();
+	}
+}
+
 void RCSGMainWindow::displayRobotsInfoDockWindow()
 {
 	if (!robotsAction->isEnabled())
@@ -618,6 +658,7 @@ void RCSGMainWindow::comPortDevicesAvailable()
 	{
 		emit onConnectionsAction();
 		emit comPortsInfo->updateDevicesInformation(communicationDevices);
+		emit robotFirmware->updateComPortsList(communicationDevices);
 	}
 }
 

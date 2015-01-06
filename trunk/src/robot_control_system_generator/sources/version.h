@@ -19,7 +19,7 @@
 #define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
 #define VER_ORIGINAL_FILENAME_STR   VER_PRODUCTNAME_STR ".exe"
 #define VER_INTERNAL_NAME_STR       "Robot Control System Generator"
-#define VER_COPYRIGHT_STR           "Copyright (C) 2013 www.robotics.by and/or its subsidiary(-ies)."
+#define VER_COPYRIGHT_STR           "Copyright (C) 2013 - 2014 www.robotics.by and/or its subsidiary(-ies)."
 
 #define RCSG_RELEASE "Compiled " __DATE__ " " __TIME__
 

@@ -27,6 +27,7 @@ HEADERS    = sources\Version.h\
              sources\RCSGUserGraphicsItem.h\
              sources\RCSGRemoteCommunicationGraphicsItem.h\
              sources\RCSGRobotGraphicsItem.h\
+             sources\RCSGRobotFirmwareToolDockWindow.h\
              sources\RCSGProgramGraphicsItem.h\
              sources\RCSGNetworkGraphicsItem.h\
              sources\RCSGLinkGraphicsItem.h\
@@ -66,7 +67,12 @@ HEADERS    = sources\Version.h\
 	     sources\thirdparty\libjpeg\jconfig.h\
 	     sources\thirdparty\libjpeg\jpeglib.h\
 	     sources\thirdparty\libjpeg\jinclude.h\
-	     sources\thirdparty\libjpeg\jpegint.h
+	     sources\thirdparty\libjpeg\jpegint.h\
+	     sources\thirdparty\qhexedit\commands.h\
+	     sources\thirdparty\qhexedit\qhexedit.h\
+	     sources\thirdparty\qhexedit\qhexedit_p.h\
+	     sources\thirdparty\qhexedit\xbytearray.h
+
 		
 SOURCES    = sources\main.cpp\
              sources\device.cpp\
@@ -91,6 +97,7 @@ SOURCES    = sources\main.cpp\
              sources\RCSGControlSystemGeneratorDockWindow.cpp\
              sources\RCSGUserGraphicsItem.cpp\
              sources\RCSGRemoteCommunicationGraphicsItem.cpp\
+             sources\RCSGRobotFirmwareToolDockWindow.cpp\
              sources\RCSGRobotGraphicsItem.cpp\
              sources\RCSGProgramGraphicsItem.cpp\
              sources\RCSGNetworkGraphicsItem.cpp\
@@ -131,11 +138,17 @@ SOURCES    = sources\main.cpp\
              sources\thirdparty\libyuv\libyuv_scale_argb.cpp\
              sources\thirdparty\libyuv\libyuv_scale_common.cpp\
              sources\thirdparty\libyuv\libyuv_scale_win.cpp\
-             sources\thirdparty\libyuv\libyuv_video_common.cpp
+             sources\thirdparty\libyuv\libyuv_video_common.cpp\
+	     sources\thirdparty\qhexedit\commands.cpp\
+	     sources\thirdparty\qhexedit\qhexedit.cpp\
+	     sources\thirdparty\qhexedit\qhexedit_p.cpp\
+	     sources\thirdparty\qhexedit\xbytearray.cpp
 	     
 FORMS	   =   
 
 QT        += core gui widgets svg concurrent
+
+DEFINES   += NOMINMAX
 
 RESOURCES  = rcsg.qrc
 

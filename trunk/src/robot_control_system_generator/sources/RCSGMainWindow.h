@@ -42,6 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "RCSGConsoleDockWindow.h"
 #include "RCSGCommunicationDevicesManager.h"
 #include "RCSGCommunicationConsoleDockWindow.h"
+#include "RCSGRobotFirmwareToolDockWindow.h"
 #include "RCSGInputDevicesManager.h"
 #include "RCSGRobotsManager.h"
 #include "RCSGComPortsInfoDockWindow.h"
@@ -96,6 +97,7 @@ private:
 	void displayCameraPreviewDockWindow();
 	void displayJoystickTestDockWindow();
 	void displayCommunicationConsoleDockWindow();
+	void displayRobotFirmwareDockWindow();
 	void displayRobotsInfoDockWindow();
 	void displayControlSystemGeneratorDockWindow();
 
@@ -111,6 +113,7 @@ private:
 	QAction *toolsCameraPreviewAction;
 	QAction *toolsJoystickTestAction;
 	QAction *toolsCommunicationConsoleAction;
+	QAction *toolsRobotFirmwareAction;
 
 	QAction *aboutAction;
 	QAction *aboutQtAction;
@@ -128,6 +131,7 @@ private:
 	RCSGConsoleDockWindow *console;
 	RCSGComPortsInfoDockWindow *comPortsInfo;
 	RCSGCommunicationConsoleDockWindow *communicationConsole;
+	RCSGRobotFirmwareToolDockWindow *robotFirmware;
 	RCSGJoysticksInfoDockWindow *joysticksInfo;
 	RCSGJoystickTestDockWindow *joystickTest;
 	RCSGCameraInfoDockWindow *cameraInfo;
@@ -143,6 +147,7 @@ private:
 	QDockWidget *cameraInfoDockWidget;
 	QDockWidget *cameraPreviewDockWidget;
 	QDockWidget *communicationConsoleDockWidget;
+	QDockWidget *robotFirmwareDockWidget;
 	QDockWidget *joystickTestDockWidget;
 
 	QMutex canUpdateDevice;
@@ -172,6 +177,8 @@ private:
 		void onJoystickTestAction(bool checked);
 		void onCommunicationConsoleAction();
 		void onCommunicationConsoleAction(bool checked);
+		void onRobotFirmwareAction();
+		void onRobotFirmwareAction(bool checked);
 		void onRobotsAction();
 		void onRobotsAction(bool visible);
 		void onControlSystemGeneratorAction();

@@ -1126,6 +1126,9 @@ int main(int argc, char** argv)
 			} else if (globalJoystickManufactureId==3727 && globalJoystickPlatformId==18)
 			{
 				joysticksConfigNumber = 1;
+			} else if (globalJoystickManufactureId==1133 && globalJoystickPlatformId==49693)
+			{
+				joysticksConfigNumber = 0;
 			}
 			
 			double joysticksConfigVector[6] = {(double)((ji.dwXpos>>8)&0xff)-128, (double)((ji.dwYpos>>8)&0xff)-128, (double)((ji.dwZpos>>8)&0xff)-128, (double)((ji.dwUpos>>8)&0xff)-128, (double)((ji.dwRpos>>8)&0xff)-128, (double)((ji.dwVpos>>8)&0xff)-128};
